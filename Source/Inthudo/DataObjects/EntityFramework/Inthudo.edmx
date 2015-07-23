@@ -1,0 +1,1271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="InthudoModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="InthudoModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="InthudoModel.Store.Customer" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Design" EntityType="InthudoModel.Store.Design" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EmployeeDepartmentMapping" EntityType="InthudoModel.Store.EmployeeDepartmentMapping" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LibDepartment" EntityType="InthudoModel.Store.LibDepartment" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LibDepositType" EntityType="InthudoModel.Store.LibDepositType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LibOrderStatus" EntityType="InthudoModel.Store.LibOrderStatus" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LibRoleType" EntityType="InthudoModel.Store.LibRoleType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LibShippingMethod" EntityType="InthudoModel.Store.LibShippingMethod" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LocaleStringResource" EntityType="InthudoModel.Store.LocaleStringResource" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Order" EntityType="InthudoModel.Store.Order" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="OrderItem" EntityType="InthudoModel.Store.OrderItem" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="OrderStatusMapping" EntityType="InthudoModel.Store.OrderStatusMapping" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Product" EntityType="InthudoModel.Store.Product" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Setting" EntityType="InthudoModel.Store.Setting" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="InthudoModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Customer_User" Association="InthudoModel.Store.FK_Customer_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_User1" Association="InthudoModel.Store.FK_Customer_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Design_Order" Association="InthudoModel.Store.FK_Design_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Design" EntitySet="Design" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Design_User" Association="InthudoModel.Store.FK_Design_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Design" EntitySet="Design" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Design_UserCreatedBy" Association="InthudoModel.Store.FK_Design_UserCreatedBy">
+            <End Role="User" EntitySet="User" />
+            <End Role="Design" EntitySet="Design" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Design_UserLastEditedBy" Association="InthudoModel.Store.FK_Design_UserLastEditedBy">
+            <End Role="User" EntitySet="User" />
+            <End Role="Design" EntitySet="Design" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeDepartmentMapping_Employee" Association="InthudoModel.Store.FK_EmployeeDepartmentMapping_Employee">
+            <End Role="User" EntitySet="User" />
+            <End Role="EmployeeDepartmentMapping" EntitySet="EmployeeDepartmentMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeDepartmentMapping_LibDepartment" Association="InthudoModel.Store.FK_EmployeeDepartmentMapping_LibDepartment">
+            <End Role="LibDepartment" EntitySet="LibDepartment" />
+            <End Role="EmployeeDepartmentMapping" EntitySet="EmployeeDepartmentMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Customer" Association="InthudoModel.Store.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_LibDepositType" Association="InthudoModel.Store.FK_Order_LibDepositType">
+            <End Role="LibDepositType" EntitySet="LibDepositType" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_LibShippingMethod" Association="InthudoModel.Store.FK_Order_LibShippingMethod">
+            <End Role="LibShippingMethod" EntitySet="LibShippingMethod" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User" Association="InthudoModel.Store.FK_Order_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="OrderItem" EntitySet="OrderItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User1" Association="InthudoModel.Store.FK_Order_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="OrderItem" EntitySet="OrderItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User2" Association="InthudoModel.Store.FK_Order_User2">
+            <End Role="User" EntitySet="User" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User3" Association="InthudoModel.Store.FK_Order_User3">
+            <End Role="User" EntitySet="User" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User4" Association="InthudoModel.Store.FK_Order_User4">
+            <End Role="User" EntitySet="User" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderItem_Product" Association="InthudoModel.Store.FK_OrderItem_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="OrderItem" EntitySet="OrderItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderStatusMapping_LibOrderStatus" Association="InthudoModel.Store.FK_OrderStatusMapping_LibOrderStatus">
+            <End Role="LibOrderStatus" EntitySet="LibOrderStatus" />
+            <End Role="OrderStatusMapping" EntitySet="OrderStatusMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderStatusMapping_Order" Association="InthudoModel.Store.FK_OrderStatusMapping_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderStatusMapping" EntitySet="OrderStatusMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_RoleType" Association="InthudoModel.Store.FK_User_RoleType">
+            <End Role="LibRoleType" EntitySet="LibRoleType" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastEditedOn" Type="datetime" />
+          <Property Name="LastEditedBy" Type="int" />
+          <Property Name="Company" Type="nvarchar" MaxLength="500" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="FaxNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Deleted" Type="bit" />
+          <Property Name="TaxCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Design">
+          <Key>
+            <PropertyRef Name="DesignId" />
+          </Key>
+          <Property Name="DesignId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="DesignerId" Type="int" />
+          <Property Name="BeginDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Cost" Type="money" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="LastEditedBy" Type="int" />
+          <Property Name="LastEditedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EmployeeDepartmentMapping">
+          <Key>
+            <PropertyRef Name="EmployeeDepartmentMappingId" />
+          </Key>
+          <Property Name="EmployeeDepartmentMappingId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LibDepartment">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="LibDepositType">
+          <Key>
+            <PropertyRef Name="DepositTypeId" />
+          </Key>
+          <Property Name="DepositTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="LibOrderStatus">
+          <Key>
+            <PropertyRef Name="OrderStatusId" />
+          </Key>
+          <Property Name="OrderStatusId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="ProcessingOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="LibRoleType">
+          <Key>
+            <PropertyRef Name="RoleTypeId" />
+          </Key>
+          <Property Name="RoleTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="RoleDescription" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="LibShippingMethod">
+          <Key>
+            <PropertyRef Name="ShippingMethodId" />
+          </Key>
+          <Property Name="ShippingMethodId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="LocaleStringResource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ResourceName" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="ResourceValue" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Deposit" Type="money" />
+          <Property Name="DepositTypeId" Type="int" />
+          <Property Name="ShippingMethodId" Type="int" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastEditedBy" Type="int" />
+          <Property Name="LastEditedDate" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="OrderItem">
+          <Key>
+            <PropertyRef Name="OrderItemId" />
+          </Key>
+          <Property Name="OrderItemId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="Specification" Type="nvarchar(max)" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="LastEditedBy" Type="int" />
+          <Property Name="LastEditedOn" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="OrderStatusMapping">
+          <Key>
+            <PropertyRef Name="OrderStatusMappingId" />
+          </Key>
+          <Property Name="OrderStatusMappingId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="OrderStatusId" Type="int" Nullable="false" />
+          <Property Name="StatusDate" Type="datetime" Nullable="false" />
+          <Property Name="IsFailed" Type="bit" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="SettingId" />
+          </Key>
+          <Property Name="SettingId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Value" Type="nvarchar" Nullable="false" MaxLength="2000" />
+          <Property Name="Description" Type="nvarchar" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="RoleTypeId" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="LastEditedOn" Type="datetime" />
+          <Property Name="Deteted" Type="bit" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="500" />
+          <Property Name="Address" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK_Customer_User">
+          <End Role="User" Type="InthudoModel.Store.User" Multiplicity="1" />
+          <End Role="Customer" Type="InthudoModel.Store.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_User1">
+          <End Role="User" Type="InthudoModel.Store.User" Multiplicity="0..1" />
+          <End Role="Customer" Type="InthudoModel.Store.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="LastEditedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Design_Order">
+          <End Role="Order" Type="InthudoModel.Store.Order" Multiplicity="1" />
+          <End Role="Design" Type="InthudoModel.Store.Design" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="Design">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Design_User">
+          <End Role="User" Type="InthudoModel.Store.User" Multiplicity="0..1" />
+          <End Role="Design" Type="InthudoModel.Store.Design" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Design">
+              <PropertyRef Name="DesignerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Design_UserCreatedBy">
+          <End Role="User" Type="InthudoModel.Store.User" Multiplicity="1" />
+          <End Role="Design" Type="InthudoModel.Store.Design" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Design">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Design_UserLastEditedBy">
+          <End Role="User" Type="InthudoModel.Store.User" Multiplicity="0..1" />
+          <End Role="Design" Type="InthudoModel.Store.Design" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Design">
+              <PropertyRef Name="LastEditedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeDepartmentMapping_Employee">
+          <End Role="User" Type="InthudoModel.Store.User" Multiplicity="1" />
+          <End Role="EmployeeDepartmentMapping" Type="InthudoModel.Store.EmployeeDepartmentMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="EmployeeDepartmentMapping">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeDepartmentMapping_LibDepartment">
+          <End Role="LibDepartment" Type="InthudoModel.Store.LibDepartment" Multiplicity="1" />
+          <End Role="EmployeeDepartmentMapping" Type="InthudoModel.Store.EmployeeDepartmentMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LibDepartment">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="EmployeeDepartmentMapping">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Customer">
+          <End Role="Customer" Type="InthudoModel.Store.Customer" Multiplicity="1" />
+          <End Role="Order" Type="InthudoModel.Store.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_LibDepositType">
+          <End Role="LibDepositType" Type="InthudoModel.Store.LibDepositType" Multiplicity="0..1" />
+          <End Role="Order" Type="InthudoModel.Store.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LibDepositType">
+              <PropertyRef Name="DepositTypeId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="DepositTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_LibShippingMethod">
+          <End Role="LibShippingMethod" Type="InthudoModel.Store.LibShippingMethod" Multiplicity="0..1" />
+          <End Role="Order" Type="InthudoModel.Store.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LibShippingMethod">
+              <PropertyRef Name="ShippingMethodId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ShippingMethodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User">
+          <End Role="User" Type="InthudoModel.Store.User" Multiplicity="1" />
+          <End Role="OrderItem" Type="InthudoModel.Store.OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User1">
+          <End Role="User" Type="InthudoModel.Store.User" Multiplicity="0..1" />
+          <End Role="OrderItem" Type="InthudoModel.Store.OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="LastEditedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User2">
+          <End Role="User" Type="InthudoModel.Store.User" Multiplicity="1" />
+          <End Role="Order" Type="InthudoModel.Store.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User3">
+          <End Role="User" Type="InthudoModel.Store.User" Multiplicity="1" />
+          <End Role="Order" Type="InthudoModel.Store.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User4">
+          <End Role="User" Type="InthudoModel.Store.User" Multiplicity="0..1" />
+          <End Role="Order" Type="InthudoModel.Store.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="LastEditedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderItem_Product">
+          <End Role="Product" Type="InthudoModel.Store.Product" Multiplicity="1" />
+          <End Role="OrderItem" Type="InthudoModel.Store.OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderStatusMapping_LibOrderStatus">
+          <End Role="LibOrderStatus" Type="InthudoModel.Store.LibOrderStatus" Multiplicity="1" />
+          <End Role="OrderStatusMapping" Type="InthudoModel.Store.OrderStatusMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LibOrderStatus">
+              <PropertyRef Name="OrderStatusId" />
+            </Principal>
+            <Dependent Role="OrderStatusMapping">
+              <PropertyRef Name="OrderStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderStatusMapping_Order">
+          <End Role="Order" Type="InthudoModel.Store.Order" Multiplicity="1" />
+          <End Role="OrderStatusMapping" Type="InthudoModel.Store.OrderStatusMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderStatusMapping">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_RoleType">
+          <End Role="LibRoleType" Type="InthudoModel.Store.LibRoleType" Multiplicity="1" />
+          <End Role="User" Type="InthudoModel.Store.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LibRoleType">
+              <PropertyRef Name="RoleTypeId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InthudoModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="InthudoEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="InthudoModel.Customer" />
+          <EntitySet Name="Designs" EntityType="InthudoModel.Design" />
+          <EntitySet Name="EmployeeDepartmentMappings" EntityType="InthudoModel.EmployeeDepartmentMapping" />
+          <EntitySet Name="LibDepartments" EntityType="InthudoModel.LibDepartment" />
+          <EntitySet Name="LibDepositTypes" EntityType="InthudoModel.LibDepositType" />
+          <EntitySet Name="LibOrderStatus" EntityType="InthudoModel.LibOrderStatu" />
+          <EntitySet Name="LibRoleTypes" EntityType="InthudoModel.LibRoleType" />
+          <EntitySet Name="LibShippingMethods" EntityType="InthudoModel.LibShippingMethod" />
+          <EntitySet Name="LocaleStringResources" EntityType="InthudoModel.LocaleStringResource" />
+          <EntitySet Name="Orders" EntityType="InthudoModel.Order" />
+          <EntitySet Name="OrderItems" EntityType="InthudoModel.OrderItem" />
+          <EntitySet Name="OrderStatusMappings" EntityType="InthudoModel.OrderStatusMapping" />
+          <EntitySet Name="Products" EntityType="InthudoModel.Product" />
+          <EntitySet Name="Settings" EntityType="InthudoModel.Setting" />
+          <EntitySet Name="Users" EntityType="InthudoModel.User" />
+          <AssociationSet Name="FK_Customer_User" Association="InthudoModel.FK_Customer_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_User1" Association="InthudoModel.FK_Customer_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Customer" Association="InthudoModel.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Design_Order" Association="InthudoModel.FK_Design_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="Design" EntitySet="Designs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Design_User" Association="InthudoModel.FK_Design_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Design" EntitySet="Designs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Design_UserCreatedBy" Association="InthudoModel.FK_Design_UserCreatedBy">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Design" EntitySet="Designs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Design_UserLastEditedBy" Association="InthudoModel.FK_Design_UserLastEditedBy">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Design" EntitySet="Designs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeDepartmentMapping_Employee" Association="InthudoModel.FK_EmployeeDepartmentMapping_Employee">
+            <End Role="User" EntitySet="Users" />
+            <End Role="EmployeeDepartmentMapping" EntitySet="EmployeeDepartmentMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeDepartmentMapping_LibDepartment" Association="InthudoModel.FK_EmployeeDepartmentMapping_LibDepartment">
+            <End Role="LibDepartment" EntitySet="LibDepartments" />
+            <End Role="EmployeeDepartmentMapping" EntitySet="EmployeeDepartmentMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_LibDepositType" Association="InthudoModel.FK_Order_LibDepositType">
+            <End Role="LibDepositType" EntitySet="LibDepositTypes" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderStatusMapping_LibOrderStatus" Association="InthudoModel.FK_OrderStatusMapping_LibOrderStatus">
+            <End Role="LibOrderStatus" EntitySet="LibOrderStatus" />
+            <End Role="OrderStatusMapping" EntitySet="OrderStatusMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_RoleType" Association="InthudoModel.FK_User_RoleType">
+            <End Role="LibRoleType" EntitySet="LibRoleTypes" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_LibShippingMethod" Association="InthudoModel.FK_Order_LibShippingMethod">
+            <End Role="LibShippingMethod" EntitySet="LibShippingMethods" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User2" Association="InthudoModel.FK_Order_User2">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User3" Association="InthudoModel.FK_Order_User3">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User4" Association="InthudoModel.FK_Order_User4">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderStatusMapping_Order" Association="InthudoModel.FK_OrderStatusMapping_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderStatusMapping" EntitySet="OrderStatusMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User" Association="InthudoModel.FK_Order_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="OrderItem" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User1" Association="InthudoModel.FK_Order_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="OrderItem" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderItem_Product" Association="InthudoModel.FK_OrderItem_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderItem" EntitySet="OrderItems" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Telephone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastEditedOn" Type="DateTime" Precision="3" />
+          <Property Name="LastEditedBy" Type="Int32" />
+          <Property Name="Company" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="FaxNumber" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Deleted" Type="Boolean" />
+          <Property Name="TaxCode" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="User" Relationship="InthudoModel.FK_Customer_User" FromRole="Customer" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="InthudoModel.FK_Customer_User1" FromRole="Customer" ToRole="User" />
+          <NavigationProperty Name="Orders" Relationship="InthudoModel.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Design">
+          <Key>
+            <PropertyRef Name="DesignId" />
+          </Key>
+          <Property Name="DesignId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DesignerId" Type="Int32" />
+          <Property Name="BeginDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastEditedBy" Type="Int32" />
+          <Property Name="LastEditedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Order" Relationship="InthudoModel.FK_Design_Order" FromRole="Design" ToRole="Order" />
+          <NavigationProperty Name="User" Relationship="InthudoModel.FK_Design_User" FromRole="Design" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="InthudoModel.FK_Design_UserCreatedBy" FromRole="Design" ToRole="User" />
+          <NavigationProperty Name="User2" Relationship="InthudoModel.FK_Design_UserLastEditedBy" FromRole="Design" ToRole="User" />
+        </EntityType>
+        <EntityType Name="EmployeeDepartmentMapping">
+          <Key>
+            <PropertyRef Name="EmployeeDepartmentMappingId" />
+          </Key>
+          <Property Name="EmployeeDepartmentMappingId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="InthudoModel.FK_EmployeeDepartmentMapping_Employee" FromRole="EmployeeDepartmentMapping" ToRole="User" />
+          <NavigationProperty Name="LibDepartment" Relationship="InthudoModel.FK_EmployeeDepartmentMapping_LibDepartment" FromRole="EmployeeDepartmentMapping" ToRole="LibDepartment" />
+        </EntityType>
+        <EntityType Name="LibDepartment">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="EmployeeDepartmentMappings" Relationship="InthudoModel.FK_EmployeeDepartmentMapping_LibDepartment" FromRole="LibDepartment" ToRole="EmployeeDepartmentMapping" />
+        </EntityType>
+        <EntityType Name="LibDepositType">
+          <Key>
+            <PropertyRef Name="DepositTypeId" />
+          </Key>
+          <Property Name="DepositTypeId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Orders" Relationship="InthudoModel.FK_Order_LibDepositType" FromRole="LibDepositType" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="LibOrderStatu">
+          <Key>
+            <PropertyRef Name="OrderStatusId" />
+          </Key>
+          <Property Name="OrderStatusId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="ProcessingOrder" Type="Int32" />
+          <NavigationProperty Name="OrderStatusMappings" Relationship="InthudoModel.FK_OrderStatusMapping_LibOrderStatus" FromRole="LibOrderStatus" ToRole="OrderStatusMapping" />
+        </EntityType>
+        <EntityType Name="LibRoleType">
+          <Key>
+            <PropertyRef Name="RoleTypeId" />
+          </Key>
+          <Property Name="RoleTypeId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="RoleDescription" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Users" Relationship="InthudoModel.FK_User_RoleType" FromRole="LibRoleType" ToRole="User" />
+        </EntityType>
+        <EntityType Name="LibShippingMethod">
+          <Key>
+            <PropertyRef Name="ShippingMethodId" />
+          </Key>
+          <Property Name="ShippingMethodId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Orders" Relationship="InthudoModel.FK_Order_LibShippingMethod" FromRole="LibShippingMethod" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="LocaleStringResource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ResourceName" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="ResourceValue" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Deposit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DepositTypeId" Type="Int32" />
+          <Property Name="ShippingMethodId" Type="Int32" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastEditedBy" Type="Int32" />
+          <Property Name="LastEditedDate" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" />
+          <NavigationProperty Name="Customer" Relationship="InthudoModel.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="Designs" Relationship="InthudoModel.FK_Design_Order" FromRole="Order" ToRole="Design" />
+          <NavigationProperty Name="LibDepositType" Relationship="InthudoModel.FK_Order_LibDepositType" FromRole="Order" ToRole="LibDepositType" />
+          <NavigationProperty Name="LibShippingMethod" Relationship="InthudoModel.FK_Order_LibShippingMethod" FromRole="Order" ToRole="LibShippingMethod" />
+          <NavigationProperty Name="User" Relationship="InthudoModel.FK_Order_User2" FromRole="Order" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="InthudoModel.FK_Order_User3" FromRole="Order" ToRole="User" />
+          <NavigationProperty Name="User2" Relationship="InthudoModel.FK_Order_User4" FromRole="Order" ToRole="User" />
+          <NavigationProperty Name="OrderStatusMappings" Relationship="InthudoModel.FK_OrderStatusMapping_Order" FromRole="Order" ToRole="OrderStatusMapping" />
+        </EntityType>
+        <EntityType Name="OrderItem">
+          <Key>
+            <PropertyRef Name="OrderItemId" />
+          </Key>
+          <Property Name="OrderItemId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="Specification" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastEditedBy" Type="Int32" />
+          <Property Name="LastEditedOn" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" />
+          <NavigationProperty Name="User" Relationship="InthudoModel.FK_Order_User" FromRole="OrderItem" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="InthudoModel.FK_Order_User1" FromRole="OrderItem" ToRole="User" />
+          <NavigationProperty Name="Product" Relationship="InthudoModel.FK_OrderItem_Product" FromRole="OrderItem" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="OrderStatusMapping">
+          <Key>
+            <PropertyRef Name="OrderStatusMappingId" />
+          </Key>
+          <Property Name="OrderStatusMappingId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="OrderStatusId" Type="Int32" Nullable="false" />
+          <Property Name="StatusDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsFailed" Type="Boolean" />
+          <NavigationProperty Name="LibOrderStatu" Relationship="InthudoModel.FK_OrderStatusMapping_LibOrderStatus" FromRole="OrderStatusMapping" ToRole="LibOrderStatus" />
+          <NavigationProperty Name="Order" Relationship="InthudoModel.FK_OrderStatusMapping_Order" FromRole="OrderStatusMapping" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="OrderItems" Relationship="InthudoModel.FK_OrderItem_Product" FromRole="Product" ToRole="OrderItem" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="SettingId" />
+          </Key>
+          <Property Name="SettingId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="2000" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="RoleTypeId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastEditedOn" Type="DateTime" Precision="3" />
+          <Property Name="Deteted" Type="Boolean" />
+          <Property Name="FullName" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="Telephone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Customers" Relationship="InthudoModel.FK_Customer_User" FromRole="User" ToRole="Customer" />
+          <NavigationProperty Name="Customers1" Relationship="InthudoModel.FK_Customer_User1" FromRole="User" ToRole="Customer" />
+          <NavigationProperty Name="Designs" Relationship="InthudoModel.FK_Design_User" FromRole="User" ToRole="Design" />
+          <NavigationProperty Name="Designs1" Relationship="InthudoModel.FK_Design_UserCreatedBy" FromRole="User" ToRole="Design" />
+          <NavigationProperty Name="Designs2" Relationship="InthudoModel.FK_Design_UserLastEditedBy" FromRole="User" ToRole="Design" />
+          <NavigationProperty Name="EmployeeDepartmentMappings" Relationship="InthudoModel.FK_EmployeeDepartmentMapping_Employee" FromRole="User" ToRole="EmployeeDepartmentMapping" />
+          <NavigationProperty Name="LibRoleType" Relationship="InthudoModel.FK_User_RoleType" FromRole="User" ToRole="LibRoleType" />
+          <NavigationProperty Name="Orders" Relationship="InthudoModel.FK_Order_User2" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="Orders1" Relationship="InthudoModel.FK_Order_User3" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="Orders2" Relationship="InthudoModel.FK_Order_User4" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="OrderItems" Relationship="InthudoModel.FK_Order_User" FromRole="User" ToRole="OrderItem" />
+          <NavigationProperty Name="OrderItems1" Relationship="InthudoModel.FK_Order_User1" FromRole="User" ToRole="OrderItem" />
+        </EntityType>
+        <Association Name="FK_Customer_User">
+          <End Role="User" Type="InthudoModel.User" Multiplicity="1" />
+          <End Role="Customer" Type="InthudoModel.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_User1">
+          <End Role="User" Type="InthudoModel.User" Multiplicity="0..1" />
+          <End Role="Customer" Type="InthudoModel.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="LastEditedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Customer">
+          <End Role="Customer" Type="InthudoModel.Customer" Multiplicity="1" />
+          <End Role="Order" Type="InthudoModel.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Design_Order">
+          <End Role="Order" Type="InthudoModel.Order" Multiplicity="1" />
+          <End Role="Design" Type="InthudoModel.Design" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="Design">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Design_User">
+          <End Role="User" Type="InthudoModel.User" Multiplicity="0..1" />
+          <End Role="Design" Type="InthudoModel.Design" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Design">
+              <PropertyRef Name="DesignerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Design_UserCreatedBy">
+          <End Role="User" Type="InthudoModel.User" Multiplicity="1" />
+          <End Role="Design" Type="InthudoModel.Design" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Design">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Design_UserLastEditedBy">
+          <End Role="User" Type="InthudoModel.User" Multiplicity="0..1" />
+          <End Role="Design" Type="InthudoModel.Design" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Design">
+              <PropertyRef Name="LastEditedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeDepartmentMapping_Employee">
+          <End Role="User" Type="InthudoModel.User" Multiplicity="1" />
+          <End Role="EmployeeDepartmentMapping" Type="InthudoModel.EmployeeDepartmentMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="EmployeeDepartmentMapping">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeDepartmentMapping_LibDepartment">
+          <End Role="LibDepartment" Type="InthudoModel.LibDepartment" Multiplicity="1" />
+          <End Role="EmployeeDepartmentMapping" Type="InthudoModel.EmployeeDepartmentMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LibDepartment">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="EmployeeDepartmentMapping">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_LibDepositType">
+          <End Role="LibDepositType" Type="InthudoModel.LibDepositType" Multiplicity="0..1" />
+          <End Role="Order" Type="InthudoModel.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LibDepositType">
+              <PropertyRef Name="DepositTypeId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="DepositTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderStatusMapping_LibOrderStatus">
+          <End Role="LibOrderStatus" Type="InthudoModel.LibOrderStatu" Multiplicity="1" />
+          <End Role="OrderStatusMapping" Type="InthudoModel.OrderStatusMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LibOrderStatus">
+              <PropertyRef Name="OrderStatusId" />
+            </Principal>
+            <Dependent Role="OrderStatusMapping">
+              <PropertyRef Name="OrderStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_RoleType">
+          <End Role="LibRoleType" Type="InthudoModel.LibRoleType" Multiplicity="1" />
+          <End Role="User" Type="InthudoModel.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LibRoleType">
+              <PropertyRef Name="RoleTypeId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_LibShippingMethod">
+          <End Role="LibShippingMethod" Type="InthudoModel.LibShippingMethod" Multiplicity="0..1" />
+          <End Role="Order" Type="InthudoModel.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LibShippingMethod">
+              <PropertyRef Name="ShippingMethodId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ShippingMethodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User2">
+          <End Role="User" Type="InthudoModel.User" Multiplicity="1" />
+          <End Role="Order" Type="InthudoModel.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User3">
+          <End Role="User" Type="InthudoModel.User" Multiplicity="1" />
+          <End Role="Order" Type="InthudoModel.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User4">
+          <End Role="User" Type="InthudoModel.User" Multiplicity="0..1" />
+          <End Role="Order" Type="InthudoModel.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="LastEditedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderStatusMapping_Order">
+          <End Role="Order" Type="InthudoModel.Order" Multiplicity="1" />
+          <End Role="OrderStatusMapping" Type="InthudoModel.OrderStatusMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderStatusMapping">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User">
+          <End Role="User" Type="InthudoModel.User" Multiplicity="1" />
+          <End Role="OrderItem" Type="InthudoModel.OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User1">
+          <End Role="User" Type="InthudoModel.User" Multiplicity="0..1" />
+          <End Role="OrderItem" Type="InthudoModel.OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="LastEditedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderItem_Product">
+          <End Role="Product" Type="InthudoModel.Product" Multiplicity="1" />
+          <End Role="OrderItem" Type="InthudoModel.OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InthudoModelStoreContainer" CdmEntityContainer="InthudoEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="InthudoModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastEditedOn" ColumnName="LastEditedOn" />
+                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="TaxCode" ColumnName="TaxCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Designs">
+            <EntityTypeMapping TypeName="InthudoModel.Design">
+              <MappingFragment StoreEntitySet="Design">
+                <ScalarProperty Name="DesignId" ColumnName="DesignId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DesignerId" ColumnName="DesignerId" />
+                <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
+                <ScalarProperty Name="LastEditedOn" ColumnName="LastEditedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeDepartmentMappings">
+            <EntityTypeMapping TypeName="InthudoModel.EmployeeDepartmentMapping">
+              <MappingFragment StoreEntitySet="EmployeeDepartmentMapping">
+                <ScalarProperty Name="EmployeeDepartmentMappingId" ColumnName="EmployeeDepartmentMappingId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LibDepartments">
+            <EntityTypeMapping TypeName="InthudoModel.LibDepartment">
+              <MappingFragment StoreEntitySet="LibDepartment">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LibDepositTypes">
+            <EntityTypeMapping TypeName="InthudoModel.LibDepositType">
+              <MappingFragment StoreEntitySet="LibDepositType">
+                <ScalarProperty Name="DepositTypeId" ColumnName="DepositTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LibOrderStatus">
+            <EntityTypeMapping TypeName="InthudoModel.LibOrderStatu">
+              <MappingFragment StoreEntitySet="LibOrderStatus">
+                <ScalarProperty Name="OrderStatusId" ColumnName="OrderStatusId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ProcessingOrder" ColumnName="ProcessingOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LibRoleTypes">
+            <EntityTypeMapping TypeName="InthudoModel.LibRoleType">
+              <MappingFragment StoreEntitySet="LibRoleType">
+                <ScalarProperty Name="RoleTypeId" ColumnName="RoleTypeId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleDescription" ColumnName="RoleDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LibShippingMethods">
+            <EntityTypeMapping TypeName="InthudoModel.LibShippingMethod">
+              <MappingFragment StoreEntitySet="LibShippingMethod">
+                <ScalarProperty Name="ShippingMethodId" ColumnName="ShippingMethodId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocaleStringResources">
+            <EntityTypeMapping TypeName="InthudoModel.LocaleStringResource">
+              <MappingFragment StoreEntitySet="LocaleStringResource">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ResourceName" ColumnName="ResourceName" />
+                <ScalarProperty Name="ResourceValue" ColumnName="ResourceValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="InthudoModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
+                <ScalarProperty Name="DepositTypeId" ColumnName="DepositTypeId" />
+                <ScalarProperty Name="ShippingMethodId" ColumnName="ShippingMethodId" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
+                <ScalarProperty Name="LastEditedDate" ColumnName="LastEditedDate" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderItems">
+            <EntityTypeMapping TypeName="InthudoModel.OrderItem">
+              <MappingFragment StoreEntitySet="OrderItem">
+                <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Specification" ColumnName="Specification" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
+                <ScalarProperty Name="LastEditedOn" ColumnName="LastEditedOn" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStatusMappings">
+            <EntityTypeMapping TypeName="InthudoModel.OrderStatusMapping">
+              <MappingFragment StoreEntitySet="OrderStatusMapping">
+                <ScalarProperty Name="OrderStatusMappingId" ColumnName="OrderStatusMappingId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="OrderStatusId" ColumnName="OrderStatusId" />
+                <ScalarProperty Name="StatusDate" ColumnName="StatusDate" />
+                <ScalarProperty Name="IsFailed" ColumnName="IsFailed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="InthudoModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="InthudoModel.Setting">
+              <MappingFragment StoreEntitySet="Setting">
+                <ScalarProperty Name="SettingId" ColumnName="SettingId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="InthudoModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleTypeId" ColumnName="RoleTypeId" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastEditedOn" ColumnName="LastEditedOn" />
+                <ScalarProperty Name="Deteted" ColumnName="Deteted" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

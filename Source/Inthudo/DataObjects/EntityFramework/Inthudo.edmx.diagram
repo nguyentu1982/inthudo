@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9a0ec0ae643f45a99f2d4b6d5c779e16" Name="Diagram1">
+        <EntityTypeShape EntityType="InthudoModel.Customer" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InthudoModel.Design" Width="1.5" PointX="9.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="InthudoModel.EmployeeDepartmentMapping" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InthudoModel.LibDepartment" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="InthudoModel.LibDepositType" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InthudoModel.LibOrderStatu" Width="1.5" PointX="10.5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InthudoModel.LibRoleType" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="InthudoModel.LibShippingMethod" Width="1.5" PointX="5.25" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InthudoModel.LocaleStringResource" Width="1.5" PointX="7.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InthudoModel.Order" Width="1.5" PointX="7.5" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InthudoModel.OrderItem" Width="1.5" PointX="5.25" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InthudoModel.OrderStatusMapping" Width="1.5" PointX="12.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InthudoModel.Product" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="InthudoModel.Setting" Width="1.5" PointX="9.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InthudoModel.User" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <AssociationConnector Association="InthudoModel.FK_Customer_User" ManuallyRouted="false" />
+        <AssociationConnector Association="InthudoModel.FK_Customer_User1" ManuallyRouted="false" />
+        <AssociationConnector Association="InthudoModel.FK_Order_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="InthudoModel.FK_Design_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="InthudoModel.FK_Design_User" ManuallyRouted="false" />
+        <AssociationConnector Association="InthudoModel.FK_Design_UserCreatedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="InthudoModel.FK_Design_UserLastEditedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="InthudoModel.FK_EmployeeDepartmentMapping_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="InthudoModel.FK_EmployeeDepartmentMapping_LibDepartment" ManuallyRouted="false" />
+        <AssociationConnector Association="InthudoModel.FK_Order_LibDepositType" ManuallyRouted="false" />
+        <AssociationConnector Association="InthudoModel.FK_OrderStatusMapping_LibOrderStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="InthudoModel.FK_User_RoleType" ManuallyRouted="false" />
+        <AssociationConnector Association="InthudoModel.FK_Order_LibShippingMethod" ManuallyRouted="false" />
+        <AssociationConnector Association="InthudoModel.FK_Order_User2" ManuallyRouted="false" />
+        <AssociationConnector Association="InthudoModel.FK_Order_User3" ManuallyRouted="false" />
+        <AssociationConnector Association="InthudoModel.FK_Order_User4" ManuallyRouted="false" />
+        <AssociationConnector Association="InthudoModel.FK_OrderStatusMapping_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="InthudoModel.FK_Order_User" ManuallyRouted="false" />
+        <AssociationConnector Association="InthudoModel.FK_Order_User1" ManuallyRouted="false" />
+        <AssociationConnector Association="InthudoModel.FK_OrderItem_Product" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
