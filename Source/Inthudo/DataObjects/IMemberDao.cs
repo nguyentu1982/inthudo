@@ -47,5 +47,15 @@ namespace DataObjects
         // deletes a Member
 
         void DeleteMember(Member member);
+
+        bool Login(string user, string pass);
+
+        void ChangePass(int userId, string pass);
+
+        List<Member> GetMembers(string username, string email, string fullName, string address, int roletypeId);
+
+        Member GetMemberByTelephone(string telephone);
+
+        Member GetMemberByUserName(string userName);
     }
 }

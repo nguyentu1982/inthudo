@@ -12,5 +12,6 @@ namespace DataObjects.EntityFramework
     public class DaoFactory : IDaoFactory
     {
         public IMemberDao MemberDao { get { return new MemberDao(); } }
+        public IRoleTypeDao RoleTypeDao { get { return new RoleTypeDao(); } }
     }
 }

@@ -18,31 +18,33 @@ namespace BusinessObjects
         {
             // establish business rules
 
-            AddRule(new ValidateId("MemberId"));
+            AddRule(new ValidateId("UserId"));
 
             AddRule(new ValidateRequired("Email"));
             AddRule(new ValidateLength("Email", 1, 100));
             AddRule(new ValidateEmail("Email"));
-
-            AddRule(new ValidateRequired("CompanyName"));
-            AddRule(new ValidateLength("CompanyName", 1, 40));
-
-            AddRule(new ValidateRequired("City"));
-            AddRule(new ValidateLength("City", 1, 15));
-
-            AddRule(new ValidateRequired("Country"));
-            AddRule(new ValidateLength("Country", 1, 15));
         }
 
         // ** Enterprise Design Pattern: Identity field pattern
 
-        public int MemberId { get; set; }
-
+        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public Nullable<System.DateTime> LastEditedOn { get; set; }
+        public Nullable<bool> Deteted { get; set; }
+        public string FullName { get; set; }
+        public string Address { get; set; }
+        public string Telephone { get; set; }
         public string Email { get; set; }
-        public string CompanyName { get; set; }
-        public string City { get; set; }
-        public string Country { get; set; }
-        public int NumOrders { get; set; }
-        public DateTime LastOrderDate { get; set; }
+        public int RoleTypeId { get; set; }
+
+        public RoleType RoleType { get; set; }
+        public string RoleName
+        {
+            get { return RoleType.RoleName; }
+            set { }
+        }
+    
     }
 }

@@ -13,5 +13,6 @@ namespace DataObjects
     public interface IDaoFactory
     {
         IMemberDao MemberDao { get; }
+        IRoleTypeDao RoleTypeDao { get; }
     }
 }

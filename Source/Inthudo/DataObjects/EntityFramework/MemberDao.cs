@@ -19,12 +19,29 @@ namespace DataObjects.EntityFramework
             Mapper.CreateMap<User, Member>();
             Mapper.CreateMap<Member, User>();
         }
-        public List<Member> GetMembers(string sortExpression = "MemberId ASC")
+        public List<Member> GetMembers(string sortExpression = "UserId ASC")
         {
             using (var context = new InthudoEntities())
             {
-                var members = context.Users.AsQueryable().OrderBy(sortExpression).ToList();
-                return Mapper.Map<List<User>, List<Member>>(members);
+                var members = context.Users.Where(m=> m.Deteted ==false || m.Deteted == null).AsQueryable().OrderBy(sortExpression).ToList();
+
+                var roles = context.LibRoleTypes;
+                return members.AsQueryable().Select(m =>
+                    new Member
+                    {
+                        UserId = m.UserId,
+                        Email = m.Email,
+                        
+                        RoleType = Mapper.Map<LibRoleType, RoleType>(roles.Where(r=> r.RoleTypeId == m.RoleTypeId).FirstOrDefault()),
+                        FullName = m.FullName,
+                        Address = m.Address,
+                        Telephone = m.Telephone,
+                        UserName = m.UserName
+                    }
+               )
+               .ToList();
+
+                //return Mapper.Map<List<User>, List<Member>>(members);
             }
         }
 
@@ -32,7 +49,7 @@ namespace DataObjects.EntityFramework
         {
             using (var context = new InthudoEntities())
             {
-                var member = context.Users.FirstOrDefault(c => c.UserId == memberId) as User;
+                var member = context.Users.FirstOrDefault(c => c.UserId == memberId && (c.Deteted == false || c.Deteted ==null)) as User;
                 return Mapper.Map<User, Member>(member);
             }
         }
@@ -60,7 +77,7 @@ namespace DataObjects.EntityFramework
                 context.SaveChanges();
 
                 // update business object with new id
-                member.MemberId = entity.UserId;
+                member.UserId = entity.UserId;
             }
             
         }
@@ -69,9 +86,14 @@ namespace DataObjects.EntityFramework
         {
             using (var context = new InthudoEntities())
             {
-                var entity = context.Users.SingleOrDefault(m => m.UserId == member.MemberId);
+                var entity = context.Users.SingleOrDefault(m => m.UserId == member.UserId);
                 entity.Email = member.Email;
-                
+                entity.UserName = member.UserName;
+                entity.Address = member.Address;
+                entity.Telephone = member.Telephone;
+                entity.RoleTypeId = member.RoleTypeId;
+                entity.LastEditedOn = member.LastEditedOn;
+                entity.FullName = member.FullName;
 
                 //context.Members.Attach(entity); 
                 context.SaveChanges();
@@ -83,8 +105,9 @@ namespace DataObjects.EntityFramework
         {
             using (var context = new InthudoEntities())
             {
-                var entity = context.Users.SingleOrDefault(m => m.UserId == member.MemberId);
-                context.Users.Remove(entity);
+                var entity = context.Users.SingleOrDefault(m => m.UserId == member.UserId);
+                entity.Deteted = true;
+                
                 context.SaveChanges();
             }
         }
@@ -98,6 +121,86 @@ namespace DataObjects.EntityFramework
         public List<Member> GetMembersWithOrderStatistics(string sortExpression)
         {
             throw new NotImplementedException();
+        }
+
+
+        public bool Login(string user, string pass)
+        {
+            using(var context = new InthudoEntities())
+            {
+                var member = context.Users.Where(m=> m.UserName == user && m.Password == pass &&(m.Deteted == null || m.Deteted ==false));
+                if(member.Count() == 1)
+                {
+                    return true;    
+                }
+                return false;
+                
+            }
+        }
+
+
+        public void ChangePass(int userId, string pass)
+        {
+            using (var context = new InthudoEntities())
+            {
+                var mem = context.Users.SingleOrDefault(m => m.UserId == userId);
+                if (mem == null) return;
+                mem.Password = pass;
+                context.SaveChanges();
+            }
+        }
+
+
+        public List<Member> GetMembers(string username, string email, string fullName, string address, int roletypeId)
+        {
+            using (var context = new InthudoEntities())
+            {
+                var query = from mem in context.Users
+                            where
+                            (String.IsNullOrEmpty(username) || mem.UserName.Contains(username))&&
+                            (String.IsNullOrEmpty(email) || mem.Email.Contains(email))&&
+                            (String.IsNullOrEmpty(fullName)|| mem.FullName.Contains(fullName))&&
+                            (String.IsNullOrEmpty(address)|| mem.FullName.Contains(address))&&
+                            (roletypeId ==0 || mem.RoleTypeId == roletypeId)&&
+                            (mem.Deteted == null || mem.Deteted == false)
+                            select mem;
+
+                var roles = context.LibRoleTypes;
+                return query.ToList().AsQueryable().Select(m =>
+                    new Member
+                    { 
+                        UserId = m.UserId,
+                        Email = m.Email,
+
+                        RoleType = Mapper.Map<LibRoleType, RoleType>(roles.Where(r => r.RoleTypeId == m.RoleTypeId).FirstOrDefault()),
+                        FullName = m.FullName,
+                        Address = m.Address,
+                        Telephone = m.Telephone,
+                        UserName = m.UserName
+                    }
+               )
+               .ToList();
+
+            }
+        }
+
+
+        public Member GetMemberByTelephone(string telephone)
+        {
+            using (var context = new InthudoEntities())
+            {
+                var member = context.Users.FirstOrDefault(c => c.Telephone== telephone) as User;
+                return Mapper.Map<User, Member>(member);
+            }
+        }
+
+        public Member GetMemberByUserName(string userName)
+        {
+            using (var context = new InthudoEntities())
+            {
+                var member = context.Users.FirstOrDefault(c => c.UserName == userName) as User;
+                return Mapper.Map<User, Member>(member);
+            }
         }
     }
 }
