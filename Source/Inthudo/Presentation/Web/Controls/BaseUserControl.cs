@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InthudoService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -38,6 +39,25 @@ namespace Web
             BaseMasterPage inthudoMasterPage = masterPage as BaseMasterPage;
             if (inthudoMasterPage != null)
                 inthudoMasterPage.ShowError(message, completeMessage);
+        }
+
+        public IMemberService MemberService
+        {
+            get
+            {
+                return new MemberService();
+            }
+        }
+
+        public IOrderService OrderService
+        {
+            get { return new OrderService(); }
+        }
+
+        public IProductService ProductService
+        {
+            get
+            { return new ProductService(); }
         }
     }
 }

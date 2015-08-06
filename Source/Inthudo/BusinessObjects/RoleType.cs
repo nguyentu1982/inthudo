@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BusinessObjects
 {
-    public partial class RoleType:BusinessObject
+    public partial class RoleTypeBO:BusinessObject
     {
-        public RoleType()
+        public RoleTypeBO()
         { 
         
         }

@@ -53,6 +53,8 @@
     <Compile Include="BusinessRules\ValidationDataType.cs" />
     <Compile Include="BusinessRules\ValidationOperator.cs" />
     <Compile Include="Category.cs" />
+    <Compile Include="Customer.cs" />
+    <Compile Include="Design.cs" />
     <Compile Include="Member.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderDetail.cs" />

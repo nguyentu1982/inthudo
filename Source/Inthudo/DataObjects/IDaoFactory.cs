@@ -14,5 +14,7 @@ namespace DataObjects
     {
         IMemberDao MemberDao { get; }
         IRoleTypeDao RoleTypeDao { get; }
+        IProductDao ProductDao { get; }
+        IOrderDao OrderDao { get; }
     }
 }

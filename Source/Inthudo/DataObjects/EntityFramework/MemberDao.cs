@@ -32,7 +32,7 @@ namespace DataObjects.EntityFramework
                         UserId = m.UserId,
                         Email = m.Email,
                         
-                        RoleType = Mapper.Map<LibRoleType, RoleType>(roles.Where(r=> r.RoleTypeId == m.RoleTypeId).FirstOrDefault()),
+                        RoleType = Mapper.Map<LibRoleType, RoleTypeBO>(roles.Where(r=> r.RoleTypeId == m.RoleTypeId).FirstOrDefault()),
                         FullName = m.FullName,
                         Address = m.Address,
                         Telephone = m.Telephone,
@@ -172,7 +172,7 @@ namespace DataObjects.EntityFramework
                         UserId = m.UserId,
                         Email = m.Email,
 
-                        RoleType = Mapper.Map<LibRoleType, RoleType>(roles.Where(r => r.RoleTypeId == m.RoleTypeId).FirstOrDefault()),
+                        RoleType = Mapper.Map<LibRoleType, RoleTypeBO>(roles.Where(r => r.RoleTypeId == m.RoleTypeId).FirstOrDefault()),
                         FullName = m.FullName,
                         Address = m.Address,
                         Telephone = m.Telephone,
@@ -201,6 +201,12 @@ namespace DataObjects.EntityFramework
                 var member = context.Users.FirstOrDefault(c => c.UserName == userName) as User;
                 return Mapper.Map<User, Member>(member);
             }
+        }
+
+
+        public Member GetMember(string user, string pass)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -11,20 +11,23 @@ namespace BusinessObjects
     // ** Enterprise Design Pattern: Domain Model, Identity Field, Foreign key mapping
 
 
-    public class OrderDetail : BusinessObject
+    public class OrderDetailBO : BusinessObject
     {
-        // ** Enterprise Design Pattern: Identity field pattern
-        
+        public int OrderItemId { get; set; }
+        public int ProductId { get; set; }
+        public string Specification { get; set; }
+        public int Quantity { get; set; }
+        public decimal Price { get; set; }
+        public int CreatedBy { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public Nullable<int> LastEditedBy { get; set; }
+        public Nullable<System.DateTime> LastEditedOn { get; set; }
+        public Nullable<bool> Deleted { get; set; }
         public int OrderId { get; set; }
 
-        public int ProductId { get; set; }
-        public string ProductName { get; set; }
-        public int Quantity { get; set; }
-        public double UnitPrice { get; set; }
-        public double Discount { get; set; }
-
-        // ** Enterprise Design Pattern: Foreign Key Mapping. Order is the parent
-
-        public Order Order { get; set; }
+        public virtual Member User { get; set; }
+        public virtual Member User1 { get; set; }
+        public virtual ProductBO Product { get; set; }
+        public virtual OrderBO Order { get; set; }
     }
 }

@@ -57,5 +57,7 @@ namespace DataObjects
         Member GetMemberByTelephone(string telephone);
 
         Member GetMemberByUserName(string userName);
+
+        Member GetMember(string user, string pass);
     }
 }

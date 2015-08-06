@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="InthudoModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="InthudoModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="InthudoModelStoreContainer">
           <EntitySet Name="Customer" EntityType="InthudoModel.Store.Customer" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Design" EntityType="InthudoModel.Store.Design" store:Type="Tables" Schema="dbo" />
@@ -84,6 +84,10 @@
           <AssociationSet Name="FK_Order_User4" Association="InthudoModel.Store.FK_Order_User4">
             <End Role="User" EntitySet="User" />
             <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderItem_Order" Association="InthudoModel.Store.FK_OrderItem_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderItem" EntitySet="OrderItem" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderItem_Product" Association="InthudoModel.Store.FK_OrderItem_Product">
             <End Role="Product" EntitySet="Product" />
@@ -225,6 +229,7 @@
           <Property Name="LastEditedBy" Type="int" />
           <Property Name="LastEditedOn" Type="datetime" />
           <Property Name="Deleted" Type="bit" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderStatusMapping">
           <Key>
@@ -461,6 +466,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderItem_Order">
+          <End Role="Order" Type="InthudoModel.Store.Order" Multiplicity="1" />
+          <End Role="OrderItem" Type="InthudoModel.Store.OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrderItem_Product">
           <End Role="Product" Type="InthudoModel.Store.Product" Multiplicity="1" />
           <End Role="OrderItem" Type="InthudoModel.Store.OrderItem" Multiplicity="*" />
@@ -509,8 +526,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="InthudoModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -608,6 +624,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_OrderItem_Product" Association="InthudoModel.FK_OrderItem_Product">
             <End Role="Product" EntitySet="Products" />
+            <End Role="OrderItem" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderItem_Order" Association="InthudoModel.FK_OrderItem_Order">
+            <End Role="Order" EntitySet="Orders" />
             <End Role="OrderItem" EntitySet="OrderItems" />
           </AssociationSet>
         </EntityContainer>
@@ -741,6 +761,7 @@
           <NavigationProperty Name="User1" Relationship="InthudoModel.FK_Order_User3" FromRole="Order" ToRole="User" />
           <NavigationProperty Name="User2" Relationship="InthudoModel.FK_Order_User4" FromRole="Order" ToRole="User" />
           <NavigationProperty Name="OrderStatusMappings" Relationship="InthudoModel.FK_OrderStatusMapping_Order" FromRole="Order" ToRole="OrderStatusMapping" />
+          <NavigationProperty Name="OrderItems" Relationship="InthudoModel.FK_OrderItem_Order" FromRole="Order" ToRole="OrderItem" />
         </EntityType>
         <EntityType Name="OrderItem">
           <Key>
@@ -759,6 +780,8 @@
           <NavigationProperty Name="User" Relationship="InthudoModel.FK_Order_User" FromRole="OrderItem" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="InthudoModel.FK_Order_User1" FromRole="OrderItem" ToRole="User" />
           <NavigationProperty Name="Product" Relationship="InthudoModel.FK_OrderItem_Product" FromRole="OrderItem" ToRole="Product" />
+          <Property Type="Int32" Name="OrderId" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="InthudoModel.FK_OrderItem_Order" FromRole="OrderItem" ToRole="Order" />
         </EntityType>
         <EntityType Name="OrderStatusMapping">
           <Key>
@@ -1058,6 +1081,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderItem_Order">
+          <End Type="InthudoModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="InthudoModel.OrderItem" Role="OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1186,6 +1221,7 @@
           <EntitySetMapping Name="OrderItems">
             <EntityTypeMapping TypeName="InthudoModel.OrderItem">
               <MappingFragment StoreEntitySet="OrderItem">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="Specification" ColumnName="Specification" />

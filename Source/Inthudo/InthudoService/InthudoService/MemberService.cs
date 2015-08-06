@@ -94,14 +94,23 @@ namespace InthudoService
             }
         }
 
-        private Member GetMemberByTelephone(string telephone)
+        public Member GetMemberByTelephone(string telephone)
         {
            return memberDao.GetMemberByTelephone(telephone);
         }
 
-        private Member GetMemberByUserName(string userName)
+        public Member GetMemberByUserName(string userName)
         {
             return memberDao.GetMemberByUserName(userName);
         }
+
+
+        public Member GetMember(string user)
+        {
+            return memberDao.GetMemberByUserName(user);
+        }
+
+
+       
     }
 }

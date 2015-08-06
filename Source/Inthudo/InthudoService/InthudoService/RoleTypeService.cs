@@ -10,7 +10,7 @@ namespace InthudoService
     public class RoleTypeService:ServiceBase, IRoleTypeService
     {
         static readonly IRoleTypeDao roleTypeDao = factory.RoleTypeDao;
-        public List<BusinessObjects.RoleType> GetRoleTypes()
+        public List<BusinessObjects.RoleTypeBO> GetRoleTypes()
         {
             return roleTypeDao.GetRoleTypes();
         }

@@ -23,6 +23,7 @@ namespace InthudoService
         void DeleteMember(Member member);
         bool ValidateUser(string user, string pass);
         void ChangePass(int userId, string pass);
+        Member GetMemberByUserName(string user);
         #endregion Member Repository
 
         List<Member> GetMembers(string username, string email, string fullName, string address, int roletypeId);

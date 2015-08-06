@@ -18,6 +18,7 @@ namespace DataObjects.EntityFramework
         {
             this.Designs = new HashSet<Design>();
             this.OrderStatusMappings = new HashSet<OrderStatusMapping>();
+            this.OrderItems = new HashSet<OrderItem>();
         }
     
         public int OrderId { get; set; }
@@ -41,5 +42,6 @@ namespace DataObjects.EntityFramework
         public virtual User User1 { get; set; }
         public virtual User User2 { get; set; }
         public virtual ICollection<OrderStatusMapping> OrderStatusMappings { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 }

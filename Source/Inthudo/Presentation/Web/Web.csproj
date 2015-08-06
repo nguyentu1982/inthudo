@@ -211,13 +211,24 @@
     <Content Include="MemberAdd.aspx" />
     <Content Include="MemberEdit.aspx" />
     <Content Include="Members.aspx" />
+    <Content Include="Modules\DecimalTextBox.ascx" />
     <Content Include="Modules\EmailTextBox.ascx" />
     <Content Include="Modules\Login.ascx" />
     <Content Include="Modules\MemberAdd.ascx" />
     <Content Include="Modules\MemberEdit.ascx" />
     <Content Include="Modules\MemberInfo.ascx" />
     <Content Include="Modules\Members.ascx" />
+    <Content Include="Modules\NumericTextBox.ascx" />
+    <Content Include="Modules\OrderAdd.ascx" />
+    <Content Include="Modules\OrderDetailInfo.ascx" />
+    <Content Include="Modules\OrderEdit.ascx" />
+    <Content Include="Modules\OrderInfo.ascx" />
+    <Content Include="Modules\Orders.ascx" />
     <Content Include="Modules\SimpleTextBox.ascx" />
+    <Content Include="OrderAdd.aspx" />
+    <Content Include="OrderDetail.aspx" />
+    <Content Include="OrderEdit.aspx" />
+    <Content Include="Orders.aspx" />
     <Content Include="packages.config" />
     <Content Include="Site2.Master" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
@@ -314,11 +325,88 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BaseMasterPagecs.cs">
+    <Compile Include="Controls\BaseMasterPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\BaseUserControl.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\DecimalTextBox.ascx.cs">
+      <DependentUpon>DecimalTextBox.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\DecimalTextBox.ascx.designer.cs">
+      <DependentUpon>DecimalTextBox.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\NumericTextBox.ascx.cs">
+      <DependentUpon>NumericTextBox.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\NumericTextBox.ascx.designer.cs">
+      <DependentUpon>NumericTextBox.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\OrderAdd.ascx.cs">
+      <DependentUpon>OrderAdd.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\OrderAdd.ascx.designer.cs">
+      <DependentUpon>OrderAdd.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\OrderDetailInfo.ascx.cs">
+      <DependentUpon>OrderDetailInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\OrderDetailInfo.ascx.designer.cs">
+      <DependentUpon>OrderDetailInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\OrderEdit.ascx.cs">
+      <DependentUpon>OrderEdit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\OrderEdit.ascx.designer.cs">
+      <DependentUpon>OrderEdit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\OrderInfo.ascx.cs">
+      <DependentUpon>OrderInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\OrderInfo.ascx.designer.cs">
+      <DependentUpon>OrderInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Orders.ascx.cs">
+      <DependentUpon>Orders.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\Orders.ascx.designer.cs">
+      <DependentUpon>Orders.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderAdd.aspx.cs">
+      <DependentUpon>OrderAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderAdd.aspx.designer.cs">
+      <DependentUpon>OrderAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderDetail.aspx.cs">
+      <DependentUpon>OrderDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderDetail.aspx.designer.cs">
+      <DependentUpon>OrderDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderEdit.aspx.cs">
+      <DependentUpon>OrderEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderEdit.aspx.designer.cs">
+      <DependentUpon>OrderEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Orders.aspx.cs">
+      <DependentUpon>Orders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Orders.aspx.designer.cs">
+      <DependentUpon>Orders.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site2.Master.cs">
       <DependentUpon>Site2.Master</DependentUpon>

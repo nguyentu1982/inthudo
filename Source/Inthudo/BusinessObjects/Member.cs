@@ -39,11 +39,11 @@ namespace BusinessObjects
         public string Email { get; set; }
         public int RoleTypeId { get; set; }
 
-        public RoleType RoleType { get; set; }
+        public RoleTypeBO RoleType { get; set; }
         public string RoleName
         {
             get { return RoleType.RoleName; }
-            set { }
+            set { RoleName = value; }
         }
     
     }

@@ -40,6 +40,7 @@
         <AssociationConnector Association="InthudoModel.FK_Order_User" ManuallyRouted="false" />
         <AssociationConnector Association="InthudoModel.FK_Order_User1" ManuallyRouted="false" />
         <AssociationConnector Association="InthudoModel.FK_OrderItem_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="InthudoModel.FK_OrderItem_Order" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

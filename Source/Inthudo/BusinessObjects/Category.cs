@@ -10,7 +10,7 @@ namespace BusinessObjects
     // ** Enterprise Design Pattern: Domain Model, Identity Field
 
 
-    public class Category : BusinessObject
+    public class CategoryBO : BusinessObject
     {
         // ** Enterprise Design Pattern: Identity field pattern
 

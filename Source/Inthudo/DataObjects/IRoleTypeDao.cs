@@ -9,6 +9,6 @@ namespace DataObjects
 {
     public interface IRoleTypeDao
     {
-        List<RoleType> GetRoleTypes();
+        List<RoleTypeBO> GetRoleTypes();
     }
 }

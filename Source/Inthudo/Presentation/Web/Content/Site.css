@@ -4,7 +4,13 @@
     display:inline-block;
 }
 
+.ajax__html_editor_extender_popupDiv {
+    z-index:-1;
+}
 
+.ajax__html_editor_extender_container {
+    margin-bottom:10px;
+}
 /*Customize*/
 
 
@@ -417,7 +423,6 @@ fieldset {
         font-size: 1.2em;
         margin: 5px 0 6px 0;
         padding: 5px;
-        width: 300px;
     }
 
     textarea {

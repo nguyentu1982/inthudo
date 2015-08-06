@@ -5,10 +5,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using InthudoService;
+using BusinessObjects;
 
 namespace Web.Module
 {
-    public partial class Login : System.Web.UI.UserControl
+    public partial class Login : BaseUserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,6 +23,8 @@ namespace Web.Module
                 // e.Authenticated = true;
                 loginCtrl.Visible = false;
                 Session["IsLogedin"] = true;
+                Member mem = this.MemberService.GetMemberByUserName(loginCtrl.UserName);
+                Session["UserId"] = mem.UserId;
             }
             else
             {

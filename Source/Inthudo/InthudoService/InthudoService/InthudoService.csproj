@@ -42,9 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IMemberService.cs" />
+    <Compile Include="IOrderService.cs" />
     <Compile Include="IRoleTypeService.cs" />
     <Compile Include="MemberService.cs" />
     <Compile Include="MemberStatus.cs" />
+    <Compile Include="OrderService.cs" />
+    <Compile Include="IProductService.cs" />
+    <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleTypeService.cs" />
     <Compile Include="ServiceBase.cs" />

@@ -51,7 +51,7 @@ namespace Web.Modules
            
 
             IRoleTypeService roleTypeService = new RoleTypeService();
-            List<RoleType> roles = roleTypeService.GetRoleTypes();
+            List<RoleTypeBO> roles = roleTypeService.GetRoleTypes();
 
             for (int i = 0; i < roles.Count; i++)
             {

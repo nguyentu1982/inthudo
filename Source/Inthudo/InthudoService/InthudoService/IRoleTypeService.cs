@@ -9,6 +9,6 @@ namespace InthudoService
 {
     public interface IRoleTypeService
     {
-        List<RoleType> GetRoleTypes();
+        List<RoleTypeBO> GetRoleTypes();
     }
 }

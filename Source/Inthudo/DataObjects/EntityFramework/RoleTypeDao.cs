@@ -12,16 +12,16 @@ namespace DataObjects.EntityFramework
     {
         static RoleTypeDao()
         {
-            Mapper.CreateMap<LibRoleType, RoleType>();
-            Mapper.CreateMap<RoleType, LibRoleType>();
+            Mapper.CreateMap<LibRoleType, RoleTypeBO>();
+            Mapper.CreateMap<RoleTypeBO, LibRoleType>();
         }
 
-        public List<RoleType> GetRoleTypes()
+        public List<RoleTypeBO> GetRoleTypes()
         {
             using (var context = new InthudoEntities())
             {
                 var roles = context.LibRoleTypes.ToList();
-                return Mapper.Map<List<LibRoleType>, List<RoleType>>(roles);
+                return Mapper.Map<List<LibRoleType>, List<RoleTypeBO>>(roles);
             }
         }
     }

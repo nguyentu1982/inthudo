@@ -26,7 +26,7 @@ namespace Web.Modules
             ddlRoles.Items.Add(new ListItem("", "0"));
 
             IRoleTypeService roleTypeService = new RoleTypeService();
-            List<RoleType> roles = roleTypeService.GetRoleTypes();
+            List<RoleTypeBO> roles = roleTypeService.GetRoleTypes();
 
             for (int i = 0; i < roles.Count; i++)
             {
