@@ -8,8 +8,11 @@
 <div runat="server" id="panelOrderInfo">
     <span class="lbtitle">Mã đơn hàng: </span>
     <asp:Label runat="server" ID="lbOrderId"></asp:Label>
+    <br />
+    <span class="lbtitle" >Nhân viên thiết kế:</span><asp:DropDownList runat="server" ID="ddlDesigner"></asp:DropDownList>
 </div>
-<span class="lbtitle">Sản phẩm </span><asp:DropDownList runat="server" ID="ddlProduct"></asp:DropDownList>
+<span class="lbtitle">Sản phẩm </span>
+<ajaxToolkit:ComboBox ID="cboxProduct" runat="server"></ajaxToolkit:ComboBox>
 <br />
 <span class="lbtitle">Quy cách sản phẩm</span>
 <div>
@@ -17,8 +20,8 @@
 <ajaxToolkit:HtmlEditorExtender ID="txtProductRequirement_HtmlEditorExtender" runat="server" BehaviorID="txtProductRequirement_HtmlEditorExtender" TargetControlID="txtProductRequirement" EnableSanitization="false">
 </ajaxToolkit:HtmlEditorExtender>
 </div>
-<span class="lbtitle">Số lượng: </span><inthudo:NumericTextBox runat="server" ID="ctrltxtQuantity" />
+<span class="lbtitle">Số lượng: </span><inthudo:NumericTextBox runat="server" ID="ctrltxtQuantity" MaximumValue="1000000" MinimumValue="1" Value="1" RequiredErrorMessage="Bạn hãy nhập số lượng!" RangeErrorMessage="Số lượng từ 1 đến 1.000.000" />
 <br />
-<span class="lbtitle">Đơn giá: </span><inthudo:DecimalTextBox runat="server" ID="ctrltxtPrice" />
+<span class="lbtitle">Đơn giá: </span><inthudo:DecimalTextBox runat="server" ID="ctrltxtPrice" MaximumValue="1000000000" MinimumValue="0" Value="0" RequiredErrorMessage="Bạn hãy nhập đơn giá!" RangeErrorMessage="Đơn giá từ 0 đến 1.000.000.000" />
 <br />
 <span class="lbtitle">Thành tiền:</span> <span id="total-money"></span>

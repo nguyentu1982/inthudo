@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Web.Modules
 {
-    public partial class OrderEdit : System.Web.UI.UserControl
+    public partial class OrderEdit : BaseUserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {

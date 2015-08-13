@@ -59,5 +59,13 @@ namespace Web
             get
             { return new ProductService(); }
         }
+
+        public ICustomerService CustomerService
+        {
+            get
+            {
+                return new CustomerService();
+            }
+        }
     }
 }

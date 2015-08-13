@@ -31,22 +31,13 @@ namespace Web.Modules {
         protected global::System.Web.UI.WebControls.Label lbOrderId;
         
         /// <summary>
-        /// txtOrderDate control.
+        /// ctrlDatePicker control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtOrderDate;
-        
-        /// <summary>
-        /// txtOrderDate_CalendarExtender control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender txtOrderDate_CalendarExtender;
+        protected global::Web.Modules.DatePicker ctrlDatePicker;
         
         /// <summary>
         /// ddlOrderStatus control.
@@ -58,6 +49,15 @@ namespace Web.Modules {
         protected global::System.Web.UI.WebControls.DropDownList ddlOrderStatus;
         
         /// <summary>
+        /// ctrlCustomerSelect control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Web.Modules.CustomerSelect ctrlCustomerSelect;
+        
+        /// <summary>
         /// ddlDepositMethod control.
         /// </summary>
         /// <remarks>
@@ -67,13 +67,22 @@ namespace Web.Modules {
         protected global::System.Web.UI.WebControls.DropDownList ddlDepositMethod;
         
         /// <summary>
-        /// txtDeposit control.
+        /// ctrlDepositAmount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDeposit;
+        protected global::Web.Modules.DecimalTextBox ctrlDepositAmount;
+        
+        /// <summary>
+        /// ddlShippingMethod control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlShippingMethod;
         
         /// <summary>
         /// ddlBusinessManId control.
@@ -83,15 +92,6 @@ namespace Web.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlBusinessManId;
-        
-        /// <summary>
-        /// ddlDesignerId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDesignerId;
         
         /// <summary>
         /// panelOrderDetails control.

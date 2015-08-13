@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomerService.cs" />
+    <Compile Include="ICustomerService.cs" />
     <Compile Include="IMemberService.cs" />
     <Compile Include="IOrderService.cs" />
     <Compile Include="IRoleTypeService.cs" />

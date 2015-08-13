@@ -10,33 +10,51 @@
 namespace Web.Modules {
     
     
-    public partial class OrderEdit {
+    public partial class CustomerSelect {
         
         /// <summary>
-        /// btSave control.
+        /// UpdatePanel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btSave;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
-        /// btDelete control.
+        /// txtCustomerCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btDelete;
+        protected global::System.Web.UI.WebControls.TextBox txtCustomerCode;
         
         /// <summary>
-        /// ctrlOrderInfo control.
+        /// panelCustomerInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Web.Modules.OrderInfo ctrlOrderInfo;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelCustomerInfo;
+        
+        /// <summary>
+        /// lbCustomerInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbCustomerInfo;
+        
+        /// <summary>
+        /// ctrlCustomerSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Web.Modules.CustomerSearch ctrlCustomerSearch;
     }
 }

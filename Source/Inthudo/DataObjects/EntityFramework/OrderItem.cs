@@ -14,6 +14,12 @@ namespace DataObjects.EntityFramework
     
     public partial class OrderItem
     {
+        public OrderItem()
+        {
+            this.Designs = new HashSet<Design>();
+            this.OrderStatusMappings = new HashSet<OrderStatusMapping>();
+        }
+    
         public int OrderItemId { get; set; }
         public int ProductId { get; set; }
         public string Specification { get; set; }
@@ -25,10 +31,16 @@ namespace DataObjects.EntityFramework
         public Nullable<System.DateTime> LastEditedOn { get; set; }
         public Nullable<bool> Deleted { get; set; }
         public int OrderId { get; set; }
+        public Nullable<int> DesignerId { get; set; }
     
+        public virtual ICollection<Design> Designs { get; set; }
+        public virtual Order Order { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
+        public virtual OrderItem OrderItem1 { get; set; }
+        public virtual OrderItem OrderItem2 { get; set; }
         public virtual Product Product { get; set; }
-        public virtual Order Order { get; set; }
+        public virtual User User2 { get; set; }
+        public virtual ICollection<OrderStatusMapping> OrderStatusMappings { get; set; }
     }
 }

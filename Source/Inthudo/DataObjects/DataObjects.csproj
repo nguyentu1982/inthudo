@@ -70,6 +70,7 @@
     <Compile Include="EntityFramework\Customer.cs">
       <DependentUpon>Inthudo.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\CustomerDao.cs" />
     <Compile Include="EntityFramework\Design.cs">
       <DependentUpon>Inthudo.tt</DependentUpon>
     </Compile>
@@ -130,6 +131,7 @@
     <Compile Include="EntityFramework\User.cs">
       <DependentUpon>Inthudo.tt</DependentUpon>
     </Compile>
+    <Compile Include="ICustomerDao.cs" />
     <Compile Include="IDaoFactory.cs" />
     <Compile Include="EntityFramework\DaoFactory.cs" />
     <Compile Include="EntityFramework\DynamicLinq.cs" />
@@ -152,13 +154,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config">
-      <SubType>Designer</SubType>
-    </None>
     <EntityDeploy Include="EntityFramework\Inthudo.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Inthudo.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="App.Config" />
     <None Include="EntityFramework\Inthudo.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Inthudo.edmx</DependentUpon>

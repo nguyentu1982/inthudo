@@ -10,33 +10,33 @@
 namespace Web.Modules {
     
     
-    public partial class OrderEdit {
+    public partial class DatePicker {
         
         /// <summary>
-        /// btSave control.
+        /// txtDateTime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btSave;
+        protected global::System.Web.UI.WebControls.TextBox txtDateTime;
         
         /// <summary>
-        /// btDelete control.
+        /// btnCalendar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btDelete;
+        protected global::System.Web.UI.WebControls.ImageButton btnCalendar;
         
         /// <summary>
-        /// ctrlOrderInfo control.
+        /// ajaxCalendar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Web.Modules.OrderInfo ctrlOrderInfo;
+        protected global::AjaxControlToolkit.CalendarExtender ajaxCalendar;
     }
 }

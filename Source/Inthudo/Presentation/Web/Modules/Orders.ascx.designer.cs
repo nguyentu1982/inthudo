@@ -22,13 +22,13 @@ namespace Web.Modules {
         protected global::System.Web.UI.WebControls.TextBox txtOrderCode;
         
         /// <summary>
-        /// txtCustomerCode control.
+        /// ctrlCustomerSelect control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCustomerCode;
+        protected global::Web.Modules.CustomerSelect ctrlCustomerSelect;
         
         /// <summary>
         /// ddlProduct control.
@@ -40,31 +40,31 @@ namespace Web.Modules {
         protected global::System.Web.UI.WebControls.DropDownList ddlProduct;
         
         /// <summary>
-        /// dllShipping control.
+        /// ddlShipping control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dllShipping;
+        protected global::System.Web.UI.WebControls.DropDownList ddlShipping;
         
         /// <summary>
-        /// dllDeposit control.
+        /// ddlDeposit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dllDeposit;
+        protected global::System.Web.UI.WebControls.DropDownList ddlDeposit;
         
         /// <summary>
-        /// dllStatus control.
+        /// ddlStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dllStatus;
+        protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
         
         /// <summary>
         /// ddlBusinessManId control.

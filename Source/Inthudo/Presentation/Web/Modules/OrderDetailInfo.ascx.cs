@@ -27,7 +27,7 @@ namespace Web.Modules
             {
                 hdfOrderDetailId.Value = orderDetail.OrderItemId.ToString();
                 lbOrderId.Text = orderDetail.Order.OrderId.ToString();
-                ddlProduct.SelectedValue = orderDetail.ProductId.ToString();
+                cboxProduct.SelectedValue = orderDetail.ProductId.ToString();
                 txtProductRequirement.Text = orderDetail.Specification;
                 ctrltxtQuantity.Value = orderDetail.Quantity;
                 ctrltxtPrice.Value = orderDetail.Price;
@@ -49,23 +49,37 @@ namespace Web.Modules
         {
             //Product dropdown
             List<ProductBO> products = this.ProductService.GetAllProucts();
-            ddlProduct.Items.Clear();
+            cboxProduct.Items.Clear();
             foreach (ProductBO p in products)
-            { 
-                ddlProduct.Items.Add(new ListItem(p.Name, p.ProductId.ToString()));
+            {
+                cboxProduct.Items.Add(new ListItem(p.Name, p.ProductId.ToString()));
             }
 
+            //Designer drop down
+            string orderBy = "UserId ASC";
+            List<Member> designers = this.MemberService.GetMembers(orderBy);
+            ddlDesigner.Items.Clear();
+            ddlDesigner.Items.Add(new ListItem("", "0"));
+            foreach (Member m in designers)
+            { 
+                ddlDesigner.Items.Add(new ListItem(m.UserName,m.UserId.ToString()));
+            }
         }
 
         public OrderDetailBO SaveInfo(int orderId)
         {
+            if (cboxProduct.SelectedValue == string.Empty)
+            { 
+                
+            }
+
             OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
             if (orderDetail != null)
             {
-                orderDetail.ProductId = int.Parse(ddlProduct.SelectedValue);
+                orderDetail.ProductId = int.Parse(cboxProduct.SelectedValue);
                 orderDetail.Specification = txtProductRequirement.Text;
                 orderDetail.Quantity = ctrltxtQuantity.Value;
-                orderDetail.Price = ctrltxtPrice.Value;
+                orderDetail.Price = ctrltxtPrice.Value;                
                 this.OrderService.UpdateOrderDetail(orderDetail);
             }
             else
@@ -73,7 +87,7 @@ namespace Web.Modules
                 orderDetail = new OrderDetailBO() 
                 { 
                      OrderId = string.IsNullOrEmpty(lbOrderId.Text) == true ? orderId : int.Parse(lbOrderId.Text),
-                     ProductId = int.Parse(ddlProduct.SelectedValue),
+                     ProductId = int.Parse(cboxProduct.SelectedValue),
                      Specification = txtProductRequirement.Text,
                      Quantity = ctrltxtQuantity.Value,
                      Price = ctrltxtPrice.Value,

@@ -211,6 +211,9 @@
     <Content Include="MemberAdd.aspx" />
     <Content Include="MemberEdit.aspx" />
     <Content Include="Members.aspx" />
+    <Content Include="Modules\CustomerSearch.ascx" />
+    <Content Include="Modules\CustomerSelect.ascx" />
+    <Content Include="Modules\DatePicker.ascx" />
     <Content Include="Modules\DecimalTextBox.ascx" />
     <Content Include="Modules\EmailTextBox.ascx" />
     <Content Include="Modules\Login.ascx" />
@@ -330,6 +333,27 @@
     </Compile>
     <Compile Include="Controls\BaseUserControl.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\CustomerSearch.ascx.cs">
+      <DependentUpon>CustomerSearch.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\CustomerSearch.ascx.designer.cs">
+      <DependentUpon>CustomerSearch.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\CustomerSelect.ascx.cs">
+      <DependentUpon>CustomerSelect.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\CustomerSelect.ascx.designer.cs">
+      <DependentUpon>CustomerSelect.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DatePicker.ascx.cs">
+      <DependentUpon>DatePicker.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\DatePicker.ascx.designer.cs">
+      <DependentUpon>DatePicker.ascx</DependentUpon>
     </Compile>
     <Compile Include="Modules\DecimalTextBox.ascx.cs">
       <DependentUpon>DecimalTextBox.ascx</DependentUpon>

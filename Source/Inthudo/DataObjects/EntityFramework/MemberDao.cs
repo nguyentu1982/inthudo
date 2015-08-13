@@ -18,14 +18,16 @@ namespace DataObjects.EntityFramework
         {
             Mapper.CreateMap<User, Member>();
             Mapper.CreateMap<Member, User>();
+            Mapper.CreateMap<LibRoleType, RoleTypeBO>();
+            Mapper.CreateMap<RoleTypeBO, LibRoleType>();
         }
         public List<Member> GetMembers(string sortExpression = "UserId ASC")
         {
-            using (var context = new InthudoEntities())
+            using (context)
             {
                 var members = context.Users.Where(m=> m.Deteted ==false || m.Deteted == null).AsQueryable().OrderBy(sortExpression).ToList();
 
-                var roles = context.LibRoleTypes;
+                var roles = context.LibRoleTypes.ToList();
                 return members.AsQueryable().Select(m =>
                     new Member
                     {
@@ -47,7 +49,7 @@ namespace DataObjects.EntityFramework
 
         public Member GetMember(int memberId)
         {
-            using (var context = new InthudoEntities())
+            using (context)
             {
                 var member = context.Users.FirstOrDefault(c => c.UserId == memberId && (c.Deteted == false || c.Deteted ==null)) as User;
                 return Mapper.Map<User, Member>(member);
@@ -56,7 +58,7 @@ namespace DataObjects.EntityFramework
 
         public Member GetMemberByEmail(string email)
         {
-            using (var context = new InthudoEntities())
+            using (context)
             {
                 var member = context.Users.FirstOrDefault(c => c.Email == email) as User;
                 return Mapper.Map<User, Member>(member);
@@ -69,7 +71,7 @@ namespace DataObjects.EntityFramework
 
         public void InsertMember(Member member)
         {
-            using (var context = new InthudoEntities())
+            using (context)
             {
                 var entity = Mapper.Map<Member, User>(member);
 
@@ -84,7 +86,7 @@ namespace DataObjects.EntityFramework
 
         public void UpdateMember(Member member)
         {
-            using (var context = new InthudoEntities())
+            using (context)
             {
                 var entity = context.Users.SingleOrDefault(m => m.UserId == member.UserId);
                 entity.Email = member.Email;
@@ -103,7 +105,7 @@ namespace DataObjects.EntityFramework
 
         public void DeleteMember(Member member)
         {
-            using (var context = new InthudoEntities())
+            using (context )
             {
                 var entity = context.Users.SingleOrDefault(m => m.UserId == member.UserId);
                 entity.Deteted = true;
@@ -126,7 +128,7 @@ namespace DataObjects.EntityFramework
 
         public bool Login(string user, string pass)
         {
-            using(var context = new InthudoEntities())
+            using(context)
             {
                 var member = context.Users.Where(m=> m.UserName == user && m.Password == pass &&(m.Deteted == null || m.Deteted ==false));
                 if(member.Count() == 1)
@@ -141,7 +143,7 @@ namespace DataObjects.EntityFramework
 
         public void ChangePass(int userId, string pass)
         {
-            using (var context = new InthudoEntities())
+            using (context )
             {
                 var mem = context.Users.SingleOrDefault(m => m.UserId == userId);
                 if (mem == null) return;
@@ -153,7 +155,7 @@ namespace DataObjects.EntityFramework
 
         public List<Member> GetMembers(string username, string email, string fullName, string address, int roletypeId)
         {
-            using (var context = new InthudoEntities())
+            using (context)
             {
                 var query = from mem in context.Users
                             where
@@ -187,7 +189,7 @@ namespace DataObjects.EntityFramework
 
         public Member GetMemberByTelephone(string telephone)
         {
-            using (var context = new InthudoEntities())
+            using (context)
             {
                 var member = context.Users.FirstOrDefault(c => c.Telephone== telephone) as User;
                 return Mapper.Map<User, Member>(member);
@@ -196,7 +198,7 @@ namespace DataObjects.EntityFramework
 
         public Member GetMemberByUserName(string userName)
         {
-            using (var context = new InthudoEntities())
+            using (context)
             {
                 var member = context.Users.FirstOrDefault(c => c.UserName == userName) as User;
                 return Mapper.Map<User, Member>(member);
@@ -207,6 +209,14 @@ namespace DataObjects.EntityFramework
         public Member GetMember(string user, string pass)
         {
             throw new NotImplementedException();
+        }
+
+        public InThuDoEntities context
+        {
+            get
+            {
+                return new InThuDoEntities();
+            }
         }
     }
 }

@@ -18,7 +18,7 @@ namespace DataObjects.EntityFramework
 
         public List<RoleTypeBO> GetRoleTypes()
         {
-            using (var context = new InthudoEntities())
+            using (var context = new InThuDoEntities())
             {
                 var roles = context.LibRoleTypes.ToList();
                 return Mapper.Map<List<LibRoleType>, List<RoleTypeBO>>(roles);

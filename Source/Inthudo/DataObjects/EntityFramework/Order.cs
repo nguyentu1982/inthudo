@@ -16,9 +16,8 @@ namespace DataObjects.EntityFramework
     {
         public Order()
         {
-            this.Designs = new HashSet<Design>();
-            this.OrderStatusMappings = new HashSet<OrderStatusMapping>();
             this.OrderItems = new HashSet<OrderItem>();
+            this.OrderStatusMappings = new HashSet<OrderStatusMapping>();
         }
     
         public int OrderId { get; set; }
@@ -35,13 +34,12 @@ namespace DataObjects.EntityFramework
         public Nullable<bool> Deleted { get; set; }
     
         public virtual Customer Customer { get; set; }
-        public virtual ICollection<Design> Designs { get; set; }
         public virtual LibDepositType LibDepositType { get; set; }
         public virtual LibShippingMethod LibShippingMethod { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
         public virtual User User2 { get; set; }
-        public virtual ICollection<OrderStatusMapping> OrderStatusMappings { get; set; }
         public virtual ICollection<OrderItem> OrderItems { get; set; }
+        public virtual ICollection<OrderStatusMapping> OrderStatusMappings { get; set; }
     }
 }

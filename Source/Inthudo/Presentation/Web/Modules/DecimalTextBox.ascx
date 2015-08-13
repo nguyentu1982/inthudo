@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true"
     Inherits="Web.Modules.DecimalTextBox" Codebehind="DecimalTextBox.ascx.cs" %>
  
-<asp:TextBox ID="txtValue" runat="server"></asp:TextBox>
+<asp:TextBox ID="txtValue" runat="server">0</asp:TextBox>
 <ajaxToolkit:FilteredTextBoxExtender ID="ftbeValue" runat="server" TargetControlID="txtValue"
     FilterType="Custom, Numbers" ValidChars="-." />
 <asp:RequiredFieldValidator ID="rfvValue" ControlToValidate="txtValue" Font-Name="verdana"

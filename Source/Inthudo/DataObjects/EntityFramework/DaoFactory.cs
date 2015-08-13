@@ -15,5 +15,6 @@ namespace DataObjects.EntityFramework
         public IRoleTypeDao RoleTypeDao { get { return new RoleTypeDao(); } }
         public IProductDao ProductDao { get { return new ProductDao(); } }
         public IOrderDao OrderDao { get { return new OrderDao(); } }
+        public ICustomerDao CustomerDao { get { return new CustomerDao(); } }
     }
 }

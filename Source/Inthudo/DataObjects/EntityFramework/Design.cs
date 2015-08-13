@@ -20,13 +20,13 @@ namespace DataObjects.EntityFramework
         public Nullable<System.DateTime> BeginDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
         public Nullable<decimal> Cost { get; set; }
-        public int OrderId { get; set; }
         public int CreatedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public Nullable<int> LastEditedBy { get; set; }
         public Nullable<System.DateTime> LastEditedOn { get; set; }
+        public int OrderItemId { get; set; }
     
-        public virtual Order Order { get; set; }
+        public virtual OrderItem OrderItem { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
         public virtual User User2 { get; set; }

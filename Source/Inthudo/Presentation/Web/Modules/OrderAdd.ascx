@@ -4,7 +4,7 @@
 <div class="">
     <asp:Button ID="btSave" runat="server" Text="Lưu" OnClick="btSave_Click" />
     <asp:Button ID="btSaveAndContinueEdit" runat="server" Text="Lưu và tiếp tục sửa" OnClick="btSaveAndContinueEdit_Click" />
-    <a href="Orders.ascx" class="a-button">Trở lại danh sách đơn hàng</a>    
+    <a href="Orders.aspx" class="a-button">Trở lại danh sách đơn hàng</a>    
 </div>
 
 <div>

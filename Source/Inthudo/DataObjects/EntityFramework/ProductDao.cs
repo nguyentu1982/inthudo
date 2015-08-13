@@ -18,10 +18,18 @@ namespace DataObjects.EntityFramework
 
         public List<BusinessObjects.ProductBO> GetAllProducts()
         {
-            using (var context = new InthudoEntities())
+            using (context)
             {
                 var query = context.Products.ToList();
                 return Mapper.Map<List<Product>, List<BusinessObjects.ProductBO>>(query);
+            }
+        }
+
+        public InThuDoEntities context
+        {
+            get
+            {
+                return new InThuDoEntities();
             }
         }
     }

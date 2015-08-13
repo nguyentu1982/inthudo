@@ -13,26 +13,90 @@ namespace InthudoService
         static readonly IOrderDao orderDao = factory.OrderDao;
 
 
-        public BusinessObjects.OrderDetailBO GetOrderDetailById(int p)
+        public OrderDetailBO GetOrderDetailById(int id)
         {
-            throw new NotImplementedException();
+            return orderDao.GetOrderDetailById(id);
         }
 
-        public void UpdateOrderDetail(BusinessObjects.OrderDetailBO orderDetail)
+        public void UpdateOrderDetail(OrderDetailBO orderDetail)
         {
-            throw new NotImplementedException();
+            orderDao.UpdateOrderDetail(orderDetail);
         }
 
 
         public void InsertOrderDetail(OrderDetailBO orderDetail)
         {
-            throw new NotImplementedException();
+            orderDao.InsertOrderDetail(orderDetail);
         }
 
 
         public OrderBO GetOrderById(int orderId)
         {
-            throw new NotImplementedException();
+            return orderDao.GetOrderById(orderId);
+        }
+
+        
+
+        void IOrderService.UpdateOrderDetail(OrderDetailBO orderDetail)
+        {
+            orderDao.UpdateOrderDetail(orderDetail);
+        }
+
+        void IOrderService.InsertOrderDetail(OrderDetailBO orderDetail)
+        {
+            orderDao.InsertOrderDetail(orderDetail);
+        }
+
+        List<OrderDetailBO> IOrderService.GetOrderItemsByOrderId(int orderId)
+        {
+            return orderDao.GetOrderItemsByOrderId(orderId);
+        }
+
+
+        public List<OrderStatusBO> GetAllOrderStatus()
+        {
+            return orderDao.GetAllOrderStatus();
+        }
+
+
+        public List<DepositMethodBO> GetAllDepositMethod()
+        {
+            return orderDao.GetAllDepositMethod();
+        }
+
+
+        public List<ShippingMethodBO> GetAllShippingMehod()
+        {
+            return orderDao.GetAllShippingMethod();
+        }
+
+
+        public OrderBO InsertOrderInfo(OrderBO order)
+        {
+            return orderDao.InsertOrderInfo(order);
+        }
+
+        public OrderStatusBO GetContinueOrderStatusByOrderId(int orderId)
+        {
+            return orderDao.GetContinueOrderStatusByOrderId(orderId);
+        }
+
+
+        public void InsertOrderStatusMapping(OrderStatusMappingBO orderStatusMapping)
+        {
+            orderDao.InsertOrderStatusMapping(orderStatusMapping);
+        }
+
+
+        public void UpdateOrderInfo(OrderBO order)
+        {
+            orderDao.UpdateOrderInfo(order);
+        }
+
+
+        public List<OrderBO> GetOrders(OrderSearch orderSearchObj)
+        {
+            return orderDao.GetOrders(orderSearchObj);
         }
     }
 }

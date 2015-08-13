@@ -13,10 +13,10 @@ namespace DataObjects.EntityFramework
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class InthudoEntities : DbContext
+    public partial class InThuDoEntities : DbContext
     {
-        public InthudoEntities()
-            : base("name=InthudoEntities")
+        public InThuDoEntities()
+            : base("name=InThuDoEntities")
         {
         }
     
