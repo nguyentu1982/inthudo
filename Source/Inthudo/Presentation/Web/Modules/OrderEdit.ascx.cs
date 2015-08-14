@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,28 @@ namespace Web.Modules
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected void btSave_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                try
+                {
+                    OrderBO order = Save();
+
+                }
+                catch (Exception ex)
+                {
+                    ProcessException(ex);
+                }
+            }
+        }
+
+        protected OrderBO Save()
+        {
+            OrderBO order = ctrlOrderInfo.SaveInfo();
+            return order;
         }
     }
 }

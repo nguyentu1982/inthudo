@@ -11,6 +11,8 @@ namespace Web.Modules
 {
     public partial class OrderDetailInfo : BaseUserControl
     {
+        public bool ActionButtonIsDisplay { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -22,15 +24,22 @@ namespace Web.Modules
 
         private void BindData()
         {
-            OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
+            
+            OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);            
+
             if (orderDetail != null)
             {
                 hdfOrderDetailId.Value = orderDetail.OrderItemId.ToString();
-                lbOrderId.Text = orderDetail.Order.OrderId.ToString();
+                lbOrderId.Text = orderDetail.OrderId.ToString();
+                if (orderDetail.DesignerId != null)
+                    ddlDesigner.SelectedValue = orderDetail.DesignerId.ToString();
                 cboxProduct.SelectedValue = orderDetail.ProductId.ToString();
+                cboxProduct.Text = orderDetail.ProductName;
+
                 txtProductRequirement.Text = orderDetail.Specification;
                 ctrltxtQuantity.Value = orderDetail.Quantity;
                 ctrltxtPrice.Value = orderDetail.Price;
+                
             }
             else
             {
@@ -40,13 +49,16 @@ namespace Web.Modules
                 }
                 else
                 {
-                    panelOrderInfo.Visible = false;                    
+                    panelOrderInfo.Visible = false;
                 }
             }
         }
 
         private void FillDropDowns()
         {
+            btSave.Visible = ActionButtonIsDisplay;
+            btCancel.Visible = ActionButtonIsDisplay;
+            btDelete.Visible = ActionButtonIsDisplay;
             //Product dropdown
             List<ProductBO> products = this.ProductService.GetAllProucts();
             cboxProduct.Items.Clear();
@@ -69,13 +81,22 @@ namespace Web.Modules
         public OrderDetailBO SaveInfo(int orderId)
         {
             if (cboxProduct.SelectedValue == string.Empty)
-            { 
-                
+            {
+                throw new Exception("Bạn phải nhập sản phẩm");
             }
 
             OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
             if (orderDetail != null)
             {
+                int designerId = int.Parse(ddlDesigner.SelectedValue);
+                if (designerId == 0)
+                { 
+                    orderDetail.DesignerId = null;
+                }
+                else{
+                    orderDetail.DesignerId = designerId;
+                }               
+                
                 orderDetail.ProductId = int.Parse(cboxProduct.SelectedValue);
                 orderDetail.Specification = txtProductRequirement.Text;
                 orderDetail.Quantity = ctrltxtQuantity.Value;
@@ -84,6 +105,15 @@ namespace Web.Modules
             }
             else
             {
+                int designerId = int.Parse(ddlDesigner.SelectedValue);
+                if (designerId == 0)
+                {
+                    orderDetail.DesignerId = null;
+                }
+                else
+                {
+                    orderDetail.DesignerId = designerId;
+                }
                 orderDetail = new OrderDetailBO() 
                 { 
                      OrderId = string.IsNullOrEmpty(lbOrderId.Text) == true ? orderId : int.Parse(lbOrderId.Text),
@@ -92,7 +122,8 @@ namespace Web.Modules
                      Quantity = ctrltxtQuantity.Value,
                      Price = ctrltxtPrice.Value,
                      CreatedBy = this.UserId,
-                     CreatedOn = DateTime.Now
+                     CreatedOn = DateTime.Now,
+                     DesignerId = designerId
                 };
                 this.OrderService.InsertOrderDetail(orderDetail);
             }
@@ -111,7 +142,23 @@ namespace Web.Modules
         {
             get
             {
-                return CommonHelper.QueryStringInt("OrderDetailId");
+                int orderDetailId;
+                orderDetailId = CommonHelper.QueryStringInt("OrderDetailId");
+                if (orderDetailId > 0) return orderDetailId;
+
+                if (CommonHelper.QueryStringInt("AddNew") == 1) return 0;
+
+                List<OrderDetailBO> orderDetails = this.OrderService.GetOrderDetailsByOrderId(this.OrderId);
+
+                if (orderDetails != null)
+                {
+                    if (orderDetails.Count == 1)
+                    {
+                        return orderDetails[0].OrderItemId;
+                    }
+                }
+
+                return orderDetailId;
             } 
         }
 
@@ -120,6 +167,21 @@ namespace Web.Modules
             get
             { 
                 return int.Parse(Session["UserId"].ToString());
+            }
+        }
+
+        protected void btSave_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                try
+                {
+                    SaveInfo(this.OrderId);
+                }
+                catch (Exception ex)
+                {
+                    ProcessException(ex);
+                }
             }
         }
     }

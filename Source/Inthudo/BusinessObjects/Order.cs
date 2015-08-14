@@ -29,9 +29,41 @@ namespace BusinessObjects
 
         public virtual CustomerBO Customer { get; set; }
         public virtual ICollection<DesignBO> Designs { get; set; }
-        public virtual Member User { get; set; }
+        public virtual Member BusinessMan { get; set; }
         public virtual Member User1 { get; set; }
         public virtual Member User2 { get; set; }
+        public virtual DepositMethodBO DepositType { get; set; }
+        public virtual ShippingMethodBO ShippingMethod { get; set; }
+        public virtual IList<OrderDetailBO> OrderItems { get; set; }
+
+        public string CustomerName
+        {
+            get;
+            set;
+        }
         
+        public string BusinessManName
+        {
+            get;
+            set;
+        }
+
+        public string DepositTypeName
+        {
+            get;
+            set;
+        }
+
+        public string ShippingMethodName
+        {
+            get;
+            set;
+        }
+
+        public decimal Total
+        {
+            get;
+            set;
+        }
     }
 }

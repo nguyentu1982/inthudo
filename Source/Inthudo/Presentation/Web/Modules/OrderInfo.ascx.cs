@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessObjects;
 using Common.Utils;
+using System.Transactions;
 
 namespace Web.Modules
 {
@@ -28,16 +29,27 @@ namespace Web.Modules
                 lbOrderId.Text = order.OrderId.ToString();
                 ctrlDatePicker.SelectedDate = order.OrderDate;
                 ddlOrderStatus.SelectedValue = order.ShippingMethodId.ToString();
-
-                decimal deposit = 0;
-                if(order.Deposit !=null)
-                    decimal.Parse(order.Deposit.ToString());
+                ctrlCustomerSelect.CustomerCode = order.CustomerId.ToString();
+                ctrlCustomerSelect.txtCustomerCode_TextChanged(new object(), new EventArgs());
+                //deposit
+                ddlDepositMethod.SelectedValue = order.DepositTypeId.ToString();
+                decimal deposit = 0;               
+                decimal.TryParse(order.Deposit.ToString(), out deposit);
                 ctrlDepositAmount.Value = deposit;
+                //Business man
                 ddlBusinessManId.SelectedValue = order.UserId.ToString();
                 //Order Items
                 List<OrderDetailBO> orderItems = this.OrderService.GetOrderItemsByOrderId(this.OrderId);
-                grvOrderDetails.DataSource = orderItems;
-                grvOrderDetails.DataBind();
+                if (orderItems.Count > 1)
+                {
+                    grvOrderDetails.DataSource = orderItems;
+                    grvOrderDetails.DataBind();
+                    ctrlOrderDetailInfo.Visible = false;
+                }
+                else
+                {
+                    grvOrderDetails.Visible = false;
+                }
             }
             else
             { 
@@ -84,6 +96,10 @@ namespace Web.Modules
 
         public OrderBO SaveInfo()
         {
+            if (ctrlCustomerSelect.CustomerCode == string.Empty)
+            {
+                throw new Exception("Bạn hãy nhập mã số khách hàng!");
+            }
             OrderBO order = this.OrderService.GetOrderById(this.OrderId);
             if (order != null)
             {
@@ -95,12 +111,17 @@ namespace Web.Modules
                 order.UserId = int.Parse(ddlBusinessManId.SelectedValue);
                 order.LastEditedBy = LoggedInUserId;
                 order.LastEditedDate = DateTime.Now;
-
-                this.OrderService.UpdateOrderInfo(order);
-                ctrlOrderDetailInfo.SaveInfo(order.OrderId);
+                
+                using(TransactionScope scope = new TransactionScope())
+                {                    
+                    this.OrderService.UpdateOrderInfo(order);
+                    ctrlOrderDetailInfo.SaveInfo(order.OrderId);
+                    scope.Complete();                    
+                }                  
             }
             else
             {
+                
                 order = new OrderBO()
                 {
                     OrderDate = ctrlDatePicker.SelectedDate,
@@ -112,18 +133,13 @@ namespace Web.Modules
                     CreatedBy = LoggedInUserId,
                     CreatedDate = DateTime.Now
                 };
-                order = this.OrderService.InsertOrderInfo(order);
-                //OrderStatusBO continueOrderStatus = this.OrderService.GetContinueOrderStatusByOrderId(order.OrderId);
 
-                //OrderStatusMappingBO orderStatusMapping = new OrderStatusMappingBO()
-                //{
-                //    OrderId = order.OrderId,
-                //    OrderStatusId = continueOrderStatus.OrderStatusId,
-                //    StatusDate = DateTime.Now,
-                //    IsFailed = false
-                //};
-                //this.OrderService.InsertOrderStatusMapping(orderStatusMapping);
-                ctrlOrderDetailInfo.SaveInfo(order.OrderId);
+                using (TransactionScope scope = new TransactionScope())
+                {                    
+                    order = this.OrderService.InsertOrderInfo(order);
+                    ctrlOrderDetailInfo.SaveInfo(order.OrderId);
+                    scope.Complete();                    
+                }
             }
             return order;
         }
@@ -141,6 +157,18 @@ namespace Web.Modules
             get
             {
                 return CommonHelper.QueryStringInt("OrderId");
+            }
+        }
+
+        protected void grvOrderDetails_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "DeleteOrderDetail")
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                GridViewRow row = grvOrderDetails.Rows[index];
+                int orderDetailId = int.Parse(row.Cells[0].Text);
+
+                this.OrderService.MarkOrderDetailAsDeleted(orderDetailId);
             }
         }
     }

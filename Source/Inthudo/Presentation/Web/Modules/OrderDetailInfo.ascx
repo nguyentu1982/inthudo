@@ -20,8 +20,11 @@
 <ajaxToolkit:HtmlEditorExtender ID="txtProductRequirement_HtmlEditorExtender" runat="server" BehaviorID="txtProductRequirement_HtmlEditorExtender" TargetControlID="txtProductRequirement" EnableSanitization="false">
 </ajaxToolkit:HtmlEditorExtender>
 </div>
-<span class="lbtitle">Số lượng: </span><inthudo:NumericTextBox runat="server" ID="ctrltxtQuantity" MaximumValue="1000000" MinimumValue="1" Value="1" RequiredErrorMessage="Bạn hãy nhập số lượng!" RangeErrorMessage="Số lượng từ 1 đến 1.000.000" />
+<span class="lbtitle">Số lượng: </span><inthudo:NumericTextBox runat="server" ID="ctrltxtQuantity" Value="1" MaximumValue="1000000" MinimumValue="1"  RequiredErrorMessage="Bạn hãy nhập số lượng!" RangeErrorMessage="Số lượng từ 1 đến 1.000.000"/>
 <br />
-<span class="lbtitle">Đơn giá: </span><inthudo:DecimalTextBox runat="server" ID="ctrltxtPrice" MaximumValue="1000000000" MinimumValue="0" Value="0" RequiredErrorMessage="Bạn hãy nhập đơn giá!" RangeErrorMessage="Đơn giá từ 0 đến 1.000.000.000" />
+<span class="lbtitle">Đơn giá: </span><inthudo:DecimalTextBox runat="server" ID="ctrltxtPrice" Value="0" MaximumValue="1000000000" MinimumValue="0"  RequiredErrorMessage="Bạn hãy nhập đơn giá!" RangeErrorMessage="Đơn giá từ 0 đến 1.000.000.000" />
 <br />
 <span class="lbtitle">Thành tiền:</span> <span id="total-money"></span>
+<asp:Button ID="btSave" runat="server" Text="Lưu" OnClick="btSave_Click" />
+<asp:Button ID="btCancel" runat="server" Text="Hủy"/>
+<asp:Button ID="btDelete" runat="server" Text="Xóa" />

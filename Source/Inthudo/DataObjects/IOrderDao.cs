@@ -34,5 +34,9 @@ namespace DataObjects
         void UpdateOrderInfo(OrderBO order);
 
         List<OrderBO> GetOrders(OrderSearch orderSearchObj);
+
+        List<OrderDetailBO> GetOrderDetailsByOrderId(int orderId);
+
+        void MarkOrderDetailAsDeleted(int orderDetailId);
     }
 }

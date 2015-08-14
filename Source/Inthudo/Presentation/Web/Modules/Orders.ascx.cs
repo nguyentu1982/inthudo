@@ -107,5 +107,10 @@ namespace Web.Modules
             grvOrders.DataSource = orders;
             grvOrders.DataBind();
         }
+
+        protected void btAdd_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("OrderAdd.aspx");
+        }
     }
 }

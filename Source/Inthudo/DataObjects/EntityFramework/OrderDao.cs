@@ -30,13 +30,29 @@ namespace DataObjects.EntityFramework
 
         public OrderDetailBO GetOrderDetailById(int id)
         {
-            using (context)
+            using (var context = new InThuDoEntities())
             {
-                var query = from orderDetail in context.OrderItems
-                            where
-                            orderDetail.OrderItemId == id
-                            select orderDetail;
-                return Mapper.Map<OrderItem, OrderDetailBO>(query.FirstOrDefault());
+                var orderDetail =  (from od in context.OrderItems
+                        where od.OrderItemId == id &&
+                        (od.Deleted == null || od.Deleted == false)
+                        select new OrderDetailBO()
+                        {
+                            OrderItemId = od.OrderItemId,
+                            ProductId = od.ProductId,
+                            Specification = od.Specification,
+                            Quantity = od.Quantity,
+                            Price = od.Price,
+                            CreatedBy = od.CreatedBy,
+                            CreatedOn = od.CreatedOn,
+                            LastEditedBy = od.LastEditedBy,
+                            LastEditedOn = od.LastEditedOn,
+                            OrderId = od.OrderId,
+                            DesignerId = od.DesignerId,
+                            ProductName = od.Product.Name
+                        }).FirstOrDefault();
+
+                
+                return orderDetail;
             }
         }
 
@@ -44,32 +60,68 @@ namespace DataObjects.EntityFramework
         {
             using (context)
             {
-                var query = from o in context.Orders
-                            where o.OrderId == orderId
-                            select o;
-                return Mapper.Map<Order, OrderBO>(query.FirstOrDefault());
+                var order = (from o in context.Orders
+                        where o.OrderId == orderId
+                        && (o.Deleted == false || o.Deleted == null)
+                        select new OrderBO()
+                        {
+                            OrderId = o.OrderId,
+                            Deposit = o.Deposit,
+                            DepositTypeId = o.DepositTypeId,
+                            ShippingMethodId = o.ShippingMethodId,
+                            OrderDate = o.OrderDate,
+                            CustomerId = o.CustomerId,
+                            UserId = o.UserId,
+                            CreatedBy = o.CreatedBy,
+                            CreatedDate = o.CreatedDate,
+                            LastEditedBy = o.LastEditedBy,
+                            LastEditedDate = o.LastEditedDate,
+                            Deleted = o.Deleted,                            
+                        }).FirstOrDefault();               
+            
+                return order;
             }
         }
 
-        public List<BusinessObjects.OrderDetailBO> GetOrderItemsByOrderId(int orderId)
+        public List<OrderDetailBO> GetOrderItemsByOrderId(int orderId)
         {
             using( context )
             {
-                var query = from od in context.OrderItems
+                return (from od in context.OrderItems
                             where
-                            od.OrderId == orderId
-                            select od;
-                return Mapper.Map<List<OrderItem>, List<OrderDetailBO>>(query.ToList());
+                            (od.OrderId == orderId)&&
+                            (od.Deleted == null || od.Deleted ==false)
+                            select new OrderDetailBO() { 
+                               OrderItemId = od.OrderItemId,
+                               ProductId = od.ProductId,
+                               Specification = od.Specification,
+                               Quantity = od.Quantity,
+                               Price = od.Price,
+                               CreatedBy = od.CreatedBy,
+                               CreatedOn = od.CreatedOn,
+                               LastEditedBy = od.LastEditedBy,
+                               LastEditedOn = od.LastEditedOn,
+                               Deleted = od.Deleted,
+                               OrderId = od.OrderId,
+                               ProductName = od.Product.Name
+                            }).ToList();
+                
             }
         }
 
 
         public List<OrderStatusBO> GetAllOrderStatus()
         {
-            using (context)
+            using (var context = new InThuDoEntities())
             {
-                var orders = context.LibOrderStatus.ToList();
-                return Mapper.Map<List<LibOrderStatu>, List<OrderStatusBO>>(orders);
+                return (from status in context.LibOrderStatus
+                       select new OrderStatusBO()
+                       {
+                           OrderStatusId = status.OrderStatusId,
+                           Name = status.Name,
+                           Description = status.Description,
+                           ProcessingOrder = status.ProcessingOrder
+                       }).ToList();             
             }
         }
 
@@ -77,19 +129,30 @@ namespace DataObjects.EntityFramework
         public List<DepositMethodBO> GetAllDepositMethod()
         {
             using (context )
-            {
-                var methods = context.LibDepositTypes.ToList();
-                return Mapper.Map<List<LibDepositType>, List<DepositMethodBO>>(methods);
+            {               
+                return (from d in context.LibDepositTypes
+                        select new DepositMethodBO() { 
+                        DepositTypeId = d.DepositTypeId,
+                        Name = d.Name,
+                        Description = d.Description
+                        }).ToList();
             }
         }
 
 
         public List<ShippingMethodBO> GetAllShippingMethod()
         {
-            using (context)
+            using (var context = new InThuDoEntities())
             {
-                var ships = context.LibShippingMethods.ToList();
-                return Mapper.Map<List<LibShippingMethod>, List<ShippingMethodBO>>(ships);
+               
+                return (from s in context.LibShippingMethods
+                             select new ShippingMethodBO()
+                             {
+                                 Name = s.Name,
+                                 Description = s.Description,
+                                 ShippingMethodId = s.ShippingMethodId
+                             }).ToList();
+               
             }
         }
 
@@ -135,7 +198,7 @@ namespace DataObjects.EntityFramework
                 entity.Price = orderDetail.Price;
                 entity.LastEditedBy = orderDetail.LastEditedBy;
                 entity.LastEditedOn = orderDetail.LastEditedOn;
-                entity.DesignerId = entity.DesignerId;
+                entity.DesignerId = orderDetail.DesignerId;
                 context.SaveChanges();
             }
         }
@@ -189,11 +252,12 @@ namespace DataObjects.EntityFramework
             using (var context = new InThuDoEntities())
             {
                 var query = (from o in context.Orders
-                            join oitem in context.OrderItems on o.OrderId equals oitem.OrderId into orderItemGrop
+                            join oitem in context.OrderItems on o.OrderId equals oitem.OrderId  into orderItemGrop
                             from oitem2 in orderItemGrop.DefaultIfEmpty()
                             join oStatusMapping in context.OrderStatusMappings on oitem2.OrderItemId equals oStatusMapping.OrderItemId into oStatusMappingGroup
                             from oStatusMapping2 in oStatusMappingGroup.DefaultIfEmpty()
                             where
+                            (oitem2.Deleted == false || oitem2.Deleted == null)&&
                             (orderSearchObj.OrderId == 0 || o.OrderId == orderSearchObj.OrderId) &&
                             (orderSearchObj.CustId == 0 || o.CustomerId == orderSearchObj.CustId) &&
                             (orderSearchObj.ProductId == 0 || oitem2.ProductId == orderSearchObj.ProductId) &&
@@ -215,9 +279,37 @@ namespace DataObjects.EntityFramework
                                 CreatedDate = o.CreatedDate,
                                 LastEditedBy =o.LastEditedBy,
                                 LastEditedDate = o.LastEditedDate,
-                                Customer = Mapper.Map<Customer, CustomerBO>(o.Customer),
+                                CustomerName = o.Customer.Name,
+                                BusinessManName = o.User.FullName,
+                                DepositTypeName = o.LibDepositType.Name,
+                                ShippingMethodName = o.LibShippingMethod.Name
+                                
                             }).ToList();
                 return query;
+            }
+        }
+
+
+        public List<OrderDetailBO> GetOrderDetailsByOrderId(int orderId)
+        {
+            List<OrderDetailBO> orderDetails = (from od in context.OrderItems
+                                                where od.OrderId == orderId
+                                                &&(od.Deleted == null|| od.Deleted == false)
+                                                select new OrderDetailBO()
+                                                {
+                                                    OrderItemId = od.OrderItemId
+                                                }).ToList();
+            return orderDetails;
+        }
+
+
+        public void MarkOrderDetailAsDeleted(int orderDetailId)
+        {
+            using (var contex = new InThuDoEntities())
+            {
+                OrderItem orderDetail = contex.OrderItems.Where(od => od.OrderItemId == orderDetailId).FirstOrDefault();
+                orderDetail.Deleted = true;
+                contex.SaveChanges();
             }
         }
     }

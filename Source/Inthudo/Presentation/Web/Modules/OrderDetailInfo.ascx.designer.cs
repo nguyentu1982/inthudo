@@ -76,6 +76,15 @@ namespace Web.Modules {
         protected global::System.Web.UI.WebControls.TextBox txtProductRequirement;
         
         /// <summary>
+        /// txtProductRequirement_HtmlEditorExtender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.HtmlEditorExtender txtProductRequirement_HtmlEditorExtender;
+        
+        /// <summary>
         /// ctrltxtQuantity control.
         /// </summary>
         /// <remarks>
@@ -92,5 +101,32 @@ namespace Web.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Web.Modules.DecimalTextBox ctrltxtPrice;
+        
+        /// <summary>
+        /// btSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btSave;
+        
+        /// <summary>
+        /// btCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btCancel;
+        
+        /// <summary>
+        /// btDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btDelete;
     }
 }

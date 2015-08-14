@@ -12,8 +12,7 @@ namespace DataObjects.EntityFramework
     {
         static CustomerDao()
         {
-            Mapper.CreateMap<Customer, CustomerBO>();
-            Mapper.CreateMap<CustomerBO, Customer>();
+           
         }
 
         public List<CustomerBO> GetCustomers(string customerName, string telephone, string email, string companyName)
@@ -26,18 +25,50 @@ namespace DataObjects.EntityFramework
                             (string.IsNullOrEmpty(telephone) || c.Telephone.Contains(telephone)) &&
                             (string.IsNullOrEmpty(email) || c.Email.Contains(email)) &&
                             (string.IsNullOrEmpty(companyName) || c.Company.Contains(companyName))
-                            select c;
-                return Mapper.Map<List<Customer>, List<CustomerBO>>(query.ToList());
+                            select new CustomerBO() {
+                                CustomerId = c.CustomerId,
+                                Name = c.Name,
+                                Telephone = c.Telephone,
+                                Address = c.Address,
+                                Email = c.Email,
+                                CreatedOn = c.CreatedOn,
+                                CreatedBy = c.CreatedBy,
+                                LastEditedOn = c.LastEditedOn,
+                                LastEditedBy = c.LastEditedBy,
+                                Company = c.Company,
+                                PhoneNumber = c.PhoneNumber,
+                                FaxNumber = c.FaxNumber,
+                                TaxCode = c.TaxCode,
+                            };
+                return query.ToList();
+                
             }
         }
 
 
         public CustomerBO GetCustomerById(int custId)
         {
-            using ( context )
+            using (var context = new InThuDoEntities())
             {
-                var query = context.Customers.Where(c => c.CustomerId == custId).FirstOrDefault();
-                return Mapper.Map<Customer, CustomerBO>(query);
+                return ( from c in context.Customers
+                       where c.CustomerId == custId
+                       select new CustomerBO()
+                       {
+                           CustomerId = c.CustomerId,
+                           Name = c.Name,
+                           Telephone = c.Telephone,
+                           Address = c.Address,
+                           Email = c.Email,
+                           CreatedOn = c.CreatedOn,
+                           CreatedBy = c.CreatedBy,
+                           LastEditedOn = c.LastEditedOn,
+                           LastEditedBy = c.LastEditedBy,
+                           Company = c.Company,
+                           PhoneNumber = c.PhoneNumber,
+                           FaxNumber = c.FaxNumber,
+                           TaxCode = c.TaxCode,
+                       }).FirstOrDefault();
+                
             }
         }
 

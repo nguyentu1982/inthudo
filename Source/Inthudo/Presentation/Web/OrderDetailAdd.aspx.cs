@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Web
 {
-    public partial class OrderDetail : System.Web.UI.Page
+    public partial class OrderDetailAdd : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

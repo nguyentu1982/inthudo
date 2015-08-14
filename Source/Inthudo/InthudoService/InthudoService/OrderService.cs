@@ -98,5 +98,17 @@ namespace InthudoService
         {
             return orderDao.GetOrders(orderSearchObj);
         }
+
+
+        public List<OrderDetailBO> GetOrderDetailsByOrderId(int orderId)
+        {
+            return orderDao.GetOrderDetailsByOrderId(orderId);
+        }
+
+
+        public void MarkOrderDetailAsDeleted(int orderDetailId)
+        {
+            orderDao.MarkOrderDetailAsDeleted(orderDetailId);
+        }
     }
 }

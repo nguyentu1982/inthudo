@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -229,11 +230,13 @@
     <Content Include="Modules\Orders.ascx" />
     <Content Include="Modules\SimpleTextBox.ascx" />
     <Content Include="OrderAdd.aspx" />
-    <Content Include="OrderDetail.aspx" />
+    <Content Include="OrderDetailAdd.aspx" />
+    <Content Include="OrderDetailEdit.aspx" />
     <Content Include="OrderEdit.aspx" />
     <Content Include="Orders.aspx" />
     <Content Include="packages.config" />
     <Content Include="Site2.Master" />
+    <Content Include="Popup.Master" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -411,12 +414,19 @@
     <Compile Include="OrderAdd.aspx.designer.cs">
       <DependentUpon>OrderAdd.aspx</DependentUpon>
     </Compile>
-    <Compile Include="OrderDetail.aspx.cs">
-      <DependentUpon>OrderDetail.aspx</DependentUpon>
+    <Compile Include="OrderDetailAdd.aspx.cs">
+      <DependentUpon>OrderDetailAdd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OrderDetail.aspx.designer.cs">
-      <DependentUpon>OrderDetail.aspx</DependentUpon>
+    <Compile Include="OrderDetailAdd.aspx.designer.cs">
+      <DependentUpon>OrderDetailAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderDetailEdit.aspx.cs">
+      <DependentUpon>OrderDetailEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderDetailEdit.aspx.designer.cs">
+      <DependentUpon>OrderDetailEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="OrderEdit.aspx.cs">
       <DependentUpon>OrderEdit.aspx</DependentUpon>
@@ -431,6 +441,13 @@
     </Compile>
     <Compile Include="Orders.aspx.designer.cs">
       <DependentUpon>Orders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Popup.Master.cs">
+      <DependentUpon>Popup.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Popup.Master.designer.cs">
+      <DependentUpon>Popup.Master</DependentUpon>
     </Compile>
     <Compile Include="Site2.Master.cs">
       <DependentUpon>Site2.Master</DependentUpon>

@@ -35,5 +35,9 @@ namespace InthudoService
         void UpdateOrderInfo(OrderBO order);
 
         List<OrderBO> GetOrders(OrderSearch orderSearchObj);
+
+        List<OrderDetailBO> GetOrderDetailsByOrderId(int p);
+
+        void MarkOrderDetailAsDeleted(int orderDetailId);
     }
 }

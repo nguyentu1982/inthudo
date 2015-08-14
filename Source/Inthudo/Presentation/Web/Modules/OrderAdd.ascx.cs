@@ -30,6 +30,7 @@ namespace Web.Modules
                 try
                 {
                     OrderBO order = Save();
+                    Response.Redirect(string.Format("OrderEdit.aspx?OrderId={0}",order.OrderId));
                     
                 }
                 catch (Exception ex)

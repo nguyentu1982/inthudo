@@ -19,7 +19,9 @@
 <br />
  <span class="lbtitle" >Nhân viên TK:</span> <asp:DropDownList ID="ddlDesingerId" runat="server"></asp:DropDownList>
 <br />
-<asp:Button runat="server" ID="btFind" Text="Tìm" OnClick="btFind_Click"/><asp:Button ID="btAdd" runat="server" Text="Tạo đơn hàng" /><asp:Button ID="btDelete" runat="server" Text="Xóa đơn hàng đã chọn" />
+<asp:Button runat="server" ID="btFind" Text="Tìm" OnClick="btFind_Click"/>
+<asp:Button ID="btAdd" runat="server" Text="Tạo đơn hàng" OnClick="btAdd_Click" />
+<asp:Button ID="btDelete" runat="server" Text="Xóa đơn hàng đã chọn" />
 <br />
 <div class="orders-grid">
     <asp:GridView ID="grvOrders" runat="server" AutoGenerateColumns="false">
@@ -32,11 +34,12 @@
                     <asp:CheckBox runat="server" ID="cbMember"/>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField HeaderText="Mã Đơn Hàng" DataField="OrderId" />
+            <asp:BoundField HeaderText="Mã ĐH" DataField="OrderId" />
+            <asp:BoundField HeaderText="Ngày" DataField="OrderDate" />
             <asp:BoundField HeaderText="Khách hàng" DataField="CustomerName" />
-            <asp:BoundField HeaderText="NVKD Phụ trách" DataField="BusinessManName" />
+            <asp:BoundField HeaderText="NVKD" DataField="BusinessManName" />
             <asp:BoundField HeaderText="PT Đặt cọc" DataField="DepositTypeName" />
-            <asp:BoundField HeaderText="Tiền Đặt cọc" DataField="Deposit" />
+            <asp:BoundField HeaderText="Đặt cọc" DataField="Deposit" />
             <asp:BoundField HeaderText="Giao hàng" DataField="ShippingMethodName" />
             <asp:BoundField HeaderText="Giá trị ĐH" DataField="Total" />
             <asp:HyperLinkField HeaderText="Sửa" DataNavigateUrlFields="OrderId" DataNavigateUrlFormatString="~/OrderEdit.aspx?OrderId={0}" Text="Sửa" />
