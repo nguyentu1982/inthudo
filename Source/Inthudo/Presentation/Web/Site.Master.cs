@@ -67,7 +67,7 @@ namespace Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         public override void ShowMessage(string message)

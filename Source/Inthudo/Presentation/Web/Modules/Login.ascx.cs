@@ -23,8 +23,11 @@ namespace Web.Module
                 // e.Authenticated = true;
                 loginCtrl.Visible = false;
                 Session["IsLogedin"] = true;
-                Member mem = this.MemberService.GetMemberByUserName(loginCtrl.UserName);
+                MemberBO mem = this.MemberService.GetMemberByUserName(loginCtrl.UserName);
                 Session["UserId"] = mem.UserId;
+                if (ReturnURL == string.Empty) return;
+
+                Response.Redirect(ReturnURL);
             }
             else
             {
@@ -37,6 +40,11 @@ namespace Web.Module
         {
             IMemberService memeberService = new MemberService();
             return memeberService.ValidateUser(userName, pass);
+        }
+
+        private string ReturnURL
+        {
+            get { return Common.Utils.CommonHelper.QueryString("ReturnURL"); }
         }
     }
 }

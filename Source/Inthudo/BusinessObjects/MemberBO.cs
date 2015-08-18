@@ -12,9 +12,9 @@ namespace BusinessObjects
     // ** Enterprise Design Pattern: Domain Model, Identity Field.
     // this is also the place where business rules are established.
 
-    public class Member : BusinessObject
+    public class MemberBO : BusinessObject
     {
-        public Member()
+        public MemberBO()
         {
             // establish business rules
 

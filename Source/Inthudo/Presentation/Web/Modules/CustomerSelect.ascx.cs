@@ -40,5 +40,14 @@ namespace Web.Modules
                 txtCustomerCode.Text = value;
             }
         }
+
+        public bool Enable
+        {
+            set
+            {
+                txtCustomerCode.Enabled = value;
+
+            }
+        }
     }
 }

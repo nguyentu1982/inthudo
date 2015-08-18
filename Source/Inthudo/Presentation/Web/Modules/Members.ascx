@@ -19,7 +19,7 @@
 <div>
     <asp:Button runat="server" ID="btFindMember" Text="Tìm" OnClick="btFindMember_Click"/>
     <asp:Button runat="server" ID="btAddMember" Text="Tạo User" OnClick="btAddMember_Click"/>
-     <asp:Button runat="server" ID="btDeleteUser" Text="Xóa User" OnClick="btDeleteUser_Click"/>
+     <asp:Button runat="server" ID="btDeleteUser" Text="Xóa User" OnClick="btDeleteUser_Click" OnClientClick=""/>
     <ajaxToolkit:ConfirmButtonExtender ID="btDeleteUser_ConfirmButtonExtender" runat="server" TargetControlID="btDeleteUser" ConfirmText="Bạn có chắc chắn xóa User đã chọn?" />
 </div>
 

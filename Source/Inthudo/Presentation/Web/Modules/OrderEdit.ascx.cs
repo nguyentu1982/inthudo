@@ -1,10 +1,12 @@
 ﻿using BusinessObjects;
+using Common.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+
 
 namespace Web.Modules
 {
@@ -35,6 +37,27 @@ namespace Web.Modules
         {
             OrderBO order = ctrlOrderInfo.SaveInfo();
             return order;
+        }
+
+        protected void btDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.OrderService.MarkOrderAsDeleted(this.OrderId);
+                Page.ClientScript.RegisterStartupScript(typeof(Page), "closePage", "<script>window.close()</script>");
+            }
+            catch (Exception ex)
+            {
+                ProcessException(ex);
+            }
+        }
+
+        public int OrderId
+        {
+            get
+            {
+                return CommonHelper.QueryStringInt("OrderId");
+            }
         }
     }
 }

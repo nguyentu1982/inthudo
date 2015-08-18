@@ -26,7 +26,6 @@ namespace DataObjects.EntityFramework
         }
     
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Design> Designs { get; set; }
         public DbSet<EmployeeDepartmentMapping> EmployeeDepartmentMappings { get; set; }
         public DbSet<LibDepartment> LibDepartments { get; set; }
         public DbSet<LibDepositType> LibDepositTypes { get; set; }
@@ -40,5 +39,7 @@ namespace DataObjects.EntityFramework
         public DbSet<Product> Products { get; set; }
         public DbSet<Setting> Settings { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<DesignRequest> DesignRequests { get; set; }
+        public DbSet<ManufactureRequest> ManufactureRequests { get; set; }
     }
 }

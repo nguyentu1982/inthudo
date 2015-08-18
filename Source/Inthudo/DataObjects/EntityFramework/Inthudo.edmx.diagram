@@ -4,9 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2069f79bf6f7480287ac5c483d7ba763" Name="Diagram1">
+      <Diagram DiagramId="2069f79bf6f7480287ac5c483d7ba763" Name="Diagram1" ZoomLevel="95">
         <EntityTypeShape EntityType="InThuDoMNGModel.Customer" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="InThuDoMNGModel.Design" Width="1.5" PointX="12" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="InThuDoMNGModel.EmployeeDepartmentMapping" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="InThuDoMNGModel.LibDepartment" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="InThuDoMNGModel.LibDepositType" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
@@ -23,10 +22,6 @@
         <AssociationConnector Association="InThuDoMNGModel.FK_Customer_User" ManuallyRouted="false" />
         <AssociationConnector Association="InThuDoMNGModel.FK_Customer_User1" ManuallyRouted="false" />
         <AssociationConnector Association="InThuDoMNGModel.FK_Order_Customer" ManuallyRouted="false" />
-        <AssociationConnector Association="InThuDoMNGModel.FK_Design_OrderItem" ManuallyRouted="false" />
-        <AssociationConnector Association="InThuDoMNGModel.FK_Design_User" ManuallyRouted="false" />
-        <AssociationConnector Association="InThuDoMNGModel.FK_Design_UserCreatedBy" ManuallyRouted="false" />
-        <AssociationConnector Association="InThuDoMNGModel.FK_Design_UserLastEditedBy" ManuallyRouted="false" />
         <AssociationConnector Association="InThuDoMNGModel.FK_EmployeeDepartmentMapping_Employee" ManuallyRouted="false" />
         <AssociationConnector Association="InThuDoMNGModel.FK_EmployeeDepartmentMapping_LibDepartment" ManuallyRouted="false" />
         <AssociationConnector Association="InThuDoMNGModel.FK_Order_LibDepositType" ManuallyRouted="false" />
@@ -44,6 +39,15 @@
         <AssociationConnector Association="InThuDoMNGModel.FK_OrderItem_Product" ManuallyRouted="false" />
         <AssociationConnector Association="InThuDoMNGModel.FK_OrderItem_User" ManuallyRouted="false" />
         <AssociationConnector Association="InThuDoMNGModel.FK_OrderStatusMapping_OrderItem" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="InThuDoMNGModel.DesignRequest" Width="1.5" PointX="0.27281070327051482" PointY="5.3436213011590867" />
+        <EntityTypeShape EntityType="InThuDoMNGModel.ManufactureRequest" Width="1.5" PointX="11.58735469336964" PointY="21.014405260334911" />
+        <AssociationConnector Association="InThuDoMNGModel.FK_Design_OrderItem1" />
+        <AssociationConnector Association="InThuDoMNGModel.FK_Design_User1" />
+        <AssociationConnector Association="InThuDoMNGModel.FK_Design_UserCreatedBy1" />
+        <AssociationConnector Association="InThuDoMNGModel.FK_Design_UserLastEditedBy1" />
+        <AssociationConnector Association="InThuDoMNGModel.FK_ManufactureRequest_Design" />
+        <AssociationConnector Association="InThuDoMNGModel.FK_ManufactureRequest_User" />
+        <AssociationConnector Association="InThuDoMNGModel.FK_ManufactureRequest_User1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

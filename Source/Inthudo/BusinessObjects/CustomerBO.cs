@@ -22,8 +22,8 @@ namespace BusinessObjects
         public Nullable<bool> Deleted { get; set; }
         public string TaxCode { get; set; }
 
-        public virtual Member User { get; set; }
-        public virtual Member User1 { get; set; }
+        public virtual MemberBO User { get; set; }
+        public virtual MemberBO User1 { get; set; }
         public virtual ICollection<OrderBO> Orders { get; set; }
     }
 }

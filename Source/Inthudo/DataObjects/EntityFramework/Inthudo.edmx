@@ -4,10 +4,10 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="InThuDoMNGModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="InThuDoMNGModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="InThuDoMNGModelStoreContainer">
           <EntitySet Name="Customer" EntityType="InThuDoMNGModel.Store.Customer" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Design" EntityType="InThuDoMNGModel.Store.Design" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DesignRequest" EntityType="InThuDoMNGModel.Store.DesignRequest" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="EmployeeDepartmentMapping" EntityType="InThuDoMNGModel.Store.EmployeeDepartmentMapping" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LibDepartment" EntityType="InThuDoMNGModel.Store.LibDepartment" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LibDepositType" EntityType="InThuDoMNGModel.Store.LibDepositType" store:Type="Tables" Schema="dbo" />
@@ -15,6 +15,7 @@
           <EntitySet Name="LibRoleType" EntityType="InThuDoMNGModel.Store.LibRoleType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LibShippingMethod" EntityType="InThuDoMNGModel.Store.LibShippingMethod" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LocaleStringResource" EntityType="InThuDoMNGModel.Store.LocaleStringResource" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ManufactureRequest" EntityType="InThuDoMNGModel.Store.ManufactureRequest" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Order" EntityType="InThuDoMNGModel.Store.Order" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OrderItem" EntityType="InThuDoMNGModel.Store.OrderItem" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OrderStatusMapping" EntityType="InThuDoMNGModel.Store.OrderStatusMapping" store:Type="Tables" Schema="dbo" />
@@ -31,19 +32,19 @@
           </AssociationSet>
           <AssociationSet Name="FK_Design_OrderItem" Association="InThuDoMNGModel.Store.FK_Design_OrderItem">
             <End Role="OrderItem" EntitySet="OrderItem" />
-            <End Role="Design" EntitySet="Design" />
+            <End Role="DesignRequest" EntitySet="DesignRequest" />
           </AssociationSet>
           <AssociationSet Name="FK_Design_User" Association="InThuDoMNGModel.Store.FK_Design_User">
             <End Role="User" EntitySet="User" />
-            <End Role="Design" EntitySet="Design" />
+            <End Role="DesignRequest" EntitySet="DesignRequest" />
           </AssociationSet>
           <AssociationSet Name="FK_Design_UserCreatedBy" Association="InThuDoMNGModel.Store.FK_Design_UserCreatedBy">
             <End Role="User" EntitySet="User" />
-            <End Role="Design" EntitySet="Design" />
+            <End Role="DesignRequest" EntitySet="DesignRequest" />
           </AssociationSet>
           <AssociationSet Name="FK_Design_UserLastEditedBy" Association="InThuDoMNGModel.Store.FK_Design_UserLastEditedBy">
             <End Role="User" EntitySet="User" />
-            <End Role="Design" EntitySet="Design" />
+            <End Role="DesignRequest" EntitySet="DesignRequest" />
           </AssociationSet>
           <AssociationSet Name="FK_EmployeeDepartmentMapping_Employee" Association="InThuDoMNGModel.Store.FK_EmployeeDepartmentMapping_Employee">
             <End Role="User" EntitySet="User" />
@@ -52,6 +53,18 @@
           <AssociationSet Name="FK_EmployeeDepartmentMapping_LibDepartment" Association="InThuDoMNGModel.Store.FK_EmployeeDepartmentMapping_LibDepartment">
             <End Role="LibDepartment" EntitySet="LibDepartment" />
             <End Role="EmployeeDepartmentMapping" EntitySet="EmployeeDepartmentMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureRequest_DesignRequest" Association="InThuDoMNGModel.Store.FK_ManufactureRequest_DesignRequest">
+            <End Role="DesignRequest" EntitySet="DesignRequest" />
+            <End Role="ManufactureRequest" EntitySet="ManufactureRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureRequest_User" Association="InThuDoMNGModel.Store.FK_ManufactureRequest_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ManufactureRequest" EntitySet="ManufactureRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureRequest_User1" Association="InThuDoMNGModel.Store.FK_ManufactureRequest_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="ManufactureRequest" EntitySet="ManufactureRequest" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_Customer" Association="InThuDoMNGModel.Store.FK_Order_Customer">
             <End Role="Customer" EntitySet="Customer" />
@@ -137,11 +150,11 @@
           <Property Name="Deleted" Type="bit" />
           <Property Name="TaxCode" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Design">
+        <EntityType Name="DesignRequest">
           <Key>
-            <PropertyRef Name="DesignId" />
+            <PropertyRef Name="DesignRequestId" />
           </Key>
-          <Property Name="DesignId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DesignRequestId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="DesignerId" Type="int" />
           <Property Name="BeginDate" Type="datetime" />
@@ -152,6 +165,7 @@
           <Property Name="LastEditedBy" Type="int" />
           <Property Name="LastEditedOn" Type="datetime" />
           <Property Name="OrderItemId" Type="int" Nullable="false" />
+          <Property Name="Deleted" Type="bit" />
         </EntityType>
         <EntityType Name="EmployeeDepartmentMapping">
           <Key>
@@ -209,6 +223,23 @@
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ResourceName" Type="nvarchar" Nullable="false" MaxLength="255" />
           <Property Name="ResourceValue" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ManufactureRequest">
+          <Key>
+            <PropertyRef Name="ManufactureRequestId" />
+          </Key>
+          <Property Name="ManufactureRequestId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DesignRequestId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="BeginDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Cost" Type="money" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="LastEditedBy" Type="int" />
+          <Property Name="LastEditedOn" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -314,48 +345,48 @@
         </Association>
         <Association Name="FK_Design_OrderItem">
           <End Role="OrderItem" Type="InThuDoMNGModel.Store.OrderItem" Multiplicity="1" />
-          <End Role="Design" Type="InThuDoMNGModel.Store.Design" Multiplicity="*" />
+          <End Role="DesignRequest" Type="InThuDoMNGModel.Store.DesignRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="OrderItem">
               <PropertyRef Name="OrderItemId" />
             </Principal>
-            <Dependent Role="Design">
+            <Dependent Role="DesignRequest">
               <PropertyRef Name="OrderItemId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Design_User">
           <End Role="User" Type="InThuDoMNGModel.Store.User" Multiplicity="0..1" />
-          <End Role="Design" Type="InThuDoMNGModel.Store.Design" Multiplicity="*" />
+          <End Role="DesignRequest" Type="InThuDoMNGModel.Store.DesignRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
             </Principal>
-            <Dependent Role="Design">
+            <Dependent Role="DesignRequest">
               <PropertyRef Name="DesignerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Design_UserCreatedBy">
           <End Role="User" Type="InThuDoMNGModel.Store.User" Multiplicity="1" />
-          <End Role="Design" Type="InThuDoMNGModel.Store.Design" Multiplicity="*" />
+          <End Role="DesignRequest" Type="InThuDoMNGModel.Store.DesignRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
             </Principal>
-            <Dependent Role="Design">
+            <Dependent Role="DesignRequest">
               <PropertyRef Name="CreatedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Design_UserLastEditedBy">
           <End Role="User" Type="InThuDoMNGModel.Store.User" Multiplicity="0..1" />
-          <End Role="Design" Type="InThuDoMNGModel.Store.Design" Multiplicity="*" />
+          <End Role="DesignRequest" Type="InThuDoMNGModel.Store.DesignRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserId" />
             </Principal>
-            <Dependent Role="Design">
+            <Dependent Role="DesignRequest">
               <PropertyRef Name="LastEditedBy" />
             </Dependent>
           </ReferentialConstraint>
@@ -381,6 +412,42 @@
             </Principal>
             <Dependent Role="EmployeeDepartmentMapping">
               <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureRequest_DesignRequest">
+          <End Role="DesignRequest" Type="InThuDoMNGModel.Store.DesignRequest" Multiplicity="1" />
+          <End Role="ManufactureRequest" Type="InThuDoMNGModel.Store.ManufactureRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DesignRequest">
+              <PropertyRef Name="DesignRequestId" />
+            </Principal>
+            <Dependent Role="ManufactureRequest">
+              <PropertyRef Name="DesignRequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureRequest_User">
+          <End Role="User" Type="InThuDoMNGModel.Store.User" Multiplicity="1" />
+          <End Role="ManufactureRequest" Type="InThuDoMNGModel.Store.ManufactureRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ManufactureRequest">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureRequest_User1">
+          <End Role="User" Type="InThuDoMNGModel.Store.User" Multiplicity="0..1" />
+          <End Role="ManufactureRequest" Type="InThuDoMNGModel.Store.ManufactureRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ManufactureRequest">
+              <PropertyRef Name="LastEditedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -576,14 +643,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="InThuDoMNGModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="InThuDoEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="Customers" EntityType="InThuDoMNGModel.Customer" />
-          <EntitySet Name="Designs" EntityType="InThuDoMNGModel.Design" />
           <EntitySet Name="EmployeeDepartmentMappings" EntityType="InThuDoMNGModel.EmployeeDepartmentMapping" />
           <EntitySet Name="LibDepartments" EntityType="InThuDoMNGModel.LibDepartment" />
           <EntitySet Name="LibDepositTypes" EntityType="InThuDoMNGModel.LibDepositType" />
@@ -608,22 +673,6 @@
           <AssociationSet Name="FK_Order_Customer" Association="InThuDoMNGModel.FK_Order_Customer">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Design_OrderItem" Association="InThuDoMNGModel.FK_Design_OrderItem">
-            <End Role="OrderItem" EntitySet="OrderItems" />
-            <End Role="Design" EntitySet="Designs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Design_User" Association="InThuDoMNGModel.FK_Design_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Design" EntitySet="Designs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Design_UserCreatedBy" Association="InThuDoMNGModel.FK_Design_UserCreatedBy">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Design" EntitySet="Designs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Design_UserLastEditedBy" Association="InThuDoMNGModel.FK_Design_UserLastEditedBy">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Design" EntitySet="Designs" />
           </AssociationSet>
           <AssociationSet Name="FK_EmployeeDepartmentMapping_Employee" Association="InThuDoMNGModel.FK_EmployeeDepartmentMapping_Employee">
             <End Role="User" EntitySet="Users" />
@@ -693,6 +742,36 @@
             <End Role="OrderItem" EntitySet="OrderItems" />
             <End Role="OrderStatusMapping" EntitySet="OrderStatusMappings" />
           </AssociationSet>
+          <EntitySet Name="DesignRequests" EntityType="InThuDoMNGModel.DesignRequest" />
+          <EntitySet Name="ManufactureRequests" EntityType="InThuDoMNGModel.ManufactureRequest" />
+          <AssociationSet Name="FK_Design_OrderItem1" Association="InThuDoMNGModel.FK_Design_OrderItem1">
+            <End Role="OrderItem" EntitySet="OrderItems" />
+            <End Role="DesignRequest" EntitySet="DesignRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Design_User1" Association="InThuDoMNGModel.FK_Design_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="DesignRequest" EntitySet="DesignRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Design_UserCreatedBy1" Association="InThuDoMNGModel.FK_Design_UserCreatedBy1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="DesignRequest" EntitySet="DesignRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Design_UserLastEditedBy1" Association="InThuDoMNGModel.FK_Design_UserLastEditedBy1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="DesignRequest" EntitySet="DesignRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureRequest_Design" Association="InThuDoMNGModel.FK_ManufactureRequest_Design">
+            <End Role="DesignRequest" EntitySet="DesignRequests" />
+            <End Role="ManufactureRequest" EntitySet="ManufactureRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureRequest_User" Association="InThuDoMNGModel.FK_ManufactureRequest_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ManufactureRequest" EntitySet="ManufactureRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufactureRequest_User1" Association="InThuDoMNGModel.FK_ManufactureRequest_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ManufactureRequest" EntitySet="ManufactureRequests" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer">
           <Key>
@@ -715,26 +794,6 @@
           <NavigationProperty Name="User" Relationship="InThuDoMNGModel.FK_Customer_User" FromRole="Customer" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="InThuDoMNGModel.FK_Customer_User1" FromRole="Customer" ToRole="User" />
           <NavigationProperty Name="Orders" Relationship="InThuDoMNGModel.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
-        </EntityType>
-        <EntityType Name="Design">
-          <Key>
-            <PropertyRef Name="DesignId" />
-          </Key>
-          <Property Name="DesignId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="DesignerId" Type="Int32" />
-          <Property Name="BeginDate" Type="DateTime" Precision="3" />
-          <Property Name="EndDate" Type="DateTime" Precision="3" />
-          <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastEditedBy" Type="Int32" />
-          <Property Name="LastEditedOn" Type="DateTime" Precision="3" />
-          <Property Name="OrderItemId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="OrderItem" Relationship="InThuDoMNGModel.FK_Design_OrderItem" FromRole="Design" ToRole="OrderItem" />
-          <NavigationProperty Name="User" Relationship="InThuDoMNGModel.FK_Design_User" FromRole="Design" ToRole="User" />
-          <NavigationProperty Name="User1" Relationship="InThuDoMNGModel.FK_Design_UserCreatedBy" FromRole="Design" ToRole="User" />
-          <NavigationProperty Name="User2" Relationship="InThuDoMNGModel.FK_Design_UserLastEditedBy" FromRole="Design" ToRole="User" />
         </EntityType>
         <EntityType Name="EmployeeDepartmentMapping">
           <Key>
@@ -841,7 +900,6 @@
           <Property Name="Deleted" Type="Boolean" />
           <Property Name="OrderId" Type="Int32" Nullable="false" />
           <Property Name="DesignerId" Type="Int32" />
-          <NavigationProperty Name="Designs" Relationship="InThuDoMNGModel.FK_Design_OrderItem" FromRole="OrderItem" ToRole="Design" />
           <NavigationProperty Name="Order" Relationship="InThuDoMNGModel.FK_OrderItem_Order" FromRole="OrderItem" ToRole="Order" />
           <NavigationProperty Name="User" Relationship="InThuDoMNGModel.FK_Order_User" FromRole="OrderItem" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="InThuDoMNGModel.FK_Order_User1" FromRole="OrderItem" ToRole="User" />
@@ -850,6 +908,7 @@
           <NavigationProperty Name="Product" Relationship="InThuDoMNGModel.FK_OrderItem_Product" FromRole="OrderItem" ToRole="Product" />
           <NavigationProperty Name="User2" Relationship="InThuDoMNGModel.FK_OrderItem_User" FromRole="OrderItem" ToRole="User" />
           <NavigationProperty Name="OrderStatusMappings" Relationship="InThuDoMNGModel.FK_OrderStatusMapping_OrderItem" FromRole="OrderItem" ToRole="OrderStatusMapping" />
+          <NavigationProperty Name="DesignRequests" Relationship="InThuDoMNGModel.FK_Design_OrderItem1" FromRole="OrderItem" ToRole="DesignRequest" />
         </EntityType>
         <EntityType Name="OrderStatusMapping">
           <Key>
@@ -900,9 +959,6 @@
           <Property Name="Email" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Customers" Relationship="InThuDoMNGModel.FK_Customer_User" FromRole="User" ToRole="Customer" />
           <NavigationProperty Name="Customers1" Relationship="InThuDoMNGModel.FK_Customer_User1" FromRole="User" ToRole="Customer" />
-          <NavigationProperty Name="Designs" Relationship="InThuDoMNGModel.FK_Design_User" FromRole="User" ToRole="Design" />
-          <NavigationProperty Name="Designs1" Relationship="InThuDoMNGModel.FK_Design_UserCreatedBy" FromRole="User" ToRole="Design" />
-          <NavigationProperty Name="Designs2" Relationship="InThuDoMNGModel.FK_Design_UserLastEditedBy" FromRole="User" ToRole="Design" />
           <NavigationProperty Name="EmployeeDepartmentMappings" Relationship="InThuDoMNGModel.FK_EmployeeDepartmentMapping_Employee" FromRole="User" ToRole="EmployeeDepartmentMapping" />
           <NavigationProperty Name="LibRoleType" Relationship="InThuDoMNGModel.FK_User_RoleType" FromRole="User" ToRole="LibRoleType" />
           <NavigationProperty Name="Orders" Relationship="InThuDoMNGModel.FK_Order_User2" FromRole="User" ToRole="Order" />
@@ -911,6 +967,11 @@
           <NavigationProperty Name="OrderItems" Relationship="InThuDoMNGModel.FK_Order_User" FromRole="User" ToRole="OrderItem" />
           <NavigationProperty Name="OrderItems1" Relationship="InThuDoMNGModel.FK_Order_User1" FromRole="User" ToRole="OrderItem" />
           <NavigationProperty Name="OrderItems2" Relationship="InThuDoMNGModel.FK_OrderItem_User" FromRole="User" ToRole="OrderItem" />
+          <NavigationProperty Name="DesignRequests" Relationship="InThuDoMNGModel.FK_Design_User1" FromRole="User" ToRole="DesignRequest" />
+          <NavigationProperty Name="DesignRequests1" Relationship="InThuDoMNGModel.FK_Design_UserCreatedBy1" FromRole="User" ToRole="DesignRequest" />
+          <NavigationProperty Name="DesignRequests2" Relationship="InThuDoMNGModel.FK_Design_UserLastEditedBy1" FromRole="User" ToRole="DesignRequest" />
+          <NavigationProperty Name="ManufactureRequests" Relationship="InThuDoMNGModel.FK_ManufactureRequest_User" FromRole="User" ToRole="ManufactureRequest" />
+          <NavigationProperty Name="ManufactureRequests1" Relationship="InThuDoMNGModel.FK_ManufactureRequest_User1" FromRole="User" ToRole="ManufactureRequest" />
         </EntityType>
         <Association Name="FK_Customer_User">
           <End Role="User" Type="InThuDoMNGModel.User" Multiplicity="1" />
@@ -945,54 +1006,6 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="CustomerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Design_OrderItem">
-          <End Role="OrderItem" Type="InThuDoMNGModel.OrderItem" Multiplicity="1" />
-          <End Role="Design" Type="InThuDoMNGModel.Design" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrderItem">
-              <PropertyRef Name="OrderItemId" />
-            </Principal>
-            <Dependent Role="Design">
-              <PropertyRef Name="OrderItemId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Design_User">
-          <End Role="User" Type="InThuDoMNGModel.User" Multiplicity="0..1" />
-          <End Role="Design" Type="InThuDoMNGModel.Design" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Design">
-              <PropertyRef Name="DesignerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Design_UserCreatedBy">
-          <End Role="User" Type="InThuDoMNGModel.User" Multiplicity="1" />
-          <End Role="Design" Type="InThuDoMNGModel.Design" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Design">
-              <PropertyRef Name="CreatedBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Design_UserLastEditedBy">
-          <End Role="User" Type="InThuDoMNGModel.User" Multiplicity="0..1" />
-          <End Role="Design" Type="InThuDoMNGModel.Design" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Design">
-              <PropertyRef Name="LastEditedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1200,6 +1213,132 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DesignRequest">
+          <Key>
+            <PropertyRef Name="DesignRequestId" />
+          </Key>
+          <Property Type="Int32" Name="DesignRequestId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="DesignerId" />
+          <Property Type="DateTime" Name="BeginDate" Precision="3" />
+          <Property Type="DateTime" Name="EndDate" Precision="3" />
+          <Property Type="Decimal" Name="Cost" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="LastEditedBy" />
+          <Property Type="DateTime" Name="LastEditedOn" Precision="3" />
+          <Property Type="Int32" Name="OrderItemId" Nullable="false" />
+          <Property Type="Boolean" Name="Deleted" />
+          <NavigationProperty Name="OrderItem" Relationship="InThuDoMNGModel.FK_Design_OrderItem1" FromRole="DesignRequest" ToRole="OrderItem" />
+          <NavigationProperty Name="User" Relationship="InThuDoMNGModel.FK_Design_User1" FromRole="DesignRequest" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="InThuDoMNGModel.FK_Design_UserCreatedBy1" FromRole="DesignRequest" ToRole="User" />
+          <NavigationProperty Name="User2" Relationship="InThuDoMNGModel.FK_Design_UserLastEditedBy1" FromRole="DesignRequest" ToRole="User" />
+          <NavigationProperty Name="ManufactureRequests" Relationship="InThuDoMNGModel.FK_ManufactureRequest_Design" FromRole="DesignRequest" ToRole="ManufactureRequest" />
+        </EntityType>
+        <EntityType Name="ManufactureRequest">
+          <Key>
+            <PropertyRef Name="ManufactureRequestId" />
+          </Key>
+          <Property Type="Int32" Name="ManufactureRequestId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="DesignRequestId" Nullable="false" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="BeginDate" Precision="3" />
+          <Property Type="DateTime" Name="EndDate" Precision="3" />
+          <Property Type="Decimal" Name="Cost" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="LastEditedBy" />
+          <Property Type="DateTime" Name="LastEditedOn" Precision="3" />
+          <Property Type="Boolean" Name="Deleted" />
+          <NavigationProperty Name="DesignRequest" Relationship="InThuDoMNGModel.FK_ManufactureRequest_Design" FromRole="ManufactureRequest" ToRole="DesignRequest" />
+          <NavigationProperty Name="User" Relationship="InThuDoMNGModel.FK_ManufactureRequest_User" FromRole="ManufactureRequest" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="InThuDoMNGModel.FK_ManufactureRequest_User1" FromRole="ManufactureRequest" ToRole="User" />
+          <Property Type="Int32" Name="Quantity" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Design_OrderItem1">
+          <End Type="InThuDoMNGModel.OrderItem" Role="OrderItem" Multiplicity="1" />
+          <End Type="InThuDoMNGModel.DesignRequest" Role="DesignRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderItem">
+              <PropertyRef Name="OrderItemId" />
+            </Principal>
+            <Dependent Role="DesignRequest">
+              <PropertyRef Name="OrderItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Design_User1">
+          <End Type="InThuDoMNGModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="InThuDoMNGModel.DesignRequest" Role="DesignRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DesignRequest">
+              <PropertyRef Name="DesignerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Design_UserCreatedBy1">
+          <End Type="InThuDoMNGModel.User" Role="User" Multiplicity="1" />
+          <End Type="InThuDoMNGModel.DesignRequest" Role="DesignRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DesignRequest">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Design_UserLastEditedBy1">
+          <End Type="InThuDoMNGModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="InThuDoMNGModel.DesignRequest" Role="DesignRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DesignRequest">
+              <PropertyRef Name="LastEditedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureRequest_Design">
+          <End Type="InThuDoMNGModel.DesignRequest" Role="DesignRequest" Multiplicity="1" />
+          <End Type="InThuDoMNGModel.ManufactureRequest" Role="ManufactureRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DesignRequest">
+              <PropertyRef Name="DesignRequestId" />
+            </Principal>
+            <Dependent Role="ManufactureRequest">
+              <PropertyRef Name="DesignRequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureRequest_User">
+          <End Type="InThuDoMNGModel.User" Role="User" Multiplicity="1" />
+          <End Type="InThuDoMNGModel.ManufactureRequest" Role="ManufactureRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ManufactureRequest">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufactureRequest_User1">
+          <End Type="InThuDoMNGModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="InThuDoMNGModel.ManufactureRequest" Role="ManufactureRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ManufactureRequest">
+              <PropertyRef Name="LastEditedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1223,23 +1362,6 @@
                 <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
                 <ScalarProperty Name="Deleted" ColumnName="Deleted" />
                 <ScalarProperty Name="TaxCode" ColumnName="TaxCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Designs">
-            <EntityTypeMapping TypeName="InThuDoMNGModel.Design">
-              <MappingFragment StoreEntitySet="Design">
-                <ScalarProperty Name="DesignId" ColumnName="DesignId" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="DesignerId" ColumnName="DesignerId" />
-                <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
-                <ScalarProperty Name="LastEditedOn" ColumnName="LastEditedOn" />
-                <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1388,6 +1510,42 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Telephone" ColumnName="Telephone" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DesignRequests">
+            <EntityTypeMapping TypeName="InThuDoMNGModel.DesignRequest">
+              <MappingFragment StoreEntitySet="DesignRequest">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
+                <ScalarProperty Name="LastEditedOn" ColumnName="LastEditedOn" />
+                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+                <ScalarProperty Name="DesignerId" ColumnName="DesignerId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DesignRequestId" ColumnName="DesignRequestId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ManufactureRequests">
+            <EntityTypeMapping TypeName="InThuDoMNGModel.ManufactureRequest">
+              <MappingFragment StoreEntitySet="ManufactureRequest">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="LastEditedOn" ColumnName="LastEditedOn" />
+                <ScalarProperty Name="LastEditedBy" ColumnName="LastEditedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DesignRequestId" ColumnName="DesignRequestId" />
+                <ScalarProperty Name="ManufactureRequestId" ColumnName="ManufactureRequestId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

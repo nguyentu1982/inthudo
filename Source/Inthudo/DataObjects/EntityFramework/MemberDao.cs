@@ -16,12 +16,12 @@ namespace DataObjects.EntityFramework
     {
         static MemberDao()
         {
-            Mapper.CreateMap<User, Member>();
-            Mapper.CreateMap<Member, User>();
+            Mapper.CreateMap<User, MemberBO>();
+            Mapper.CreateMap<MemberBO, User>();
             Mapper.CreateMap<LibRoleType, RoleTypeBO>();
             Mapper.CreateMap<RoleTypeBO, LibRoleType>();
         }
-        public List<Member> GetMembers(string sortExpression = "UserId ASC")
+        public List<MemberBO> GetMembers(string sortExpression = "UserId ASC")
         {
             using (context)
             {
@@ -29,12 +29,17 @@ namespace DataObjects.EntityFramework
 
                 var roles = context.LibRoleTypes.ToList();
                 return members.AsQueryable().Select(m =>
-                    new Member
+                    new MemberBO
                     {
                         UserId = m.UserId,
                         Email = m.Email,
                         
-                        RoleType = Mapper.Map<LibRoleType, RoleTypeBO>(roles.Where(r=> r.RoleTypeId == m.RoleTypeId).FirstOrDefault()),
+                        RoleType = new RoleTypeBO()
+                        {
+                          RoleTypeId = m.RoleTypeId,
+                          RoleName = m.LibRoleType.RoleName,
+                          RoleDescription = m.LibRoleType.RoleDescription
+                        },
                         FullName = m.FullName,
                         Address = m.Address,
                         Telephone = m.Telephone,
@@ -47,21 +52,21 @@ namespace DataObjects.EntityFramework
             }
         }
 
-        public Member GetMember(int memberId)
+        public MemberBO GetMember(int memberId)
         {
             using (context)
             {
                 var member = context.Users.FirstOrDefault(c => c.UserId == memberId && (c.Deteted == false || c.Deteted ==null)) as User;
-                return Mapper.Map<User, Member>(member);
+                return Mapper.Map<User, MemberBO>(member);
             }
         }
 
-        public Member GetMemberByEmail(string email)
+        public MemberBO GetMemberByEmail(string email)
         {
             using (context)
             {
                 var member = context.Users.FirstOrDefault(c => c.Email == email) as User;
-                return Mapper.Map<User, Member>(member);
+                return Mapper.Map<User, MemberBO>(member);
             }
         }
 
@@ -69,11 +74,11 @@ namespace DataObjects.EntityFramework
 
         
 
-        public void InsertMember(Member member)
+        public void InsertMember(MemberBO member)
         {
-            using (context)
+            using (var context = new InThuDoEntities())
             {
-                var entity = Mapper.Map<Member, User>(member);
+                var entity = Mapper.Map<MemberBO, User>(member);
 
                 context.Users.Add(entity);
                 context.SaveChanges();
@@ -84,9 +89,9 @@ namespace DataObjects.EntityFramework
             
         }
 
-        public void UpdateMember(Member member)
+        public void UpdateMember(MemberBO member)
         {
-            using (context)
+            using (var context = new InThuDoEntities())
             {
                 var entity = context.Users.SingleOrDefault(m => m.UserId == member.UserId);
                 entity.Email = member.Email;
@@ -103,9 +108,9 @@ namespace DataObjects.EntityFramework
             }
         }
 
-        public void DeleteMember(Member member)
+        public void DeleteMember(MemberBO member)
         {
-            using (context )
+            using (var context = new InThuDoEntities())
             {
                 var entity = context.Users.SingleOrDefault(m => m.UserId == member.UserId);
                 entity.Deteted = true;
@@ -115,12 +120,28 @@ namespace DataObjects.EntityFramework
         }
 
 
-        public Member GetMemberByOrder(int orderId)
+        public MemberBO GetMemberByOrder(int orderId)
         {
-            throw new NotImplementedException();
+            using (var context = new InThuDoEntities())
+            {
+                var query = from u in context.Users
+                            join o in context.Orders on u.UserId equals o.UserId
+                            where
+                            (o.OrderId == orderId)
+                            select new MemberBO()
+                            {
+                                UserId = u.UserId,
+                                Email = u.Email,                               
+                                FullName = u.FullName,
+                                Address = u.Address,
+                                Telephone = u.Telephone,
+                                UserName = u.UserName
+                            };
+                return query.FirstOrDefault();
+            }
         }
 
-        public List<Member> GetMembersWithOrderStatistics(string sortExpression)
+        public List<MemberBO> GetMembersWithOrderStatistics(string sortExpression)
         {
             throw new NotImplementedException();
         }
@@ -143,7 +164,7 @@ namespace DataObjects.EntityFramework
 
         public void ChangePass(int userId, string pass)
         {
-            using (context )
+            using (var context = new InThuDoEntities())
             {
                 var mem = context.Users.SingleOrDefault(m => m.UserId == userId);
                 if (mem == null) return;
@@ -153,7 +174,7 @@ namespace DataObjects.EntityFramework
         }
 
 
-        public List<Member> GetMembers(string username, string email, string fullName, string address, int roletypeId)
+        public List<MemberBO> GetMembers(string username, string email, string fullName, string telephone, int roletypeId)
         {
             using (context)
             {
@@ -162,14 +183,14 @@ namespace DataObjects.EntityFramework
                             (String.IsNullOrEmpty(username) || mem.UserName.Contains(username))&&
                             (String.IsNullOrEmpty(email) || mem.Email.Contains(email))&&
                             (String.IsNullOrEmpty(fullName)|| mem.FullName.Contains(fullName))&&
-                            (String.IsNullOrEmpty(address)|| mem.FullName.Contains(address))&&
+                            (String.IsNullOrEmpty(telephone)|| mem.FullName.Contains(telephone))&&
                             (roletypeId ==0 || mem.RoleTypeId == roletypeId)&&
                             (mem.Deteted == null || mem.Deteted == false)
                             select mem;
 
                 var roles = context.LibRoleTypes;
                 return query.ToList().AsQueryable().Select(m =>
-                    new Member
+                    new MemberBO
                     { 
                         UserId = m.UserId,
                         Email = m.Email,
@@ -187,26 +208,26 @@ namespace DataObjects.EntityFramework
         }
 
 
-        public Member GetMemberByTelephone(string telephone)
+        public MemberBO GetMemberByTelephone(string telephone)
         {
             using (context)
             {
                 var member = context.Users.FirstOrDefault(c => c.Telephone== telephone) as User;
-                return Mapper.Map<User, Member>(member);
+                return Mapper.Map<User, MemberBO>(member);
             }
         }
 
-        public Member GetMemberByUserName(string userName)
+        public MemberBO GetMemberByUserName(string userName)
         {
             using (context)
             {
                 var member = context.Users.FirstOrDefault(c => c.UserName == userName) as User;
-                return Mapper.Map<User, Member>(member);
+                return Mapper.Map<User, MemberBO>(member);
             }
         }
 
 
-        public Member GetMember(string user, string pass)
+        public MemberBO GetMember(string user, string pass)
         {
             throw new NotImplementedException();
         }

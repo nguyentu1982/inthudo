@@ -41,6 +41,14 @@ namespace Web
                 inthudoMasterPage.ShowError(message, completeMessage);
         }
 
+        public int LoggedInUserId
+        {
+            get
+            {
+                return int.Parse(Session["UserId"].ToString());
+            }
+        }
+
         public IMemberService MemberService
         {
             get

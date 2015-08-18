@@ -12,11 +12,11 @@ namespace DataObjects.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class Design
+    public partial class ManufactureRequest
     {
-        public int DesignId { get; set; }
+        public int ManufactureRequestId { get; set; }
+        public int DesignRequestId { get; set; }
         public string Description { get; set; }
-        public Nullable<int> DesignerId { get; set; }
         public Nullable<System.DateTime> BeginDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
         public Nullable<decimal> Cost { get; set; }
@@ -24,11 +24,11 @@ namespace DataObjects.EntityFramework
         public System.DateTime CreatedOn { get; set; }
         public Nullable<int> LastEditedBy { get; set; }
         public Nullable<System.DateTime> LastEditedOn { get; set; }
-        public int OrderItemId { get; set; }
+        public Nullable<bool> Deleted { get; set; }
+        public int Quantity { get; set; }
     
-        public virtual OrderItem OrderItem { get; set; }
+        public virtual DesignRequest DesignRequest { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
-        public virtual User User2 { get; set; }
     }
 }

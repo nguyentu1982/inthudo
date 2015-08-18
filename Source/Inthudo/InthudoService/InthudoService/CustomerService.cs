@@ -22,5 +22,11 @@ namespace InthudoService
         {
             return customerDao.GetCustomerById(custId);
         }
+
+
+        public CustomerBO GetCustomerByOrder(int orderId)
+        {
+            return customerDao.GetCustomerByOrder(orderId);
+        }
     }
 }

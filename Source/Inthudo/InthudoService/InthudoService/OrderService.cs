@@ -110,5 +110,63 @@ namespace InthudoService
         {
             orderDao.MarkOrderDetailAsDeleted(orderDetailId);
         }
+
+
+        public void MarkOrderAsDeleted(int orderId)
+        {
+            orderDao.MarkOrderAsDeleted(orderId);
+        }
+
+
+        public DesignRequestBO GetDesignRequestById(int requestId)
+        {
+            return orderDao.GetDesignRequestById(requestId);
+        }
+
+
+        public void UpdateDesignRequest(DesignRequestBO designReq)
+        {
+            orderDao.UpdateDesignRequest(designReq);
+        }
+
+        public int InsertDesignRequest(DesignRequestBO designReq)
+        {
+            return orderDao.InsertDesignRequest(designReq);
+        }
+
+
+        public void MaskDesignRequestAsDeleted(int designRequestId, int deletedBy)
+        {
+            orderDao.MaskDesignRequestAsDeleted(designRequestId, deletedBy);
+        }
+
+
+        public DesignRequestBO GetDesignRequestByOrderDetailId(int orderDetailId)
+        {
+            return orderDao.GetDesignRequestByOrderDetailId(orderDetailId);
+        }
+
+
+        public ManufactureRequestBO GetManufactureRequestById(int id)
+        {
+            return orderDao.GetManufactureRequestById(id);
+        }
+
+
+        public void UpdateManufactureRequest(ManufactureRequestBO manu)
+        {
+            orderDao.UpdateManufactureRequest(manu);
+        }
+
+        public int InsertManufactureRequest(ManufactureRequestBO manu)
+        {
+            return orderDao.InsertManufactureRequest(manu);
+        }
+
+
+        public ManufactureRequestBO GetManufactureRequestByDesignRequest(int designRequestId)
+        {
+            return orderDao.GetManufactureRequestByDesignRequest(designRequestId);
+        }
     }
 }

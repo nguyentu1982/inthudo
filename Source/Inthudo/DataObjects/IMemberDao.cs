@@ -17,47 +17,47 @@ namespace DataObjects
     {
         // gets a specific Member
 
-        Member GetMember(int memberId);
+        MemberBO GetMember(int memberId);
 
         // gets a specific Member by email
 
-        Member GetMemberByEmail(string email);
+        MemberBO GetMemberByEmail(string email);
 
         // gets a sorted list of all Members
 
-        List<Member> GetMembers(string sortExpression = "MemberId ASC");
+        List<MemberBO> GetMembers(string sortExpression = "MemberId ASC");
 
         // gets Member given an order
 
-        Member GetMemberByOrder(int orderId);
+        MemberBO GetMemberByOrder(int orderId);
 
         // gets Members with order statistics in given sort order.
 
-        List<Member> GetMembersWithOrderStatistics(string sortExpression);
+        List<MemberBO> GetMembersWithOrderStatistics(string sortExpression);
 
         // inserts a new Member
         // following insert, Member object will contain the new identifier
         
-        void InsertMember(Member member);
+        void InsertMember(MemberBO member);
 
         // updates a Member
 
-        void UpdateMember(Member member);
+        void UpdateMember(MemberBO member);
 
         // deletes a Member
 
-        void DeleteMember(Member member);
+        void DeleteMember(MemberBO member);
 
         bool Login(string user, string pass);
 
         void ChangePass(int userId, string pass);
 
-        List<Member> GetMembers(string username, string email, string fullName, string address, int roletypeId);
+        List<MemberBO> GetMembers(string username, string email, string fullName, string telephone, int roletypeId);
 
-        Member GetMemberByTelephone(string telephone);
+        MemberBO GetMemberByTelephone(string telephone);
 
-        Member GetMemberByUserName(string userName);
+        MemberBO GetMemberByUserName(string userName);
 
-        Member GetMember(string user, string pass);
+        MemberBO GetMember(string user, string pass);
     }
 }

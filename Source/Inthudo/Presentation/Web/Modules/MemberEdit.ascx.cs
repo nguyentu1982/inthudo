@@ -17,9 +17,9 @@ namespace Web.Modules
 
         }
 
-        protected Member Save()
+        protected MemberBO Save()
         {
-            Member mem = ctrlMemberInfo.SaveInfo();
+            MemberBO mem = ctrlMemberInfo.SaveInfo();
             return mem;
         }
 
@@ -45,7 +45,7 @@ namespace Web.Modules
             {
                 try
                 {
-                    Member mem = Save();
+                    MemberBO mem = Save();
                     Response.Redirect("MemberEdit.aspx?MemberId=" + mem.UserId.ToString());
                 }
                 catch (Exception ex)
@@ -59,7 +59,7 @@ namespace Web.Modules
         {
 
             IMemberService memberService = new MemberService();
-            Member member = memberService.GetMember(this.MemeberId);
+            MemberBO member = memberService.GetMember(this.MemeberId);
             if (member == null) return;
             try
             {

@@ -21,7 +21,7 @@
 <br />
 <asp:Button runat="server" ID="btFind" Text="Tìm" OnClick="btFind_Click"/>
 <asp:Button ID="btAdd" runat="server" Text="Tạo đơn hàng" OnClick="btAdd_Click" />
-<asp:Button ID="btDelete" runat="server" Text="Xóa đơn hàng đã chọn" />
+<asp:Button ID="btDelete" runat="server" Text="Xóa đơn hàng đã chọn" OnClick="btDelete_Click" OnClientClick="return confirmDelete()"/>
 <br />
 <div class="orders-grid">
     <asp:GridView ID="grvOrders" runat="server" AutoGenerateColumns="false">
@@ -52,5 +52,12 @@
         for (i = 1; i < grvMembers.rows.length; i++) {
             grvMembers.rows[i].cells[0].getElementsByTagName("INPUT")[0].checked = oCheckbox.checked;
         }
+    }
+
+    function confirmDelete() {
+        if (confirm("Bạn có chắc chắn xóa?") == true)
+            return true;
+        else
+            return false;
     }
 </script>

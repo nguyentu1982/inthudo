@@ -71,7 +71,7 @@
       <DependentUpon>Inthudo.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\CustomerDao.cs" />
-    <Compile Include="EntityFramework\Design.cs">
+    <Compile Include="EntityFramework\DesignRequest.cs">
       <DependentUpon>Inthudo.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\EmployeeDepartmentMapping.cs">
@@ -108,6 +108,9 @@
       <DependentUpon>Inthudo.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\LocaleStringResource.cs">
+      <DependentUpon>Inthudo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\ManufactureRequest.cs">
       <DependentUpon>Inthudo.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Order.cs">

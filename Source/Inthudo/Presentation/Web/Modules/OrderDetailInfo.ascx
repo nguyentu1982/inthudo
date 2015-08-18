@@ -9,14 +9,16 @@
     <span class="lbtitle">Mã đơn hàng: </span>
     <asp:Label runat="server" ID="lbOrderId"></asp:Label>
     <br />
-    <span class="lbtitle" >Nhân viên thiết kế:</span><asp:DropDownList runat="server" ID="ddlDesigner"></asp:DropDownList>
+   
 </div>
+ <span class="lbtitle" >Nhân viên thiết kế:</span><asp:DropDownList runat="server" ID="ddlDesigner"></asp:DropDownList>
+<br />
 <span class="lbtitle">Sản phẩm </span>
 <ajaxToolkit:ComboBox ID="cboxProduct" runat="server"></ajaxToolkit:ComboBox>
 <br />
 <span class="lbtitle">Quy cách sản phẩm</span>
 <div>
-    <asp:TextBox ID="txtProductRequirement" runat="server" Width="600" Height="400"></asp:TextBox>
+    <asp:TextBox ID="txtProductRequirement" runat="server" Width="600" Height="300"></asp:TextBox>
 <ajaxToolkit:HtmlEditorExtender ID="txtProductRequirement_HtmlEditorExtender" runat="server" BehaviorID="txtProductRequirement_HtmlEditorExtender" TargetControlID="txtProductRequirement" EnableSanitization="false">
 </ajaxToolkit:HtmlEditorExtender>
 </div>
@@ -26,5 +28,14 @@
 <br />
 <span class="lbtitle">Thành tiền:</span> <span id="total-money"></span>
 <asp:Button ID="btSave" runat="server" Text="Lưu" OnClick="btSave_Click" />
-<asp:Button ID="btCancel" runat="server" Text="Hủy"/>
-<asp:Button ID="btDelete" runat="server" Text="Xóa" />
+<asp:Button ID="btCancel" runat="server" Text="Hủy" OnClientClick="window.close(); return false"/>
+<asp:Button ID="btDelete" runat="server" Text="Xóa" OnClick="btDelete_Click" OnClientClick="return confirmDelete()" />
+
+<script type="text/javascript">
+    function RefreshParent() {
+        if (window.opener != null && !window.opener.closed) {
+            window.opener.location.reload();
+        }
+    }
+    window.onunload = RefreshParent;
+</script>

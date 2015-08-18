@@ -18,9 +18,6 @@ namespace DataObjects.EntityFramework
         {
             this.Customers = new HashSet<Customer>();
             this.Customers1 = new HashSet<Customer>();
-            this.Designs = new HashSet<Design>();
-            this.Designs1 = new HashSet<Design>();
-            this.Designs2 = new HashSet<Design>();
             this.EmployeeDepartmentMappings = new HashSet<EmployeeDepartmentMapping>();
             this.Orders = new HashSet<Order>();
             this.Orders1 = new HashSet<Order>();
@@ -28,6 +25,11 @@ namespace DataObjects.EntityFramework
             this.OrderItems = new HashSet<OrderItem>();
             this.OrderItems1 = new HashSet<OrderItem>();
             this.OrderItems2 = new HashSet<OrderItem>();
+            this.DesignRequests = new HashSet<DesignRequest>();
+            this.DesignRequests1 = new HashSet<DesignRequest>();
+            this.DesignRequests2 = new HashSet<DesignRequest>();
+            this.ManufactureRequests = new HashSet<ManufactureRequest>();
+            this.ManufactureRequests1 = new HashSet<ManufactureRequest>();
         }
     
         public int UserId { get; set; }
@@ -44,9 +46,6 @@ namespace DataObjects.EntityFramework
     
         public virtual ICollection<Customer> Customers { get; set; }
         public virtual ICollection<Customer> Customers1 { get; set; }
-        public virtual ICollection<Design> Designs { get; set; }
-        public virtual ICollection<Design> Designs1 { get; set; }
-        public virtual ICollection<Design> Designs2 { get; set; }
         public virtual ICollection<EmployeeDepartmentMapping> EmployeeDepartmentMappings { get; set; }
         public virtual LibRoleType LibRoleType { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
@@ -55,5 +54,10 @@ namespace DataObjects.EntityFramework
         public virtual ICollection<OrderItem> OrderItems { get; set; }
         public virtual ICollection<OrderItem> OrderItems1 { get; set; }
         public virtual ICollection<OrderItem> OrderItems2 { get; set; }
+        public virtual ICollection<DesignRequest> DesignRequests { get; set; }
+        public virtual ICollection<DesignRequest> DesignRequests1 { get; set; }
+        public virtual ICollection<DesignRequest> DesignRequests2 { get; set; }
+        public virtual ICollection<ManufactureRequest> ManufactureRequests { get; set; }
+        public virtual ICollection<ManufactureRequest> ManufactureRequests1 { get; set; }
     }
 }

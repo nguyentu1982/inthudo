@@ -27,7 +27,9 @@
 <h3>Nội dung chi tiết đơn đặt hàng</h3>
 <br />
 <div id="panelOrderDetails" runat="server">
-    <asp:GridView ID="grvOrderDetails" runat="server" AutoGenerateColumns="false" OnRowCommand="grvOrderDetails_RowCommand" >
+    <asp:GridView ID="grvOrderDetails" runat="server" 
+        AutoGenerateColumns="False" OnRowCommand="grvOrderDetails_RowCommand" 
+        OnRowDataBound="grvOrderDetails_RowDataBound" CellPadding="10" >
         <Columns>
             <%--<asp:TemplateField>
                 <HeaderTemplate>
@@ -39,16 +41,15 @@
             </asp:TemplateField>--%>
             <asp:BoundField HeaderText="ID" DataField="OrderItemId" />
             <asp:BoundField HeaderText="Sản phẩm" DataField="ProductName" />
-            <asp:BoundField HeaderText="Quy cách" DataField="Specification" />
+            <asp:BoundField HeaderText="Quy cách" DataField="Specification" HtmlEncode="False" />
             <asp:BoundField HeaderText="Số lượng" DataField="Quantity" />
             <asp:BoundField HeaderText="Đơn giá" DataField="Price" />
             <asp:TemplateField>
                 <HeaderTemplate>
                     <asp:Label runat="server" Text="Sửa" ID="lbEditOrderDetail"></asp:Label>
                 </HeaderTemplate>
-                <ItemTemplate>
-                   
-                    <a onclick="OpenOrderDetailEditWindow(<%#Eval("OrderItemId")%>); return false" href="">Sửa</a>
+                <ItemTemplate>                   
+                    <a onclick="OpenOrderDetailEditWindow(<%#Eval("OrderItemId")%>); return false" class="a-popup">Sửa</a>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField>
@@ -56,6 +57,23 @@
                     <asp:Button ID="btDeleteOrderDetail" runat="server" Text="Xóa" CommandName="DeleteOrderDetail" OnClientClick="return confirmDelete()" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>' />
                 </ItemTemplate>
             </asp:TemplateField>
+            <asp:TemplateField>
+                <HeaderTemplate>
+                    <asp:Label ID="lbDesignRequest" Text="Thiết Kế" runat="server"></asp:Label>
+                </HeaderTemplate>
+                <ItemTemplate>                    
+                    <asp:HyperLink ID="hlDesignRequest" runat="server"></asp:HyperLink>
+                </ItemTemplate>
+            </asp:TemplateField>
+            
+           <asp:TemplateField>
+               <HeaderTemplate>
+                   <span>Sản Xuất</span>
+               </HeaderTemplate>
+               <ItemTemplate>
+                   <asp:HyperLink ID="hlManufactureRequest" runat="server"></asp:HyperLink>
+               </ItemTemplate>
+           </asp:TemplateField>
             
         </Columns>
     </asp:GridView>
@@ -97,4 +115,10 @@
         else
             return false;
     }
+
+    function OpenWindow(url)
+    {
+        window.open(url, 800, 600, true);
+    }
+
 </script>

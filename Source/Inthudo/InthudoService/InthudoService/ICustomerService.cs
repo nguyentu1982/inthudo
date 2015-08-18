@@ -12,5 +12,7 @@ namespace InthudoService
         List<CustomerBO> GetCustomers(string customerName, string telephone, string email, string companyName);
 
         CustomerBO GetCustomerById(int custId);
+
+        CustomerBO GetCustomerByOrder(int orderId);
     }
 }

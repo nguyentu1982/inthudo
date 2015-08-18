@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace Web
 {
-    public partial class MemberEdit : System.Web.UI.Page
+    public partial class MemberEdit : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            base.CheckLogin();
         }
     }
 }

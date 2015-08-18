@@ -17,7 +17,7 @@ namespace BusinessObjects
         public string RoleName { get; set; }
         public string RoleDescription { get; set; }
 
-        public virtual ICollection<Member> Users { get; set; }
+        public virtual ICollection<MemberBO> Users { get; set; }
         
     }
 }

@@ -39,5 +39,25 @@ namespace InthudoService
         List<OrderDetailBO> GetOrderDetailsByOrderId(int p);
 
         void MarkOrderDetailAsDeleted(int orderDetailId);
+
+        void MarkOrderAsDeleted(int orderId);
+
+        DesignRequestBO GetDesignRequestById(int p);
+
+        void UpdateDesignRequest(DesignRequestBO designReq);
+
+        int InsertDesignRequest(DesignRequestBO designReq);
+
+        void MaskDesignRequestAsDeleted(int designRequestId, int deletedBy);
+
+        DesignRequestBO GetDesignRequestByOrderDetailId(int orderDetailId);
+
+        ManufactureRequestBO GetManufactureRequestById(int p);
+
+        void UpdateManufactureRequest(ManufactureRequestBO manu);
+
+        int InsertManufactureRequest(ManufactureRequestBO manu);
+
+        ManufactureRequestBO GetManufactureRequestByDesignRequest(int p);
     }
 }

@@ -40,7 +40,7 @@ namespace Web.Modules
                 ddlBusinessManId.SelectedValue = order.UserId.ToString();
                 //Order Items
                 List<OrderDetailBO> orderItems = this.OrderService.GetOrderItemsByOrderId(this.OrderId);
-                if (orderItems.Count > 1)
+                if (orderItems.Count >= 1)
                 {
                     grvOrderDetails.DataSource = orderItems;
                     grvOrderDetails.DataBind();
@@ -49,11 +49,12 @@ namespace Web.Modules
                 else
                 {
                     grvOrderDetails.Visible = false;
+                    btAddNewOrderDetail.Visible = false;
                 }
             }
             else
-            { 
-                
+            {
+                btAddNewOrderDetail.Visible = false;
             }
         }
 
@@ -78,8 +79,8 @@ namespace Web.Modules
             //Business Man
             ddlBusinessManId.Items.Clear();
             string orderby = "UserId ASC";
-            List<Member> mems = this.MemberService.GetMembers(orderby);
-            foreach (Member m in mems)
+            List<MemberBO> mems = this.MemberService.GetMembers(orderby);
+            foreach (MemberBO m in mems)
             {
                 ddlBusinessManId.Items.Add(new ListItem(m.UserName, m.UserId.ToString()));
             }
@@ -144,14 +145,6 @@ namespace Web.Modules
             return order;
         }
 
-        public int LoggedInUserId
-        {
-            get
-            {
-                return int.Parse(Session["UserId"].ToString());
-            }
-        }
-
         public int OrderId
         {
             get
@@ -169,6 +162,53 @@ namespace Web.Modules
                 int orderDetailId = int.Parse(row.Cells[0].Text);
 
                 this.OrderService.MarkOrderDetailAsDeleted(orderDetailId);
+            }
+        }
+
+        protected void grvOrderDetails_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                //Design Request
+                int orderDetailId = int.Parse(e.Row.Cells[0].Text);
+                DesignRequestBO ds = this.OrderService.GetDesignRequestByOrderDetailId(orderDetailId);
+                HyperLink designRequestHyperLink = e.Row.Cells[7].FindControl("hlDesignRequest") as HyperLink;
+                HyperLink manufactureRequestLink = e.Row.Cells[8].FindControl("hlManufactureRequest") as HyperLink;
+
+                if (ds != null)
+                {
+                    string url=string.Format("/DesignRequestEdit.aspx?OrderId={0}&OrderDetailId={1}&DesignRequestId={2}",OrderId, orderDetailId, ds.DesignRequestId);
+                    designRequestHyperLink.Attributes.Add("onclick", "OpenWindow('"+url+"')");
+                    designRequestHyperLink.Attributes.Add("class", "a-popup");
+                    designRequestHyperLink.Text = "Xem";
+
+                    //Manufacture Request
+                    ManufactureRequestBO manu = this.OrderService.GetManufactureRequestByDesignRequest(ds.DesignRequestId);
+                    if (manu != null)
+                    {
+                        string ManuRequestURL = string.Format("/ManufactureRequestEdit.aspx?OrderId={0}&OrderDetailId={1}&DesignRequestId={2}&ManufactureRequestId={3}", this.OrderId, orderDetailId, ds.DesignRequestId, manu.ManufactureRequestId);
+                        manufactureRequestLink.Attributes.Add("onclick", "OpenWindow('" + ManuRequestURL + "')");
+                        manufactureRequestLink.Attributes.Add("class", "a-popup");
+                        manufactureRequestLink.Text = "Xem";
+                    }
+                    else
+                    {
+                        string ManuRequestURL = string.Format("/ManufactureRequestAdd.aspx?OrderId={0}&OrderDetailId={1}&DesignRequestId={2}", this.OrderId, orderDetailId, ds.DesignRequestId);
+                        manufactureRequestLink.Attributes.Add("onclick", "OpenWindow('" + ManuRequestURL + "')");
+                        manufactureRequestLink.Attributes.Add("class", "a-popup");
+                        manufactureRequestLink.Text = "Tạo";
+                    }
+                }
+                else
+                {
+                    string url = string.Format("/DesignRequestAdd.aspx?OrderId={0}&OrderDetailId={1}", OrderId, orderDetailId);                   
+                    designRequestHyperLink.Attributes.Add("onclick", "OpenWindow('" + url + "')");
+                    designRequestHyperLink.Attributes.Add("class", "a-popup");
+                    designRequestHyperLink.Text = "Tạo";
+                }
+
+                
+
             }
         }
     }

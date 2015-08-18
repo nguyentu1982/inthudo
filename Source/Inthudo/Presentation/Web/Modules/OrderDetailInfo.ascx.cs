@@ -69,10 +69,10 @@ namespace Web.Modules
 
             //Designer drop down
             string orderBy = "UserId ASC";
-            List<Member> designers = this.MemberService.GetMembers(orderBy);
+            List<MemberBO> designers = this.MemberService.GetMembers(orderBy);
             ddlDesigner.Items.Clear();
             ddlDesigner.Items.Add(new ListItem("", "0"));
-            foreach (Member m in designers)
+            foreach (MemberBO m in designers)
             { 
                 ddlDesigner.Items.Add(new ListItem(m.UserName,m.UserId.ToString()));
             }
@@ -105,15 +105,7 @@ namespace Web.Modules
             }
             else
             {
-                int designerId = int.Parse(ddlDesigner.SelectedValue);
-                if (designerId == 0)
-                {
-                    orderDetail.DesignerId = null;
-                }
-                else
-                {
-                    orderDetail.DesignerId = designerId;
-                }
+                
                 orderDetail = new OrderDetailBO() 
                 { 
                      OrderId = string.IsNullOrEmpty(lbOrderId.Text) == true ? orderId : int.Parse(lbOrderId.Text),
@@ -123,8 +115,19 @@ namespace Web.Modules
                      Price = ctrltxtPrice.Value,
                      CreatedBy = this.UserId,
                      CreatedOn = DateTime.Now,
-                     DesignerId = designerId
+                     
                 };
+
+                int designerId = int.Parse(ddlDesigner.SelectedValue);
+                if (designerId == 0)
+                {
+                    orderDetail.DesignerId = null;
+                }
+                else
+                {
+                    orderDetail.DesignerId = designerId;
+                }
+               
                 this.OrderService.InsertOrderDetail(orderDetail);
             }
             return orderDetail;
@@ -177,11 +180,27 @@ namespace Web.Modules
                 try
                 {
                     SaveInfo(this.OrderId);
+                    
                 }
                 catch (Exception ex)
                 {
                     ProcessException(ex);
                 }
+            }
+        }
+
+        protected void btDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int orderDetailId = 0;
+                int.TryParse(hdfOrderDetailId.Value,out orderDetailId);
+                this.OrderService.MarkOrderDetailAsDeleted(orderDetailId);
+                Page.ClientScript.RegisterStartupScript(typeof(Page), "closePage", "<script>window.close()</script>");
+            }
+            catch (Exception ex)
+            {
+                ProcessException(ex);
             }
         }
     }

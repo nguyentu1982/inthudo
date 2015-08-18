@@ -38,5 +38,29 @@ namespace DataObjects
         List<OrderDetailBO> GetOrderDetailsByOrderId(int orderId);
 
         void MarkOrderDetailAsDeleted(int orderDetailId);
+
+        void MarkOrderAsDeleted(int orderId);
+
+        DesignRequestBO GetDesignRequestById(int requestId);
+
+        void UpdateDesignRequest(DesignRequestBO designReq);
+        /// <summary>
+        /// Insert Design return ID
+        /// </summary>
+        /// <param name="designReq"></param>
+        /// <returns></returns>
+        int InsertDesignRequest(DesignRequestBO designReq);
+
+        void MaskDesignRequestAsDeleted(int designRequestId, int deletedBy);
+
+        DesignRequestBO GetDesignRequestByOrderDetailId(int orderDetailId);
+
+        ManufactureRequestBO GetManufactureRequestById(int id);
+
+        void UpdateManufactureRequest(ManufactureRequestBO manu);
+
+        int InsertManufactureRequest(ManufactureRequestBO manu);
+
+        ManufactureRequestBO GetManufactureRequestByDesignRequest(int designRequestId);
     }
 }

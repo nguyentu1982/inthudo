@@ -16,9 +16,9 @@ namespace Web.Modules
 
         }
 
-        protected Member Save()
+        protected MemberBO Save()
         {
-            Member mem = ctrlMemberInfo.SaveInfo();
+            MemberBO mem = ctrlMemberInfo.SaveInfo();
             return mem;
         }
 
@@ -44,7 +44,7 @@ namespace Web.Modules
             {
                 try
                 {
-                    Member mem = Save();
+                    MemberBO mem = Save();
                     Response.Redirect("Members.aspx?MemberId=" + mem.UserId.ToString());
                 }
                 catch (Exception ex)

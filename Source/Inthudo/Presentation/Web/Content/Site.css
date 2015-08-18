@@ -11,6 +11,10 @@
 .ajax__html_editor_extender_container {
     margin-bottom:10px;
 }
+
+.a-popup {
+    cursor:pointer;
+}
 /*Customize*/
 
 
@@ -417,7 +421,7 @@ fieldset {
     }
 
     input, textarea {
-        border: 1px solid #e2e2e2;
+        border: 1px solid #C0C0C0;
         background: #fff;
         color: #333;
         font-size: 1.2em;
@@ -706,7 +710,7 @@ tr.pager td {
 
     /* forms */
     input {
-        width: 90%;
+        /*width: 90%;*/
     }
 
     

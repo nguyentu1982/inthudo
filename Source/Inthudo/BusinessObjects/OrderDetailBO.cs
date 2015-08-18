@@ -26,8 +26,8 @@ namespace BusinessObjects
         public int OrderId { get; set; }
         public int? DesignerId { get; set; }
 
-        public virtual Member User { get; set; }
-        public virtual Member User1 { get; set; }
+        public virtual MemberBO User { get; set; }
+        public virtual MemberBO User1 { get; set; }
         public virtual ProductBO Product { get; set; }
         public virtual OrderBO Order { get; set; }
 

@@ -57,16 +57,16 @@ namespace Web.Modules
             //Business man
             ddlBusinessManId.Items.Clear();
             ddlBusinessManId.Items.Add(new ListItem(string.Empty, string.Empty));
-            List<Member> businessMans = this.MemberService.GetMembers(orderby);
-            foreach (Member m in businessMans)
+            List<MemberBO> businessMans = this.MemberService.GetMembers(orderby);
+            foreach (MemberBO m in businessMans)
             {
                 ddlBusinessManId.Items.Add(new ListItem(m.FullName, m.UserId.ToString()));
             }
             //Designner man
             ddlDesingerId.Items.Clear();
             ddlDesingerId.Items.Add(new ListItem(string.Empty, string.Empty));
-            List<Member> designers = this.MemberService.GetMembers(orderby);
-            foreach (Member m in designers)
+            List<MemberBO> designers = this.MemberService.GetMembers(orderby);
+            foreach (MemberBO m in designers)
             {
                 ddlDesingerId.Items.Add(new ListItem(m.FullName, m.UserId.ToString()));
             }
@@ -111,6 +111,35 @@ namespace Web.Modules
         protected void btAdd_Click(object sender, EventArgs e)
         {
             Response.Redirect("OrderAdd.aspx");
+        }
+
+        protected void btDelete_Click(object sender, EventArgs e)
+        {
+            foreach (GridViewRow row in grvOrders.Rows)
+            {
+                CheckBox chk = row.Cells[0].Controls[1] as CheckBox;
+                if (chk != null && chk.Checked)
+                {
+                    int orderId = int.Parse(row.Cells[1].Text);
+
+                    OrderBO order = this.OrderService.GetOrderById(orderId);
+
+                    if (order == null) return;
+                    
+                    try
+                    {
+                        this.OrderService.MarkOrderAsDeleted(orderId);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        ProcessException(ex);
+                    }
+                    
+                }
+            }
+
+            btFind_Click(new object(), new EventArgs());
         }
     }
 }

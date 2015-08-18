@@ -25,7 +25,7 @@ namespace Web.Modules
         private void BindData()
         {
             IMemberService memberService = new MemberService();
-            Member member = memberService.GetMember(this.MemeberId);
+            MemberBO member = memberService.GetMember(this.MemeberId);
             if (member != null)
             {
                 
@@ -61,10 +61,10 @@ namespace Web.Modules
             
         }
 
-        public Member SaveInfo()
+        public MemberBO SaveInfo()
         {
             IMemberService memberService = new MemberService();
-            Member member = memberService.GetMember(this.MemeberId);
+            MemberBO member = memberService.GetMember(this.MemeberId);
             if (member != null)
             {
                 member.UserName = txtUserName.Text;
@@ -79,7 +79,7 @@ namespace Web.Modules
             }
             else
             {
-                member = new Member()
+                member = new MemberBO()
                 {
                     UserName = txtUserName.Text,
                     Password = txtPassword.Text,
@@ -104,7 +104,7 @@ namespace Web.Modules
         protected void btChangePass_Click(object sender, EventArgs e)
         {
             IMemberService memberService = new MemberService();
-            Member member = memberService.GetMember(this.MemeberId);
+            MemberBO member = memberService.GetMember(this.MemeberId);
             if (member == null) return;
             memberService.ChangePass(this.MemeberId, txtPassword.Text);
 

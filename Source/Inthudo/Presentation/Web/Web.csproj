@@ -192,6 +192,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="DesignRequestAdd.aspx" />
+    <Content Include="DesignRequestEdit.aspx" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\heroAccent.png" />
@@ -209,6 +211,8 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
+    <Content Include="ManufactureRequestAdd.aspx" />
+    <Content Include="ManufactureRequestEdit.aspx" />
     <Content Include="MemberAdd.aspx" />
     <Content Include="MemberEdit.aspx" />
     <Content Include="Members.aspx" />
@@ -216,14 +220,23 @@
     <Content Include="Modules\CustomerSelect.ascx" />
     <Content Include="Modules\DatePicker.ascx" />
     <Content Include="Modules\DecimalTextBox.ascx" />
+    <Content Include="Modules\DesignRequestAdd.ascx" />
+    <Content Include="Modules\DesignRequestEdit.ascx" />
+    <Content Include="Modules\DesignRequestInfo.ascx" />
+    <Content Include="Modules\DesignRequests.ascx" />
     <Content Include="Modules\EmailTextBox.ascx" />
     <Content Include="Modules\Login.ascx" />
+    <Content Include="Modules\ManufactureRequestAdd.ascx" />
+    <Content Include="Modules\ManufactureRequestEdit.ascx" />
+    <Content Include="Modules\ManufactureRequestInfo.ascx" />
     <Content Include="Modules\MemberAdd.ascx" />
     <Content Include="Modules\MemberEdit.ascx" />
     <Content Include="Modules\MemberInfo.ascx" />
     <Content Include="Modules\Members.ascx" />
     <Content Include="Modules\NumericTextBox.ascx" />
     <Content Include="Modules\OrderAdd.ascx" />
+    <Content Include="Modules\OrderDetailAdd.ascx" />
+    <Content Include="Modules\OrderDetailEdit.ascx" />
     <Content Include="Modules\OrderDetailInfo.ascx" />
     <Content Include="Modules\OrderEdit.ascx" />
     <Content Include="Modules\OrderInfo.ascx" />
@@ -334,8 +347,39 @@
     <Compile Include="Controls\BaseMasterPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Controls\BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Controls\BaseUserControl.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesignRequestAdd.aspx.cs">
+      <DependentUpon>DesignRequestAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesignRequestAdd.aspx.designer.cs">
+      <DependentUpon>DesignRequestAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DesignRequestEdit.aspx.cs">
+      <DependentUpon>DesignRequestEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesignRequestEdit.aspx.designer.cs">
+      <DependentUpon>DesignRequestEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManufactureRequestAdd.aspx.cs">
+      <DependentUpon>ManufactureRequestAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManufactureRequestAdd.aspx.designer.cs">
+      <DependentUpon>ManufactureRequestAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManufactureRequestEdit.aspx.cs">
+      <DependentUpon>ManufactureRequestEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManufactureRequestEdit.aspx.designer.cs">
+      <DependentUpon>ManufactureRequestEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="Modules\CustomerSearch.ascx.cs">
       <DependentUpon>CustomerSearch.ascx</DependentUpon>
@@ -365,6 +409,55 @@
     <Compile Include="Modules\DecimalTextBox.ascx.designer.cs">
       <DependentUpon>DecimalTextBox.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Modules\DesignRequestAdd.ascx.cs">
+      <DependentUpon>DesignRequestAdd.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\DesignRequestAdd.ascx.designer.cs">
+      <DependentUpon>DesignRequestAdd.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DesignRequestEdit.ascx.cs">
+      <DependentUpon>DesignRequestEdit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\DesignRequestEdit.ascx.designer.cs">
+      <DependentUpon>DesignRequestEdit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DesignRequestInfo.ascx.cs">
+      <DependentUpon>DesignRequestInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\DesignRequestInfo.ascx.designer.cs">
+      <DependentUpon>DesignRequestInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DesignRequests.ascx.cs">
+      <DependentUpon>DesignRequests.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\DesignRequests.ascx.designer.cs">
+      <DependentUpon>DesignRequests.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ManufactureRequestAdd.ascx.cs">
+      <DependentUpon>ManufactureRequestAdd.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\ManufactureRequestAdd.ascx.designer.cs">
+      <DependentUpon>ManufactureRequestAdd.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ManufactureRequestEdit.ascx.cs">
+      <DependentUpon>ManufactureRequestEdit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\ManufactureRequestEdit.ascx.designer.cs">
+      <DependentUpon>ManufactureRequestEdit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ManufactureRequestInfo.ascx.cs">
+      <DependentUpon>ManufactureRequestInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\ManufactureRequestInfo.ascx.designer.cs">
+      <DependentUpon>ManufactureRequestInfo.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Modules\NumericTextBox.ascx.cs">
       <DependentUpon>NumericTextBox.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -378,6 +471,20 @@
     </Compile>
     <Compile Include="Modules\OrderAdd.ascx.designer.cs">
       <DependentUpon>OrderAdd.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\OrderDetailAdd.ascx.cs">
+      <DependentUpon>OrderDetailAdd.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\OrderDetailAdd.ascx.designer.cs">
+      <DependentUpon>OrderDetailAdd.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\OrderDetailEdit.ascx.cs">
+      <DependentUpon>OrderDetailEdit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\OrderDetailEdit.ascx.designer.cs">
+      <DependentUpon>OrderDetailEdit.ascx</DependentUpon>
     </Compile>
     <Compile Include="Modules\OrderDetailInfo.ascx.cs">
       <DependentUpon>OrderDetailInfo.ascx</DependentUpon>

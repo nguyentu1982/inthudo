@@ -22,8 +22,8 @@ namespace DataObjects.EntityFramework
             Mapper.CreateMap<LibShippingMethod, ShippingMethodBO>();
             Mapper.CreateMap<Customer, CustomerBO>();
             Mapper.CreateMap<CustomerBO, Customer>();
-            Mapper.CreateMap<User, Member>();
-            Mapper.CreateMap<Member, User>();
+            Mapper.CreateMap<User, MemberBO>();
+            Mapper.CreateMap<MemberBO, User>();
             Mapper.CreateMap<OrderItem, OrderDetailBO>();
             Mapper.CreateMap<OrderDetailBO, OrderItem>();
         }
@@ -284,7 +284,7 @@ namespace DataObjects.EntityFramework
                                 DepositTypeName = o.LibDepositType.Name,
                                 ShippingMethodName = o.LibShippingMethod.Name
                                 
-                            }).ToList();
+                            }).Distinct().ToList();
                 return query;
             }
         }
@@ -308,8 +308,248 @@ namespace DataObjects.EntityFramework
             using (var contex = new InThuDoEntities())
             {
                 OrderItem orderDetail = contex.OrderItems.Where(od => od.OrderItemId == orderDetailId).FirstOrDefault();
+                if (orderDetail == null) return;
                 orderDetail.Deleted = true;
                 contex.SaveChanges();
+            }
+        }
+
+        public void MarkOrderAsDeleted(int orderId)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                Order order = context.Orders.Where(o => o.OrderId == orderId).FirstOrDefault();
+                if (order==null) return;
+                order.Deleted = true;
+                context.SaveChanges();
+            }
+        }
+
+        public DesignRequestBO GetDesignRequestById(int requestId)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                return (from dr in context.DesignRequests
+                        where
+                        (dr.DesignRequestId == requestId)&&(dr.Deleted==null|| dr.Deleted == false)
+                        select new DesignRequestBO()
+                        {
+                            DesignRequestId = dr.DesignRequestId,
+                            Description = dr.Description,
+                            DesignerId = dr.DesignerId,
+                            BeginDate = dr.BeginDate,
+                            EndDate = dr.EndDate,
+                            Cost = dr.Cost,
+                            CreatedBy = dr.CreatedBy,
+                            CreatedOn = dr.CreatedOn,
+                            LastEditedBy = dr.LastEditedBy,
+                            LastEditedOn = dr.LastEditedOn,
+                            OrderItem = new OrderDetailBO() { 
+                                OrderItemId = dr.OrderItemId,
+                                ProductId = dr.OrderItem.ProductId,
+                                Specification = dr.OrderItem.Specification,
+                                Quantity = dr.OrderItem.Quantity,
+                                Price = dr.OrderItem.Price,
+                                CreatedBy = dr.OrderItem.CreatedBy,
+                                CreatedOn = dr.OrderItem.CreatedOn,
+                                LastEditedBy = dr.OrderItem.LastEditedBy,
+                                LastEditedOn = dr.OrderItem.LastEditedOn,
+                                OrderId = dr.OrderItem.OrderId,
+                                DesignerId = dr.OrderItem.DesignerId,
+                                ProductName = dr.OrderItem.Product.Name
+                            }
+                        }).FirstOrDefault();
+            }
+        }
+
+        public void UpdateDesignRequest(DesignRequestBO designReq)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                DesignRequest ds = context.DesignRequests.Where(d => d.DesignRequestId == designReq.DesignRequestId).FirstOrDefault();
+                ds.Description = designReq.Description;
+                ds.DesignerId = designReq.DesignerId;
+                ds.BeginDate = designReq.BeginDate;
+                ds.EndDate = designReq.EndDate;
+                ds.Cost = designReq.Cost;
+                ds.LastEditedBy = designReq.LastEditedBy;
+                ds.LastEditedOn = designReq.LastEditedOn;
+
+                context.SaveChanges();
+            }
+        }
+
+        public int InsertDesignRequest(DesignRequestBO designReq)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                DesignRequest ds = new DesignRequest()
+                {
+                    Description = designReq.Description,
+                    DesignerId = designReq.DesignerId,
+                    BeginDate = designReq.BeginDate,
+                    EndDate = designReq.EndDate,
+                    Cost = designReq.Cost,
+                    CreatedBy = designReq.CreatedBy,
+                    CreatedOn= designReq.CreatedOn,
+                    OrderItemId = designReq.OrderItemId
+                };
+
+                context.DesignRequests.Add(ds);
+                context.Entry(ds).State = System.Data.EntityState.Added;
+                context.SaveChanges();
+
+                return ds.DesignRequestId;
+            }
+        }
+
+        public void MaskDesignRequestAsDeleted(int designRequestId, int deletedBy)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                DesignRequest ds = context.DesignRequests.Where(d => d.DesignRequestId == designRequestId).FirstOrDefault();
+                ds.Deleted = true;
+                ds.LastEditedBy = deletedBy;
+                ds.LastEditedOn = DateTime.Now;
+                context.SaveChanges();
+            }
+        }
+
+
+        public DesignRequestBO GetDesignRequestByOrderDetailId(int orderDetailId)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                var query = from dr in context.DesignRequests
+                            where
+                            (dr.OrderItemId == orderDetailId) &&
+                            (dr.Deleted == null || dr.Deleted == false)
+                            select new DesignRequestBO()
+                            {
+                                DesignRequestId = dr.DesignRequestId,
+                                Description = dr.Description,
+                                DesignerId = dr.DesignerId,
+                                BeginDate = dr.BeginDate,
+                                EndDate = dr.EndDate,
+                                Cost = dr.Cost,
+                                CreatedBy = dr.CreatedBy,
+                                CreatedOn = dr.CreatedOn,
+                                LastEditedBy = dr.LastEditedBy,
+                                LastEditedOn = dr.LastEditedOn,
+                                OrderItem = new OrderDetailBO()
+                                {
+                                    OrderItemId = dr.OrderItemId,
+                                    ProductId = dr.OrderItem.ProductId,
+                                    Specification = dr.OrderItem.Specification,
+                                    Quantity = dr.OrderItem.Quantity,
+                                    Price = dr.OrderItem.Price,
+                                    CreatedBy = dr.OrderItem.CreatedBy,
+                                    CreatedOn = dr.OrderItem.CreatedOn,
+                                    LastEditedBy = dr.OrderItem.LastEditedBy,
+                                    LastEditedOn = dr.OrderItem.LastEditedOn,
+                                    OrderId = dr.OrderItem.OrderId,
+                                    DesignerId = dr.OrderItem.DesignerId,
+                                    ProductName = dr.OrderItem.Product.Name
+                                }
+                            };
+                return query.FirstOrDefault();
+            }
+        }
+
+
+        public ManufactureRequestBO GetManufactureRequestById(int id)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                return (from m in context.ManufactureRequests
+                       where m.ManufactureRequestId == id
+                       select new ManufactureRequestBO()
+                       {
+                           ManufactureRequestId = m.ManufactureRequestId,
+                           DesignRequestId = m.DesignRequestId,
+                           Description = m.Description,
+                           BeginDate = m.BeginDate,
+                           EndDate = m.EndDate,
+                           Cost = m.Cost,
+                           CreatedBy = m.CreatedBy,
+                           CreatedOn = m.CreatedOn,
+                           LastEditedBy = m.LastEditedBy,
+                           LastEditedOn = m.LastEditedOn,
+                           Deleted = m.Deleted,
+                           Quantity = m.Quantity,
+                       }).FirstOrDefault();
+            }
+        }
+
+
+        public void UpdateManufactureRequest(ManufactureRequestBO manu)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                ManufactureRequest ma = context.ManufactureRequests.Where(m => m.ManufactureRequestId == manu.ManufactureRequestId).FirstOrDefault();
+                if (ma == null) return;
+                ma.Description = manu.Description;
+                ma.BeginDate = manu.BeginDate;
+                ma.EndDate = manu.EndDate;
+                ma.Quantity = manu.Quantity;
+                ma.Cost = manu.Cost;
+                ma.LastEditedBy = manu.LastEditedBy;
+                ma.LastEditedOn = manu.LastEditedOn;
+
+                context.SaveChanges();
+            }
+        }
+
+        public int InsertManufactureRequest(ManufactureRequestBO manu)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                ManufactureRequest ma = new ManufactureRequest()
+                {
+                    Description = manu.Description,
+                    BeginDate = manu.BeginDate,
+                    EndDate = manu.EndDate,
+                    Quantity = manu.Quantity,
+                    Cost = manu.Cost,
+                    CreatedBy = manu.CreatedBy,
+                    CreatedOn = manu.CreatedOn,
+                    DesignRequestId = manu.DesignRequestId,
+                };
+
+                context.ManufactureRequests.Add(ma);
+                context.SaveChanges();
+
+                return ma.ManufactureRequestId;
+            }
+        }
+
+
+        public ManufactureRequestBO GetManufactureRequestByDesignRequest(int designRequestId)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                var query = (from m in context.ManufactureRequests
+                            where m.DesignRequestId == designRequestId
+                            &&(m.Deleted == false || m.Deleted == null)
+                             select m).FirstOrDefault();
+                if (query == null) return null;
+
+                return new ManufactureRequestBO()
+                {
+                    ManufactureRequestId = query.ManufactureRequestId,
+                    DesignRequestId = query.DesignRequestId,
+                    Description = query.Description,
+                    BeginDate = query.BeginDate,
+                    EndDate = query.EndDate,
+                    Cost = query.Cost,
+                    CreatedBy = query.CreatedBy,
+                    CreatedOn = query.CreatedOn,
+                    LastEditedBy = query.LastEditedBy,
+                    LastEditedOn = query.LastEditedOn,
+                    Deleted = query.Deleted,
+                    Quantity = query.Quantity,
+                };
+                
             }
         }
     }

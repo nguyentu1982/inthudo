@@ -1,0 +1,45 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using BusinessObjects;
+
+namespace Web.Modules
+{
+    public partial class ManufactureRequestEdit : BaseUserControl
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btSave_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                try
+                {
+                    ManufactureRequestBO manu = ctrlManufactureRequestInfo.SaveInfo();                    
+                }
+                catch (Exception ex)
+                {
+                    ProcessException(ex);
+                }
+            }
+        }
+
+        protected void btDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                ProcessException(ex);
+            }
+        }
+    }
+}

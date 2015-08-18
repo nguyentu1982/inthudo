@@ -12,42 +12,42 @@ namespace InthudoService
     {
         static readonly IMemberDao memberDao = factory.MemberDao;
 
-        public Member GetMember(int memberId)
+        public MemberBO GetMember(int memberId)
         {
             return memberDao.GetMember(memberId);
         }
 
-        public Member GetMemberByEmail(string email)
+        public MemberBO GetMemberByEmail(string email)
         {
             return memberDao.GetMemberByEmail(email);
         }
 
-        public List<Member> GetMembers(string sortExpression)
+        public List<MemberBO> GetMembers(string sortExpression)
         {
             return memberDao.GetMembers(sortExpression);
         }
 
-        public Member GetMemberByOrder(int orderId)
+        public MemberBO GetMemberByOrder(int orderId)
+        {
+            return memberDao.GetMemberByOrder(orderId);
+        }
+
+        public List<MemberBO> GetMembersWithOrderStatistics(string sortExpression)
         {
             throw new NotImplementedException();
         }
 
-        public List<Member> GetMembersWithOrderStatistics(string sortExpression)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void InsertMember(Member member)
+        public void InsertMember(MemberBO member)
         {
             memberDao.InsertMember(member);
         }        
 
-        public void UpdateMember(Member member)
+        public void UpdateMember(MemberBO member)
         {
             memberDao.UpdateMember(member);
         }
 
-        public void DeleteMember(Member member)
+        public void DeleteMember(MemberBO member)
         {
             memberDao.DeleteMember(member);
         }
@@ -64,13 +64,13 @@ namespace InthudoService
         }
 
 
-        public List<Member> GetMembers(string username, string email, string fullName, string address, int roletypeId)
+        public List<MemberBO> GetMembers(string username, string email, string fullName, string telephone, int roletypeId)
         {
-            return memberDao.GetMembers(username, email, fullName, address, roletypeId);
+            return memberDao.GetMembers(username, email, fullName, telephone, roletypeId);
         }
 
 
-        public void InsertMember(Member member, out MemberStatus status)
+        public void InsertMember(MemberBO member, out MemberStatus status)
         {
             status = MemberStatus.Success;
             if (this.GetMemberByUserName(member.UserName) != null)
@@ -94,18 +94,18 @@ namespace InthudoService
             }
         }
 
-        public Member GetMemberByTelephone(string telephone)
+        public MemberBO GetMemberByTelephone(string telephone)
         {
            return memberDao.GetMemberByTelephone(telephone);
         }
 
-        public Member GetMemberByUserName(string userName)
+        public MemberBO GetMemberByUserName(string userName)
         {
             return memberDao.GetMemberByUserName(userName);
         }
 
 
-        public Member GetMember(string user)
+        public MemberBO GetMember(string user)
         {
             return memberDao.GetMemberByUserName(user);
         }

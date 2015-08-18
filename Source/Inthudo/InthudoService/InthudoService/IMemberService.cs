@@ -12,20 +12,20 @@ namespace InthudoService
     {
         #region Member Repository
 
-        Member GetMember(int memberId);
-        Member GetMemberByEmail(string email);
-        List<Member> GetMembers(string sortExpression);
-        Member GetMemberByOrder(int orderId);
-        List<Member> GetMembersWithOrderStatistics(string sortExpression);
-        void InsertMember(Member member);
-        void InsertMember(Member member, out MemberStatus status);
-        void UpdateMember(Member member);
-        void DeleteMember(Member member);
+        MemberBO GetMember(int memberId);
+        MemberBO GetMemberByEmail(string email);
+        List<MemberBO> GetMembers(string sortExpression);
+        MemberBO GetMemberByOrder(int orderId);
+        List<MemberBO> GetMembersWithOrderStatistics(string sortExpression);
+        void InsertMember(MemberBO member);
+        void InsertMember(MemberBO member, out MemberStatus status);
+        void UpdateMember(MemberBO member);
+        void DeleteMember(MemberBO member);
         bool ValidateUser(string user, string pass);
         void ChangePass(int userId, string pass);
-        Member GetMemberByUserName(string user);
+        MemberBO GetMemberByUserName(string user);
         #endregion Member Repository
 
-        List<Member> GetMembers(string username, string email, string fullName, string address, int roletypeId);
+        List<MemberBO> GetMembers(string username, string email, string fullName, string telephone, int roletypeId);
     }
 }

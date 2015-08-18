@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace Web
 {
-    public partial class Orders : System.Web.UI.Page
+    public partial class Orders : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            base.CheckLogin();
         }
     }
 }

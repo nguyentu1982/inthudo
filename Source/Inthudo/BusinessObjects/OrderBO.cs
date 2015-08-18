@@ -28,10 +28,10 @@ namespace BusinessObjects
         public Nullable<bool> Deleted { get; set; }
 
         public virtual CustomerBO Customer { get; set; }
-        public virtual ICollection<DesignBO> Designs { get; set; }
-        public virtual Member BusinessMan { get; set; }
-        public virtual Member User1 { get; set; }
-        public virtual Member User2 { get; set; }
+        public virtual ICollection<DesignRequestBO> Designs { get; set; }
+        public virtual MemberBO BusinessMan { get; set; }
+        public virtual MemberBO User1 { get; set; }
+        public virtual MemberBO User2 { get; set; }
         public virtual DepositMethodBO DepositType { get; set; }
         public virtual ShippingMethodBO ShippingMethod { get; set; }
         public virtual IList<OrderDetailBO> OrderItems { get; set; }

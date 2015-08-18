@@ -61,7 +61,7 @@ namespace Web.Modules
                 {
                     int userId = int.Parse(row.Cells[1].Text);
                     IMemberService memberService = new MemberService();
-                    Member mem = memberService.GetMember(userId);
+                    MemberBO mem = memberService.GetMember(userId);
                     if(mem != null)
                     {
                         try

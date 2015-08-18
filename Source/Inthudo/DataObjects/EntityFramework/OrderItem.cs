@@ -16,8 +16,8 @@ namespace DataObjects.EntityFramework
     {
         public OrderItem()
         {
-            this.Designs = new HashSet<Design>();
             this.OrderStatusMappings = new HashSet<OrderStatusMapping>();
+            this.DesignRequests = new HashSet<DesignRequest>();
         }
     
         public int OrderItemId { get; set; }
@@ -33,7 +33,6 @@ namespace DataObjects.EntityFramework
         public int OrderId { get; set; }
         public Nullable<int> DesignerId { get; set; }
     
-        public virtual ICollection<Design> Designs { get; set; }
         public virtual Order Order { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
@@ -42,5 +41,6 @@ namespace DataObjects.EntityFramework
         public virtual Product Product { get; set; }
         public virtual User User2 { get; set; }
         public virtual ICollection<OrderStatusMapping> OrderStatusMappings { get; set; }
+        public virtual ICollection<DesignRequest> DesignRequests { get; set; }
     }
 }
