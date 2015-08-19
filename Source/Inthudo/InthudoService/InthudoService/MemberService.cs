@@ -37,9 +37,9 @@ namespace InthudoService
             throw new NotImplementedException();
         }
 
-        public void InsertMember(MemberBO member)
+        public int InsertMember(MemberBO member)
         {
-            memberDao.InsertMember(member);
+            return memberDao.InsertMember(member);
         }        
 
         public void UpdateMember(MemberBO member)
@@ -64,13 +64,13 @@ namespace InthudoService
         }
 
 
-        public List<MemberBO> GetMembers(string username, string email, string fullName, string telephone, int roletypeId)
+        public List<MemberBO> GetMembers(string username, string email, string fullName, string telephone, int roletypeId, int departId)
         {
-            return memberDao.GetMembers(username, email, fullName, telephone, roletypeId);
+            return memberDao.GetMembers(username, email, fullName, telephone, roletypeId, departId);
         }
 
 
-        public void InsertMember(MemberBO member, out MemberStatus status)
+        public int InsertMember(MemberBO member, out MemberStatus status)
         {
             status = MemberStatus.Success;
             if (this.GetMemberByUserName(member.UserName) != null)
@@ -90,8 +90,9 @@ namespace InthudoService
 
             if (status == MemberStatus.Success)
             {
-                InsertMember(member);
+                return InsertMember(member);
             }
+            return 0;
         }
 
         public MemberBO GetMemberByTelephone(string telephone)
@@ -111,6 +112,12 @@ namespace InthudoService
         }
 
 
-       
+
+
+
+        public List<DepartmentBO> GetAllDepartment()
+        {
+            return memberDao.GetAllDepartment();
+        }
     }
 }

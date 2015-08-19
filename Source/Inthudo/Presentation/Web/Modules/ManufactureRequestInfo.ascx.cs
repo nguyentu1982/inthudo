@@ -26,6 +26,7 @@ namespace Web.Modules
             if (manu != null)
             {
                 lbManufactureRequestId.Text = manu.ManufactureRequestId.ToString();
+                lbManufactureRequestDate.Text = manu.CreatedOn.ToShortDateString();
                 ctrlDatePickerBeginDate.SelectedDate = manu.BeginDate;
                 ctrlDatePickerEndDate.SelectedDate = manu.EndDate;
                 txtRequirement.Text = manu.Description;

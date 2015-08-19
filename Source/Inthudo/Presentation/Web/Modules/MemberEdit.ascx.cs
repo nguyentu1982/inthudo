@@ -64,6 +64,7 @@ namespace Web.Modules
             try
             {
                 memberService.DeleteMember(member);
+                Response.Redirect("Members.aspx");
             }
             catch (Exception ex)
             {

@@ -22,13 +22,13 @@ namespace Web.Modules {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelOrderDetailId;
         
         /// <summary>
-        /// hdfOrderDetailId control.
+        /// lbOrderDetailID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdfOrderDetailId;
+        protected global::System.Web.UI.WebControls.Label lbOrderDetailID;
         
         /// <summary>
         /// panelOrderInfo control.
@@ -49,13 +49,22 @@ namespace Web.Modules {
         protected global::System.Web.UI.WebControls.Label lbOrderId;
         
         /// <summary>
-        /// ddlDesigner control.
+        /// lbCustomer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDesigner;
+        protected global::System.Web.UI.WebControls.Label lbCustomer;
+        
+        /// <summary>
+        /// lbBusinessMan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbBusinessMan;
         
         /// <summary>
         /// cboxProduct control.
@@ -67,6 +76,15 @@ namespace Web.Modules {
         protected global::AjaxControlToolkit.ComboBox cboxProduct;
         
         /// <summary>
+        /// requiredFieldValidatorProduct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator requiredFieldValidatorProduct;
+        
+        /// <summary>
         /// txtProductRequirement control.
         /// </summary>
         /// <remarks>
@@ -74,6 +92,15 @@ namespace Web.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtProductRequirement;
+        
+        /// <summary>
+        /// requiredFieldValidatorProductRequirement control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator requiredFieldValidatorProductRequirement;
         
         /// <summary>
         /// txtProductRequirement_HtmlEditorExtender control.
@@ -101,32 +128,5 @@ namespace Web.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Web.Modules.DecimalTextBox ctrltxtPrice;
-        
-        /// <summary>
-        /// btSave control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btSave;
-        
-        /// <summary>
-        /// btCancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btCancel;
-        
-        /// <summary>
-        /// btDelete control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btDelete;
     }
 }

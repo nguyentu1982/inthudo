@@ -38,6 +38,7 @@ namespace BusinessObjects
         public string Telephone { get; set; }
         public string Email { get; set; }
         public int RoleTypeId { get; set; }
+        public Nullable<int> DepartmentId { get; set; }
 
         public RoleTypeBO RoleType { get; set; }
         public string RoleName

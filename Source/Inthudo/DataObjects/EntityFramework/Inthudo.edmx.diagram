@@ -48,6 +48,7 @@
         <AssociationConnector Association="InThuDoMNGModel.FK_ManufactureRequest_Design" />
         <AssociationConnector Association="InThuDoMNGModel.FK_ManufactureRequest_User" />
         <AssociationConnector Association="InThuDoMNGModel.FK_ManufactureRequest_User1" />
+        <AssociationConnector Association="InThuDoMNGModel.FK_User_LibDepartment" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

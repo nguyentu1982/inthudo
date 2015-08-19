@@ -13,6 +13,33 @@ namespace Web.Modules {
     public partial class DesignRequestInfo {
         
         /// <summary>
+        /// panelDesignRequestId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelDesignRequestId;
+        
+        /// <summary>
+        /// lbDesignRequestId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbDesignRequestId;
+        
+        /// <summary>
+        /// lbDesignRequestDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbDesignRequestDate;
+        
+        /// <summary>
         /// lbOrderId control.
         /// </summary>
         /// <remarks>
@@ -22,13 +49,22 @@ namespace Web.Modules {
         protected global::System.Web.UI.WebControls.Label lbOrderId;
         
         /// <summary>
-        /// panelDesignRequestId control.
+        /// lbCustomer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelDesignRequestId;
+        protected global::System.Web.UI.WebControls.Label lbCustomer;
+        
+        /// <summary>
+        /// lbBusinessMan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbBusinessMan;
         
         /// <summary>
         /// lbOrderDetailId control.
@@ -40,24 +76,6 @@ namespace Web.Modules {
         protected global::System.Web.UI.WebControls.Label lbOrderDetailId;
         
         /// <summary>
-        /// ctrlCustomerSelect control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Web.Modules.CustomerSelect ctrlCustomerSelect;
-        
-        /// <summary>
-        /// ddlBussinessMan control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlBussinessMan;
-        
-        /// <summary>
         /// ddlDesigner control.
         /// </summary>
         /// <remarks>
@@ -65,6 +83,15 @@ namespace Web.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlDesigner;
+        
+        /// <summary>
+        /// requiredFieldValidatorDesigner control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator requiredFieldValidatorDesigner;
         
         /// <summary>
         /// ctrlDatePickerFrom control.

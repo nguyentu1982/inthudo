@@ -11,7 +11,7 @@ using Common;
 
 namespace Web.Modules
 {
-    public partial class MemberInfo : System.Web.UI.UserControl
+    public partial class MemberInfo : BaseUserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -30,7 +30,7 @@ namespace Web.Modules
             {
                 
                 txtUserName.Text = member.UserName;
-                
+                ddlDepartment.SelectedValue = member.DepartmentId.ToString();
                 txtFullName.Text = member.FullName;
                 txtAdress.Text = member.Address;
                 txtTelephone.Text = member.Telephone;
@@ -58,7 +58,13 @@ namespace Web.Modules
                 ddlRoleType.Items.Add(new ListItem(roles[i].RoleName, roles[i].RoleTypeId.ToString()));
             }
 
-            
+            //Department Dropdown list
+            ddlDepartment.Items.Clear();            
+            List<DepartmentBO> departments = this.MemberService.GetAllDepartment();
+            foreach (DepartmentBO d in departments)
+            {
+                ddlDepartment.Items.Add(new ListItem(d.Name, d.DepartmentId.ToString()));
+            }
         }
 
         public MemberBO SaveInfo()
@@ -68,7 +74,7 @@ namespace Web.Modules
             if (member != null)
             {
                 member.UserName = txtUserName.Text;
-              
+                member.DepartmentId = int.Parse(ddlDepartment.SelectedValue);
                 member.FullName = txtFullName.Text;
                 member.Address = txtAdress.Text;
                 member.Telephone = txtTelephone.Text;
@@ -89,9 +95,10 @@ namespace Web.Modules
                     Email = txtEmail.Text,
                     RoleTypeId = int.Parse(ddlRoleType.SelectedValue),
                     CreatedOn = DateTime.Now,
+                    DepartmentId = int.Parse(ddlDepartment.SelectedValue)
                 };
                 MemberStatus status = MemberStatus.Success;
-                memberService.InsertMember(member, out status);
+                member.UserId = memberService.InsertMember(member, out status);
 
                 if (status != MemberStatus.Success)
                 {

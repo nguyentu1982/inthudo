@@ -13,6 +13,33 @@ namespace Web.Modules {
     public partial class ManufactureRequestInfo {
         
         /// <summary>
+        /// panelManufactureRequestID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelManufactureRequestID;
+        
+        /// <summary>
+        /// lbManufactureRequestId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbManufactureRequestId;
+        
+        /// <summary>
+        /// lbManufactureRequestDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbManufactureRequestDate;
+        
+        /// <summary>
         /// lbOrderId control.
         /// </summary>
         /// <remarks>
@@ -20,24 +47,6 @@ namespace Web.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbOrderId;
-        
-        /// <summary>
-        /// lbOrderDetailId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbOrderDetailId;
-        
-        /// <summary>
-        /// lbDesignRequestId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbDesignRequestId;
         
         /// <summary>
         /// lbCustomer control.
@@ -58,22 +67,22 @@ namespace Web.Modules {
         protected global::System.Web.UI.WebControls.Label lbBusinessMan;
         
         /// <summary>
-        /// panelManufactureRequestID control.
+        /// lbOrderDetailId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelManufactureRequestID;
+        protected global::System.Web.UI.WebControls.Label lbOrderDetailId;
         
         /// <summary>
-        /// lbManufactureRequestId control.
+        /// lbDesignRequestId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbManufactureRequestId;
+        protected global::System.Web.UI.WebControls.Label lbDesignRequestId;
         
         /// <summary>
         /// ctrlDatePickerBeginDate control.

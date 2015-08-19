@@ -70,11 +70,11 @@ namespace DataObjects.EntityFramework
             }
         }
 
-        
 
-        
 
-        public void InsertMember(MemberBO member)
+
+
+        public int InsertMember(MemberBO member)
         {
             using (var context = new InThuDoEntities())
             {
@@ -84,7 +84,7 @@ namespace DataObjects.EntityFramework
                 context.SaveChanges();
 
                 // update business object with new id
-                member.UserId = entity.UserId;
+                return entity.UserId;
             }
             
         }
@@ -101,7 +101,7 @@ namespace DataObjects.EntityFramework
                 entity.RoleTypeId = member.RoleTypeId;
                 entity.LastEditedOn = member.LastEditedOn;
                 entity.FullName = member.FullName;
-
+                entity.DepartmentId = member.DepartmentId;
                 //context.Members.Attach(entity); 
                 context.SaveChanges();
              
@@ -174,7 +174,7 @@ namespace DataObjects.EntityFramework
         }
 
 
-        public List<MemberBO> GetMembers(string username, string email, string fullName, string telephone, int roletypeId)
+        public List<MemberBO> GetMembers(string username, string email, string fullName, string telephone, int roletypeId, int departId)
         {
             using (context)
             {
@@ -185,6 +185,7 @@ namespace DataObjects.EntityFramework
                             (String.IsNullOrEmpty(fullName)|| mem.FullName.Contains(fullName))&&
                             (String.IsNullOrEmpty(telephone)|| mem.FullName.Contains(telephone))&&
                             (roletypeId ==0 || mem.RoleTypeId == roletypeId)&&
+                            (departId == 0 || mem.DepartmentId == departId)&&
                             (mem.Deteted == null || mem.Deteted == false)
                             select mem;
 
@@ -194,7 +195,7 @@ namespace DataObjects.EntityFramework
                     { 
                         UserId = m.UserId,
                         Email = m.Email,
-
+                        DepartmentId = m.DepartmentId,
                         RoleType = Mapper.Map<LibRoleType, RoleTypeBO>(roles.Where(r => r.RoleTypeId == m.RoleTypeId).FirstOrDefault()),
                         FullName = m.FullName,
                         Address = m.Address,
@@ -237,6 +238,21 @@ namespace DataObjects.EntityFramework
             get
             {
                 return new InThuDoEntities();
+            }
+        }
+
+
+        public List<DepartmentBO> GetAllDepartment()
+        {
+            using (var context = new InThuDoEntities())
+            {
+                var query = from d in context.LibDepartments
+                            select new DepartmentBO() { 
+                                DepartmentId = d.DepartmentId,
+                                Name = d.Name,
+                                Description = d.Description
+                            };
+                return query.ToList();
             }
         }
     }

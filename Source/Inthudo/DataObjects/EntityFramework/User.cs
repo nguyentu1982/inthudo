@@ -43,6 +43,7 @@ namespace DataObjects.EntityFramework
         public string Address { get; set; }
         public string Telephone { get; set; }
         public string Email { get; set; }
+        public Nullable<int> DepartmentId { get; set; }
     
         public virtual ICollection<Customer> Customers { get; set; }
         public virtual ICollection<Customer> Customers1 { get; set; }
@@ -59,5 +60,6 @@ namespace DataObjects.EntityFramework
         public virtual ICollection<DesignRequest> DesignRequests2 { get; set; }
         public virtual ICollection<ManufactureRequest> ManufactureRequests { get; set; }
         public virtual ICollection<ManufactureRequest> ManufactureRequests1 { get; set; }
+        public virtual LibDepartment LibDepartment { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace DataObjects.EntityFramework
         public LibDepartment()
         {
             this.EmployeeDepartmentMappings = new HashSet<EmployeeDepartmentMapping>();
+            this.Users = new HashSet<User>();
         }
     
         public int DepartmentId { get; set; }
@@ -24,5 +25,6 @@ namespace DataObjects.EntityFramework
         public string Description { get; set; }
     
         public virtual ICollection<EmployeeDepartmentMapping> EmployeeDepartmentMappings { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

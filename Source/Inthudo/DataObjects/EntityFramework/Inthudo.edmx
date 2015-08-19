@@ -126,6 +126,10 @@
             <End Role="OrderItem" EntitySet="OrderItem" />
             <End Role="OrderStatusMapping" EntitySet="OrderStatusMapping" />
           </AssociationSet>
+          <AssociationSet Name="FK_User_LibDepartment" Association="InThuDoMNGModel.Store.FK_User_LibDepartment">
+            <End Role="LibDepartment" EntitySet="LibDepartment" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_RoleType" Association="InThuDoMNGModel.Store.FK_User_RoleType">
             <End Role="LibRoleType" EntitySet="LibRoleType" />
             <End Role="User" EntitySet="User" />
@@ -318,6 +322,7 @@
           <Property Name="Address" Type="nvarchar" MaxLength="1000" />
           <Property Name="Telephone" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="DepartmentId" Type="int" />
         </EntityType>
         <Association Name="FK_Customer_User">
           <End Role="User" Type="InThuDoMNGModel.Store.User" Multiplicity="1" />
@@ -631,6 +636,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_LibDepartment">
+          <End Role="LibDepartment" Type="InThuDoMNGModel.Store.LibDepartment" Multiplicity="0..1" />
+          <End Role="User" Type="InThuDoMNGModel.Store.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LibDepartment">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_RoleType">
           <End Role="LibRoleType" Type="InThuDoMNGModel.Store.LibRoleType" Multiplicity="1" />
           <End Role="User" Type="InThuDoMNGModel.Store.User" Multiplicity="*" />
@@ -772,6 +789,10 @@
             <End Role="User" EntitySet="Users" />
             <End Role="ManufactureRequest" EntitySet="ManufactureRequests" />
           </AssociationSet>
+          <AssociationSet Name="FK_User_LibDepartment" Association="InThuDoMNGModel.FK_User_LibDepartment">
+            <End Role="LibDepartment" EntitySet="LibDepartments" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer">
           <Key>
@@ -813,6 +834,7 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
           <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="EmployeeDepartmentMappings" Relationship="InThuDoMNGModel.FK_EmployeeDepartmentMapping_LibDepartment" FromRole="LibDepartment" ToRole="EmployeeDepartmentMapping" />
+          <NavigationProperty Name="Users" Relationship="InThuDoMNGModel.FK_User_LibDepartment" FromRole="LibDepartment" ToRole="User" />
         </EntityType>
         <EntityType Name="LibDepositType">
           <Key>
@@ -972,6 +994,8 @@
           <NavigationProperty Name="DesignRequests2" Relationship="InThuDoMNGModel.FK_Design_UserLastEditedBy1" FromRole="User" ToRole="DesignRequest" />
           <NavigationProperty Name="ManufactureRequests" Relationship="InThuDoMNGModel.FK_ManufactureRequest_User" FromRole="User" ToRole="ManufactureRequest" />
           <NavigationProperty Name="ManufactureRequests1" Relationship="InThuDoMNGModel.FK_ManufactureRequest_User1" FromRole="User" ToRole="ManufactureRequest" />
+          <Property Type="Int32" Name="DepartmentId" />
+          <NavigationProperty Name="LibDepartment" Relationship="InThuDoMNGModel.FK_User_LibDepartment" FromRole="User" ToRole="LibDepartment" />
         </EntityType>
         <Association Name="FK_Customer_User">
           <End Role="User" Type="InThuDoMNGModel.User" Multiplicity="1" />
@@ -1339,6 +1363,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_LibDepartment">
+          <End Type="InThuDoMNGModel.LibDepartment" Role="LibDepartment" Multiplicity="0..1" />
+          <End Type="InThuDoMNGModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LibDepartment">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1499,6 +1535,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="InThuDoMNGModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />

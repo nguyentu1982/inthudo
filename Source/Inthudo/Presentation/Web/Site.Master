@@ -16,7 +16,7 @@
 <body>
     <form runat="server">
     
-    <asp:ScriptManager runat="server">
+    <asp:ScriptManager  ID="ScriptManager2" runat="server">
         <Scripts>
             <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=272931&clcid=0x409 --%>
             <%--Framework Scripts--%>

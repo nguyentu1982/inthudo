@@ -38,7 +38,7 @@ namespace DataObjects
         // inserts a new Member
         // following insert, Member object will contain the new identifier
         
-        void InsertMember(MemberBO member);
+        int InsertMember(MemberBO member);
 
         // updates a Member
 
@@ -52,12 +52,14 @@ namespace DataObjects
 
         void ChangePass(int userId, string pass);
 
-        List<MemberBO> GetMembers(string username, string email, string fullName, string telephone, int roletypeId);
+        List<MemberBO> GetMembers(string username, string email, string fullName, string telephone, int roletypeId, int departId);
 
         MemberBO GetMemberByTelephone(string telephone);
 
         MemberBO GetMemberByUserName(string userName);
 
         MemberBO GetMember(string user, string pass);
+
+        List<DepartmentBO> GetAllDepartment();
     }
 }

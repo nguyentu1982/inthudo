@@ -94,6 +94,15 @@ namespace Web.Modules {
         protected global::Web.Modules.EmailTextBox txtEmail;
         
         /// <summary>
+        /// ddlDepartment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlDepartment;
+        
+        /// <summary>
         /// ddlRoleType control.
         /// </summary>
         /// <remarks>

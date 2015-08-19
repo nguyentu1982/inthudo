@@ -90,8 +90,10 @@
     function OpenOrderDetailAddWindow()
     {
         var orderId = getParameterByName("OrderId");
-        
-        window.open("/OrderDetailAdd.aspx?OrderId=" + orderId + "&AddNew=1", 800, 600, true);
+        var w = 600;
+        var left = (screen.width / 2) - (w / 2);
+        var h = screen.height-100;
+        window.open("/OrderDetailAdd.aspx?OrderId=" + orderId + "&AddNew=1", "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=10, left="+left+" width="+w+", height="+h+"");
         
     }
 
@@ -103,9 +105,11 @@
     }
 
     function OpenOrderDetailEditWindow(orderDetailId) {
-        //var orderDetailId = getParameterByName("OrderDetailId");
-
-        window.open("/OrderDetailEdit.aspx?OrderDetailId=" + orderDetailId, 800, 600, true);
+        var orderId = getParameterByName("OrderId");
+        var w = 600;
+        var h = screen.height-100;
+        var left = (screen.width / 2) - (w / 2);
+        window.open("/OrderDetailEdit.aspx?OrderId=" + orderId + "&OrderDetailId=" + orderDetailId, "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=10, left=" + left + " width=" + w + ", height="+h+"");
 
     }
 
@@ -118,7 +122,10 @@
 
     function OpenWindow(url)
     {
-        window.open(url, 800, 600, true);
+        var w = 600;
+        var h = screen.height-100;
+        var left = (screen.width / 2) - (w / 2);
+        window.open(url, "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=10, left=" + left + " width=" + w + ", height="+h+"");
     }
 
 </script>

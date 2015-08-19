@@ -29,10 +29,8 @@ namespace Web.Modules
 
             if (orderDetail != null)
             {
-                hdfOrderDetailId.Value = orderDetail.OrderItemId.ToString();
-                lbOrderId.Text = orderDetail.OrderId.ToString();
-                if (orderDetail.DesignerId != null)
-                    ddlDesigner.SelectedValue = orderDetail.DesignerId.ToString();
+                lbOrderDetailID.Text = orderDetail.OrderItemId.ToString();
+                lbOrderId.Text = orderDetail.OrderId.ToString();       
                 cboxProduct.SelectedValue = orderDetail.ProductId.ToString();
                 cboxProduct.Text = orderDetail.ProductName;
 
@@ -51,31 +49,31 @@ namespace Web.Modules
                 {
                     panelOrderInfo.Visible = false;
                 }
+
+                panelOrderDetailId.Visible = false;
             }
         }
 
         private void FillDropDowns()
         {
-            btSave.Visible = ActionButtonIsDisplay;
-            btCancel.Visible = ActionButtonIsDisplay;
-            btDelete.Visible = ActionButtonIsDisplay;
+            lbOrderId.Text = this.OrderId.ToString();           
+            MemberBO mem = this.MemberService.GetMemberByOrder(this.OrderId);
+            if (mem != null)
+            {
+                lbBusinessMan.Text = mem.FullName;
+            }
+            CustomerBO cust = this.CustomerService.GetCustomerByOrder(this.OrderId);
+            if (cust != null)
+            {
+                lbCustomer.Text = string.Format("Tên: {0}, Địa chỉ: {1}, SĐT: {2}", cust.Name, cust.Address, cust.Telephone);
+            }
             //Product dropdown
             List<ProductBO> products = this.ProductService.GetAllProucts();
             cboxProduct.Items.Clear();
             foreach (ProductBO p in products)
             {
                 cboxProduct.Items.Add(new ListItem(p.Name, p.ProductId.ToString()));
-            }
-
-            //Designer drop down
-            string orderBy = "UserId ASC";
-            List<MemberBO> designers = this.MemberService.GetMembers(orderBy);
-            ddlDesigner.Items.Clear();
-            ddlDesigner.Items.Add(new ListItem("", "0"));
-            foreach (MemberBO m in designers)
-            { 
-                ddlDesigner.Items.Add(new ListItem(m.UserName,m.UserId.ToString()));
-            }
+            }            
         }
 
         public OrderDetailBO SaveInfo(int orderId)
@@ -87,16 +85,7 @@ namespace Web.Modules
 
             OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
             if (orderDetail != null)
-            {
-                int designerId = int.Parse(ddlDesigner.SelectedValue);
-                if (designerId == 0)
-                { 
-                    orderDetail.DesignerId = null;
-                }
-                else{
-                    orderDetail.DesignerId = designerId;
-                }               
-                
+            {  
                 orderDetail.ProductId = int.Parse(cboxProduct.SelectedValue);
                 orderDetail.Specification = txtProductRequirement.Text;
                 orderDetail.Quantity = ctrltxtQuantity.Value;
@@ -108,7 +97,7 @@ namespace Web.Modules
                 
                 orderDetail = new OrderDetailBO() 
                 { 
-                     OrderId = string.IsNullOrEmpty(lbOrderId.Text) == true ? orderId : int.Parse(lbOrderId.Text),
+                     OrderId = orderId,
                      ProductId = int.Parse(cboxProduct.SelectedValue),
                      Specification = txtProductRequirement.Text,
                      Quantity = ctrltxtQuantity.Value,
@@ -116,17 +105,7 @@ namespace Web.Modules
                      CreatedBy = this.UserId,
                      CreatedOn = DateTime.Now,
                      
-                };
-
-                int designerId = int.Parse(ddlDesigner.SelectedValue);
-                if (designerId == 0)
-                {
-                    orderDetail.DesignerId = null;
-                }
-                else
-                {
-                    orderDetail.DesignerId = designerId;
-                }
+                };                
                
                 this.OrderService.InsertOrderDetail(orderDetail);
             }
@@ -175,33 +154,12 @@ namespace Web.Modules
 
         protected void btSave_Click(object sender, EventArgs e)
         {
-            if (Page.IsValid)
-            {
-                try
-                {
-                    SaveInfo(this.OrderId);
-                    
-                }
-                catch (Exception ex)
-                {
-                    ProcessException(ex);
-                }
-            }
+            
         }
 
         protected void btDelete_Click(object sender, EventArgs e)
         {
-            try
-            {
-                int orderDetailId = 0;
-                int.TryParse(hdfOrderDetailId.Value,out orderDetailId);
-                this.OrderService.MarkOrderDetailAsDeleted(orderDetailId);
-                Page.ClientScript.RegisterStartupScript(typeof(Page), "closePage", "<script>window.close()</script>");
-            }
-            catch (Exception ex)
-            {
-                ProcessException(ex);
-            }
+            
         }
     }
 }

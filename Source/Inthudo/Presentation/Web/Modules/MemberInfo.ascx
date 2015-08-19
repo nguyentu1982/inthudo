@@ -30,5 +30,7 @@
 <%--<asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
 <br />--%>
 <br />
+<span class="lbtitle">Phòng: </span><asp:DropDownList runat="server" ID="ddlDepartment"></asp:DropDownList>
+<br />
 <span class="lbtitle">Quyền: </span>
 <asp:DropDownList ID="ddlRoleType" runat="server"></asp:DropDownList>

@@ -17,8 +17,8 @@ namespace InthudoService
         List<MemberBO> GetMembers(string sortExpression);
         MemberBO GetMemberByOrder(int orderId);
         List<MemberBO> GetMembersWithOrderStatistics(string sortExpression);
-        void InsertMember(MemberBO member);
-        void InsertMember(MemberBO member, out MemberStatus status);
+        int InsertMember(MemberBO member);
+        int InsertMember(MemberBO member, out MemberStatus status);
         void UpdateMember(MemberBO member);
         void DeleteMember(MemberBO member);
         bool ValidateUser(string user, string pass);
@@ -26,6 +26,8 @@ namespace InthudoService
         MemberBO GetMemberByUserName(string user);
         #endregion Member Repository
 
-        List<MemberBO> GetMembers(string username, string email, string fullName, string telephone, int roletypeId);
+        List<MemberBO> GetMembers(string username, string email, string fullName, string telephone, int roletypeId, int departId);
+
+        List<DepartmentBO> GetAllDepartment();
     }
 }
