@@ -54,10 +54,37 @@ namespace DataObjects.EntityFramework
 
         public MemberBO GetMember(int memberId)
         {
-            using (context)
+            using (var context = new InThuDoEntities())
             {
-                var member = context.Users.FirstOrDefault(c => c.UserId == memberId && (c.Deteted == false || c.Deteted ==null)) as User;
-                return Mapper.Map<User, MemberBO>(member);
+                var query = from u in context.Users
+                            join d in context.LibDepartments on u.DepartmentId equals d.DepartmentId into departGroup
+                            from d2 in departGroup.DefaultIfEmpty()
+                            where
+                            (u.UserId == memberId)
+                            select new MemberBO()
+                            {
+                                UserId = u.UserId,
+                                Email = u.Email,
+
+                                RoleType = new RoleTypeBO()
+                                {
+                                    RoleTypeId = u.RoleTypeId,
+                                    RoleName = u.LibRoleType.RoleName,
+                                    RoleDescription = u.LibRoleType.RoleDescription
+                                },
+                                FullName = u.FullName,
+                                Address = u.Address,
+                                Telephone = u.Telephone,
+                                UserName = u.UserName,
+                                Department = new DepartmentBO() { 
+                                    DepartmentId = d2.DepartmentId,
+                                    Code = d2.Code,
+                                    Name = d2.Name,
+                                    Description = d2.Description
+                                }
+                            };
+
+                return query.FirstOrDefault();
             }
         }
 

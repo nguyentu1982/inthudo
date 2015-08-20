@@ -62,5 +62,7 @@ namespace DataObjects
         int InsertManufactureRequest(ManufactureRequestBO manu);
 
         ManufactureRequestBO GetManufactureRequestByDesignRequest(int designRequestId);
+
+        void MarkManufactureRequestAsDeleted(int manuRequestId);
     }
 }

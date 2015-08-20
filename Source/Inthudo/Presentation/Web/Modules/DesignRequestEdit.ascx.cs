@@ -23,7 +23,6 @@ namespace Web.Modules
                 try
                 {
                     DesignRequestBO designRequest = ctrlDesignRequestInfo.SaveDesignRequestInfo();
-                    Response.Redirect(string.Format("DesignRequestEdit.aspx?DesignRequestId={0}", designRequest.DesignRequestId));
                 }
                 catch (Exception ex)
                 {
@@ -49,6 +48,22 @@ namespace Web.Modules
         {
             get { 
                  return CommonHelper.QueryStringInt("DesignRequestId");
+            }
+        }
+
+        public int OrderDetailId
+        {
+            get
+            {
+                return CommonHelper.QueryStringInt("OrderDetailId");
+            }
+        }
+
+        public int OrderId
+        {
+            get
+            {
+                return CommonHelper.QueryStringInt("OrderId");
             }
         }
     }

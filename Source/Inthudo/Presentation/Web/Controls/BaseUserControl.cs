@@ -1,4 +1,5 @@
-﻿using InthudoService;
+﻿using BusinessObjects;
+using InthudoService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace Web
             ShowError(exc.Message, string.Empty);
             
         }
+        
 
         protected void ShowError(string message, string completeMessage)
         {
@@ -46,6 +48,15 @@ namespace Web
             get
             {
                 return int.Parse(Session["UserId"].ToString());
+            }
+        }
+
+        public string DepartmentName
+        {
+            get
+            {
+                MemberBO mem = this.MemberService.GetMember(this.LoggedInUserId);
+                return mem.DepartmentName;
             }
         }
 

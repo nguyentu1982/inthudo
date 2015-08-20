@@ -28,7 +28,7 @@ namespace BusinessObjects
         public Nullable<bool> Deleted { get; set; }
 
         public virtual CustomerBO Customer { get; set; }
-        public virtual ICollection<DesignRequestBO> Designs { get; set; }
+        public virtual ICollection<DesignRequestBO> DesignRequests { get; set; }
         public virtual MemberBO BusinessMan { get; set; }
         public virtual MemberBO User1 { get; set; }
         public virtual MemberBO User2 { get; set; }
@@ -65,5 +65,50 @@ namespace BusinessObjects
             get;
             set;
         }
+
+        public OrderStatusEnum OrderStatus
+        {
+            get;
+            set;
+        }
+
+        public string OrderStatusString
+        {
+            get
+            {
+                switch (OrderStatus)
+                { 
+                    case OrderStatusEnum.OrderNotExist:
+                        return "Đơn hàng không tồn tại / Chưa hoàn thành";                        
+                    case OrderStatusEnum.OrderCreated:
+                        return "Đơn hàng đã tạo";
+                    case OrderStatusEnum.DesignRequestCreated :
+                        return "Yêu cầu thiết kế đã tạo";
+                    case OrderStatusEnum.Designing:
+                        return "Đang thiết kế";
+                    case OrderStatusEnum.DesignCopmleted:
+                        return "Đã thiết kế xong";
+                    case OrderStatusEnum.ManufactureRequestCreated:
+                        return "Yêu cầu sản xuất đã tạo";
+                    case OrderStatusEnum.Manufacturing:
+                        return "Đang sản xuất";
+                    case OrderStatusEnum.ManufactureCompleted:
+                        return "Đã sản xuất xong";
+                    default: return "Đơn hàng không tồn tại / Chưa hoàn thành";
+                }
+            }
+        }
+    }
+
+    public enum OrderStatusEnum
+    {
+        OrderNotExist=0,
+        OrderCreated = 1,
+        DesignRequestCreated = 2,
+        Designing = 3,
+        DesignCopmleted = 4,
+        ManufactureRequestCreated =5,
+        Manufacturing = 6,
+        ManufactureCompleted = 7,
     }
 }

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessObjects;
+using Common.Utils;
 
 namespace Web.Modules
 {
@@ -34,11 +35,20 @@ namespace Web.Modules
         {
             try
             {
-
+                this.OrderService.MarkManufactureRequestAsDeleted(this.ManufactureRequestId);
+                Page.ClientScript.RegisterStartupScript(typeof(Page), "closePage", "<script>window.close()</script>");
             }
             catch (Exception ex)
             {
                 ProcessException(ex);
+            }
+        }
+
+        public int ManufactureRequestId
+        {
+            get
+            {
+                return CommonHelper.QueryStringInt("ManufactureRequestId");
             }
         }
     }

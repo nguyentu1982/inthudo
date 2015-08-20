@@ -77,9 +77,77 @@ namespace DataObjects.EntityFramework
                             LastEditedBy = o.LastEditedBy,
                             LastEditedDate = o.LastEditedDate,
                             Deleted = o.Deleted,                            
-                        }).FirstOrDefault();               
-            
+                        }).FirstOrDefault();
+
+                if (order != null)
+                    order.OrderStatus = this.GetOrderStatus(order.OrderId);
                 return order;
+            }
+        }
+
+
+        public OrderStatusEnum GetOrderStatus(int orderId)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                Order order = context.Orders.Where(o => o.OrderId == orderId && (o.Deleted == null || o.Deleted == false)).FirstOrDefault();
+
+                OrderStatusEnum status = new OrderStatusEnum();
+
+                if (order == null) return OrderStatusEnum.OrderNotExist;
+
+                if (order.OrderItems.Count > 0)
+                {
+                    foreach (OrderItem oi in order.OrderItems)
+                    {
+                        if (oi.Deleted == null || oi.Deleted == false)
+                            status = OrderStatusEnum.OrderCreated;
+
+                        if (oi.DesignRequests.Count > 0)
+                        {
+                            foreach (DesignRequest dr in oi.DesignRequests)
+                            {
+                                if ((dr.Deleted == null || dr.Deleted == false) && (dr.BeginDate == null) && (dr.EndDate == null))
+                                {
+                                    status = OrderStatusEnum.DesignRequestCreated;
+                                }
+
+                                if ((dr.Deleted == null || dr.Deleted == false) && (dr.BeginDate != null) && (dr.EndDate == null))
+                                {
+                                    status = OrderStatusEnum.Designing;
+                                }
+
+                                if ((dr.Deleted == null || dr.Deleted == false) && (dr.BeginDate != null) && (dr.EndDate != null))
+                                {
+                                    status = OrderStatusEnum.DesignCopmleted;
+                                }
+
+                                if (dr.ManufactureRequests.Count > 0)
+                                {
+                                    foreach (ManufactureRequest mr in dr.ManufactureRequests)
+                                    {
+                                        if ((mr.Deleted == null || mr.Deleted == false) && (mr.BeginDate == null) && (mr.EndDate == null))
+                                        {
+                                            status = OrderStatusEnum.ManufactureRequestCreated;
+                                        }
+
+                                        if ((mr.Deleted == null || mr.Deleted == false) && (mr.BeginDate != null) && (mr.EndDate == null))
+                                        {
+                                            status = OrderStatusEnum.Manufacturing;
+                                        }
+
+                                        if ((mr.Deleted == null || mr.Deleted == false) && (mr.BeginDate != null) && (mr.EndDate != null))
+                                        {
+                                            status = OrderStatusEnum.ManufactureCompleted;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return status;
             }
         }
 
@@ -254,8 +322,8 @@ namespace DataObjects.EntityFramework
                 var query = (from o in context.Orders
                             join oitem in context.OrderItems on o.OrderId equals oitem.OrderId  into orderItemGrop
                             from oitem2 in orderItemGrop.DefaultIfEmpty()
-                            join oStatusMapping in context.OrderStatusMappings on oitem2.OrderItemId equals oStatusMapping.OrderItemId into oStatusMappingGroup
-                            from oStatusMapping2 in oStatusMappingGroup.DefaultIfEmpty()
+                            //join oStatusMapping in context.OrderStatusMappings on oitem2.OrderItemId equals oStatusMapping.OrderItemId into oStatusMappingGroup
+                            //from oStatusMapping2 in oStatusMappingGroup.DefaultIfEmpty()
                             where
                             (oitem2.Deleted == false || oitem2.Deleted == null)&&
                             (orderSearchObj.OrderId == 0 || o.OrderId == orderSearchObj.OrderId) &&
@@ -263,7 +331,7 @@ namespace DataObjects.EntityFramework
                             (orderSearchObj.ProductId == 0 || oitem2.ProductId == orderSearchObj.ProductId) &&
                             (orderSearchObj.ShipMethodId ==0|| o.ShippingMethodId == orderSearchObj.ShipMethodId)&&
                             (orderSearchObj.DepositMethodId ==0 || o.DepositTypeId == orderSearchObj.DepositMethodId)&&
-                            (orderSearchObj.OrderStatusId == 0 || oStatusMapping2.OrderStatusId == orderSearchObj.OrderStatusId)&&
+                            //(orderSearchObj.OrderStatusId == 0 || oStatusMapping2.OrderStatusId == orderSearchObj.OrderStatusId)&&
                             (orderSearchObj.BusManId ==0 || o.UserId == orderSearchObj.BusManId)&&
                             (orderSearchObj.DesignerManId ==0 || oitem2.DesignerId == orderSearchObj.DesignerManId)&&
                             (o.Deleted ==null || o.Deleted==false)
@@ -285,6 +353,16 @@ namespace DataObjects.EntityFramework
                                 ShippingMethodName = o.LibShippingMethod.Name
                                 
                             }).Distinct().ToList();
+                foreach (OrderBO o in query)
+                {
+                    o.OrderStatus = this.GetOrderStatus(o.OrderId);
+                }
+
+                if (orderSearchObj.OrderStatusId != 0)
+                {
+                    query = query.Where(o => o.OrderStatus == (OrderStatusEnum)orderSearchObj.OrderStatusId).ToList();
+                }
+
                 return query;
             }
         }
@@ -550,6 +628,19 @@ namespace DataObjects.EntityFramework
                     Quantity = query.Quantity,
                 };
                 
+            }
+        }
+
+
+        public void MarkManufactureRequestAsDeleted(int manuRequestId)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                var manu = (from m in context.ManufactureRequests
+                            where m.ManufactureRequestId == manuRequestId
+                            select m).FirstOrDefault();
+                manu.Deleted = true;
+                context.SaveChanges();
             }
         }
     }

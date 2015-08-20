@@ -186,6 +186,7 @@
           <Property Name="DepartmentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="LibDepositType">
           <Key>
@@ -835,6 +836,7 @@
           <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="EmployeeDepartmentMappings" Relationship="InThuDoMNGModel.FK_EmployeeDepartmentMapping_LibDepartment" FromRole="LibDepartment" ToRole="EmployeeDepartmentMapping" />
           <NavigationProperty Name="Users" Relationship="InThuDoMNGModel.FK_User_LibDepartment" FromRole="LibDepartment" ToRole="User" />
+          <Property Type="String" Name="Code" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="LibDepositType">
           <Key>
@@ -1413,6 +1415,7 @@
           <EntitySetMapping Name="LibDepartments">
             <EntityTypeMapping TypeName="InThuDoMNGModel.LibDepartment">
               <MappingFragment StoreEntitySet="LibDepartment">
+                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />

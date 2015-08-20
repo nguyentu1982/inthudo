@@ -22,7 +22,7 @@ namespace Web.Modules
         {
             //Product drop down
             ddlProduct.Items.Clear();
-            ddlProduct.Items.Add(new ListItem(string.Empty,string.Empty));
+            ddlProduct.Items.Add(new ListItem(string.Empty,"0"));
             List<ProductBO> products = this.ProductService.GetAllProucts();
             foreach (ProductBO p in products)
             { 
@@ -30,7 +30,7 @@ namespace Web.Modules
             }
             //Shipping 
             ddlShipping.Items.Clear();
-            ddlShipping.Items.Add(new ListItem(string.Empty, string.Empty));
+            ddlShipping.Items.Add(new ListItem(string.Empty, "0"));
             List<ShippingMethodBO> ships = this.OrderService.GetAllShippingMehod();
             foreach (ShippingMethodBO s in ships)
             {
@@ -38,7 +38,7 @@ namespace Web.Modules
             }
             //Deposit
             ddlDeposit.Items.Clear();
-            ddlDeposit.Items.Add(new ListItem(string.Empty, string.Empty));
+            ddlDeposit.Items.Add(new ListItem(string.Empty, "0"));
             List<DepositMethodBO> deposits = this.OrderService.GetAllDepositMethod();
             foreach (DepositMethodBO d in deposits)
             {
@@ -46,7 +46,7 @@ namespace Web.Modules
             }
             //Order Status
             ddlStatus.Items.Clear();
-            ddlStatus.Items.Add(new ListItem(string.Empty, string.Empty));
+            ddlStatus.Items.Add(new ListItem(string.Empty, "0"));
             List<OrderStatusBO> status = this.OrderService.GetAllOrderStatus();
             foreach (OrderStatusBO s in status)
             {
@@ -56,7 +56,7 @@ namespace Web.Modules
             string orderby = "UserId ASC";
             //Business man
             ddlBusinessManId.Items.Clear();
-            ddlBusinessManId.Items.Add(new ListItem(string.Empty, string.Empty));
+            ddlBusinessManId.Items.Add(new ListItem(string.Empty, "0"));
             List<MemberBO> businessMans = this.MemberService.GetMembers(orderby);
             foreach (MemberBO m in businessMans)
             {
@@ -64,7 +64,7 @@ namespace Web.Modules
             }
             //Designner man
             ddlDesingerId.Items.Clear();
-            ddlDesingerId.Items.Add(new ListItem(string.Empty, string.Empty));
+            ddlDesingerId.Items.Add(new ListItem(string.Empty, "0"));
             List<MemberBO> designers = this.MemberService.GetMembers(orderby);
             foreach (MemberBO m in designers)
             {
@@ -89,7 +89,7 @@ namespace Web.Modules
             int busManId = 0;
             int.TryParse(ddlBusinessManId.SelectedValue,out busManId);
             int designerManId = 0;
-            int.TryParse(ddlDesingerId.SelectedValue,out busManId);
+            int.TryParse(ddlDesingerId.SelectedValue, out designerManId);
 
             OrderSearch orderSearchObj = new OrderSearch()
             {

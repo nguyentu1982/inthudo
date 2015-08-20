@@ -28,9 +28,10 @@ namespace Web.Modules
             {
                 lbOrderId.Text = order.OrderId.ToString();
                 ctrlDatePicker.SelectedDate = order.OrderDate;
-                ddlOrderStatus.SelectedValue = order.ShippingMethodId.ToString();
+                ddlShippingMethod.SelectedValue = order.ShippingMethodId.ToString();
                 ctrlCustomerSelect.CustomerCode = order.CustomerId.ToString();
                 ctrlCustomerSelect.txtCustomerCode_TextChanged(new object(), new EventArgs());
+                lbOrderStatus.Text = order.OrderStatusString;
                 //deposit
                 ddlDepositMethod.SelectedValue = order.DepositTypeId.ToString();
                 decimal deposit = 0;               
@@ -61,13 +62,13 @@ namespace Web.Modules
         private void FillDropDowns()
         {
             //Order Status
-             ddlOrderStatus.Items.Clear();
-             ddlOrderStatus.Items.Add(new ListItem("","0"));
-             List<OrderStatusBO> status = this.OrderService.GetAllOrderStatus();
-             foreach (OrderStatusBO s in status)
-             { 
-                ddlOrderStatus.Items.Add(new ListItem(s.Name, s.OrderStatusId.ToString()));
-             }
+             //ddlOrderStatus.Items.Clear();
+             //ddlOrderStatus.Items.Add(new ListItem("","0"));
+             //List<OrderStatusBO> status = this.OrderService.GetAllOrderStatus();
+             //foreach (OrderStatusBO s in status)
+             //{ 
+             //   ddlOrderStatus.Items.Add(new ListItem(s.Name, s.OrderStatusId.ToString()));
+             //}
             
             //Deposit Method
             ddlDepositMethod.Items.Clear();
@@ -162,6 +163,7 @@ namespace Web.Modules
                 int orderDetailId = int.Parse(row.Cells[0].Text);
 
                 this.OrderService.MarkOrderDetailAsDeleted(orderDetailId);
+                BindData();
             }
         }
 

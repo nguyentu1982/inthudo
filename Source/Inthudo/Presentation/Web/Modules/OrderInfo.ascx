@@ -12,7 +12,7 @@
 <span class="lbtitle">Ngày:</span>
 
 <inthudo:DatePicker runat="server" ID="ctrlDatePicker"  Format="dd/MM/yyyy"></inthudo:DatePicker>
-<span class="lbtitle">Tình trạng ĐH:</span><asp:DropDownList runat="server" ID="ddlOrderStatus"></asp:DropDownList>
+<span class="lbtitle">Tình trạng ĐH:</span><asp:Label runat="server" ID="lbOrderStatus"></asp:Label>
 
 <br />
 <inthudo:CustomerSelect runat="server" ID="ctrlCustomerSelect" />

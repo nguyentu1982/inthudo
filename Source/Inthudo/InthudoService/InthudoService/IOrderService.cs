@@ -59,5 +59,7 @@ namespace InthudoService
         int InsertManufactureRequest(ManufactureRequestBO manu);
 
         ManufactureRequestBO GetManufactureRequestByDesignRequest(int p);
+
+        void MarkManufactureRequestAsDeleted(int p);
     }
 }

@@ -40,13 +40,13 @@ namespace Web.Modules {
         protected global::Web.Modules.DatePicker ctrlDatePicker;
         
         /// <summary>
-        /// ddlOrderStatus control.
+        /// lbOrderStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlOrderStatus;
+        protected global::System.Web.UI.WebControls.Label lbOrderStatus;
         
         /// <summary>
         /// ctrlCustomerSelect control.

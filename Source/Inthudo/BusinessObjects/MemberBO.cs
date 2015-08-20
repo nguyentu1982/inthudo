@@ -40,11 +40,19 @@ namespace BusinessObjects
         public int RoleTypeId { get; set; }
         public Nullable<int> DepartmentId { get; set; }
 
+        public virtual DepartmentBO Department { get; set; }
+
         public RoleTypeBO RoleType { get; set; }
         public string RoleName
         {
             get { return RoleType.RoleName; }
             set { RoleName = value; }
+        }
+
+        public string DepartmentName
+        {
+            get;
+            set;
         }
     
     }
