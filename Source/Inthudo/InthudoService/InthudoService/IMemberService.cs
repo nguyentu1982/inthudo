@@ -26,8 +26,16 @@ namespace InthudoService
         MemberBO GetMemberByUserName(string user);
         #endregion Member Repository
 
-        List<MemberBO> GetMembers(string username, string email, string fullName, string telephone, int roletypeId, int departId);
+        List<MemberBO> GetMembers(string username, string email, string fullName, string telephone, int roletypeId, int departId,int organizationId);
 
         List<DepartmentBO> GetAllDepartment();
+
+        List<OrganizationBO> GetAllOrganization();
+
+        List<OrganizationBO> GetOrganizationsByMemberId(int memberId);
+
+        void InsertUserOrganizationMapping(int memberId, int organizationId);
+
+        void DeleteUserOrganizationMapping(int memberId, int organizationId);
     }
 }

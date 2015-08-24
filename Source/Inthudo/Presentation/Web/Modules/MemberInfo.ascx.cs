@@ -42,6 +42,7 @@ namespace Web.Modules
             {
                 pnlUserId.Visible = false;
                 btChangePass.Visible = false;
+                ctrlOrganizationSelect.Visible = false;
             }
         }
 

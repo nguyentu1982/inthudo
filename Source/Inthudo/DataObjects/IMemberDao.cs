@@ -52,7 +52,7 @@ namespace DataObjects
 
         void ChangePass(int userId, string pass);
 
-        List<MemberBO> GetMembers(string username, string email, string fullName, string telephone, int roletypeId, int departId);
+        List<MemberBO> GetMembers(string username, string email, string fullName, string telephone, int roletypeId, int departId, int organizationId);
 
         MemberBO GetMemberByTelephone(string telephone);
 
@@ -61,5 +61,13 @@ namespace DataObjects
         MemberBO GetMember(string user, string pass);
 
         List<DepartmentBO> GetAllDepartment();
+
+        List<OrganizationBO> GetAllOrganization();
+
+        List<OrganizationBO> GetOrganizationsByMemberId(int memberId);
+
+        void InsertUserOrganizationMapping(int memberId, int organizationId);
+
+        void DeleteUserOrganizationMapping(int memberId, int organizationId);
     }
 }

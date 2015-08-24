@@ -49,6 +49,10 @@
         <AssociationConnector Association="InThuDoMNGModel.FK_ManufactureRequest_User" />
         <AssociationConnector Association="InThuDoMNGModel.FK_ManufactureRequest_User1" />
         <AssociationConnector Association="InThuDoMNGModel.FK_User_LibDepartment" />
+        <EntityTypeShape EntityType="InThuDoMNGModel.Organization" Width="1.5" PointX="6.0933110313924548" PointY="28.814319877333158" />
+        <EntityTypeShape EntityType="InThuDoMNGModel.UserOrganizationMappping" Width="1.5" PointX="3.0798754929936845" PointY="25.696260285422326" />
+        <AssociationConnector Association="InThuDoMNGModel.FK_UserOrganizationMappping_Organization" />
+        <AssociationConnector Association="InThuDoMNGModel.FK_UserOrganizationMappping_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

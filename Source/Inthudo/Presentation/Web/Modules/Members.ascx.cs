@@ -42,6 +42,15 @@ namespace Web.Modules
                 ddlDepartment.Items.Add(new ListItem(d.Name, d.DepartmentId.ToString()));
             }
 
+            //Organization dropdown
+            ddlOrganization.Items.Clear();
+            ddlOrganization.Items.Add(new ListItem(string.Empty, "0"));
+            List<OrganizationBO> orgs = this.MemberService.GetAllOrganization();
+            foreach(OrganizationBO o in orgs)
+            {
+                ddlOrganization.Items.Add(new ListItem(o.Name, o.OrganizationId.ToString()));
+            }
+
             //Binding gridview
             IMemberService memberService = new MemberService();
             string orderBy = "UserId ASC";
@@ -57,7 +66,7 @@ namespace Web.Modules
         protected void btFindMember_Click(object sender, EventArgs e)
         {
             IMemberService memberService = new MemberService();
-            grvMembers.DataSource = memberService.GetMembers(txtUserName.Text, txtEmail.Text, txtFullName.Text, txtTelephone.Text,int.Parse(ddlRoles.SelectedValue),int.Parse(ddlDepartment.SelectedValue));
+            grvMembers.DataSource = memberService.GetMembers(txtUserName.Text, txtEmail.Text, txtFullName.Text, txtTelephone.Text,int.Parse(ddlRoles.SelectedValue),int.Parse(ddlDepartment.SelectedValue),int.Parse(ddlOrganization.SelectedValue));
             grvMembers.DataBind();
         }
 

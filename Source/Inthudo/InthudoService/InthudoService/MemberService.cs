@@ -64,9 +64,9 @@ namespace InthudoService
         }
 
 
-        public List<MemberBO> GetMembers(string username, string email, string fullName, string telephone, int roletypeId, int departId)
+        public List<MemberBO> GetMembers(string username, string email, string fullName, string telephone, int roletypeId, int departId, int organizationId)
         {
-            return memberDao.GetMembers(username, email, fullName, telephone, roletypeId, departId);
+            return memberDao.GetMembers(username, email, fullName, telephone, roletypeId, departId, organizationId);
         }
 
 
@@ -118,6 +118,29 @@ namespace InthudoService
         public List<DepartmentBO> GetAllDepartment()
         {
             return memberDao.GetAllDepartment();
+        }
+
+
+        public List<OrganizationBO> GetAllOrganization()
+        {
+            return memberDao.GetAllOrganization();
+        }
+
+        public List<OrganizationBO> GetOrganizationsByMemberId(int memberId)
+        {
+            return memberDao.GetOrganizationsByMemberId(memberId);
+        }
+
+
+        public void InsertUserOrganizationMapping(int memberId, int organizationId)
+        {
+            memberDao.InsertUserOrganizationMapping(memberId, organizationId);
+        }
+
+
+        public void DeleteUserOrganizationMapping(int memberId, int organizationId)
+        {
+            memberDao.DeleteUserOrganizationMapping(memberId, organizationId);
         }
     }
 }

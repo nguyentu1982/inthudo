@@ -41,5 +41,7 @@ namespace DataObjects.EntityFramework
         public DbSet<User> Users { get; set; }
         public DbSet<DesignRequest> DesignRequests { get; set; }
         public DbSet<ManufactureRequest> ManufactureRequests { get; set; }
+        public DbSet<Organization> Organizations { get; set; }
+        public DbSet<UserOrganizationMappping> UserOrganizationMapppings { get; set; }
     }
 }

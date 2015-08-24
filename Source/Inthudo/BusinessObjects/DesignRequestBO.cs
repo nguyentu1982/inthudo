@@ -19,6 +19,9 @@ namespace BusinessObjects
         public Nullable<int> LastEditedBy { get; set; }
         public Nullable<System.DateTime> LastEditedOn { get; set; }
         public int OrderItemId { get; set; }
+        public Nullable<bool> ApprovedByCustomer { get; set; }
+        public string Note { get; set; }
+        public Nullable<System.DateTime> ApprovedDate { get; set; }
 
         public virtual OrderDetailBO OrderItem { get; set; }
         public virtual MemberBO User { get; set; }

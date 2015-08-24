@@ -20,6 +20,7 @@ namespace Web.Modules
 
         private void LoadDefaultData()
         {
+            cblOrderStatus.Attributes.Add("onclick", "radioMe(event);");
             //Product drop down
             ddlProduct.Items.Clear();
             ddlProduct.Items.Add(new ListItem(string.Empty,"0"));
@@ -45,12 +46,12 @@ namespace Web.Modules
                 ddlDeposit.Items.Add(new ListItem(d.Name, d.DepositTypeId.ToString()));
             }
             //Order Status
-            ddlStatus.Items.Clear();
-            ddlStatus.Items.Add(new ListItem(string.Empty, "0"));
+            ddlOrderDetailStatus.Items.Clear();
+            ddlOrderDetailStatus.Items.Add(new ListItem(string.Empty, "0"));
             List<OrderStatusBO> status = this.OrderService.GetAllOrderStatus();
             foreach (OrderStatusBO s in status)
             {
-                ddlStatus.Items.Add(new ListItem(s.Name, s.OrderStatusId.ToString()));
+                ddlOrderDetailStatus.Items.Add(new ListItem(s.Name, s.OrderStatusId.ToString()));
             }
 
             string orderby = "UserId ASC";
@@ -76,20 +77,30 @@ namespace Web.Modules
         {
             int orderId = 0;
             int.TryParse(txtOrderCode.Text, out orderId);
+            
             int custId = 0;
             int.TryParse(ctrlCustomerSelect.CustomerCode, out custId);
+            
             int productId = 0;
             int.TryParse(ddlProduct.SelectedValue, out productId);
+            
             int shipMethodId = 0;
             int.TryParse(ddlShipping.SelectedValue, out shipMethodId);
+            
             int depositMethodId = 0;
             int.TryParse(ddlDeposit.SelectedValue, out depositMethodId);
-            int orderStatusId = 0;
-            int.TryParse(ddlStatus.SelectedValue, out orderStatusId);
+            
+            int orderDetailStatusId = 0;
+            int.TryParse(ddlOrderDetailStatus.SelectedValue, out orderDetailStatusId);
+            
             int busManId = 0;
             int.TryParse(ddlBusinessManId.SelectedValue,out busManId);
+            
             int designerManId = 0;
             int.TryParse(ddlDesingerId.SelectedValue, out designerManId);
+
+            int orderStatusValue = 0;
+            int.TryParse(cblOrderStatus.SelectedValue, out orderStatusValue);
 
             OrderSearch orderSearchObj = new OrderSearch()
             {
@@ -98,7 +109,8 @@ namespace Web.Modules
                 ProductId = productId,
                 ShipMethodId = shipMethodId,
                 DepositMethodId = depositMethodId,
-                OrderStatusId = orderStatusId,
+                OrderDetailStatus = (OrderDetailStatusEnum)orderDetailStatusId,
+                OrderStatus = (OrderStatusEnum)orderStatusValue,
                 BusManId = busManId,
                 DesignerManId = designerManId
             };

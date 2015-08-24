@@ -17,6 +17,9 @@
     <br />
     <span class="lbtitle">Phòng: </span>
     <asp:DropDownList ID="ddlDepartment" runat="server"></asp:DropDownList>
+    <br />
+    <span class="lbtitle">Trực thuộc công ty:</span>
+    <asp:DropDownList ID="ddlOrganization" runat="server"></asp:DropDownList>
 </div>
 
 <div>

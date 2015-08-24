@@ -23,8 +23,9 @@ namespace DataObjects.EntityFramework
         }
         public List<MemberBO> GetMembers(string sortExpression = "UserId ASC")
         {
-            using (context)
+            using (var context = new InThuDoEntities())
             {
+
                 var members = context.Users.Where(m=> m.Deteted ==false || m.Deteted == null).AsQueryable().OrderBy(sortExpression).ToList();
 
                 var roles = context.LibRoleTypes.ToList();
@@ -33,17 +34,24 @@ namespace DataObjects.EntityFramework
                     {
                         UserId = m.UserId,
                         Email = m.Email,
-                        
+
                         RoleType = new RoleTypeBO()
                         {
-                          RoleTypeId = m.RoleTypeId,
-                          RoleName = m.LibRoleType.RoleName,
-                          RoleDescription = m.LibRoleType.RoleDescription
+                            RoleTypeId = m.RoleTypeId,
+                            RoleName = m.LibRoleType.RoleName,
+                            RoleDescription = m.LibRoleType.RoleDescription
                         },
                         FullName = m.FullName,
                         Address = m.Address,
                         Telephone = m.Telephone,
-                        UserName = m.UserName
+                        UserName = m.UserName,
+                        Department = new DepartmentBO()
+                        {
+                            DepartmentId = m.LibDepartment.DepartmentId,
+                            Code = m.LibDepartment.Code,
+                            Name = m.LibDepartment.Name,
+                            Description = m.LibDepartment.Description
+                        }
                     }
                )
                .ToList();
@@ -65,7 +73,8 @@ namespace DataObjects.EntityFramework
                             {
                                 UserId = u.UserId,
                                 Email = u.Email,
-
+                                RoleTypeId = u.RoleTypeId,
+                                DepartmentId = u.DepartmentId,
                                 RoleType = new RoleTypeBO()
                                 {
                                     RoleTypeId = u.RoleTypeId,
@@ -90,7 +99,7 @@ namespace DataObjects.EntityFramework
 
         public MemberBO GetMemberByEmail(string email)
         {
-            using (context)
+            using (var context = new InThuDoEntities())
             {
                 var member = context.Users.FirstOrDefault(c => c.Email == email) as User;
                 return Mapper.Map<User, MemberBO>(member);
@@ -176,7 +185,7 @@ namespace DataObjects.EntityFramework
 
         public bool Login(string user, string pass)
         {
-            using(context)
+            using(var context = new InThuDoEntities())
             {
                 var member = context.Users.Where(m=> m.UserName == user && m.Password == pass &&(m.Deteted == null || m.Deteted ==false));
                 if(member.Count() == 1)
@@ -201,11 +210,13 @@ namespace DataObjects.EntityFramework
         }
 
 
-        public List<MemberBO> GetMembers(string username, string email, string fullName, string telephone, int roletypeId, int departId)
+        public List<MemberBO> GetMembers(string username, string email, string fullName, string telephone, int roletypeId, int departId, int organizationId)
         {
-            using (context)
+            using (var context = new InThuDoEntities())
             {
                 var query = from mem in context.Users
+                            join uom in context.UserOrganizationMapppings on mem.UserId equals uom.UserId into uomGroup
+                            from uom2 in uomGroup.DefaultIfEmpty()
                             where
                             (String.IsNullOrEmpty(username) || mem.UserName.Contains(username))&&
                             (String.IsNullOrEmpty(email) || mem.Email.Contains(email))&&
@@ -213,13 +224,14 @@ namespace DataObjects.EntityFramework
                             (String.IsNullOrEmpty(telephone)|| mem.FullName.Contains(telephone))&&
                             (roletypeId ==0 || mem.RoleTypeId == roletypeId)&&
                             (departId == 0 || mem.DepartmentId == departId)&&
+                            (organizationId ==0 || uom2.OrganizationId == organizationId)&&
                             (mem.Deteted == null || mem.Deteted == false)
                             select mem;
 
                 var roles = context.LibRoleTypes;
                 return query.ToList().AsQueryable().Select(m =>
                     new MemberBO
-                    { 
+                    {
                         UserId = m.UserId,
                         Email = m.Email,
                         DepartmentId = m.DepartmentId,
@@ -227,7 +239,14 @@ namespace DataObjects.EntityFramework
                         FullName = m.FullName,
                         Address = m.Address,
                         Telephone = m.Telephone,
-                        UserName = m.UserName
+                        UserName = m.UserName,
+                        Department = new DepartmentBO()
+                        {
+                            DepartmentId = m.LibDepartment.DepartmentId,
+                            Code = m.LibDepartment.Code,
+                            Name = m.LibDepartment.Name,
+                            Description = m.LibDepartment.Description
+                        }
                     }
                )
                .ToList();
@@ -238,7 +257,7 @@ namespace DataObjects.EntityFramework
 
         public MemberBO GetMemberByTelephone(string telephone)
         {
-            using (context)
+            using (var context = new InThuDoEntities())
             {
                 var member = context.Users.FirstOrDefault(c => c.Telephone== telephone) as User;
                 return Mapper.Map<User, MemberBO>(member);
@@ -247,7 +266,7 @@ namespace DataObjects.EntityFramework
 
         public MemberBO GetMemberByUserName(string userName)
         {
-            using (context)
+            using (var context = new InThuDoEntities())
             {
                 var member = context.Users.FirstOrDefault(c => c.UserName == userName) as User;
                 return Mapper.Map<User, MemberBO>(member);
@@ -260,15 +279,6 @@ namespace DataObjects.EntityFramework
             throw new NotImplementedException();
         }
 
-        public InThuDoEntities context
-        {
-            get
-            {
-                return new InThuDoEntities();
-            }
-        }
-
-
         public List<DepartmentBO> GetAllDepartment()
         {
             using (var context = new InThuDoEntities())
@@ -280,6 +290,78 @@ namespace DataObjects.EntityFramework
                                 Description = d.Description
                             };
                 return query.ToList();
+            }
+        }
+
+
+        public List<OrganizationBO> GetAllOrganization()
+        {
+            using (var context = new InThuDoEntities())
+            {
+                var query = from or in context.Organizations
+                            select new OrganizationBO() { 
+                                OrganizationId = or.OrganizationId,
+                                Name = or.Name,
+                                Address = or.Address,
+                                Description = or.Description,
+                                FaxNumber = or.FaxNumber,
+                                PhoneNumber = or.PhoneNumber,
+                                TaxCode = or.TaxCode
+                            };
+                if (query == null) return new List<OrganizationBO>();
+
+                return query.ToList();
+            }
+        }
+
+        public List<OrganizationBO> GetOrganizationsByMemberId(int memberId)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                var query = from om in context.UserOrganizationMapppings
+                            where om.UserId == memberId
+                            select new OrganizationBO() { 
+                                OrganizationId = om.OrganizationId,
+                                Name = om.Organization.Name,
+                                Address = om.Organization.Address,
+                                Description = om.Organization.Description,
+                                FaxNumber = om.Organization.FaxNumber,
+                                PhoneNumber = om.Organization.PhoneNumber,
+                                TaxCode = om.Organization.TaxCode
+                            };
+                if (query == null) return new List<OrganizationBO>();
+
+                return query.ToList();
+            }
+        }
+
+
+        public void InsertUserOrganizationMapping(int memberId, int organizationId)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                UserOrganizationMappping userOrganization = new UserOrganizationMappping()
+                {
+                    OrganizationId = organizationId,
+                    UserId = memberId,
+                };
+
+                context.UserOrganizationMapppings.Add(userOrganization);
+                context.SaveChanges();
+            }
+        }
+
+
+        public void DeleteUserOrganizationMapping(int memberId, int organizationId)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                UserOrganizationMappping userOrganizationMap = context.UserOrganizationMapppings.Where(uo => uo.UserId == memberId && uo.OrganizationId == organizationId).FirstOrDefault();
+                if (userOrganizationMap == null)
+                    return;
+
+                context.UserOrganizationMapppings.Remove(userOrganizationMap);
+                context.SaveChanges();
             }
         }
     }

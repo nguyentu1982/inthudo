@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MemberInfo.ascx.cs" Inherits="Web.Modules.MemberInfo" %>
 <%@ Register TagPrefix="inthudo" TagName="EmailTextBox" Src="~/Modules/EmailTextBox.ascx" %>
 <%@ Register TagPrefix="inthudo" TagName="SimpleTextBox" Src="~/Modules/SimpleTextBox.ascx" %>
-
+<%@ Register TagPrefix="inthudo" TagName="OrganizationSelect" Src="~/Modules/OrganizationSelect.ascx" %>
 
 <div runat="server" id="pnlUserId">
 <span class="lbtitle">UserId: </span>
@@ -34,3 +34,5 @@
 <br />
 <span class="lbtitle">Quyền: </span>
 <asp:DropDownList ID="ddlRoleType" runat="server"></asp:DropDownList>
+
+<inthudo:OrganizationSelect runat="server" ID="ctrlOrganizationSelect" />

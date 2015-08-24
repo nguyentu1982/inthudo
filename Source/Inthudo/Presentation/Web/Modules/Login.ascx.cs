@@ -25,6 +25,7 @@ namespace Web.Module
                 Session["IsLogedin"] = true;
                 MemberBO mem = this.MemberService.GetMemberByUserName(loginCtrl.UserName);
                 Session["UserId"] = mem.UserId;
+
                 if (string.IsNullOrEmpty(ReturnURL))
                 {
                     Response.Redirect("Orders.aspx");

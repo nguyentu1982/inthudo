@@ -31,6 +31,24 @@ namespace Web.Modules {
         protected global::System.Web.UI.WebControls.Button btDelete;
         
         /// <summary>
+        /// OrderTab control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabContainer OrderTab;
+        
+        /// <summary>
+        /// pnlOrderInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabPanel pnlOrderInfo;
+        
+        /// <summary>
         /// ctrlOrderInfo control.
         /// </summary>
         /// <remarks>
@@ -38,5 +56,23 @@ namespace Web.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Web.Modules.OrderInfo ctrlOrderInfo;
+        
+        /// <summary>
+        /// pnlOrderCustomerApprove control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabPanel pnlOrderCustomerApprove;
+        
+        /// <summary>
+        /// ctrlOrderCustomerApprove control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Web.Modules.OrderCustomerApprove ctrlOrderCustomerApprove;
     }
 }

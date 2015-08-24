@@ -58,7 +58,7 @@ namespace DataObjects.EntityFramework
 
         public OrderBO GetOrderById(int orderId)
         {
-            using (context)
+            using (var context = new InThuDoEntities())
             {
                 var order = (from o in context.Orders
                         where o.OrderId == orderId
@@ -76,70 +76,139 @@ namespace DataObjects.EntityFramework
                             CreatedDate = o.CreatedDate,
                             LastEditedBy = o.LastEditedBy,
                             LastEditedDate = o.LastEditedDate,
-                            Deleted = o.Deleted,                            
+                            Deleted = o.Deleted,
+                            ExpectedCompleteDate = o.ExpectedCompleteDate,
+                            Note = o.Note,
+                            DeliveryAddress = o.DeliveryAddress,
+                            ApprovedByCustomer = o.ApprovedByCustomer,
+                            ApprovedDate = o.ApprovedDate
                         }).FirstOrDefault();
 
                 if (order != null)
+                { 
+                    order.OrderTotal = GetOrderTotal(order);
                     order.OrderStatus = this.GetOrderStatus(order.OrderId);
+                }
                 return order;
             }
         }
 
-
-        public OrderStatusEnum GetOrderStatus(int orderId)
+        private OrderStatusEnum GetOrderStatus(int orderId)
         {
             using (var context = new InThuDoEntities())
             {
-                Order order = context.Orders.Where(o => o.OrderId == orderId && (o.Deleted == null || o.Deleted == false)).FirstOrDefault();
-
-                OrderStatusEnum status = new OrderStatusEnum();
-
-                if (order == null) return OrderStatusEnum.OrderNotExist;
-
-                if (order.OrderItems.Count > 0)
+                OrderStatusEnum status = OrderStatusEnum.NotCompleted;
+                Order order = context.Orders.Where(o => o.OrderId == orderId && (o.Deleted == false || o.Deleted == null)).FirstOrDefault();
+                if (order != null)
                 {
+                    List<OrderDetailStatusEnum> statuslist = new List<OrderDetailStatusEnum>();
                     foreach (OrderItem oi in order.OrderItems)
                     {
-                        if (oi.Deleted == null || oi.Deleted == false)
-                            status = OrderStatusEnum.OrderCreated;
-
-                        if (oi.DesignRequests.Count > 0)
+                        if (oi.Deleted == false || oi.Deleted == null)
                         {
-                            foreach (DesignRequest dr in oi.DesignRequests)
+                            statuslist.Add(this.GetOrderDetailStatus(oi.OrderItemId));
+                        }                        
+                    }
+
+                    int i = 0;
+                    foreach (OrderDetailStatusEnum odse in statuslist)
+                    {
+                        if (odse == OrderDetailStatusEnum.ManufactureCompleted)
+                        {
+                            i++;
+                        }
+                    }
+
+                    if (i == statuslist.Count)
+                    {
+                       // status = OrderStatusEnum.Completed;
+
+                        if (order.ApprovedByCustomer == true)
+                        {
+                            status = OrderStatusEnum.Completed;
+                        }
+                    }
+
+                    
+                }
+                return status;
+            }
+        }
+
+        public decimal GetOrderTotal(OrderBO order)
+        {            
+            using (var context = new InThuDoEntities())
+            {
+                var orderDetail = from od in context.OrderItems
+                                    where od.OrderId == order.OrderId
+                                    && (od.Deleted == false || od.Deleted == null)
+                                    select od;
+
+                decimal orderTotal = 0;
+                if (orderDetail != null)
+                {
+                    foreach (OrderItem oi in orderDetail.ToList())
+                    {
+                        orderTotal += oi.Quantity * oi.Price;
+                    }
+
+                }
+                return orderTotal;
+            }         
+        }
+
+        
+
+        public OrderDetailStatusEnum GetOrderDetailStatus(int orderDetailId)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                OrderDetailStatusEnum status = OrderDetailStatusEnum.DesignRequestNotCreated;
+                OrderItem orderItem = context.OrderItems.Where(oi => oi.OrderItemId == orderDetailId && (oi.Deleted == null || oi.Deleted == false)).FirstOrDefault();
+
+                if (orderItem != null)
+                {
+                    if (orderItem.DesignRequests.Count > 0)
+                    {
+                        foreach (DesignRequest dr in orderItem.DesignRequests)
+                        {
+                            if ((dr.Deleted == null || dr.Deleted == false) && (dr.BeginDate == null) && (dr.EndDate == null))
                             {
-                                if ((dr.Deleted == null || dr.Deleted == false) && (dr.BeginDate == null) && (dr.EndDate == null))
-                                {
-                                    status = OrderStatusEnum.DesignRequestCreated;
-                                }
+                                status = OrderDetailStatusEnum.DesignRequestCreated;
+                            }
 
-                                if ((dr.Deleted == null || dr.Deleted == false) && (dr.BeginDate != null) && (dr.EndDate == null))
-                                {
-                                    status = OrderStatusEnum.Designing;
-                                }
+                            if ((dr.Deleted == null || dr.Deleted == false) && (dr.BeginDate != null) && (dr.EndDate == null))
+                            {
+                                status = OrderDetailStatusEnum.Designing;
+                            }
 
-                                if ((dr.Deleted == null || dr.Deleted == false) && (dr.BeginDate != null) && (dr.EndDate != null))
-                                {
-                                    status = OrderStatusEnum.DesignCopmleted;
-                                }
+                            if ((dr.Deleted == null || dr.Deleted == false) && (dr.BeginDate != null) && (dr.EndDate != null))
+                            {
+                                status = OrderDetailStatusEnum.DesignCopmleted;
+                            }
 
-                                if (dr.ManufactureRequests.Count > 0)
+                            if ((dr.Deleted == null || dr.Deleted == false) && (dr.ApprovedByCustomer == true))
+                            {
+                                status = OrderDetailStatusEnum.DesignApprovedByCustomer;
+                            }
+
+                            if (dr.ManufactureRequests.Count > 0)
+                            {
+                                foreach (ManufactureRequest mr in dr.ManufactureRequests)
                                 {
-                                    foreach (ManufactureRequest mr in dr.ManufactureRequests)
+                                    if ((mr.Deleted == null || mr.Deleted == false) && (mr.BeginDate == null) && (mr.EndDate == null))
                                     {
-                                        if ((mr.Deleted == null || mr.Deleted == false) && (mr.BeginDate == null) && (mr.EndDate == null))
-                                        {
-                                            status = OrderStatusEnum.ManufactureRequestCreated;
-                                        }
+                                        status = OrderDetailStatusEnum.ManufactureRequestCreated;
+                                    }
 
-                                        if ((mr.Deleted == null || mr.Deleted == false) && (mr.BeginDate != null) && (mr.EndDate == null))
-                                        {
-                                            status = OrderStatusEnum.Manufacturing;
-                                        }
+                                    if ((mr.Deleted == null || mr.Deleted == false) && (mr.BeginDate != null) && (mr.EndDate == null))
+                                    {
+                                        status = OrderDetailStatusEnum.Manufacturing;
+                                    }
 
-                                        if ((mr.Deleted == null || mr.Deleted == false) && (mr.BeginDate != null) && (mr.EndDate != null))
-                                        {
-                                            status = OrderStatusEnum.ManufactureCompleted;
-                                        }
+                                    if ((mr.Deleted == null || mr.Deleted == false) && (mr.BeginDate != null) && (mr.EndDate != null))
+                                    {
+                                        status = OrderDetailStatusEnum.ManufactureCompleted;
                                     }
                                 }
                             }
@@ -149,6 +218,7 @@ namespace DataObjects.EntityFramework
 
                 return status;
             }
+            
         }
 
         public List<OrderDetailBO> GetOrderItemsByOrderId(int orderId)
@@ -298,6 +368,11 @@ namespace DataObjects.EntityFramework
                 entity.UserId = order.UserId;
                 entity.LastEditedBy = order.LastEditedBy;
                 entity.LastEditedDate = order.LastEditedDate;
+                entity.ExpectedCompleteDate = order.ExpectedCompleteDate;
+                entity.Note = order.Note;
+                entity.DeliveryAddress = order.DeliveryAddress;
+                entity.ApprovedByCustomer = order.ApprovedByCustomer;
+                entity.ApprovedDate = order.ApprovedDate;
 
                 context.Entry(entity).State = System.Data.EntityState.Modified;
                 context.SaveChanges();
@@ -320,47 +395,98 @@ namespace DataObjects.EntityFramework
             using (var context = new InThuDoEntities())
             {
                 var query = (from o in context.Orders
-                            join oitem in context.OrderItems on o.OrderId equals oitem.OrderId  into orderItemGrop
-                            from oitem2 in orderItemGrop.DefaultIfEmpty()
-                            //join oStatusMapping in context.OrderStatusMappings on oitem2.OrderItemId equals oStatusMapping.OrderItemId into oStatusMappingGroup
-                            //from oStatusMapping2 in oStatusMappingGroup.DefaultIfEmpty()
-                            where
-                            (oitem2.Deleted == false || oitem2.Deleted == null)&&
-                            (orderSearchObj.OrderId == 0 || o.OrderId == orderSearchObj.OrderId) &&
-                            (orderSearchObj.CustId == 0 || o.CustomerId == orderSearchObj.CustId) &&
-                            (orderSearchObj.ProductId == 0 || oitem2.ProductId == orderSearchObj.ProductId) &&
-                            (orderSearchObj.ShipMethodId ==0|| o.ShippingMethodId == orderSearchObj.ShipMethodId)&&
-                            (orderSearchObj.DepositMethodId ==0 || o.DepositTypeId == orderSearchObj.DepositMethodId)&&
-                            //(orderSearchObj.OrderStatusId == 0 || oStatusMapping2.OrderStatusId == orderSearchObj.OrderStatusId)&&
-                            (orderSearchObj.BusManId ==0 || o.UserId == orderSearchObj.BusManId)&&
-                            (orderSearchObj.DesignerManId ==0 || oitem2.DesignerId == orderSearchObj.DesignerManId)&&
-                            (o.Deleted ==null || o.Deleted==false)
-                            select new OrderBO{ 
-                                OrderId = o.OrderId,
-                                OrderDate = o.OrderDate,
-                                Deposit =o.Deposit,
-                                DepositTypeId =o.DepositTypeId,
-                                ShippingMethodId = o.ShippingMethodId,                                
-                                CustomerId= o.CustomerId,
-                                UserId = o.UserId,
-                                CreatedBy =o.CreatedBy,
-                                CreatedDate = o.CreatedDate,
-                                LastEditedBy =o.LastEditedBy,
-                                LastEditedDate = o.LastEditedDate,
-                                CustomerName = o.Customer.Name,
-                                BusinessManName = o.User.FullName,
-                                DepositTypeName = o.LibDepositType.Name,
-                                ShippingMethodName = o.LibShippingMethod.Name
-                                
-                            }).Distinct().ToList();
+                             join oitem in context.OrderItems on o.OrderId equals oitem.OrderId into orderItemGrop
+                             from oitem2 in orderItemGrop.DefaultIfEmpty()
+                             //join oStatusMapping in context.OrderStatusMappings on oitem2.OrderItemId equals oStatusMapping.OrderItemId into oStatusMappingGroup
+                             //from oStatusMapping2 in oStatusMappingGroup.DefaultIfEmpty()
+                             where
+                             (oitem2.Deleted == false || oitem2.Deleted == null) &&
+                             (orderSearchObj.OrderId == 0 || o.OrderId == orderSearchObj.OrderId) &&
+                             (orderSearchObj.CustId == 0 || o.CustomerId == orderSearchObj.CustId) &&
+                             (orderSearchObj.ProductId == 0 || oitem2.ProductId == orderSearchObj.ProductId) &&
+                             (orderSearchObj.ShipMethodId == 0 || o.ShippingMethodId == orderSearchObj.ShipMethodId) &&
+                             (orderSearchObj.DepositMethodId == 0 || o.DepositTypeId == orderSearchObj.DepositMethodId) &&
+                                 //(orderSearchObj.OrderStatusId == 0 || oStatusMapping2.OrderStatusId == orderSearchObj.OrderStatusId)&&
+                             (orderSearchObj.BusManId == 0 || o.UserId == orderSearchObj.BusManId) &&
+                             (orderSearchObj.DesignerManId == 0 || oitem2.DesignerId == orderSearchObj.DesignerManId) &&
+                             (o.Deleted == null || o.Deleted == false)
+                             select new OrderBO
+                             {
+                                 OrderId = o.OrderId,
+                                 OrderDate = o.OrderDate,
+                                 Deposit = o.Deposit,
+                                 DepositTypeId = o.DepositTypeId,
+                                 ShippingMethodId = o.ShippingMethodId,
+                                 CustomerId = o.CustomerId,
+                                 UserId = o.UserId,
+                                 CreatedBy = o.CreatedBy,
+                                 CreatedDate = o.CreatedDate,
+                                 LastEditedBy = o.LastEditedBy,
+                                 LastEditedDate = o.LastEditedDate,
+                                 CustomerName = o.Customer.Name,
+                                 BusinessManName = o.User.FullName,
+                                 DepositTypeName = o.LibDepositType.Name,
+                                 ShippingMethodName = o.LibShippingMethod.Name,
+                                 ExpectedCompleteDate = o.ExpectedCompleteDate,
+                                 Note = o.Note,
+                                 DeliveryAddress = o.DeliveryAddress
+                             }).Distinct().ToList();
+                 
                 foreach (OrderBO o in query)
                 {
                     o.OrderStatus = this.GetOrderStatus(o.OrderId);
+                    o.OrderTotal = this.GetOrderTotal(o);
+
+                    var orderItems = (from od in context.OrderItems
+                                     where
+                                     (od.OrderId == o.OrderId) && (od.Deleted == null || od.Deleted == false)
+                                     select new OrderDetailBO()
+                                     {
+                                         OrderItemId = od.OrderItemId,    
+                                         OrderId = od.OrderId
+                                     }).ToList();
+                    if (orderItems.Count>0)
+                    {
+                        foreach (OrderDetailBO od in orderItems)
+                        {
+                            od.OrderDetailStatus = this.GetOrderDetailStatus(od.OrderItemId);
+                        }
+
+                        o.OrderItems = orderItems.Distinct().ToList();
+                    }
+
+                    
                 }
 
-                if (orderSearchObj.OrderStatusId != 0)
+                if (orderSearchObj.OrderDetailStatus != 0)
                 {
-                    query = query.Where(o => o.OrderStatus == (OrderStatusEnum)orderSearchObj.OrderStatusId).ToList();
+                    var orderItems = (from od in context.OrderItems
+                                  where
+                                   (od.Deleted == null || od.Deleted == false)
+                                  select new OrderDetailBO()
+                                  {
+                                      OrderItemId = od.OrderItemId,
+                                      OrderId = od.OrderId
+                                  }).ToList();
+                    if (orderItems.Count > 0)
+                    {
+                        foreach (OrderDetailBO od in orderItems)
+                        {
+                            od.OrderDetailStatus = this.GetOrderDetailStatus(od.OrderItemId);
+                        }                        
+                    }
+
+                    query = (from q in query
+                            join od in orderItems on q.OrderId equals od.OrderId
+                            where od.OrderDetailStatus == orderSearchObj.OrderDetailStatus
+                            select q).Distinct().ToList();
+                }
+
+                if (orderSearchObj.OrderStatus != 0)
+                {
+                    query = (from q in query
+                             where q.OrderStatus == orderSearchObj.OrderStatus
+                             select q).Distinct().ToList();
                 }
 
                 return query;
@@ -435,7 +561,10 @@ namespace DataObjects.EntityFramework
                                 OrderId = dr.OrderItem.OrderId,
                                 DesignerId = dr.OrderItem.DesignerId,
                                 ProductName = dr.OrderItem.Product.Name
-                            }
+                            },
+                            ApprovedByCustomer = dr.ApprovedByCustomer,
+                            Note = dr.Note,
+                            ApprovedDate = dr.ApprovedDate
                         }).FirstOrDefault();
             }
         }
@@ -452,6 +581,9 @@ namespace DataObjects.EntityFramework
                 ds.Cost = designReq.Cost;
                 ds.LastEditedBy = designReq.LastEditedBy;
                 ds.LastEditedOn = designReq.LastEditedOn;
+                ds.ApprovedByCustomer = designReq.ApprovedByCustomer;
+                ds.Note = designReq.Note;
+                ds.ApprovedDate = designReq.ApprovedDate;
 
                 context.SaveChanges();
             }

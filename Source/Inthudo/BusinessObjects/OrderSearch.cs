@@ -18,7 +18,8 @@ namespace BusinessObjects
         public int ProductId { get; set; }
         public int ShipMethodId { get; set; }
         public int DepositMethodId { get; set; }
-        public int OrderStatusId { get; set; }
+        public OrderDetailStatusEnum OrderDetailStatus { get; set; }
+        public OrderStatusEnum OrderStatus { get; set; }
         public int BusManId { get; set; }
         public int DesignerManId { get; set; }
     }

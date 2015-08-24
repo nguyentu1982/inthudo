@@ -30,6 +30,7 @@ namespace DataObjects.EntityFramework
             this.DesignRequests2 = new HashSet<DesignRequest>();
             this.ManufactureRequests = new HashSet<ManufactureRequest>();
             this.ManufactureRequests1 = new HashSet<ManufactureRequest>();
+            this.UserOrganizationMapppings = new HashSet<UserOrganizationMappping>();
         }
     
         public int UserId { get; set; }
@@ -61,5 +62,6 @@ namespace DataObjects.EntityFramework
         public virtual ICollection<ManufactureRequest> ManufactureRequests { get; set; }
         public virtual ICollection<ManufactureRequest> ManufactureRequests1 { get; set; }
         public virtual LibDepartment LibDepartment { get; set; }
+        public virtual ICollection<UserOrganizationMappping> UserOrganizationMapppings { get; set; }
     }
 }

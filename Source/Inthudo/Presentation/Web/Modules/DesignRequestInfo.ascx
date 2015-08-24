@@ -30,9 +30,9 @@
     <asp:RequiredFieldValidator ID="requiredFieldValidatorDesigner" runat="server" ErrorMessage="Bạn hãy chọn NV Thiết kế" ControlToValidate="ddlDesigner" ValidationGroup="val" InitialValue="0" ForeColor="Red"></asp:RequiredFieldValidator>
     <br />
     <span class="lbtitle">Ngày nhận việc: </span>
-    <inthudo:DatePicker runat="server" ID="ctrlDatePickerFrom" Format="dd/MM/yyyy" />
+    <inthudo:DatePicker runat="server" ID="ctrlDatePickerFrom" Format="dd/MM/yyyy" Visible="false" />
     <span class="lbtitle">Ngày hoàn thành: </span>
-    <inthudo:DatePicker runat="server" ID="ctrlDatePickerTo" Format="dd/MM/yyyy" />
+    <inthudo:DatePicker runat="server" ID="ctrlDatePickerTo" Format="dd/MM/yyyy" Visible="false" />
     <h3>Nội dung yêu cầu thiết kế:</h3>
     <asp:TextBox ID="txtDesignRequirement" runat="server" Width="600" Height="300"></asp:TextBox>
     <ajaxToolkit:HtmlEditorExtender ID="txtDesignRequirement_HtmlEditorExtender" runat="server" BehaviorID="txtDesignRequirement_HtmlEditorExtender" TargetControlID="txtDesignRequirement" EnableSanitization="false">

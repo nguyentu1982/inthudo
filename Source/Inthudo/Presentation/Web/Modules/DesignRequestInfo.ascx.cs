@@ -26,15 +26,17 @@ namespace Web.Modules
             DesignRequestBO design = this.OrderService.GetDesignRequestById(this.DesignRequestId);
             if (design != null)
             {
-                lbDesignRequestId.Text = design.DesignRequestId.ToString();
+                lbDesignRequestId.Text = design.DesignRequestId.ToString();                
                 lbDesignRequestDate.Text = design.CreatedOn.ToShortDateString();
                 ddlDesigner.SelectedValue = design.DesignerId.ToString();
+                ctrlDatePickerFrom.Visible = true;
                 ctrlDatePickerFrom.SelectedDate = design.BeginDate;
+                ctrlDatePickerTo.Visible = true;
                 ctrlDatePickerTo.SelectedDate = design.EndDate;
                 txtDesignRequirement.Text = design.Description;
                 decimal cost = 0;
                 decimal.TryParse(design.Cost.ToString(), out cost);
-                ctrlDecimalTextBoxDesignCost.Value = cost;                
+                ctrlDecimalTextBoxDesignCost.Value = cost;                 
             }
             else
             {
@@ -84,11 +86,11 @@ namespace Web.Modules
             {
                 designReq.Description = txtDesignRequirement.Text;
                 designReq.DesignerId = int.Parse(ddlDesigner.SelectedValue);
-                designReq.BeginDate = ctrlDatePickerFrom.SelectedDate;
-                designReq.EndDate = ctrlDatePickerTo.SelectedDate;
+                //designReq.BeginDate = ctrlDatePickerFrom.SelectedDate;
+                //designReq.EndDate = ctrlDatePickerTo.SelectedDate;
                 designReq.Cost = ctrlDecimalTextBoxDesignCost.Value;
                 designReq.LastEditedBy = LoggedInUserId;
-                designReq.LastEditedOn = DateTime.Now;
+                designReq.LastEditedOn = DateTime.Now;                
 
                 this.OrderService.UpdateDesignRequest(designReq);
             }
@@ -98,8 +100,8 @@ namespace Web.Modules
                 {                    
                     Description = txtDesignRequirement.Text,
                     DesignerId = int.Parse(ddlDesigner.SelectedValue),
-                    BeginDate = ctrlDatePickerFrom.SelectedDate,
-                    EndDate = ctrlDatePickerTo.SelectedDate,
+                    //BeginDate = ctrlDatePickerFrom.SelectedDate,
+                    //EndDate = ctrlDatePickerTo.SelectedDate,
                     Cost = ctrlDecimalTextBoxDesignCost.Value,
                     CreatedBy = LoggedInUserId,
                     CreatedOn = DateTime.Now,

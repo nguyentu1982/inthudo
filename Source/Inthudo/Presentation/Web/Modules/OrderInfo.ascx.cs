@@ -32,6 +32,9 @@ namespace Web.Modules
                 ctrlCustomerSelect.CustomerCode = order.CustomerId.ToString();
                 ctrlCustomerSelect.txtCustomerCode_TextChanged(new object(), new EventArgs());
                 lbOrderStatus.Text = order.OrderStatusString;
+                lbOrderTotal.Text = order.OrderTotal.ToString();                
+                ctrlDatePickerEstimatedComplteDate.SelectedDate = order.ExpectedCompleteDate;
+                txtDeliveryAddress.Text = order.DeliveryAddress;
                 //deposit
                 ddlDepositMethod.SelectedValue = order.DepositTypeId.ToString();
                 decimal deposit = 0;               
@@ -40,6 +43,7 @@ namespace Web.Modules
                 //Business man
                 ddlBusinessManId.SelectedValue = order.UserId.ToString();
                 //Order Items
+
                 List<OrderDetailBO> orderItems = this.OrderService.GetOrderItemsByOrderId(this.OrderId);
                 if (orderItems.Count >= 1)
                 {
@@ -56,6 +60,7 @@ namespace Web.Modules
             else
             {
                 btAddNewOrderDetail.Visible = false;
+                panelOrderSumary.Visible = false;
             }
         }
 
@@ -83,7 +88,7 @@ namespace Web.Modules
             List<MemberBO> mems = this.MemberService.GetMembers(orderby);
             foreach (MemberBO m in mems)
             {
-                ddlBusinessManId.Items.Add(new ListItem(m.UserName, m.UserId.ToString()));
+                ddlBusinessManId.Items.Add(new ListItem(m.FullName, m.UserId.ToString()));
             }
             //Shipping Method
             ddlShippingMethod.Items.Clear();
@@ -113,6 +118,8 @@ namespace Web.Modules
                 order.UserId = int.Parse(ddlBusinessManId.SelectedValue);
                 order.LastEditedBy = LoggedInUserId;
                 order.LastEditedDate = DateTime.Now;
+                order.ExpectedCompleteDate = ctrlDatePickerEstimatedComplteDate.SelectedDate;
+                order.DeliveryAddress = txtDeliveryAddress.Text;
                 
                 using(TransactionScope scope = new TransactionScope())
                 {                    
@@ -133,7 +140,9 @@ namespace Web.Modules
                     CustomerId = int.Parse(ctrlCustomerSelect.CustomerCode),
                     UserId = int.Parse(ddlBusinessManId.SelectedValue),
                     CreatedBy = LoggedInUserId,
-                    CreatedDate = DateTime.Now
+                    CreatedDate = DateTime.Now,
+                    ExpectedCompleteDate = ctrlDatePickerEstimatedComplteDate.SelectedDate,
+                    DeliveryAddress = txtDeliveryAddress.Text,
                 };
 
                 using (TransactionScope scope = new TransactionScope())

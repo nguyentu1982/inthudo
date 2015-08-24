@@ -32,6 +32,11 @@ namespace DataObjects.EntityFramework
         public Nullable<int> LastEditedBy { get; set; }
         public Nullable<System.DateTime> LastEditedDate { get; set; }
         public Nullable<bool> Deleted { get; set; }
+        public Nullable<System.DateTime> ExpectedCompleteDate { get; set; }
+        public string Note { get; set; }
+        public string DeliveryAddress { get; set; }
+        public Nullable<bool> ApprovedByCustomer { get; set; }
+        public Nullable<System.DateTime> ApprovedDate { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual LibDepositType LibDepositType { get; set; }

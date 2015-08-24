@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace BusinessObjects
 {
-    
-    // Order business object
-    // ** Enterprise Design Pattern: Domain Model, Identity Field, Foreign Key Mapping.
+
+    public enum OrderStatusEnum
+    {
+        NotCompleted=1,
+        Completed=2
+
+    }
     
     public class OrderBO : BusinessObject
     {
@@ -26,6 +30,11 @@ namespace BusinessObjects
         public Nullable<int> LastEditedBy { get; set; }
         public Nullable<System.DateTime> LastEditedDate { get; set; }
         public Nullable<bool> Deleted { get; set; }
+        public Nullable<System.DateTime> ExpectedCompleteDate { get; set; }
+        public string Note { get; set; }
+        public string DeliveryAddress { get; set; }
+        public Nullable<bool> ApprovedByCustomer { get; set; }
+        public Nullable<System.DateTime> ApprovedDate { get; set; }
 
         public virtual CustomerBO Customer { get; set; }
         public virtual ICollection<DesignRequestBO> DesignRequests { get; set; }
@@ -35,6 +44,15 @@ namespace BusinessObjects
         public virtual DepositMethodBO DepositType { get; set; }
         public virtual ShippingMethodBO ShippingMethod { get; set; }
         public virtual IList<OrderDetailBO> OrderItems { get; set; }
+
+
+        
+
+        public decimal OrderTotal
+        {
+            get;
+            set;
+        }
 
         public string CustomerName
         {
@@ -60,12 +78,6 @@ namespace BusinessObjects
             set;
         }
 
-        public decimal Total
-        {
-            get;
-            set;
-        }
-
         public OrderStatusEnum OrderStatus
         {
             get;
@@ -74,41 +86,18 @@ namespace BusinessObjects
 
         public string OrderStatusString
         {
-            get
-            {
+            get {
                 switch (OrderStatus)
-                { 
-                    case OrderStatusEnum.OrderNotExist:
-                        return "Đơn hàng không tồn tại / Chưa hoàn thành";                        
-                    case OrderStatusEnum.OrderCreated:
-                        return "Đơn hàng đã tạo";
-                    case OrderStatusEnum.DesignRequestCreated :
-                        return "Yêu cầu thiết kế đã tạo";
-                    case OrderStatusEnum.Designing:
-                        return "Đang thiết kế";
-                    case OrderStatusEnum.DesignCopmleted:
-                        return "Đã thiết kế xong";
-                    case OrderStatusEnum.ManufactureRequestCreated:
-                        return "Yêu cầu sản xuất đã tạo";
-                    case OrderStatusEnum.Manufacturing:
-                        return "Đang sản xuất";
-                    case OrderStatusEnum.ManufactureCompleted:
-                        return "Đã sản xuất xong";
-                    default: return "Đơn hàng không tồn tại / Chưa hoàn thành";
+                {
+                    case OrderStatusEnum.Completed:
+                        return "Hoàn thành";
+                    case OrderStatusEnum.NotCompleted:
+                        return "Chưa hoàn thành";
+                    default : return "Chưa hoàn thành";
                 }
             }
         }
     }
 
-    public enum OrderStatusEnum
-    {
-        OrderNotExist=0,
-        OrderCreated = 1,
-        DesignRequestCreated = 2,
-        Designing = 3,
-        DesignCopmleted = 4,
-        ManufactureRequestCreated =5,
-        Manufacturing = 6,
-        ManufactureCompleted = 7,
-    }
+        
 }

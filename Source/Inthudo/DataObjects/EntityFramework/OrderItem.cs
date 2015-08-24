@@ -32,6 +32,7 @@ namespace DataObjects.EntityFramework
         public Nullable<bool> Deleted { get; set; }
         public int OrderId { get; set; }
         public Nullable<int> DesignerId { get; set; }
+        public Nullable<decimal> VAT { get; set; }
     
         public virtual Order Order { get; set; }
         public virtual User User { get; set; }

@@ -9,7 +9,18 @@ namespace BusinessObjects
     
     // Order Detail business object
     // ** Enterprise Design Pattern: Domain Model, Identity Field, Foreign key mapping
-
+    public enum OrderDetailStatusEnum
+    {
+        OrderNotExist = 0,
+        DesignRequestNotCreated = 1,
+        DesignRequestCreated = 2,
+        Designing = 3,
+        DesignCopmleted = 4,
+        DesignApprovedByCustomer = 5,
+        ManufactureRequestCreated = 6,
+        Manufacturing = 7,
+        ManufactureCompleted = 8,
+    }
 
     public class OrderDetailBO : BusinessObject
     {
@@ -35,6 +46,41 @@ namespace BusinessObjects
         {
             get;
             set;
+        }
+
+        public OrderDetailStatusEnum OrderDetailStatus
+        {
+            get;
+            set;
+        }
+
+        public string OrderDetailStatusString
+        {
+            get
+            {
+                switch (OrderDetailStatus)
+                {
+                    case OrderDetailStatusEnum.OrderNotExist:
+                        return "Đơn hàng không tồn tại / Chưa hoàn thành";
+                    case OrderDetailStatusEnum.DesignRequestNotCreated:
+                        return "Chưa tạo yêu cầu thiết kế";
+                    case OrderDetailStatusEnum.DesignRequestCreated:
+                        return "Đã tạo yêu cầu thiết kế";
+                    case OrderDetailStatusEnum.Designing:
+                        return "Đang thiết kế";
+                    case OrderDetailStatusEnum.DesignCopmleted:
+                        return "Đã thiết kế xong";
+                    case OrderDetailStatusEnum.DesignApprovedByCustomer:
+                        return "Khách hàng đã duyệt mẫu thiết kế";
+                    case OrderDetailStatusEnum.ManufactureRequestCreated:
+                        return "Yêu cầu sản xuất đã tạo";
+                    case OrderDetailStatusEnum.Manufacturing:
+                        return "Đang sản xuất";
+                    case OrderDetailStatusEnum.ManufactureCompleted:
+                        return "Đã sản xuất xong";
+                    default: return "Đơn hàng không tồn tại / Chưa hoàn thành";
+                }
+            }
         }
     }
 }

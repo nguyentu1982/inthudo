@@ -19,9 +19,11 @@
           <EntitySet Name="Order" EntityType="InThuDoMNGModel.Store.Order" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OrderItem" EntityType="InThuDoMNGModel.Store.OrderItem" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OrderStatusMapping" EntityType="InThuDoMNGModel.Store.OrderStatusMapping" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Organization" EntityType="InThuDoMNGModel.Store.Organization" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Product" EntityType="InThuDoMNGModel.Store.Product" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Setting" EntityType="InThuDoMNGModel.Store.Setting" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="InThuDoMNGModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserOrganizationMappping" EntityType="InThuDoMNGModel.Store.UserOrganizationMappping" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_Customer_User" Association="InThuDoMNGModel.Store.FK_Customer_User">
             <End Role="User" EntitySet="User" />
             <End Role="Customer" EntitySet="Customer" />
@@ -134,6 +136,14 @@
             <End Role="LibRoleType" EntitySet="LibRoleType" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserOrganizationMappping_Organization" Association="InThuDoMNGModel.Store.FK_UserOrganizationMappping_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="UserOrganizationMappping" EntitySet="UserOrganizationMappping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserOrganizationMappping_User" Association="InThuDoMNGModel.Store.FK_UserOrganizationMappping_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserOrganizationMappping" EntitySet="UserOrganizationMappping" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer">
           <Key>
@@ -153,6 +163,7 @@
           <Property Name="FaxNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="Deleted" Type="bit" />
           <Property Name="TaxCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Note" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="DesignRequest">
           <Key>
@@ -170,6 +181,9 @@
           <Property Name="LastEditedOn" Type="datetime" />
           <Property Name="OrderItemId" Type="int" Nullable="false" />
           <Property Name="Deleted" Type="bit" />
+          <Property Name="ApprovedByCustomer" Type="bit" />
+          <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="ApprovedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="EmployeeDepartmentMapping">
           <Key>
@@ -262,6 +276,11 @@
           <Property Name="LastEditedBy" Type="int" />
           <Property Name="LastEditedDate" Type="datetime" />
           <Property Name="Deleted" Type="bit" />
+          <Property Name="ExpectedCompleteDate" Type="datetime" />
+          <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="DeliveryAddress" Type="nvarchar(max)" />
+          <Property Name="ApprovedByCustomer" Type="bit" />
+          <Property Name="ApprovedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="OrderItem">
           <Key>
@@ -279,6 +298,7 @@
           <Property Name="Deleted" Type="bit" />
           <Property Name="OrderId" Type="int" Nullable="false" />
           <Property Name="DesignerId" Type="int" />
+          <Property Name="VAT" Type="money" />
         </EntityType>
         <EntityType Name="OrderStatusMapping">
           <Key>
@@ -290,6 +310,18 @@
           <Property Name="StatusDate" Type="datetime" Nullable="false" />
           <Property Name="IsFailed" Type="bit" />
           <Property Name="OrderItemId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="OrganizationId" />
+          </Key>
+          <Property Name="OrganizationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="FaxNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="TaxCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -324,6 +356,14 @@
           <Property Name="Telephone" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="255" />
           <Property Name="DepartmentId" Type="int" />
+        </EntityType>
+        <EntityType Name="UserOrganizationMappping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="OrganizationId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Customer_User">
           <End Role="User" Type="InThuDoMNGModel.Store.User" Multiplicity="1" />
@@ -661,6 +701,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserOrganizationMappping_Organization">
+          <End Role="Organization" Type="InThuDoMNGModel.Store.Organization" Multiplicity="1" />
+          <End Role="UserOrganizationMappping" Type="InThuDoMNGModel.Store.UserOrganizationMappping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="UserOrganizationMappping">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserOrganizationMappping_User">
+          <End Role="User" Type="InThuDoMNGModel.Store.User" Multiplicity="1" />
+          <End Role="UserOrganizationMappping" Type="InThuDoMNGModel.Store.UserOrganizationMappping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserOrganizationMappping">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -794,6 +858,16 @@
             <End Role="LibDepartment" EntitySet="LibDepartments" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="Organizations" EntityType="InThuDoMNGModel.Organization" />
+          <EntitySet Name="UserOrganizationMapppings" EntityType="InThuDoMNGModel.UserOrganizationMappping" />
+          <AssociationSet Name="FK_UserOrganizationMappping_Organization" Association="InThuDoMNGModel.FK_UserOrganizationMappping_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="UserOrganizationMappping" EntitySet="UserOrganizationMapppings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserOrganizationMappping_User" Association="InThuDoMNGModel.FK_UserOrganizationMappping_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserOrganizationMappping" EntitySet="UserOrganizationMapppings" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer">
           <Key>
@@ -816,6 +890,7 @@
           <NavigationProperty Name="User" Relationship="InThuDoMNGModel.FK_Customer_User" FromRole="Customer" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="InThuDoMNGModel.FK_Customer_User1" FromRole="Customer" ToRole="User" />
           <NavigationProperty Name="Orders" Relationship="InThuDoMNGModel.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
+          <Property Type="String" Name="Note" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="EmployeeDepartmentMapping">
           <Key>
@@ -907,6 +982,11 @@
           <NavigationProperty Name="User2" Relationship="InThuDoMNGModel.FK_Order_User4" FromRole="Order" ToRole="User" />
           <NavigationProperty Name="OrderItems" Relationship="InThuDoMNGModel.FK_OrderItem_Order" FromRole="Order" ToRole="OrderItem" />
           <NavigationProperty Name="OrderStatusMappings" Relationship="InThuDoMNGModel.FK_OrderStatusMapping_Order" FromRole="Order" ToRole="OrderStatusMapping" />
+          <Property Type="DateTime" Name="ExpectedCompleteDate" Precision="3" />
+          <Property Type="String" Name="Note" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DeliveryAddress" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="ApprovedByCustomer" />
+          <Property Type="DateTime" Name="ApprovedDate" Precision="3" />
         </EntityType>
         <EntityType Name="OrderItem">
           <Key>
@@ -933,6 +1013,7 @@
           <NavigationProperty Name="User2" Relationship="InThuDoMNGModel.FK_OrderItem_User" FromRole="OrderItem" ToRole="User" />
           <NavigationProperty Name="OrderStatusMappings" Relationship="InThuDoMNGModel.FK_OrderStatusMapping_OrderItem" FromRole="OrderItem" ToRole="OrderStatusMapping" />
           <NavigationProperty Name="DesignRequests" Relationship="InThuDoMNGModel.FK_Design_OrderItem1" FromRole="OrderItem" ToRole="DesignRequest" />
+          <Property Type="Decimal" Name="VAT" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="OrderStatusMapping">
           <Key>
@@ -998,6 +1079,7 @@
           <NavigationProperty Name="ManufactureRequests1" Relationship="InThuDoMNGModel.FK_ManufactureRequest_User1" FromRole="User" ToRole="ManufactureRequest" />
           <Property Type="Int32" Name="DepartmentId" />
           <NavigationProperty Name="LibDepartment" Relationship="InThuDoMNGModel.FK_User_LibDepartment" FromRole="User" ToRole="LibDepartment" />
+          <NavigationProperty Name="UserOrganizationMapppings" Relationship="InThuDoMNGModel.FK_UserOrganizationMappping_User" FromRole="User" ToRole="UserOrganizationMappping" />
         </EntityType>
         <Association Name="FK_Customer_User">
           <End Role="User" Type="InThuDoMNGModel.User" Multiplicity="1" />
@@ -1260,6 +1342,9 @@
           <NavigationProperty Name="User1" Relationship="InThuDoMNGModel.FK_Design_UserCreatedBy1" FromRole="DesignRequest" ToRole="User" />
           <NavigationProperty Name="User2" Relationship="InThuDoMNGModel.FK_Design_UserLastEditedBy1" FromRole="DesignRequest" ToRole="User" />
           <NavigationProperty Name="ManufactureRequests" Relationship="InThuDoMNGModel.FK_ManufactureRequest_Design" FromRole="DesignRequest" ToRole="ManufactureRequest" />
+          <Property Type="Boolean" Name="ApprovedByCustomer" />
+          <Property Type="String" Name="Note" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="ApprovedDate" Precision="3" />
         </EntityType>
         <EntityType Name="ManufactureRequest">
           <Key>
@@ -1377,6 +1462,53 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="OrganizationId" />
+          </Key>
+          <Property Type="Int32" Name="OrganizationId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Address" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PhoneNumber" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FaxNumber" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TaxCode" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserOrganizationMapppings" Relationship="InThuDoMNGModel.FK_UserOrganizationMappping_Organization" FromRole="Organization" ToRole="UserOrganizationMappping" />
+        </EntityType>
+        <EntityType Name="UserOrganizationMappping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="OrganizationId" Nullable="false" />
+          <NavigationProperty Name="Organization" Relationship="InThuDoMNGModel.FK_UserOrganizationMappping_Organization" FromRole="UserOrganizationMappping" ToRole="Organization" />
+          <NavigationProperty Name="User" Relationship="InThuDoMNGModel.FK_UserOrganizationMappping_User" FromRole="UserOrganizationMappping" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_UserOrganizationMappping_Organization">
+          <End Type="InThuDoMNGModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="InThuDoMNGModel.UserOrganizationMappping" Role="UserOrganizationMappping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="UserOrganizationMappping">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserOrganizationMappping_User">
+          <End Type="InThuDoMNGModel.User" Role="User" Multiplicity="1" />
+          <End Type="InThuDoMNGModel.UserOrganizationMappping" Role="UserOrganizationMappping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserOrganizationMappping">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1386,6 +1518,7 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="InThuDoMNGModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Telephone" ColumnName="Telephone" />
@@ -1471,6 +1604,11 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="InThuDoMNGModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+                <ScalarProperty Name="ApprovedByCustomer" ColumnName="ApprovedByCustomer" />
+                <ScalarProperty Name="DeliveryAddress" ColumnName="DeliveryAddress" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ExpectedCompleteDate" ColumnName="ExpectedCompleteDate" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="Deposit" ColumnName="Deposit" />
                 <ScalarProperty Name="DepositTypeId" ColumnName="DepositTypeId" />
@@ -1489,6 +1627,7 @@
           <EntitySetMapping Name="OrderItems">
             <EntityTypeMapping TypeName="InThuDoMNGModel.OrderItem">
               <MappingFragment StoreEntitySet="OrderItem">
+                <ScalarProperty Name="VAT" ColumnName="VAT" />
                 <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="Specification" ColumnName="Specification" />
@@ -1556,6 +1695,9 @@
           <EntitySetMapping Name="DesignRequests">
             <EntityTypeMapping TypeName="InThuDoMNGModel.DesignRequest">
               <MappingFragment StoreEntitySet="DesignRequest">
+                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ApprovedByCustomer" ColumnName="ApprovedByCustomer" />
                 <ScalarProperty Name="Deleted" ColumnName="Deleted" />
                 <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
                 <ScalarProperty Name="LastEditedOn" ColumnName="LastEditedOn" />
@@ -1586,6 +1728,28 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="DesignRequestId" ColumnName="DesignRequestId" />
                 <ScalarProperty Name="ManufactureRequestId" ColumnName="ManufactureRequestId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Organizations">
+            <EntityTypeMapping TypeName="InThuDoMNGModel.Organization">
+              <MappingFragment StoreEntitySet="Organization">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TaxCode" ColumnName="TaxCode" />
+                <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserOrganizationMapppings">
+            <EntityTypeMapping TypeName="InThuDoMNGModel.UserOrganizationMappping">
+              <MappingFragment StoreEntitySet="UserOrganizationMappping">
+                <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

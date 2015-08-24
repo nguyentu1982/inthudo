@@ -123,6 +123,9 @@
     <Compile Include="EntityFramework\OrderStatusMapping.cs">
       <DependentUpon>Inthudo.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\Organization.cs">
+      <DependentUpon>Inthudo.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\Product.cs">
       <DependentUpon>Inthudo.tt</DependentUpon>
     </Compile>
@@ -132,6 +135,9 @@
       <DependentUpon>Inthudo.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\User.cs">
+      <DependentUpon>Inthudo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\UserOrganizationMappping.cs">
       <DependentUpon>Inthudo.tt</DependentUpon>
     </Compile>
     <Compile Include="ICustomerDao.cs" />

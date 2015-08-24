@@ -10,52 +10,34 @@
 namespace Web.Modules {
     
     
-    public partial class DesignRequestEdit {
+    public partial class DesignRequestCustomerApprove {
         
         /// <summary>
-        /// DesignRequestTab control.
+        /// UpdatePanel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.TabContainer DesignRequestTab;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
-        /// pnlDesignRequestInfo control.
+        /// cbApprovedByCustomer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.TabPanel pnlDesignRequestInfo;
+        protected global::System.Web.UI.WebControls.CheckBox cbApprovedByCustomer;
         
         /// <summary>
-        /// ctrlDesignRequestInfo control.
+        /// txtApprovedByCustomerNote control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Web.Modules.DesignRequestInfo ctrlDesignRequestInfo;
-        
-        /// <summary>
-        /// pnlDesignRequestCustomerApprove control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TabPanel pnlDesignRequestCustomerApprove;
-        
-        /// <summary>
-        /// ctrlDesignRequestCustomerApprove control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Web.Modules.DesignRequestCustomerApprove ctrlDesignRequestCustomerApprove;
+        protected global::System.Web.UI.WebControls.TextBox txtApprovedByCustomerNote;
         
         /// <summary>
         /// btSave control.
@@ -67,12 +49,12 @@ namespace Web.Modules {
         protected global::System.Web.UI.WebControls.Button btSave;
         
         /// <summary>
-        /// btDelete control.
+        /// UpdateProgress1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btDelete;
+        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
     }
 }

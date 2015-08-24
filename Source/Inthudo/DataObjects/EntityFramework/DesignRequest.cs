@@ -31,6 +31,9 @@ namespace DataObjects.EntityFramework
         public Nullable<System.DateTime> LastEditedOn { get; set; }
         public int OrderItemId { get; set; }
         public Nullable<bool> Deleted { get; set; }
+        public Nullable<bool> ApprovedByCustomer { get; set; }
+        public string Note { get; set; }
+        public Nullable<System.DateTime> ApprovedDate { get; set; }
     
         public virtual OrderItem OrderItem { get; set; }
         public virtual User User { get; set; }

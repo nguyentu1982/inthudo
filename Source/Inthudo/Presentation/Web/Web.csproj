@@ -221,6 +221,7 @@
     <Content Include="Modules\DatePicker.ascx" />
     <Content Include="Modules\DecimalTextBox.ascx" />
     <Content Include="Modules\DesignRequestAdd.ascx" />
+    <Content Include="Modules\DesignRequestCustomerApprove.ascx" />
     <Content Include="Modules\DesignRequestEdit.ascx" />
     <Content Include="Modules\DesignRequestInfo.ascx" />
     <Content Include="Modules\DesignRequests.ascx" />
@@ -235,12 +236,14 @@
     <Content Include="Modules\Members.ascx" />
     <Content Include="Modules\NumericTextBox.ascx" />
     <Content Include="Modules\OrderAdd.ascx" />
+    <Content Include="Modules\OrderCustomerApprove.ascx" />
     <Content Include="Modules\OrderDetailAdd.ascx" />
     <Content Include="Modules\OrderDetailEdit.ascx" />
     <Content Include="Modules\OrderDetailInfo.ascx" />
     <Content Include="Modules\OrderEdit.ascx" />
     <Content Include="Modules\OrderInfo.ascx" />
     <Content Include="Modules\Orders.ascx" />
+    <Content Include="Modules\OrganizationSelect.ascx" />
     <Content Include="Modules\SimpleTextBox.ascx" />
     <Content Include="OrderAdd.aspx" />
     <Content Include="OrderDetailAdd.aspx" />
@@ -416,6 +419,13 @@
     <Compile Include="Modules\DesignRequestAdd.ascx.designer.cs">
       <DependentUpon>DesignRequestAdd.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Modules\DesignRequestCustomerApprove.ascx.cs">
+      <DependentUpon>DesignRequestCustomerApprove.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\DesignRequestCustomerApprove.ascx.designer.cs">
+      <DependentUpon>DesignRequestCustomerApprove.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Modules\DesignRequestEdit.ascx.cs">
       <DependentUpon>DesignRequestEdit.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -472,6 +482,13 @@
     <Compile Include="Modules\OrderAdd.ascx.designer.cs">
       <DependentUpon>OrderAdd.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Modules\OrderCustomerApprove.ascx.cs">
+      <DependentUpon>OrderCustomerApprove.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\OrderCustomerApprove.ascx.designer.cs">
+      <DependentUpon>OrderCustomerApprove.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Modules\OrderDetailAdd.ascx.cs">
       <DependentUpon>OrderDetailAdd.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -513,6 +530,13 @@
     </Compile>
     <Compile Include="Modules\Orders.ascx.designer.cs">
       <DependentUpon>Orders.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\OrganizationSelect.ascx.cs">
+      <DependentUpon>OrganizationSelect.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\OrganizationSelect.ascx.designer.cs">
+      <DependentUpon>OrganizationSelect.ascx</DependentUpon>
     </Compile>
     <Compile Include="OrderAdd.aspx.cs">
       <DependentUpon>OrderAdd.aspx</DependentUpon>

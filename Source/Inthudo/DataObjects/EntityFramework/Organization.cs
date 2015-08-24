@@ -12,31 +12,21 @@ namespace DataObjects.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer
+    public partial class Organization
     {
-        public Customer()
+        public Organization()
         {
-            this.Orders = new HashSet<Order>();
+            this.UserOrganizationMapppings = new HashSet<UserOrganizationMappping>();
         }
     
-        public int CustomerId { get; set; }
+        public int OrganizationId { get; set; }
         public string Name { get; set; }
-        public string Telephone { get; set; }
         public string Address { get; set; }
-        public string Email { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public int CreatedBy { get; set; }
-        public Nullable<System.DateTime> LastEditedOn { get; set; }
-        public Nullable<int> LastEditedBy { get; set; }
-        public string Company { get; set; }
         public string PhoneNumber { get; set; }
         public string FaxNumber { get; set; }
-        public Nullable<bool> Deleted { get; set; }
         public string TaxCode { get; set; }
-        public string Note { get; set; }
+        public string Description { get; set; }
     
-        public virtual User User { get; set; }
-        public virtual User User1 { get; set; }
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<UserOrganizationMappping> UserOrganizationMapppings { get; set; }
     }
 }

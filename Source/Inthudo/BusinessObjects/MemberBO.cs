@@ -41,7 +41,7 @@ namespace BusinessObjects
         public Nullable<int> DepartmentId { get; set; }
 
         public virtual DepartmentBO Department { get; set; }
-
+        
         public RoleTypeBO RoleType { get; set; }
         public string RoleName
         {
