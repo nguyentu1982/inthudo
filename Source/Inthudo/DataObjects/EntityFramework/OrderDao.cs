@@ -409,6 +409,8 @@ namespace DataObjects.EntityFramework
                                  //(orderSearchObj.OrderStatusId == 0 || oStatusMapping2.OrderStatusId == orderSearchObj.OrderStatusId)&&
                              (orderSearchObj.BusManId == 0 || o.UserId == orderSearchObj.BusManId) &&
                              (orderSearchObj.DesignerManId == 0 || oitem2.DesignerId == orderSearchObj.DesignerManId) &&
+                             (orderSearchObj.OrderFrom == null || o.OrderDate >= orderSearchObj.OrderFrom)&&
+                             (orderSearchObj.OrderTo == null || o.OrderDate <= orderSearchObj.OrderTo)&&
                              (o.Deleted == null || o.Deleted == false)
                              select new OrderBO
                              {
@@ -460,9 +462,10 @@ namespace DataObjects.EntityFramework
 
                 if (orderSearchObj.OrderDetailStatus != 0)
                 {
-                    var orderItems = (from od in context.OrderItems
+                    var orderItems = (from od in context.OrderItems                                      
                                   where
                                    (od.Deleted == null || od.Deleted == false)
+                                 
                                   select new OrderDetailBO()
                                   {
                                       OrderItemId = od.OrderItemId,
@@ -773,6 +776,82 @@ namespace DataObjects.EntityFramework
                             select m).FirstOrDefault();
                 manu.Deleted = true;
                 context.SaveChanges();
+            }
+        }
+
+
+        public List<DesignRequestBO> GetDesignRequests(DesignRequestSearch searchObj)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                var query = (from dr in context.DesignRequests
+                             join od in context.OrderItems on dr.OrderItemId equals od.OrderItemId
+                             join o in context.Orders on od.OrderId equals o.OrderId
+                             where
+                             (dr.Deleted == null || dr.Deleted == false) &&
+                             (searchObj.CustomerId == 0 || o.CustomerId == searchObj.CustomerId) &&
+                             (searchObj.ProductId == 0 || od.ProductId == searchObj.ProductId) &&
+                             (searchObj.DesignerId == 0 || dr.DesignerId == searchObj.DesignerId) &&
+                             (searchObj.RequestFrom == null || dr.OrderItem.Order.OrderDate >= searchObj.RequestFrom) &&
+                             (searchObj.RequestTo == null || dr.OrderItem.Order.OrderDate <= searchObj.RequestTo)
+                             select new DesignRequestBO()
+                             {
+                                 DesignRequestId = dr.DesignRequestId,
+                                 Description = dr.Description,
+                                 DesignerId = dr.DesignerId,
+                                 BeginDate = dr.BeginDate,
+                                 EndDate = dr.EndDate,
+                                 Cost = dr.Cost,
+                                 CreatedBy = dr.CreatedBy,
+                                 CreatedOn = dr.CreatedOn,
+                                 LastEditedBy = dr.LastEditedBy,
+                                 LastEditedOn = dr.LastEditedOn,
+                                 OrderItemId = dr.OrderItemId,
+                                 ApprovedByCustomer = dr.ApprovedByCustomer,
+                                 Note = dr.Note,
+                                 ApprovedDate = dr.ApprovedDate,
+                                 OrderId = o.OrderId,
+                                 OrderDate = o.OrderDate,
+                                 ProductName = od.Product.Name,
+                                 OrderItem = new OrderDetailBO() { 
+                                    OrderItemId = od.OrderItemId
+                                 }
+                             }).Distinct().ToList();
+
+                var orders = from o in context.Orders
+                             join od in context.OrderItems on o.OrderId equals od.OrderId
+                             join dr in context.DesignRequests on od.OrderItemId equals dr.OrderItemId
+                             select o;
+
+                var orderDetails = (from od in context.OrderItems
+                                   join o in orders on od.OrderId equals o.OrderId
+                                 where
+                                 (od.Deleted == false || od.Deleted == null)
+                                 select new OrderDetailBO() { 
+                                    OrderItemId = od.OrderItemId,
+                                 }).Distinct().ToList();
+                foreach (OrderDetailBO od in orderDetails)
+                {
+                    od.OrderDetailStatus = this.GetOrderDetailStatus(od.OrderItemId);
+                }
+
+                if (searchObj.OrderDetailStatus != 0)
+                {
+                    query = (from q in query
+                            join od in orderDetails on q.OrderItemId equals od.OrderItemId
+                            where
+                            od.OrderDetailStatus == searchObj.OrderDetailStatus
+                            select q).ToList();
+                    
+                }
+
+                foreach (DesignRequestBO dr in query)
+                {
+                    dr.OrderItem.OrderDetailStatus = this.GetOrderDetailStatus(dr.OrderItem.OrderItemId);
+                }
+
+                return query;
+
             }
         }
     }

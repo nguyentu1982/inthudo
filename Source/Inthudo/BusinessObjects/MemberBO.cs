@@ -51,8 +51,14 @@ namespace BusinessObjects
 
         public string DepartmentName
         {
-            get;
-            set;
+            get
+            {
+                return Department.Name;
+            }
+            set 
+            {
+                DepartmentName = value;
+            }
         }
     
     }

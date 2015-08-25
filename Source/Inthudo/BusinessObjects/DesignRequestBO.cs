@@ -27,5 +27,13 @@ namespace BusinessObjects
         public virtual MemberBO User { get; set; }
         public virtual MemberBO User1 { get; set; }
         public virtual MemberBO User2 { get; set; }
+
+        public DateTime? OrderDate { get; set; }
+        public string ProductName { get; set; }
+        public string OrderDetailStatusString {
+            get {
+                return OrderItem.OrderDetailStatusString;
+            }
+        }
     }
 }

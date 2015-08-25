@@ -5,11 +5,15 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessObjects;
+using Common;
 
 namespace Web.Modules
 {
     public partial class Orders : BaseUserControl
     {
+        const string Not_Allow_Business_Man_View_Others_Order = "NotAllowBusinessManViewOthersOrder";
+        const string Not_Allow_User_Of_Other_Department_View_Order = "NotAllowUserOfOtherDepartmentViewOrder";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -58,7 +62,7 @@ namespace Web.Modules
             //Business man
             ddlBusinessManId.Items.Clear();
             ddlBusinessManId.Items.Add(new ListItem(string.Empty, "0"));
-            List<MemberBO> businessMans = this.MemberService.GetMembers(orderby);
+            List<MemberBO> businessMans = this.MemberService.GetBusinessMen();
             foreach (MemberBO m in businessMans)
             {
                 ddlBusinessManId.Items.Add(new ListItem(m.FullName, m.UserId.ToString()));
@@ -66,15 +70,37 @@ namespace Web.Modules
             //Designner man
             ddlDesingerId.Items.Clear();
             ddlDesingerId.Items.Add(new ListItem(string.Empty, "0"));
-            List<MemberBO> designers = this.MemberService.GetMembers(orderby);
+            List<MemberBO> designers = this.MemberService.GetDesigners();
             foreach (MemberBO m in designers)
             {
                 ddlDesingerId.Items.Add(new ListItem(m.FullName, m.UserId.ToString()));
+            }
+
+            //Check Roles and Department to bindata
+            MemberBO mem = this.MemberService.GetMember(this.LoggedInUserId);
+            if (this.SettingService.GetBoolSetting(Not_Allow_User_Of_Other_Department_View_Order))
+            {
+                if (mem.RoleName == "User")
+                {
+                    if (mem.Department.Code != Constant.PKD) Response.Redirect("Login.aspx");
+                }
+            }
+
+            if (this.SettingService.GetBoolSetting(Not_Allow_Business_Man_View_Others_Order))
+            {
+                if (mem.RoleName == "User")
+                {
+                    ddlBusinessManId.SelectedValue = mem.UserId.ToString();
+                    ddlBusinessManId.Enabled = false;
+                }
             }
         }
 
         protected void btFind_Click(object sender, EventArgs e)
         {
+            DateTime? orderFrom = ctrlDatePickerFrom.SelectedDate;
+            DateTime? orderTo = ctrlDatePickerTo.SelectedDate;
+
             int orderId = 0;
             int.TryParse(txtOrderCode.Text, out orderId);
             
@@ -104,6 +130,8 @@ namespace Web.Modules
 
             OrderSearch orderSearchObj = new OrderSearch()
             {
+                OrderFrom = orderFrom,
+                OrderTo = orderTo,
                 OrderId= orderId,
                 CustId = custId,
                 ProductId = productId,

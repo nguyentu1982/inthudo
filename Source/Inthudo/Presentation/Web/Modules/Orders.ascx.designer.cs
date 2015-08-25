@@ -13,6 +13,24 @@ namespace Web.Modules {
     public partial class Orders {
         
         /// <summary>
+        /// ctrlDatePickerFrom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Web.Modules.DatePicker ctrlDatePickerFrom;
+        
+        /// <summary>
+        /// ctrlDatePickerTo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Web.Modules.DatePicker ctrlDatePickerTo;
+        
+        /// <summary>
         /// txtOrderCode control.
         /// </summary>
         /// <remarks>
@@ -92,6 +110,24 @@ namespace Web.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlDesingerId;
+        
+        /// <summary>
+        /// lbNumberOfOrders control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbNumberOfOrders;
+        
+        /// <summary>
+        /// lbOrderTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbOrderTotal;
         
         /// <summary>
         /// btFind control.

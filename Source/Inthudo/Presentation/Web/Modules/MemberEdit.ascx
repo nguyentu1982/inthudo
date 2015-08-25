@@ -10,6 +10,7 @@
     <asp:Button ID="btSave" runat="server" Text="Lưu" OnClick="btSave_Click" />
     <asp:Button ID="btSaveAndContinueEdit" runat="server" Text="Lưu và tiếp tục sửa" OnClick="btSaveAndContinueEdit_Click" />
     <asp:Button ID="btDelete" runat="server" Text="Xóa" OnClick="btDelete_Click" />
+    <a href="/Members.aspx" >Trở lại danh sách user</a>
     
     <ajaxToolkit:ConfirmButtonExtender ID="btDelete_ConfirmButtonExtender" runat="server" BehaviorID="btDelete_ConfirmButtonExtender" ConfirmText="Bạn có chắc chắn xóa không?" TargetControlID="btDelete" />
     

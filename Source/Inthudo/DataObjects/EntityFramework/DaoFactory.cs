@@ -16,5 +16,11 @@ namespace DataObjects.EntityFramework
         public IProductDao ProductDao { get { return new ProductDao(); } }
         public IOrderDao OrderDao { get { return new OrderDao(); } }
         public ICustomerDao CustomerDao { get { return new CustomerDao(); } }
+
+
+        public ISettingDao SettingDao
+        {
+            get { return new SettingDao(); }
+        }
     }
 }

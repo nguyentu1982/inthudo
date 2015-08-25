@@ -86,5 +86,13 @@ namespace Web
                 return new CustomerService();
             }
         }
+
+        public ISettingService SettingService
+        {
+            get
+            {
+                return new SettingService();
+            }
+        }
     }
 }

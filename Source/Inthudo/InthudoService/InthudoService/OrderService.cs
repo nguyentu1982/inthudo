@@ -174,5 +174,11 @@ namespace InthudoService
         {
             orderDao.MarkManufactureRequestAsDeleted(manuRequestId);
         }
+
+
+        public List<DesignRequestBO> GetDesignRequests(DesignRequestSearch searchObj)
+        {
+            return orderDao.GetDesignRequests(searchObj);
+        }
     }
 }

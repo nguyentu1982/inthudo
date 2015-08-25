@@ -6,7 +6,7 @@
 <p>
     <asp:Button ID="btSave" runat="server" Text="Lưu" OnClick="btSave_Click" />
     <asp:Button ID="btSaveAndContinueEdit" runat="server" Text="Lưu và tiếp tục sửa" OnClick="btSaveAndContinueEdit_Click" />
-    
+    <a href="/Members.aspx" >Trở lại danh sách user</a>
 </p>
 
 <div>

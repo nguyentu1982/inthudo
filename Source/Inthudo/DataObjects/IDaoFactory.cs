@@ -17,5 +17,6 @@ namespace DataObjects
         IProductDao ProductDao { get; }
         IOrderDao OrderDao { get; }
         ICustomerDao CustomerDao { get; }
+        ISettingDao SettingDao { get; }
     }
 }

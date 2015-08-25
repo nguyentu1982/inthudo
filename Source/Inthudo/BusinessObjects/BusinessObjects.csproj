@@ -57,6 +57,7 @@
     <Compile Include="DepartmentBO.cs" />
     <Compile Include="DepositMethodBO.cs" />
     <Compile Include="DesignRequestBO.cs" />
+    <Compile Include="DesignRequestSearch.cs" />
     <Compile Include="ManufactureRequestBO.cs" />
     <Compile Include="MemberBO.cs" />
     <Compile Include="OrderBO.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="ProductBO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleTypeBO.cs" />
+    <Compile Include="SettingBO.cs" />
     <Compile Include="ShippingMethodBO.cs" />
     <Compile Include="UserOrganizationMapppingBO.cs" />
   </ItemGroup>

@@ -269,7 +269,14 @@ namespace DataObjects.EntityFramework
             using (var context = new InThuDoEntities())
             {
                 var member = context.Users.FirstOrDefault(c => c.UserName == userName) as User;
-                return Mapper.Map<User, MemberBO>(member);
+                var result = Mapper.Map<User, MemberBO>(member);
+                result.Department = new DepartmentBO() { 
+                    DepartmentId = member.LibDepartment.DepartmentId,
+                    Code = member.LibDepartment.Code,
+                    Name = member.LibDepartment.Name,
+                    Description = member.LibDepartment.Description
+                };
+                return result;
             }
         }
 
@@ -362,6 +369,46 @@ namespace DataObjects.EntityFramework
 
                 context.UserOrganizationMapppings.Remove(userOrganizationMap);
                 context.SaveChanges();
+            }
+        }
+
+
+        public List<MemberBO> GetDesigners()
+        {
+            using (var context = new InThuDoEntities())
+            {
+                var query = from m in context.Users
+                            join d in context.LibDepartments on m.DepartmentId equals d.DepartmentId
+                            where
+                            (m.Deteted == false || m.Deteted == null) &&
+                            (d.Code == "PTK")
+                            select new MemberBO()
+                            {
+                                UserId = m.UserId,
+                                UserName = m.UserName,
+                                FullName = m.FullName,
+                            };
+                return query.Distinct().ToList();
+            }
+        }
+
+
+        public List<MemberBO> GetBusinessMen()
+        {
+            using (var context = new InThuDoEntities())
+            {
+                var query = from m in context.Users
+                            join d in context.LibDepartments on m.DepartmentId equals d.DepartmentId
+                            where
+                            (m.Deteted == false || m.Deteted == null) &&
+                            (d.Code == "PKD")
+                            select new MemberBO()
+                            {
+                                UserId = m.UserId,
+                                UserName = m.UserName,
+                                FullName = m.FullName,
+                            };
+                return query.Distinct().ToList();
             }
         }
     }

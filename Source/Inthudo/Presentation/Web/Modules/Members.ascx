@@ -45,6 +45,7 @@
             <asp:BoundField HeaderText="Email" DataField="Email" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"/>
             <asp:BoundField HeaderText="Họ Tên" DataField="FullName" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"/>
             <asp:BoundField HeaderText="Số Điện Thoại" DataField="Telephone" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" />
+             <asp:BoundField HeaderText="Phòng" DataField="DepartmentName" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" />
             <asp:BoundField HeaderText="Quyền" DataField="RoleName" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"/>
             <asp:HyperLinkField HeaderText="Sửa" DataNavigateUrlFields="UserId" DataNavigateUrlFormatString="~/MemberEdit.aspx?MemberId={0}" Text="Sửa"/>
             

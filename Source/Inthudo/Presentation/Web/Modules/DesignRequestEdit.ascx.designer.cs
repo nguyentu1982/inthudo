@@ -13,6 +13,24 @@ namespace Web.Modules {
     public partial class DesignRequestEdit {
         
         /// <summary>
+        /// btSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btSave;
+        
+        /// <summary>
+        /// btDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btDelete;
+        
+        /// <summary>
         /// DesignRequestTab control.
         /// </summary>
         /// <remarks>
@@ -40,6 +58,24 @@ namespace Web.Modules {
         protected global::Web.Modules.DesignRequestInfo ctrlDesignRequestInfo;
         
         /// <summary>
+        /// pnlDesignRequestDesignerTask control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabPanel pnlDesignRequestDesignerTask;
+        
+        /// <summary>
+        /// ctrlDesignRequestDesignerTask control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Web.Modules.DesignRequestDesignerTask ctrlDesignRequestDesignerTask;
+        
+        /// <summary>
         /// pnlDesignRequestCustomerApprove control.
         /// </summary>
         /// <remarks>
@@ -56,23 +92,5 @@ namespace Web.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Web.Modules.DesignRequestCustomerApprove ctrlDesignRequestCustomerApprove;
-        
-        /// <summary>
-        /// btSave control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btSave;
-        
-        /// <summary>
-        /// btDelete control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btDelete;
     }
 }

@@ -37,5 +37,9 @@ namespace InthudoService
         void InsertUserOrganizationMapping(int memberId, int organizationId);
 
         void DeleteUserOrganizationMapping(int memberId, int organizationId);
+
+        List<MemberBO> GetDesigners();
+
+        List<MemberBO> GetBusinessMen();
     }
 }

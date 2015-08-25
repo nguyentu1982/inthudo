@@ -194,6 +194,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="DesignRequestAdd.aspx" />
     <Content Include="DesignRequestEdit.aspx" />
+    <Content Include="DesignRequests.aspx" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\heroAccent.png" />
@@ -222,6 +223,7 @@
     <Content Include="Modules\DecimalTextBox.ascx" />
     <Content Include="Modules\DesignRequestAdd.ascx" />
     <Content Include="Modules\DesignRequestCustomerApprove.ascx" />
+    <Content Include="Modules\DesignRequestDesignerTask.ascx" />
     <Content Include="Modules\DesignRequestEdit.ascx" />
     <Content Include="Modules\DesignRequestInfo.ascx" />
     <Content Include="Modules\DesignRequests.ascx" />
@@ -370,6 +372,13 @@
     <Compile Include="DesignRequestEdit.aspx.designer.cs">
       <DependentUpon>DesignRequestEdit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DesignRequests.aspx.cs">
+      <DependentUpon>DesignRequests.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DesignRequests.aspx.designer.cs">
+      <DependentUpon>DesignRequests.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManufactureRequestAdd.aspx.cs">
       <DependentUpon>ManufactureRequestAdd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -425,6 +434,13 @@
     </Compile>
     <Compile Include="Modules\DesignRequestCustomerApprove.ascx.designer.cs">
       <DependentUpon>DesignRequestCustomerApprove.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DesignRequestDesignerTask.ascx.cs">
+      <DependentUpon>DesignRequestDesignerTask.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\DesignRequestDesignerTask.ascx.designer.cs">
+      <DependentUpon>DesignRequestDesignerTask.ascx</DependentUpon>
     </Compile>
     <Compile Include="Modules\DesignRequestEdit.ascx.cs">
       <DependentUpon>DesignRequestEdit.ascx</DependentUpon>

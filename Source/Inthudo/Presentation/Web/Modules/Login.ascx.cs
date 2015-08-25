@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using InthudoService;
 using BusinessObjects;
+using Common;
 
 namespace Web.Module
 {
@@ -28,7 +29,11 @@ namespace Web.Module
 
                 if (string.IsNullOrEmpty(ReturnURL))
                 {
-                    Response.Redirect("Orders.aspx");
+                    if(mem.Department.Code == Constant.PKD)
+                        Response.Redirect("Orders.aspx");
+
+                    if (mem.Department.Code == Constant.PTK)
+                        Response.Redirect("DesignRequest.aspx");
                     return;
                 }
 

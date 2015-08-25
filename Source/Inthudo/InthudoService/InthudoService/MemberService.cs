@@ -142,5 +142,17 @@ namespace InthudoService
         {
             memberDao.DeleteUserOrganizationMapping(memberId, organizationId);
         }
+
+
+        public List<MemberBO> GetDesigners()
+        {
+            return memberDao.GetDesigners();
+        }
+
+
+        public List<MemberBO> GetBusinessMen()
+        {
+            return memberDao.GetBusinessMen();
+        }
     }
 }

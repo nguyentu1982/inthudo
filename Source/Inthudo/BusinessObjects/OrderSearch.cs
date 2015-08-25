@@ -12,7 +12,8 @@ namespace BusinessObjects
         { 
             
         }
-
+        public DateTime? OrderFrom { get; set; }
+        public DateTime? OrderTo { get; set; }
         public int OrderId { get; set; }
         public int CustId { get; set; }
         public int ProductId { get; set; }
