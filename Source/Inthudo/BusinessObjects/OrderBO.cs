@@ -35,6 +35,7 @@ namespace BusinessObjects
         public string DeliveryAddress { get; set; }
         public Nullable<bool> ApprovedByCustomer { get; set; }
         public Nullable<System.DateTime> ApprovedDate { get; set; }
+        public Nullable<decimal> VAT { get; set; }
 
         public virtual CustomerBO Customer { get; set; }
         public virtual ICollection<DesignRequestBO> DesignRequests { get; set; }

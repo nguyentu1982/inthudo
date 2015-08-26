@@ -38,8 +38,8 @@ namespace InthudoService
 
         void DeleteUserOrganizationMapping(int memberId, int organizationId);
 
-        List<MemberBO> GetDesigners();
+        List<MemberBO> GetDesigners(int organizationId);
 
-        List<MemberBO> GetBusinessMen();
+        List<MemberBO> GetBusinessMen(int organizationId);
     }
 }

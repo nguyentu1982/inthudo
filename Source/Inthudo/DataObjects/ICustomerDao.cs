@@ -14,5 +14,11 @@ namespace DataObjects
         CustomerBO GetCustomerById(int custId);
 
         CustomerBO GetCustomerByOrder(int orderId);
+
+        void UpdateCustomer(CustomerBO customer);
+
+        int InsertCustomer(CustomerBO customer);
+
+        void MarkCustomerAsDeleted(int custId);
     }
 }

@@ -17,14 +17,15 @@ namespace DataObjects.EntityFramework
 
         public List<CustomerBO> GetCustomers(string customerName, string telephone, string email, string companyName)
         {
-            using ( context )
+            using (var context = new InThuDoEntities())
             {
                 var query = from c in context.Customers
                             where
                             (string.IsNullOrEmpty(customerName) || c.Name.Contains(customerName)) &&
                             (string.IsNullOrEmpty(telephone) || c.Telephone.Contains(telephone)) &&
                             (string.IsNullOrEmpty(email) || c.Email.Contains(email)) &&
-                            (string.IsNullOrEmpty(companyName) || c.Company.Contains(companyName))
+                            (string.IsNullOrEmpty(companyName) || c.Company.Contains(companyName))&&
+                            (c.Deleted == false || c.Deleted == null)
                             select new CustomerBO() {
                                 CustomerId = c.CustomerId,
                                 Name = c.Name,
@@ -39,6 +40,7 @@ namespace DataObjects.EntityFramework
                                 PhoneNumber = c.PhoneNumber,
                                 FaxNumber = c.FaxNumber,
                                 TaxCode = c.TaxCode,
+                                Note = c.Note,
                             };
                 return query.ToList();
                 
@@ -67,19 +69,11 @@ namespace DataObjects.EntityFramework
                            PhoneNumber = c.PhoneNumber,
                            FaxNumber = c.FaxNumber,
                            TaxCode = c.TaxCode,
+                           Note = c.Note,
                        }).FirstOrDefault();
                 
             }
         }
-
-        public InThuDoEntities context
-        {
-            get
-            {
-                return new InThuDoEntities();
-            }
-        }
-
 
         public CustomerBO GetCustomerByOrder(int orderId)
         {
@@ -103,8 +97,68 @@ namespace DataObjects.EntityFramework
                                 PhoneNumber = c.PhoneNumber,
                                 FaxNumber = c.FaxNumber,
                                 TaxCode = c.TaxCode,
+                                Note = c.Note
                             };
                 return query.FirstOrDefault();
+            }
+        }
+
+
+        public void UpdateCustomer(CustomerBO customer)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                Customer cust = context.Customers.Where(c => c.CustomerId == customer.CustomerId) as Customer;
+                cust.Name = customer.Name;
+                cust.Telephone = customer.Telephone;
+                cust.Address = customer.Address;
+                cust.Email = customer.Email;
+                cust.LastEditedOn = customer.LastEditedOn;
+                cust.LastEditedBy = customer.LastEditedBy;
+                cust.Company = customer.Company;
+                cust.PhoneNumber = customer.PhoneNumber;
+                cust.FaxNumber = customer.FaxNumber;
+                cust.TaxCode = customer.TaxCode;
+                cust.Note = customer.Note;
+
+                context.SaveChanges();
+            }
+        }
+
+        public int InsertCustomer(CustomerBO customer)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                Customer cust = new Customer() { 
+                    Name = customer.Name,
+                    Telephone = customer.Telephone,
+                    Address = customer.Address,
+                    Email = customer.Email,
+                    CreatedOn = customer.CreatedOn,
+                    CreatedBy = customer.CreatedBy,
+                    Company = customer.Company,
+                    PhoneNumber = customer.PhoneNumber,
+                    FaxNumber = customer.FaxNumber,
+                    TaxCode = customer.TaxCode,
+                    Note = customer.Note
+                };
+
+                context.Customers.Add(cust);
+                context.SaveChanges();
+                return cust.CustomerId;
+            }
+        }
+
+
+        public void MarkCustomerAsDeleted(int custId)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                Customer cust = (from c in context.Customers
+                                where c.CustomerId == custId
+                                select c).FirstOrDefault();
+                cust.Deleted = true;
+                context.SaveChanges();
             }
         }
     }

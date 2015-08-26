@@ -19,8 +19,19 @@
 
 <div class="order-detail">
     <span class="lbtitle">Sản phẩm </span>
-    <ajaxToolkit:ComboBox ID="cboxProduct" runat="server" ValidationGroup="val"></ajaxToolkit:ComboBox>
-    <asp:RequiredFieldValidator ID="requiredFieldValidatorProduct" runat="server" ControlToValidate="cboxProduct" ErrorMessage="Bạn hãy nhập sản phẩm" ForeColor="Red" ValidationGroup="val"></asp:RequiredFieldValidator>
+    <asp:TextBox runat="server" ID="txtProduct"></asp:TextBox>
+    <ajaxToolkit:AutoCompleteExtender 
+        ID="txtProduct_AutoCompleteExtender" 
+        runat="server"  
+        ServicePath="~/WebService.asmx" 
+        BehaviorID="txtProduct_AutoCompleteExtender" 
+        DelimiterCharacters="" 
+        ServiceMethod="GetProductNames" 
+        TargetControlID="txtProduct"
+        Enabled="true"
+        UseContextKey="True" MinimumPrefixLength="1" CompletionInterval="10" EnableCaching="true" CompletionSetCount="3">
+    </ajaxToolkit:AutoCompleteExtender>    
+    <asp:RequiredFieldValidator ID="requiredFieldValidatorProduct" runat="server" ControlToValidate="txtProduct" ErrorMessage="Bạn hãy nhập sản phẩm" ForeColor="Red" ValidationGroup="val"></asp:RequiredFieldValidator>
     <br />
     <span class="lbtitle">Quy cách sản phẩm</span>
     <div>
@@ -33,9 +44,8 @@
     <inthudo:NumericTextBox runat="server" ID="ctrltxtQuantity" Value="1" MaximumValue="1000000" MinimumValue="1" RequiredErrorMessage="Bạn hãy nhập số lượng!" RangeErrorMessage="Số lượng từ 1 đến 1.000.000" />
     <br />
     <span class="lbtitle">Đơn giá: </span>
-    <inthudo:DecimalTextBox runat="server" ID="ctrltxtPrice" Value="0" MaximumValue="1000000000" MinimumValue="0" RequiredErrorMessage="Bạn hãy nhập đơn giá!" RangeErrorMessage="Đơn giá từ 0 đến 1.000.000.000" />
-    <br />
-    <span class="lbtitle">Thành tiền:</span> <span id="total-money"></span>
+    <inthudo:DecimalTextBox runat="server" ID="ctrltxtPrice" Value="0" MaximumValue="1000000000" MinimumValue="0" RequiredErrorMessage="Bạn hãy nhập đơn giá!" RangeErrorMessage="Đơn giá từ 0 đến 1.000.000.000" />[VNĐ]
+
 </div>
 
 <script type="text/javascript">

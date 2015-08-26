@@ -46,7 +46,7 @@
             <asp:BoundField HeaderText="Sản phẩm" DataField="ProductName" />
             <asp:BoundField HeaderText="Quy cách" DataField="Specification" HtmlEncode="False" />
             <asp:BoundField HeaderText="Số lượng" DataField="Quantity" />
-            <asp:BoundField HeaderText="Đơn giá" DataField="Price" />
+            <asp:BoundField HeaderText="Đơn giá" DataField="Price"  DataFormatString="{0:C0}"  />
             <asp:TemplateField>
                 <HeaderTemplate>
                     <asp:Label runat="server" Text="Sửa" ID="lbEditOrderDetail"></asp:Label>
@@ -90,25 +90,34 @@
     <asp:Button runat="server" ID="btAddNewOrderDetail" Text="Tạo nội dung chi tiết đơn đặt hàng mới" OnClientClick="OpenOrderDetailAddWindow(); return false" />
 </div>
 
-
-<div id="panelOrderSumary" runat="server">
+<asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <ContentTemplate>
+        <div id="panelOrderSumary" runat="server">
     <h3></h3>
     <span class="lbtitle">Giá trị đơn hàng </span>
-    <asp:Label ID="lbOrderTotal" runat="server"></asp:Label>[VNĐ]
+    <asp:Label ID="lbOrderTotal" runat="server"  ></asp:Label>
     <br />
     <span class="lbtitle">Thuế GTGT </span>
-    <asp:Label ID="lbVAT" runat="server"></asp:Label><inthudo:DecimalTextBox runat="server" ID="ctrlDecimalTextBoxVAT" Value="0" RequiredErrorMessage="Bạn hãy nhập thuế VAT" MinimumValue="0" MaximumValue="100000000" RangeErrorMessage="Thuế VAT từ 0 đến 100.000.000" />
+    <asp:Label ID="lbVAT" runat="server"></asp:Label><inthudo:DecimalTextBox runat="server" ID="ctrlDecimalTextBoxVAT" Value="0" RequiredErrorMessage="Bạn hãy nhập thuế VAT" MinimumValue="0" MaximumValue="100000000" RangeErrorMessage="Thuế VAT từ 0 đến 100.000.000" AutoPostBack="true" OnTextChanged="ctrlDecimalTextBoxVAT_TextChanged" />
     [VNĐ]
     <br />
-    <span class="lbtitle">Tổng</span><asp:Label ID="lbOrderTotalIncludeVAT" runat="server"></asp:Label>[VNĐ]
+    <span class="lbtitle">Tổng</span><asp:Label ID="lbOrderTotalIncludeVAT" runat="server"></asp:Label>
     <br />
     <span class="lbtitle">Đặt cọc</span><asp:DropDownList ID="ddlDepositMethod" runat="server"></asp:DropDownList>
-    <span class="lbtitle">Số tiền:</span><inthudo:DecimalTextBox runat="server" ID="ctrlDepositAmount" Value="0" RequiredErrorMessage="Bạn phải nhập số tiền đặt cọc!" MinimumValue="0" MaximumValue="1000000000" RangeErrorMessage="Số tiền đặt cọc từ 0 đến 1.000.000.000!" />
+    <span class="lbtitle">Số tiền:</span><inthudo:DecimalTextBox runat="server" ID="ctrlDepositAmount" Value="0" RequiredErrorMessage="Bạn phải nhập số tiền đặt cọc!" MinimumValue="0" MaximumValue="1000000000" RangeErrorMessage="Số tiền đặt cọc từ 0 đến 1.000.000.000!" AutoPostBack="true" OnTextChanged="ctrlDepositAmount_TextChanged" />
     [VNĐ]
     <br />
+    <span class="lbtitle">Còn lại </span><asp:Label runat="server" ID="lbRemaining"></asp:Label>
+            <br />
     <span class="lbtitle">Ngày hẹn trả</span><inthudo:DatePicker runat="server" ID="ctrlDatePickerEstimatedComplteDate" Format="dd/MM/yyyy"></inthudo:DatePicker>
-
 </div>
+    </ContentTemplate>
+    <Triggers>
+        <asp:AsyncPostBackTrigger ControlID="ctrlDecimalTextBoxVAT" EventName="TextChanged" />
+        <asp:AsyncPostBackTrigger ControlID="ctrlDepositAmount" EventName="TextChanged" />
+    </Triggers>
+</asp:UpdatePanel>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $("#<% =ctrlDecimalTextBoxVAT.ClientID %>_txtValue").on('onchange change keyup paste', function () {

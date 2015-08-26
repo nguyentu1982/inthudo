@@ -63,5 +63,7 @@ namespace InthudoService
         void MarkManufactureRequestAsDeleted(int p);
 
         List<DesignRequestBO> GetDesignRequests(DesignRequestSearch searchObj);
+
+        List<OrganizationBO> GetAllOrganizations();
     }
 }

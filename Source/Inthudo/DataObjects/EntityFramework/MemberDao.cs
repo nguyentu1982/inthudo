@@ -106,10 +106,6 @@ namespace DataObjects.EntityFramework
             }
         }
 
-
-
-
-
         public int InsertMember(MemberBO member)
         {
             using (var context = new InThuDoEntities())
@@ -155,7 +151,6 @@ namespace DataObjects.EntityFramework
             }
         }
 
-
         public MemberBO GetMemberByOrder(int orderId)
         {
             using (var context = new InThuDoEntities())
@@ -197,7 +192,6 @@ namespace DataObjects.EntityFramework
             }
         }
 
-
         public void ChangePass(int userId, string pass)
         {
             using (var context = new InThuDoEntities())
@@ -208,7 +202,6 @@ namespace DataObjects.EntityFramework
                 context.SaveChanges();
             }
         }
-
 
         public List<MemberBO> GetMembers(string username, string email, string fullName, string telephone, int roletypeId, int departId, int organizationId)
         {
@@ -280,7 +273,6 @@ namespace DataObjects.EntityFramework
             }
         }
 
-
         public MemberBO GetMember(string user, string pass)
         {
             throw new NotImplementedException();
@@ -299,7 +291,6 @@ namespace DataObjects.EntityFramework
                 return query.ToList();
             }
         }
-
 
         public List<OrganizationBO> GetAllOrganization()
         {
@@ -358,7 +349,6 @@ namespace DataObjects.EntityFramework
             }
         }
 
-
         public void DeleteUserOrganizationMapping(int memberId, int organizationId)
         {
             using (var context = new InThuDoEntities())
@@ -372,16 +362,17 @@ namespace DataObjects.EntityFramework
             }
         }
 
-
-        public List<MemberBO> GetDesigners()
+        public List<MemberBO> GetDesigners(int organizationId)
         {
             using (var context = new InThuDoEntities())
             {
                 var query = from m in context.Users
                             join d in context.LibDepartments on m.DepartmentId equals d.DepartmentId
+                            join o in context.UserOrganizationMapppings on m.UserId equals o.UserId
                             where
                             (m.Deteted == false || m.Deteted == null) &&
-                            (d.Code == "PTK")
+                            (d.Code == "PTK")&&
+                            (organizationId ==0 || o.OrganizationId == organizationId)
                             select new MemberBO()
                             {
                                 UserId = m.UserId,
@@ -392,16 +383,17 @@ namespace DataObjects.EntityFramework
             }
         }
 
-
-        public List<MemberBO> GetBusinessMen()
+        public List<MemberBO> GetBusinessMen(int organizationId)
         {
             using (var context = new InThuDoEntities())
             {
                 var query = from m in context.Users
                             join d in context.LibDepartments on m.DepartmentId equals d.DepartmentId
+                            join o in context.UserOrganizationMapppings on m.UserId equals o.UserId
                             where
                             (m.Deteted == false || m.Deteted == null) &&
-                            (d.Code == "PKD")
+                            (d.Code == "PKD")&&
+                             (organizationId == 0 || o.OrganizationId == organizationId)
                             select new MemberBO()
                             {
                                 UserId = m.UserId,

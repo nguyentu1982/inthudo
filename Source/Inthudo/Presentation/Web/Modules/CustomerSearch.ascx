@@ -18,8 +18,9 @@
         <span class="lbtitle">Tên công ty:</span><asp:TextBox ID="txtCompanyName" runat="server"></asp:TextBox>
         <br />
         <asp:Button ID="btFind" runat="server" Text="Tìm" OnClick="btFind_Click" />
+        <input type="button" value="Thêm khách hàng mới" onclick="OpenWindow('CustomerAdd.aspx')" />
         <br />
-        <asp:GridView ID="grvCustomers" runat="server" AutoGenerateColumns="False" OnRowCommand="grvCustomers_RowCommand">
+        <asp:GridView ID="grvCustomers" runat="server" AutoGenerateColumns="False" OnRowCommand="grvCustomers_RowCommand" OnRowDataBound="grvCustomers_RowDataBound">
            
             <Columns>
                 
@@ -69,7 +70,24 @@
                         <asp:LinkButton ID="linkButtonChose" runat="server" CausesValidation="false" CommandName="ChoseCustomer" Text="Chọn" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>'></asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:TemplateField>
+                    <HeaderTemplate>
+                        <span>Sửa</span>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <asp:HyperLink ID="hlEidtCustomer" runat="server"></asp:HyperLink>
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
         </asp:GridView>
     </ContentTemplate>
 </asp:UpdatePanel>
+
+<script type="text/javascript">
+    function OpenWindow(url) {
+        var w = 600;
+        var h = screen.height - 100;
+        var left = (screen.width / 2) - (w / 2);
+        window.open(url, "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=10, left=" + left + " width=" + w + ", height=" + h + "");
+    }
+</script>

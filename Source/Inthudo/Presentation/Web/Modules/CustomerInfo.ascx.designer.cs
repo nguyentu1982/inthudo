@@ -10,132 +10,123 @@
 namespace Web.Modules {
     
     
-    public partial class OrderDetailInfo {
+    public partial class CustomerInfo {
         
         /// <summary>
-        /// panelOrderDetailId control.
+        /// panelCustomerId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelOrderDetailId;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelCustomerId;
         
         /// <summary>
-        /// lbOrderDetailID control.
+        /// lbCustomerID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbOrderDetailID;
+        protected global::System.Web.UI.WebControls.Label lbCustomerID;
         
         /// <summary>
-        /// panelOrderInfo control.
+        /// txtCustomerName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelOrderInfo;
+        protected global::System.Web.UI.WebControls.TextBox txtCustomerName;
         
         /// <summary>
-        /// lbOrderId control.
+        /// RequiredFieldValidatorCustomerName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbOrderId;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorCustomerName;
         
         /// <summary>
-        /// lbCustomer control.
+        /// txtTelephone control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCustomer;
+        protected global::System.Web.UI.WebControls.TextBox txtTelephone;
         
         /// <summary>
-        /// lbBusinessMan control.
+        /// RequiredFieldValidatorTelephone control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbBusinessMan;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorTelephone;
         
         /// <summary>
-        /// txtProduct control.
+        /// txtAddress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtProduct;
+        protected global::System.Web.UI.WebControls.TextBox txtAddress;
         
         /// <summary>
-        /// txtProduct_AutoCompleteExtender control.
+        /// ctrlEmailTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.AutoCompleteExtender txtProduct_AutoCompleteExtender;
+        protected global::Web.Modules.EmailTextBox ctrlEmailTextBox;
         
         /// <summary>
-        /// requiredFieldValidatorProduct control.
+        /// txtNote control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator requiredFieldValidatorProduct;
+        protected global::System.Web.UI.WebControls.TextBox txtNote;
         
         /// <summary>
-        /// txtProductRequirement control.
+        /// txtCompanyName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtProductRequirement;
+        protected global::System.Web.UI.WebControls.TextBox txtCompanyName;
         
         /// <summary>
-        /// requiredFieldValidatorProductRequirement control.
+        /// txtPhoneNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator requiredFieldValidatorProductRequirement;
+        protected global::System.Web.UI.WebControls.TextBox txtPhoneNumber;
         
         /// <summary>
-        /// txtProductRequirement_HtmlEditorExtender control.
+        /// txtFaxNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.HtmlEditorExtender txtProductRequirement_HtmlEditorExtender;
+        protected global::System.Web.UI.WebControls.TextBox txtFaxNumber;
         
         /// <summary>
-        /// ctrltxtQuantity control.
+        /// txtTaxCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Web.Modules.NumericTextBox ctrltxtQuantity;
-        
-        /// <summary>
-        /// ctrltxtPrice control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Web.Modules.DecimalTextBox ctrltxtPrice;
+        protected global::System.Web.UI.WebControls.TextBox txtTaxCode;
     }
 }

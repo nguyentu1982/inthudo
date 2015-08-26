@@ -130,5 +130,30 @@ namespace Web.Modules
                 txtValue.CssClass = value;
             }
         }
+
+        public bool AutoPostBack
+        {
+            get
+            {
+                return txtValue.AutoPostBack;
+            }
+            set
+            {
+                txtValue.AutoPostBack = value;
+            }
+        }
+
+        public event EventHandler TextChanged;
+
+        protected void txtValue_TextChanged(object sender, EventArgs e)
+        {
+            if (TextChanged != null)
+            {
+                TextChanged(this, new EventArgs());
+            }
+        }
+
+        
+        
     }
 }

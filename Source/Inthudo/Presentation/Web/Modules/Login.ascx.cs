@@ -33,7 +33,7 @@ namespace Web.Module
                         Response.Redirect("Orders.aspx");
 
                     if (mem.Department.Code == Constant.PTK)
-                        Response.Redirect("DesignRequest.aspx");
+                        Response.Redirect("DesignRequests.aspx");
                     return;
                 }
 

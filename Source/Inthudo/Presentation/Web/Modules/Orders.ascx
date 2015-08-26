@@ -32,12 +32,24 @@
         <asp:ListItem Value="2">Đã hoàn thành</asp:ListItem>
     </asp:CheckBoxList>
     <br />
-    <span class="lbtitle">Nhân viên KD:</span>
-    <asp:DropDownList ID="ddlBusinessManId" runat="server"></asp:DropDownList>
-    <br />
-    <span class="lbtitle">Nhân viên TK:</span>
-    <asp:DropDownList ID="ddlDesingerId" runat="server"></asp:DropDownList>
-    <br />
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+            <span class="lbtitle">Nhân viên KD:</span>
+            <asp:DropDownList ID="ddlBusinessManId" runat="server"></asp:DropDownList>
+            <br />
+            <span class="lbtitle">Nhân viên TK:</span>
+            <asp:DropDownList ID="ddlDesingerId" runat="server"></asp:DropDownList>
+            <br />
+            <div runat ="server" id="pnlCompany">
+                 <span class="lbtitle">Công ty</span> <asp:DropDownList runat="server" ID="ddlCompany" AutoPostBack="true" OnSelectedIndexChanged="ddlCompany_SelectedIndexChanged"></asp:DropDownList>
+            </div>
+        </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="ddlCompany" EventName="SelectedIndexChanged" />
+        </Triggers>
+    </asp:UpdatePanel>
+    
+   
 </div>
 <div class="total-result" style="float:right;min-width:600px">
     <span class="lbtitle">Số đơn hàng: </span><asp:Label runat="server" ID="lbNumberOfOrders"></asp:Label>
@@ -67,9 +79,9 @@
             <asp:BoundField HeaderText="Khách hàng" DataField="CustomerName" />
             <asp:BoundField HeaderText="NVKD" DataField="BusinessManName" />
             <asp:BoundField HeaderText="PT Đặt cọc" DataField="DepositTypeName" />
-            <asp:BoundField HeaderText="Đặt cọc" DataField="Deposit" DataFormatString="{0:#,0} VNĐ" />
+            <asp:BoundField HeaderText="Đặt cọc" DataField="Deposit" DataFormatString="{0:C0}" />
             <asp:BoundField HeaderText="Giao hàng" DataField="ShippingMethodName" />
-            <asp:BoundField HeaderText="Giá trị ĐH" DataField="OrderTotal" DataFormatString="{0:#,0} VNĐ" />
+            <asp:BoundField HeaderText="Giá trị ĐH" DataField="OrderTotal" DataFormatString="{0:C0}" />
             <asp:BoundField HeaderText="Hẹn trả" DataField="ExpectedCompleteDate" DataFormatString="{0:dd-MM-yyyy}" />
             <asp:BoundField HeaderText="Tình trạng ĐH" DataField="OrderStatusString" />
             <asp:HyperLinkField HeaderText="Sửa" DataNavigateUrlFields="OrderId" DataNavigateUrlFormatString="~/OrderEdit.aspx?OrderId={0}" Text="Sửa" />

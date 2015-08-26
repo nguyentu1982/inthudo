@@ -144,15 +144,15 @@ namespace InthudoService
         }
 
 
-        public List<MemberBO> GetDesigners()
+        public List<MemberBO> GetDesigners(int organizationId)
         {
-            return memberDao.GetDesigners();
+            return memberDao.GetDesigners(organizationId);
         }
 
 
-        public List<MemberBO> GetBusinessMen()
+        public List<MemberBO> GetBusinessMen(int organizationId)
         {
-            return memberDao.GetBusinessMen();
+            return memberDao.GetBusinessMen(organizationId);
         }
     }
 }

@@ -23,5 +23,6 @@ namespace BusinessObjects
         public OrderStatusEnum OrderStatus { get; set; }
         public int BusManId { get; set; }
         public int DesignerManId { get; set; }
+        public int OrganizationId { get; set; }
     }
 }

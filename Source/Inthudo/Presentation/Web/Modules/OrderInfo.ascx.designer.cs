@@ -139,6 +139,15 @@ namespace Web.Modules {
         protected global::System.Web.UI.WebControls.Button btAddNewOrderDetail;
         
         /// <summary>
+        /// UpdatePanel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        
+        /// <summary>
         /// panelOrderSumary control.
         /// </summary>
         /// <remarks>
@@ -200,6 +209,15 @@ namespace Web.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Web.Modules.DecimalTextBox ctrlDepositAmount;
+        
+        /// <summary>
+        /// lbRemaining control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbRemaining;
         
         /// <summary>
         /// ctrlDatePickerEstimatedComplteDate control.

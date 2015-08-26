@@ -42,7 +42,7 @@ namespace Web.Modules
             //Designer
             ddlDesigner.Items.Clear();
             ddlDesigner.Items.Add(new ListItem(string.Empty, "0"));
-            List<MemberBO> designers = this.MemberService.GetDesigners();
+            List<MemberBO> designers = this.MemberService.GetDesigners(0);
             foreach (MemberBO m in designers)
             {
                 ddlDesigner.Items.Add(new ListItem(m.FullName, m.UserId.ToString()));

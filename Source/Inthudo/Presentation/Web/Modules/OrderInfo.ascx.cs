@@ -7,11 +7,14 @@ using System.Web.UI.WebControls;
 using BusinessObjects;
 using Common.Utils;
 using System.Transactions;
+using Common;
+using System.Globalization;
 
 namespace Web.Modules
 {
     public partial class OrderInfo : BaseUserControl
     {
+        const string Not_Allow_Select_Business_Man_When_Create_Order = "NotAllowSelectBusinessManWhenCreateOrder";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -32,14 +35,19 @@ namespace Web.Modules
                 ctrlCustomerSelect.CustomerCode = order.CustomerId.ToString();
                 ctrlCustomerSelect.txtCustomerCode_TextChanged(new object(), new EventArgs());
                 lbOrderStatus.Text = order.OrderStatusString;
-                lbOrderTotal.Text = order.OrderTotal.ToString();                
+                lbOrderTotal.Text = order.OrderTotal.ToString("C0");                
                 ctrlDatePickerEstimatedComplteDate.SelectedDate = order.ExpectedCompleteDate;
                 txtDeliveryAddress.Text = order.DeliveryAddress;
+                decimal vat = 0;
+                decimal.TryParse(order.VAT.ToString(), out vat);
+                ctrlDecimalTextBoxVAT.Value = vat;
                 //deposit
                 ddlDepositMethod.SelectedValue = order.DepositTypeId.ToString();
                 decimal deposit = 0;               
                 decimal.TryParse(order.Deposit.ToString(), out deposit);
                 ctrlDepositAmount.Value = deposit;
+                lbOrderTotalIncludeVAT.Text = (order.OrderTotal + vat).ToString("C0");
+                lbRemaining.Text = (order.OrderTotal + vat - deposit).ToString("C0");
                 //Business man
                 ddlBusinessManId.SelectedValue = order.UserId.ToString();
                 //Order Items
@@ -61,6 +69,7 @@ namespace Web.Modules
             {
                 btAddNewOrderDetail.Visible = false;
                 panelOrderSumary.Visible = false;
+                ctrlDatePicker.SelectedDate = DateTime.Now;
             }
         }
 
@@ -84,8 +93,8 @@ namespace Web.Modules
             }
             //Business Man
             ddlBusinessManId.Items.Clear();
-            string orderby = "UserId ASC";
-            List<MemberBO> mems = this.MemberService.GetMembers(orderby);
+
+            List<MemberBO> mems = this.MemberService.GetBusinessMen(0);
             foreach (MemberBO m in mems)
             {
                 ddlBusinessManId.Items.Add(new ListItem(m.FullName, m.UserId.ToString()));
@@ -96,6 +105,18 @@ namespace Web.Modules
             foreach (ShippingMethodBO sh in ships)
             {
                 ddlShippingMethod.Items.Add(new ListItem(sh.Name, sh.ShippingMethodId.ToString()));
+            }
+
+            //Check roles an setting
+            MemberBO mem = this.MemberService.GetMember(this.LoggedInUserId);
+
+            if (this.SettingService.GetBoolSetting(Not_Allow_Select_Business_Man_When_Create_Order))
+            {
+                if (mem.RoleName.ToLower() == Constant.USER_ROLE_NAME.ToLower())
+                {
+                    ddlBusinessManId.SelectedValue = mem.UserId.ToString();
+                    ddlBusinessManId.Enabled = false;
+                }
             }
         }
 
@@ -120,11 +141,15 @@ namespace Web.Modules
                 order.LastEditedDate = DateTime.Now;
                 order.ExpectedCompleteDate = ctrlDatePickerEstimatedComplteDate.SelectedDate;
                 order.DeliveryAddress = txtDeliveryAddress.Text;
+                order.VAT = ctrlDecimalTextBoxVAT.Value;
                 
                 using(TransactionScope scope = new TransactionScope())
                 {                    
                     this.OrderService.UpdateOrderInfo(order);
-                    ctrlOrderDetailInfo.SaveInfo(order.OrderId);
+                    if (ctrlOrderDetailInfo.Visible)
+                    {
+                        ctrlOrderDetailInfo.SaveInfo(order.OrderId);
+                    }
                     scope.Complete();                    
                 }                  
             }
@@ -143,6 +168,7 @@ namespace Web.Modules
                     CreatedDate = DateTime.Now,
                     ExpectedCompleteDate = ctrlDatePickerEstimatedComplteDate.SelectedDate,
                     DeliveryAddress = txtDeliveryAddress.Text,
+                    VAT = ctrlDecimalTextBoxVAT.Value
                 };
 
                 using (TransactionScope scope = new TransactionScope())
@@ -219,6 +245,34 @@ namespace Web.Modules
                 }
 
                 
+
+            }
+        }
+
+        protected void ctrlDecimalTextBoxVAT_TextChanged(object sender, EventArgs e)
+        {
+            OrderBO order = this.OrderService.GetOrderById(this.OrderId);
+            if (order != null)
+            {
+                decimal orderTotal = order.OrderTotal;
+                decimal vat = ctrlDecimalTextBoxVAT.Value;
+                lbOrderTotalIncludeVAT.Text = (orderTotal + vat).ToString("C0");
+
+                ctrlDepositAmount_TextChanged(new object(), new EventArgs());
+            }
+        }
+
+        protected void ctrlDepositAmount_TextChanged(object sender, EventArgs e)
+        {
+            OrderBO order = this.OrderService.GetOrderById(this.OrderId);
+            if (order != null)
+            {
+                decimal orderTotal = order.OrderTotal;
+                decimal vat = ctrlDecimalTextBoxVAT.Value;
+                decimal orderTotalIncludedVat = orderTotal + vat;
+                decimal deposit = ctrlDepositAmount.Value;
+                lbRemaining.Text = (orderTotalIncludedVat - deposit).ToString("C0");
+
 
             }
         }

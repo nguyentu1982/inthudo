@@ -13,6 +13,7 @@ namespace Web.Modules
     {
         const string Not_Allow_Business_Man_View_Others_Order = "NotAllowBusinessManViewOthersOrder";
         const string Not_Allow_User_Of_Other_Department_View_Order = "NotAllowUserOfOtherDepartmentViewOrder";
+        const string Not_Allow_User_View_Organization = "NotAllowUserViewOrganization";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,10 +28,10 @@ namespace Web.Modules
             cblOrderStatus.Attributes.Add("onclick", "radioMe(event);");
             //Product drop down
             ddlProduct.Items.Clear();
-            ddlProduct.Items.Add(new ListItem(string.Empty,"0"));
+            ddlProduct.Items.Add(new ListItem(string.Empty, "0"));
             List<ProductBO> products = this.ProductService.GetAllProucts();
             foreach (ProductBO p in products)
-            { 
+            {
                 ddlProduct.Items.Add(new ListItem(p.Name, p.ProductId.ToString()));
             }
             //Shipping 
@@ -58,11 +59,11 @@ namespace Web.Modules
                 ddlOrderDetailStatus.Items.Add(new ListItem(s.Name, s.OrderStatusId.ToString()));
             }
 
-            string orderby = "UserId ASC";
+            
             //Business man
             ddlBusinessManId.Items.Clear();
             ddlBusinessManId.Items.Add(new ListItem(string.Empty, "0"));
-            List<MemberBO> businessMans = this.MemberService.GetBusinessMen();
+            List<MemberBO> businessMans = this.MemberService.GetBusinessMen(0);
             foreach (MemberBO m in businessMans)
             {
                 ddlBusinessManId.Items.Add(new ListItem(m.FullName, m.UserId.ToString()));
@@ -70,17 +71,26 @@ namespace Web.Modules
             //Designner man
             ddlDesingerId.Items.Clear();
             ddlDesingerId.Items.Add(new ListItem(string.Empty, "0"));
-            List<MemberBO> designers = this.MemberService.GetDesigners();
+            List<MemberBO> designers = this.MemberService.GetDesigners(0);
             foreach (MemberBO m in designers)
             {
                 ddlDesingerId.Items.Add(new ListItem(m.FullName, m.UserId.ToString()));
+            }
+
+            //Company
+            ddlCompany.Items.Clear();
+            ddlCompany.Items.Add(new ListItem(string.Empty, "0"));
+            List<OrganizationBO> organizations = this.OrderService.GetAllOrganizations();
+            foreach (OrganizationBO og in organizations)
+            {
+                ddlCompany.Items.Add(new ListItem(og.Name, og.OrganizationId.ToString()));
             }
 
             //Check Roles and Department to bindata
             MemberBO mem = this.MemberService.GetMember(this.LoggedInUserId);
             if (this.SettingService.GetBoolSetting(Not_Allow_User_Of_Other_Department_View_Order))
             {
-                if (mem.RoleName == "User")
+                if (mem.RoleName.ToLower() == Constant.USER_ROLE_NAME.ToLower())
                 {
                     if (mem.Department.Code != Constant.PKD) Response.Redirect("Login.aspx");
                 }
@@ -88,12 +98,21 @@ namespace Web.Modules
 
             if (this.SettingService.GetBoolSetting(Not_Allow_Business_Man_View_Others_Order))
             {
-                if (mem.RoleName == "User")
+                if (mem.RoleName.ToLower() == Constant.USER_ROLE_NAME.ToLower())
                 {
                     ddlBusinessManId.SelectedValue = mem.UserId.ToString();
                     ddlBusinessManId.Enabled = false;
                 }
             }
+
+            if (this.SettingService.GetBoolSetting(Not_Allow_User_View_Organization))
+            {
+                if (mem.RoleName.ToLower() == Constant.USER_ROLE_NAME.ToLower())
+                {
+                    pnlCompany.Visible = false;
+                }
+            }
+            
         }
 
         protected void btFind_Click(object sender, EventArgs e)
@@ -180,6 +199,28 @@ namespace Web.Modules
             }
 
             btFind_Click(new object(), new EventArgs());
+        }
+
+        protected void ddlCompany_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int companyId = 0;
+            int.TryParse(ddlCompany.SelectedValue, out companyId);
+            //Business man
+            ddlBusinessManId.Items.Clear();
+            ddlBusinessManId.Items.Add(new ListItem(string.Empty, "0"));
+            List<MemberBO> businessMans = this.MemberService.GetBusinessMen(companyId);
+            foreach (MemberBO m in businessMans)
+            {
+                ddlBusinessManId.Items.Add(new ListItem(m.FullName, m.UserId.ToString()));
+            }
+            //Designner man
+            ddlDesingerId.Items.Clear();
+            ddlDesingerId.Items.Add(new ListItem(string.Empty, "0"));
+            List<MemberBO> designers = this.MemberService.GetDesigners(companyId);
+            foreach (MemberBO m in designers)
+            {
+                ddlDesingerId.Items.Add(new ListItem(m.FullName, m.UserId.ToString()));
+            }
         }
     }
 }

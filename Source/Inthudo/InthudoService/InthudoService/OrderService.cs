@@ -180,5 +180,11 @@ namespace InthudoService
         {
             return orderDao.GetDesignRequests(searchObj);
         }
+
+
+        public List<OrganizationBO> GetAllOrganizations()
+        {
+            return orderDao.GetAllOrganizations();
+        }
     }
 }

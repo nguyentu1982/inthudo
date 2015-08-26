@@ -281,6 +281,7 @@
           <Property Name="DeliveryAddress" Type="nvarchar(max)" />
           <Property Name="ApprovedByCustomer" Type="bit" />
           <Property Name="ApprovedDate" Type="datetime" />
+          <Property Name="VAT" Type="money" />
         </EntityType>
         <EntityType Name="OrderItem">
           <Key>
@@ -987,6 +988,7 @@
           <Property Type="String" Name="DeliveryAddress" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="ApprovedByCustomer" />
           <Property Type="DateTime" Name="ApprovedDate" Precision="3" />
+          <Property Type="Decimal" Name="VAT" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="OrderItem">
           <Key>
@@ -1604,6 +1606,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="InThuDoMNGModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="VAT" ColumnName="VAT" />
                 <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
                 <ScalarProperty Name="ApprovedByCustomer" ColumnName="ApprovedByCustomer" />
                 <ScalarProperty Name="DeliveryAddress" ColumnName="DeliveryAddress" />

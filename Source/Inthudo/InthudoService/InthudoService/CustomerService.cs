@@ -28,5 +28,22 @@ namespace InthudoService
         {
             return customerDao.GetCustomerByOrder(orderId);
         }
+
+
+        public void UpdateCustomer(CustomerBO customer)
+        {
+            customerDao.UpdateCustomer(customer);
+        }
+
+        public int InsertCustomer(CustomerBO customer)
+        {
+            return customerDao.InsertCustomer(customer);
+        }
+
+
+        public void MarkCustomerAsDeleted(int custId)
+        {
+            customerDao.MarkCustomerAsDeleted(custId);
+        }
     }
 }

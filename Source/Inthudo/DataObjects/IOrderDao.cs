@@ -66,5 +66,7 @@ namespace DataObjects
         void MarkManufactureRequestAsDeleted(int manuRequestId);
 
         List<DesignRequestBO> GetDesignRequests(DesignRequestSearch searchObj);
+
+        List<OrganizationBO> GetAllOrganizations();
     }
 }

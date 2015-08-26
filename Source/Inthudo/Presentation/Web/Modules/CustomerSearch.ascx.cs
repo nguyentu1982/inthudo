@@ -41,5 +41,18 @@ namespace Web.Modules
                 
             }
         }
+
+        protected void grvCustomers_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                int custId = int.Parse(e.Row.Cells[0].Text);
+                HyperLink hlEidtCustomer = e.Row.Cells[7].FindControl("hlEidtCustomer") as HyperLink;
+                string url = string.Format("CustomerEdit.aspx?CustId={0}", custId);
+                hlEidtCustomer.Attributes.Add("onclick", "OpenWindow('" + url + "')");
+                hlEidtCustomer.Attributes.Add("class", "a-popup");
+                hlEidtCustomer.Text = "Xem";
+            }
+        }
     }
 }

@@ -81,7 +81,8 @@ namespace DataObjects.EntityFramework
                             Note = o.Note,
                             DeliveryAddress = o.DeliveryAddress,
                             ApprovedByCustomer = o.ApprovedByCustomer,
-                            ApprovedDate = o.ApprovedDate
+                            ApprovedDate = o.ApprovedDate,
+                            VAT=o.VAT,
                         }).FirstOrDefault();
 
                 if (order != null)
@@ -373,6 +374,7 @@ namespace DataObjects.EntityFramework
                 entity.DeliveryAddress = order.DeliveryAddress;
                 entity.ApprovedByCustomer = order.ApprovedByCustomer;
                 entity.ApprovedDate = order.ApprovedDate;
+                entity.VAT = order.VAT;
 
                 context.Entry(entity).State = System.Data.EntityState.Modified;
                 context.SaveChanges();
@@ -397,6 +399,7 @@ namespace DataObjects.EntityFramework
                 var query = (from o in context.Orders
                              join oitem in context.OrderItems on o.OrderId equals oitem.OrderId into orderItemGrop
                              from oitem2 in orderItemGrop.DefaultIfEmpty()
+                             join or in context.UserOrganizationMapppings on o.UserId equals or.UserId
                              //join oStatusMapping in context.OrderStatusMappings on oitem2.OrderItemId equals oStatusMapping.OrderItemId into oStatusMappingGroup
                              //from oStatusMapping2 in oStatusMappingGroup.DefaultIfEmpty()
                              where
@@ -411,6 +414,7 @@ namespace DataObjects.EntityFramework
                              (orderSearchObj.DesignerManId == 0 || oitem2.DesignerId == orderSearchObj.DesignerManId) &&
                              (orderSearchObj.OrderFrom == null || o.OrderDate >= orderSearchObj.OrderFrom)&&
                              (orderSearchObj.OrderTo == null || o.OrderDate <= orderSearchObj.OrderTo)&&
+                             (orderSearchObj.OrganizationId ==0 || or.OrganizationId == orderSearchObj.OrganizationId)&&
                              (o.Deleted == null || o.Deleted == false)
                              select new OrderBO
                              {
@@ -852,6 +856,20 @@ namespace DataObjects.EntityFramework
 
                 return query;
 
+            }
+        }
+
+
+        public List<OrganizationBO> GetAllOrganizations()
+        {
+            using (var context = new InThuDoEntities())
+            {
+                var query = from og in context.Organizations
+                            select new OrganizationBO() { 
+                                OrganizationId = og.OrganizationId,
+                                Name = og.Name
+                            };
+                return query.Distinct().ToList();
             }
         }
     }

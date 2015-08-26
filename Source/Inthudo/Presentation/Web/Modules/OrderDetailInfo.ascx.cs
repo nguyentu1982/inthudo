@@ -2,6 +2,8 @@
 using Common.Utils;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -30,10 +32,8 @@ namespace Web.Modules
             if (orderDetail != null)
             {
                 lbOrderDetailID.Text = orderDetail.OrderItemId.ToString();
-                lbOrderId.Text = orderDetail.OrderId.ToString();       
-                cboxProduct.SelectedValue = orderDetail.ProductId.ToString();
-                cboxProduct.Text = orderDetail.ProductName;
-
+                lbOrderId.Text = orderDetail.OrderId.ToString();
+                txtProduct.Text = orderDetail.ProductName;
                 txtProductRequirement.Text = orderDetail.Specification;
                 ctrltxtQuantity.Value = orderDetail.Quantity;
                 ctrltxtPrice.Value = orderDetail.Price;
@@ -69,27 +69,43 @@ namespace Web.Modules
             }
             //Product dropdown
             List<ProductBO> products = this.ProductService.GetAllProucts();
-            cboxProduct.Items.Clear();
-            foreach (ProductBO p in products)
-            {
-                cboxProduct.Items.Add(new ListItem(p.Name, p.ProductId.ToString()));
-            }            
+            //cboxProduct.Items.Clear();
+            //foreach (ProductBO p in products)
+            //{
+            //    cboxProduct.Items.Add(new ListItem(p.Name, p.ProductId.ToString()));
+            //}            
         }
 
         public OrderDetailBO SaveInfo(int orderId)
         {
-            if (cboxProduct.SelectedValue == string.Empty)
+            if (txtProduct.Text == string.Empty)
             {
-                throw new Exception("Bạn phải nhập sản phẩm");
+                throw new Exception("Bạn phải nhập sản phẩm");                
+            }
+
+            //Add product if not exist
+            int productId = 0;
+            ProductBO product = this.ProductService.GetProductByName(txtProduct.Text);
+
+            if (product == null)
+            {
+                productId = this.ProductService.InsertProduct(txtProduct.Text);
+            }
+            else
+            {
+                productId = product.ProductId;
             }
 
             OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
             if (orderDetail != null)
             {  
-                orderDetail.ProductId = int.Parse(cboxProduct.SelectedValue);
+                orderDetail.ProductId = productId;
                 orderDetail.Specification = txtProductRequirement.Text;
                 orderDetail.Quantity = ctrltxtQuantity.Value;
-                orderDetail.Price = ctrltxtPrice.Value;                
+                orderDetail.Price = ctrltxtPrice.Value;
+                orderDetail.LastEditedOn = DateTime.Now;
+                orderDetail.LastEditedBy = this.LoggedInUserId;
+              
                 this.OrderService.UpdateOrderDetail(orderDetail);
             }
             else
@@ -98,7 +114,7 @@ namespace Web.Modules
                 orderDetail = new OrderDetailBO() 
                 { 
                      OrderId = orderId,
-                     ProductId = int.Parse(cboxProduct.SelectedValue),
+                     ProductId = productId,
                      Specification = txtProductRequirement.Text,
                      Quantity = ctrltxtQuantity.Value,
                      Price = ctrltxtPrice.Value,
@@ -111,6 +127,9 @@ namespace Web.Modules
             }
             return orderDetail;
         }
+
+        
+        
 
         public int OrderId
         { 

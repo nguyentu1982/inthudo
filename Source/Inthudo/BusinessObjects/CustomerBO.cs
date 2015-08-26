@@ -21,6 +21,7 @@ namespace BusinessObjects
         public string FaxNumber { get; set; }
         public Nullable<bool> Deleted { get; set; }
         public string TaxCode { get; set; }
+        public string Note { get; set; }
 
         public virtual MemberBO User { get; set; }
         public virtual MemberBO User1 { get; set; }
