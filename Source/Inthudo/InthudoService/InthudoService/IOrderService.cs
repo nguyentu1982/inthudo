@@ -14,11 +14,9 @@ namespace InthudoService
 
         void UpdateOrderDetail(OrderDetailBO orderDetail);
 
-        void InsertOrderDetail(OrderDetailBO orderDetail);
+        int InsertOrderDetail(OrderDetailBO orderDetail);
 
         OrderBO GetOrderById(int orderId);
-
-        List<OrderDetailBO> GetOrderItemsByOrderId(int p);
 
         List<OrderStatusBO> GetAllOrderStatus();
 

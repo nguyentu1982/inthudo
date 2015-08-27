@@ -10,34 +10,52 @@
 namespace Web.Modules {
     
     
-    public partial class DesignRequestCustomerApprove {
+    public partial class ManufactureCustomerApprove {
         
         /// <summary>
-        /// UpdatePanel2 control.
+        /// UpdatePanel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
-        /// cbApprovedByCustomer control.
+        /// cbCustomerApprove control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox cbApprovedByCustomer;
+        protected global::System.Web.UI.WebControls.CheckBox cbCustomerApprove;
         
         /// <summary>
-        /// txtApprovedByCustomerNote control.
+        /// panelApprovedDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtApprovedByCustomerNote;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelApprovedDate;
+        
+        /// <summary>
+        /// ctrlDatePickerCustomerApproveDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Web.Modules.DatePicker ctrlDatePickerCustomerApproveDate;
+        
+        /// <summary>
+        /// txtNote control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNote;
         
         /// <summary>
         /// btSave control.
@@ -47,14 +65,5 @@ namespace Web.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btSave;
-        
-        /// <summary>
-        /// UpdateProgress1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
     }
 }

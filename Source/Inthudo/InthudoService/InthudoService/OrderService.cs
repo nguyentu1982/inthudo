@@ -24,32 +24,15 @@ namespace InthudoService
         }
 
 
-        public void InsertOrderDetail(OrderDetailBO orderDetail)
+        public int InsertOrderDetail(OrderDetailBO orderDetail)
         {
-            orderDao.InsertOrderDetail(orderDetail);
+            return orderDao.InsertOrderDetail(orderDetail);
         }
 
 
         public OrderBO GetOrderById(int orderId)
         {
             return orderDao.GetOrderById(orderId);
-        }
-
-        
-
-        void IOrderService.UpdateOrderDetail(OrderDetailBO orderDetail)
-        {
-            orderDao.UpdateOrderDetail(orderDetail);
-        }
-
-        void IOrderService.InsertOrderDetail(OrderDetailBO orderDetail)
-        {
-            orderDao.InsertOrderDetail(orderDetail);
-        }
-
-        List<OrderDetailBO> IOrderService.GetOrderItemsByOrderId(int orderId)
-        {
-            return orderDao.GetOrderItemsByOrderId(orderId);
         }
 
 

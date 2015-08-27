@@ -121,9 +121,9 @@ namespace Web.Modules
                      CreatedBy = this.UserId,
                      CreatedOn = DateTime.Now,
                      
-                };                
-               
-                this.OrderService.InsertOrderDetail(orderDetail);
+                };
+
+                orderDetail.OrderItemId = this.OrderService.InsertOrderDetail(orderDetail);
             }
             return orderDetail;
         }

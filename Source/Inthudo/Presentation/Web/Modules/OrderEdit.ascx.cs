@@ -14,7 +14,29 @@ namespace Web.Modules
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Page.IsPostBack)
+            {
+                BindData();
+            }
+        }
 
+        private void BindData()
+        {           
+            List<OrderDetailBO> orderDetails = this.OrderService.GetOrderDetailsByOrderId(this.OrderId);
+
+            int numberOfOrderItemManufactureCompleted = 0;
+            foreach(OrderDetailBO od in orderDetails)
+            {
+                if (od.OrderDetailStatus == OrderDetailStatusEnum.ManufactureCompleted)
+                {
+                    numberOfOrderItemManufactureCompleted++;
+                }
+            }
+
+            if (numberOfOrderItemManufactureCompleted != orderDetails.Count)
+            {
+                pnlOrderCustomerApprove.Visible = false;
+            }
         }
 
         protected void btSave_Click(object sender, EventArgs e)

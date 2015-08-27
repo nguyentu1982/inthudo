@@ -52,7 +52,7 @@ namespace Web.Modules
                 ddlBusinessManId.SelectedValue = order.UserId.ToString();
                 //Order Items
 
-                List<OrderDetailBO> orderItems = this.OrderService.GetOrderItemsByOrderId(this.OrderId);
+                List<OrderDetailBO> orderItems = this.OrderService.GetOrderDetailsByOrderId(this.OrderId);
                 if (orderItems.Count >= 1)
                 {
                     grvOrderDetails.DataSource = orderItems;
@@ -230,10 +230,13 @@ namespace Web.Modules
                     }
                     else
                     {
-                        string ManuRequestURL = string.Format("/ManufactureRequestAdd.aspx?OrderId={0}&OrderDetailId={1}&DesignRequestId={2}", this.OrderId, orderDetailId, ds.DesignRequestId);
-                        manufactureRequestLink.Attributes.Add("onclick", "OpenWindow('" + ManuRequestURL + "')");
-                        manufactureRequestLink.Attributes.Add("class", "a-popup");
-                        manufactureRequestLink.Text = "Tạo";
+                        if (ds.ApprovedByCustomer==true)
+                        {
+                            string ManuRequestURL = string.Format("/ManufactureRequestAdd.aspx?OrderId={0}&OrderDetailId={1}&DesignRequestId={2}", this.OrderId, orderDetailId, ds.DesignRequestId);
+                            manufactureRequestLink.Attributes.Add("onclick", "OpenWindow('" + ManuRequestURL + "')");
+                            manufactureRequestLink.Attributes.Add("class", "a-popup");
+                            manufactureRequestLink.Text = "Tạo";
+                        }
                     }
                 }
                 else

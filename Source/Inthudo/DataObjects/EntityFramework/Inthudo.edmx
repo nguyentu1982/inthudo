@@ -259,6 +259,9 @@
           <Property Name="LastEditedOn" Type="datetime" />
           <Property Name="Deleted" Type="bit" />
           <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="CustomerApproved" Type="bit" />
+          <Property Name="CustomerApprovedDate" Type="datetime" />
+          <Property Name="Note" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -300,6 +303,9 @@
           <Property Name="OrderId" Type="int" Nullable="false" />
           <Property Name="DesignerId" Type="int" />
           <Property Name="VAT" Type="money" />
+          <Property Name="CustomerApproved" Type="bit" />
+          <Property Name="CustomerApprovedDate" Type="datetime" />
+          <Property Name="Note" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="OrderStatusMapping">
           <Key>
@@ -1016,6 +1022,9 @@
           <NavigationProperty Name="OrderStatusMappings" Relationship="InThuDoMNGModel.FK_OrderStatusMapping_OrderItem" FromRole="OrderItem" ToRole="OrderStatusMapping" />
           <NavigationProperty Name="DesignRequests" Relationship="InThuDoMNGModel.FK_Design_OrderItem1" FromRole="OrderItem" ToRole="DesignRequest" />
           <Property Type="Decimal" Name="VAT" Precision="19" Scale="4" />
+          <Property Type="Boolean" Name="CustomerApproved" />
+          <Property Type="DateTime" Name="CustomerApprovedDate" Precision="3" />
+          <Property Type="String" Name="Note" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="OrderStatusMapping">
           <Key>
@@ -1367,6 +1376,9 @@
           <NavigationProperty Name="User" Relationship="InThuDoMNGModel.FK_ManufactureRequest_User" FromRole="ManufactureRequest" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="InThuDoMNGModel.FK_ManufactureRequest_User1" FromRole="ManufactureRequest" ToRole="User" />
           <Property Type="Int32" Name="Quantity" Nullable="false" />
+          <Property Type="Boolean" Name="CustomerApproved" />
+          <Property Type="DateTime" Name="CustomerApprovedDate" Precision="3" />
+          <Property Type="String" Name="Note" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Design_OrderItem1">
           <End Type="InThuDoMNGModel.OrderItem" Role="OrderItem" Multiplicity="1" />
@@ -1630,6 +1642,9 @@
           <EntitySetMapping Name="OrderItems">
             <EntityTypeMapping TypeName="InThuDoMNGModel.OrderItem">
               <MappingFragment StoreEntitySet="OrderItem">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="CustomerApprovedDate" ColumnName="CustomerApprovedDate" />
+                <ScalarProperty Name="CustomerApproved" ColumnName="CustomerApproved" />
                 <ScalarProperty Name="VAT" ColumnName="VAT" />
                 <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
@@ -1719,6 +1734,9 @@
           <EntitySetMapping Name="ManufactureRequests">
             <EntityTypeMapping TypeName="InThuDoMNGModel.ManufactureRequest">
               <MappingFragment StoreEntitySet="ManufactureRequest">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="CustomerApprovedDate" ColumnName="CustomerApprovedDate" />
+                <ScalarProperty Name="CustomerApproved" ColumnName="CustomerApproved" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Deleted" ColumnName="Deleted" />
                 <ScalarProperty Name="LastEditedOn" ColumnName="LastEditedOn" />

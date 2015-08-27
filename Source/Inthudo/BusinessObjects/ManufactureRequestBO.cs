@@ -20,6 +20,9 @@ namespace BusinessObjects
         public Nullable<System.DateTime> LastEditedOn { get; set; }
         public Nullable<bool> Deleted { get; set; }
         public int Quantity { get; set; }
+        public Nullable<bool> CustomerApproved { get; set; }
+        public Nullable<System.DateTime> CustomerApprovedDate { get; set; }
+        public string Note { get; set; }
 
         public virtual DesignRequestBO DesignRequest { get; set; }
         public virtual MemberBO Member { get; set; }

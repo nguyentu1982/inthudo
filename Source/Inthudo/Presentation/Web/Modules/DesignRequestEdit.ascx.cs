@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessObjects;
 using Common.Utils;
+using Common;
 
 namespace Web.Modules
 {
@@ -13,7 +14,22 @@ namespace Web.Modules
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Page.IsPostBack)
+            {
+                BindData();                
+            }
+        }
 
+        private void BindData()
+        {
+            DesignRequestBO designRequest = this.OrderService.GetDesignRequestById(this.DesignRequestId);
+            if (designRequest != null)
+            {
+                if (!designRequest.BeginDate.HasValue || !designRequest.EndDate.HasValue)
+                {
+                    pnlDesignRequestCustomerApprove.Visible = false;
+                }
+            }
         }
 
         protected void btSave_Click(object sender, EventArgs e)

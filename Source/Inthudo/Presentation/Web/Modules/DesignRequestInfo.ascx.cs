@@ -63,9 +63,9 @@ namespace Web.Modules
             lbBusinessMan.Text = mem.FullName;
             CustomerBO cust = this.CustomerService.GetCustomerByOrder(this.OrderId);
             lbCustomer.Text = string.Format("Tên: {0}, Địa chỉ: {1}, SĐT: {2}", cust.Name, cust.Address, cust.Telephone);
-            string orderBy = "UserId ASC";
-            
-            List<MemberBO> mems = this.MemberService.GetMembers(orderBy);
+
+
+            List<MemberBO> mems = this.MemberService.GetDesigners(0);
            
             //Designer man
             ddlDesigner.Items.Clear();

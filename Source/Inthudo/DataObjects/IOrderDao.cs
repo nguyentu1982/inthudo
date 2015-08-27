@@ -13,8 +13,6 @@ namespace DataObjects
 
         OrderBO GetOrderById(int orderId);
 
-        List<OrderDetailBO> GetOrderItemsByOrderId(int orderId);
-
         List<OrderStatusBO> GetAllOrderStatus();
 
         List<DepositMethodBO> GetAllDepositMethod();
@@ -29,7 +27,7 @@ namespace DataObjects
 
         void UpdateOrderDetail(OrderDetailBO orderDetail);
 
-        void InsertOrderDetail(OrderDetailBO orderDetail);
+        int InsertOrderDetail(OrderDetailBO orderDetail);
 
         void UpdateOrderInfo(OrderBO order);
 

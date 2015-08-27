@@ -41,6 +41,7 @@ namespace Web.Modules
                 order.Note = txtNote.Text;
 
                 this.OrderService.UpdateOrderInfo(order);
+                
             }
         }
 

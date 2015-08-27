@@ -13,15 +13,6 @@ namespace Web.Modules {
     public partial class ManufactureRequestEdit {
         
         /// <summary>
-        /// ctrlManufactureRequestInfo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Web.Modules.ManufactureRequestInfo ctrlManufactureRequestInfo;
-        
-        /// <summary>
         /// btSave control.
         /// </summary>
         /// <remarks>
@@ -38,5 +29,50 @@ namespace Web.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btDelete;
+        
+        /// <summary>
+        /// ManufactureTabContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabContainer ManufactureTabContainer;
+        
+        /// <summary>
+        /// pnlManufactureInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabPanel pnlManufactureInfo;
+        
+        /// <summary>
+        /// ctrlManufactureRequestInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Web.Modules.ManufactureRequestInfo ctrlManufactureRequestInfo;
+        
+        /// <summary>
+        /// pnlManufactureCustomerApprove control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabPanel pnlManufactureCustomerApprove;
+        
+        /// <summary>
+        /// ctrlManufactureCustomerApprove control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Web.Modules.ManufactureCustomerApprove ctrlManufactureCustomerApprove;
     }
 }

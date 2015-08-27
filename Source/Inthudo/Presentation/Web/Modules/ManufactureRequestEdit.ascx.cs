@@ -13,7 +13,22 @@ namespace Web.Modules
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Page.IsPostBack)
+            {
+                BindData();
+            }
+        }
 
+        private void BindData()
+        {
+            ManufactureRequestBO manu = this.OrderService.GetManufactureRequestById(this.ManufactureRequestId);
+            if (manu != null)
+            {
+                if (!manu.BeginDate.HasValue || !manu.EndDate.HasValue)
+                {
+                    pnlManufactureCustomerApprove.Visible = false;
+                }
+            }
         }
 
         protected void btSave_Click(object sender, EventArgs e)

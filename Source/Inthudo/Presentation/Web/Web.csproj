@@ -234,6 +234,7 @@
     <Content Include="Modules\DesignRequests.ascx" />
     <Content Include="Modules\EmailTextBox.ascx" />
     <Content Include="Modules\Login.ascx" />
+    <Content Include="Modules\ManufactureCustomerApprove.ascx" />
     <Content Include="Modules\ManufactureRequestAdd.ascx" />
     <Content Include="Modules\ManufactureRequestEdit.ascx" />
     <Content Include="Modules\ManufactureRequestInfo.ascx" />
@@ -503,6 +504,13 @@
     </Compile>
     <Compile Include="Modules\DesignRequests.ascx.designer.cs">
       <DependentUpon>DesignRequests.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ManufactureCustomerApprove.ascx.cs">
+      <DependentUpon>ManufactureCustomerApprove.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\ManufactureCustomerApprove.ascx.designer.cs">
+      <DependentUpon>ManufactureCustomerApprove.ascx</DependentUpon>
     </Compile>
     <Compile Include="Modules\ManufactureRequestAdd.ascx.cs">
       <DependentUpon>ManufactureRequestAdd.ascx</DependentUpon>

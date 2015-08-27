@@ -14,7 +14,7 @@
         </ContentTemplate>
     </ajaxToolkit:TabPanel>
 
-    <ajaxToolkit:TabPanel runat="server" ID="pnlOrderCustomerApprove" HeaderText="Khách hàng duyệt đơn hàng">
+    <ajaxToolkit:TabPanel runat="server" ID="pnlOrderCustomerApprove" HeaderText="Khách hàng duyệt đơn hàng"  Visible="false">
         <ContentTemplate>
             <inthudo:OrderCustomerApprove runat="server" ID="ctrlOrderCustomerApprove"></inthudo:OrderCustomerApprove>
         </ContentTemplate>

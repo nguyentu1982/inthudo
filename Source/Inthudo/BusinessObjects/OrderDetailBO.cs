@@ -20,6 +20,7 @@ namespace BusinessObjects
         ManufactureRequestCreated = 6,
         Manufacturing = 7,
         ManufactureCompleted = 8,
+        CustomerApproved=9,
     }
 
     public class OrderDetailBO : BusinessObject
@@ -78,6 +79,8 @@ namespace BusinessObjects
                         return "Đang sản xuất";
                     case OrderDetailStatusEnum.ManufactureCompleted:
                         return "Đã sản xuất xong";
+                    case OrderDetailStatusEnum.CustomerApproved:
+                        return "Khách hàng đã duyệt sản phẩm";
                     default: return "Đơn hàng không tồn tại / Chưa hoàn thành";
                 }
             }
