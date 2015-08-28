@@ -51,6 +51,12 @@ namespace Web.Modules
                 }
 
                 panelOrderDetailId.Visible = false;
+
+                if (this.Reproduce == 1)
+                {
+                    ctrltxtPrice.Value = 0;
+                    ctrltxtPrice.Enabled = false;
+                }
             }
         }
 
@@ -137,6 +143,14 @@ namespace Web.Modules
             {
                 return CommonHelper.QueryStringInt("OrderId");
             }            
+        }
+
+        public int Reproduce
+        {
+            get
+            {
+                return CommonHelper.QueryStringInt("Reproduce");
+            }
         }
 
         public int OrderDetailId

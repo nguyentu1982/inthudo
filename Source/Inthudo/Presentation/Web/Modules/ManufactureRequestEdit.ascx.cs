@@ -26,7 +26,7 @@ namespace Web.Modules
             {
                 if (!manu.BeginDate.HasValue || !manu.EndDate.HasValue)
                 {
-                    pnlManufactureCustomerApprove.Visible = false;
+                    pnlManufactureCustomerApprove.Enabled = false;
                 }
             }
         }

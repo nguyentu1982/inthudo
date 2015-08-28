@@ -28,8 +28,37 @@ namespace Web.Modules
                 bool.TryParse(manu.CustomerApproved.ToString(), out isCustomerApproved);
                 cbCustomerApprove.Checked = isCustomerApproved;
                 panelApprovedDate.Visible = isCustomerApproved;
+
                 ctrlDatePickerCustomerApproveDate.SelectedDate = manu.CustomerApprovedDate;
                 txtNote.Text = manu.Note;
+
+                bool isFailed = false;
+                bool.TryParse(manu.IsFailed.ToString(), out isFailed);
+                cbCustomerRefuse.Checked = isFailed;
+
+                if (manu.IsFailed == true)
+                {
+                    panelApprovedDate.Visible = false;
+                    panelApproveDetail.Visible = false;                    
+                }
+
+                if (manu.CustomerApproved == true)
+                {
+                    int approvedQuantity = 0;
+                    int.TryParse(manu.CustomerApprovedQuantity.ToString(), out approvedQuantity);
+                    ctrlNumericTextBoxQuantity.Value = approvedQuantity;
+
+                    decimal approvedPrice = 0;
+                    decimal.TryParse(manu.CustomerApprovedPrice.ToString(), out approvedPrice);
+                    ctrlDecimalTextBoxPrice.Value = approvedPrice;
+                }
+                else
+                {
+                    OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
+                    ctrlNumericTextBoxQuantity.Value = orderDetail.Quantity;
+                    ctrlDecimalTextBoxPrice.Value = orderDetail.Price;
+                }
+                
             }
         }
 
@@ -39,13 +68,18 @@ namespace Web.Modules
             if (manu != null)
             {
                 manu.CustomerApproved = cbCustomerApprove.Checked;
+                manu.IsFailed = cbCustomerRefuse.Checked;
                 if (cbCustomerApprove.Checked)
                 {
                     manu.CustomerApprovedDate = DateTime.Now;
+                    manu.CustomerApprovedQuantity = ctrlNumericTextBoxQuantity.Value;
+                    manu.CustomerApprovedPrice = ctrlDecimalTextBoxPrice.Value;
                 }
                 else
                 {
                     manu.CustomerApprovedDate = null;
+                    manu.CustomerApprovedQuantity = 0;
+                    manu.CustomerApprovedPrice = 0;
                 }
                 manu.Note = txtNote.Text;
 
@@ -60,5 +94,84 @@ namespace Web.Modules
                 return CommonHelper.QueryStringInt("ManufactureRequestId");
             }
         }
+
+
+        public int DesignRequestId
+        {
+            get
+            {
+                return CommonHelper.QueryStringInt("DesignRequestId");
+            }
+        }
+
+
+        public int OrderDetailId
+        {
+            get
+            {
+                return CommonHelper.QueryStringInt("OrderDetailId");
+            }
+        }
+
+        public int OrderId
+        {
+            get
+            {
+                return CommonHelper.QueryStringInt("OrderId");
+            }
+        }
+
+        protected void cbCustomerRefuese_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCustomerRefuse.Checked == true)
+            {
+                cbCustomerApprove.Checked = false;
+                ctrlNumericTextBoxQuantity.Value = 0;                
+                ctrlDecimalTextBoxPrice.Value = 0;
+                panelApproveDetail.Visible = false;
+                panelApprovedDate.Visible = false;
+            }
+            else
+            {
+                cbCustomerApprove.Checked = true;
+            }
+        }
+
+        protected void cbCustomerApprove_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCustomerApprove.Checked == true)
+            {
+                cbCustomerRefuse.Checked = false;
+                panelApproveDetail.Visible = true;
+                
+                ManufactureRequestBO manu = this.OrderService.GetManufactureRequestById(this.ManufactureRequestId);
+                if (manu != null)
+                {
+                    if (manu.CustomerApproved == true)
+                    {
+                        int approvedQuantity = 0;
+                        decimal approvedPrice = 0;
+                        int.TryParse(manu.CustomerApprovedQuantity.ToString(), out approvedQuantity);
+                        decimal.TryParse(manu.CustomerApprovedPrice.ToString(), out approvedPrice);
+                        ctrlNumericTextBoxQuantity.Value = approvedQuantity;
+                        ctrlDecimalTextBoxPrice.Value = approvedPrice;
+                        
+                    }
+                    else
+                    {
+                        OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
+                        ctrlNumericTextBoxQuantity.Value = orderDetail.Quantity;
+                        ctrlDecimalTextBoxPrice.Value = orderDetail.Price;
+                        panelApprovedDate.Visible = false;
+                    }
+                }
+            }
+            else
+            {
+                cbCustomerRefuse.Checked = true;
+            }
+        }
+
+
     }
 }

@@ -139,6 +139,24 @@ namespace Web.Modules {
         protected global::System.Web.UI.WebControls.Button btAddNewOrderDetail;
         
         /// <summary>
+        /// panelOrderDetailAddButtonReProduce control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelOrderDetailAddButtonReProduce;
+        
+        /// <summary>
+        /// btAddNewOrderDetailReproduce control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btAddNewOrderDetailReproduce;
+        
+        /// <summary>
         /// UpdatePanel1 control.
         /// </summary>
         /// <remarks>

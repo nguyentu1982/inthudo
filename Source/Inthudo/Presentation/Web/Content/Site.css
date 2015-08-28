@@ -19,6 +19,10 @@
 .a-popup {
     cursor:pointer;
 }
+
+.clear {
+    clear:both;
+}
 /*Customize*/
 
 

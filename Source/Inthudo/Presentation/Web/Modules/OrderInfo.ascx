@@ -77,7 +77,7 @@
                     <asp:HyperLink ID="hlManufactureRequest" runat="server"></asp:HyperLink>
                 </ItemTemplate>
             </asp:TemplateField>
-
+            <asp:BoundField HeaderText="Trạng thái" DataField="OrderDetailStatusString" />
         </Columns>
     </asp:GridView>
 </div>
@@ -86,11 +86,15 @@
 <div runat="server" id="panelOrderDetailAdd">
     <inthudo:OrderDetailInfo runat="server" ID="ctrlOrderDetailInfo" ActionButtonIsDisplay="false" />
 </div>
-<div runat="server" id="panelOrderDetailAddButton">
+<div runat="server" id="panelOrderDetailAddButton" style="float:left">
     <asp:Button runat="server" ID="btAddNewOrderDetail" Text="Tạo nội dung chi tiết đơn đặt hàng mới" OnClientClick="OpenOrderDetailAddWindow(); return false" />
 </div>
+<div runat="server" id="panelOrderDetailAddButtonReProduce" Visible="false">
+    <asp:Button runat="server" ID="btAddNewOrderDetailReproduce" Text="Tạo nội dung làm lại cho sản phẩm lỗi" OnClientClick="OpenOrderDetailAddWindowReproduce(); return false"  />
+</div>
 
-<asp:UpdatePanel ID="UpdatePanel1" runat="server">
+<div class="clear"></div>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
         <div id="panelOrderSumary" runat="server">
     <h3></h3>
@@ -117,6 +121,7 @@
         <asp:AsyncPostBackTrigger ControlID="ctrlDepositAmount" EventName="TextChanged" />
     </Triggers>
 </asp:UpdatePanel>
+
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -145,6 +150,15 @@
         var left = (screen.width / 2) - (w / 2);
         var h = screen.height - 100;
         window.open("/OrderDetailAdd.aspx?OrderId=" + orderId + "&AddNew=1", "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=10, left=" + left + " width=" + w + ", height=" + h + "");
+
+    }
+
+    function OpenOrderDetailAddWindowReproduce() {
+        var orderId = getParameterByName("OrderId");
+        var w = 600;
+        var left = (screen.width / 2) - (w / 2);
+        var h = screen.height - 100;
+        window.open("/OrderDetailAdd.aspx?OrderId=" + orderId + "&AddNew=1&Reproduce=1", "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=10, left=" + left + " width=" + w + ", height=" + h + "");
 
     }
 

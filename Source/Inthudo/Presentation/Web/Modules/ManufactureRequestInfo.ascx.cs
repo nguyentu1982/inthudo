@@ -39,6 +39,11 @@ namespace Web.Modules
             else
             {
                 panelManufactureRequestID.Visible = false;
+                OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
+                if (orderDetail != null)
+                {
+                    ctrlNumbericTextBoxQuantity.Value = orderDetail.Quantity;
+                }
             }
         }
 

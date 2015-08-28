@@ -143,6 +143,18 @@ namespace Web.Modules
             }
         }
 
+        public bool Enabled
+        {
+            get 
+            {
+                return txtValue.Enabled;
+            }
+            set 
+            {
+                txtValue.Enabled = value;
+            }
+        }
+
         public event EventHandler TextChanged;
 
         protected void txtValue_TextChanged(object sender, EventArgs e)

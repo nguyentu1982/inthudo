@@ -262,6 +262,9 @@
           <Property Name="CustomerApproved" Type="bit" />
           <Property Name="CustomerApprovedDate" Type="datetime" />
           <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="CustomerApprovedQuantity" Type="int" />
+          <Property Name="CustomerApprovedPrice" Type="money" />
+          <Property Name="IsFailed" Type="bit" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -1379,6 +1382,9 @@
           <Property Type="Boolean" Name="CustomerApproved" />
           <Property Type="DateTime" Name="CustomerApprovedDate" Precision="3" />
           <Property Type="String" Name="Note" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CustomerApprovedQuantity" />
+          <Property Type="Decimal" Name="CustomerApprovedPrice" Precision="19" Scale="4" />
+          <Property Type="Boolean" Name="IsFailed" />
         </EntityType>
         <Association Name="FK_Design_OrderItem1">
           <End Type="InThuDoMNGModel.OrderItem" Role="OrderItem" Multiplicity="1" />
@@ -1734,6 +1740,9 @@
           <EntitySetMapping Name="ManufactureRequests">
             <EntityTypeMapping TypeName="InThuDoMNGModel.ManufactureRequest">
               <MappingFragment StoreEntitySet="ManufactureRequest">
+                <ScalarProperty Name="IsFailed" ColumnName="IsFailed" />
+                <ScalarProperty Name="CustomerApprovedPrice" ColumnName="CustomerApprovedPrice" />
+                <ScalarProperty Name="CustomerApprovedQuantity" ColumnName="CustomerApprovedQuantity" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="CustomerApprovedDate" ColumnName="CustomerApprovedDate" />
                 <ScalarProperty Name="CustomerApproved" ColumnName="CustomerApproved" />

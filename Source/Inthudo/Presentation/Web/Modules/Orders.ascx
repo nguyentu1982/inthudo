@@ -26,10 +26,11 @@
     <asp:DropDownList ID="ddlOrderDetailStatus" runat="server"></asp:DropDownList>
     <br />
     <span class="lbtitle">Trạng thái đơn hàng: </span>
-    <asp:CheckBoxList ID="cblOrderStatus" runat="server" RepeatColumns="3" CssClass="order-status">
+    <asp:CheckBoxList ID="cblOrderStatus" runat="server" RepeatColumns="4" CssClass="order-status">
         <asp:ListItem Value="0">Tất cả</asp:ListItem>
         <asp:ListItem Value="1">Chưa hoàn thành</asp:ListItem>
         <asp:ListItem Value="2">Đã hoàn thành</asp:ListItem>
+        <asp:ListItem Value="3">Đơn hàng có lỗi</asp:ListItem>
     </asp:CheckBoxList>
     <br />
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">

@@ -354,17 +354,28 @@ namespace DataObjects.EntityFramework
                     }
 
                     int i = 0;
+                    int j = 0;
                     foreach (OrderDetailStatusEnum odse in statuslist)
                     {
                         if (odse == OrderDetailStatusEnum.CustomerApproved)
                         {
                             i++;
                         }
+
+                        if (odse == OrderDetailStatusEnum.CustomerRefused)
+                        {
+                            j++;
+                        }
                     }
 
                     if (i == statuslist.Count)
                     {
                         status = OrderStatusEnum.Completed;
+                    }
+
+                    if (j > 0)
+                    {
+                        status = OrderStatusEnum.IsFailed;
                     }
                 }
                 return status;
@@ -448,6 +459,11 @@ namespace DataObjects.EntityFramework
                                     if ((mr.Deleted == null || mr.Deleted == false) && (mr.BeginDate != null) && (mr.EndDate != null)&&(mr.CustomerApproved==true))
                                     {
                                         status = OrderDetailStatusEnum.CustomerApproved;
+                                    }
+
+                                    if ((mr.Deleted == null || mr.Deleted == false) && (mr.BeginDate != null) && (mr.EndDate != null) && (mr.IsFailed == true))
+                                    {
+                                        status = OrderDetailStatusEnum.CustomerRefused;
                                     }
                                 }
                             }
@@ -780,7 +796,10 @@ namespace DataObjects.EntityFramework
                            Quantity = m.Quantity,
                            CustomerApproved = m.CustomerApproved,
                            CustomerApprovedDate = m.CustomerApprovedDate,
-                           Note = m.Note
+                           Note = m.Note,
+                           CustomerApprovedPrice = m.CustomerApprovedPrice,
+                           CustomerApprovedQuantity = m.CustomerApprovedQuantity,
+                           IsFailed = m.IsFailed
                        }).FirstOrDefault();
             }
         }
@@ -801,6 +820,9 @@ namespace DataObjects.EntityFramework
                 ma.CustomerApproved = manu.CustomerApproved;
                 ma.CustomerApprovedDate = manu.CustomerApprovedDate;
                 ma.Note = manu.Note;
+                ma.CustomerApprovedPrice = manu.CustomerApprovedPrice;
+                ma.CustomerApprovedQuantity = manu.CustomerApprovedQuantity;
+                ma.IsFailed = manu.IsFailed;
 
                 context.SaveChanges();
             }
@@ -855,7 +877,10 @@ namespace DataObjects.EntityFramework
                     Quantity = query.Quantity,
                     CustomerApproved = query.CustomerApproved,
                     CustomerApprovedDate = query.CustomerApprovedDate,
-                    Note = query.Note
+                    Note = query.Note,
+                    CustomerApprovedPrice = query.CustomerApprovedPrice,
+                    CustomerApprovedQuantity = query.CustomerApprovedQuantity,
+                    IsFailed = query.IsFailed
                 };
                 
             }

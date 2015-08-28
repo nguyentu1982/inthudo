@@ -10,7 +10,8 @@ namespace BusinessObjects
     public enum OrderStatusEnum
     {
         NotCompleted=1,
-        Completed=2
+        Completed=2,
+        IsFailed =3,
 
     }
     
@@ -94,6 +95,8 @@ namespace BusinessObjects
                         return "Hoàn thành";
                     case OrderStatusEnum.NotCompleted:
                         return "Chưa hoàn thành";
+                    case OrderStatusEnum.IsFailed:
+                        return "Đơn hàng có lỗi";
                     default : return "Chưa hoàn thành";
                 }
             }

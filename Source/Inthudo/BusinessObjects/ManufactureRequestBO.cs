@@ -23,6 +23,9 @@ namespace BusinessObjects
         public Nullable<bool> CustomerApproved { get; set; }
         public Nullable<System.DateTime> CustomerApprovedDate { get; set; }
         public string Note { get; set; }
+        public Nullable<int> CustomerApprovedQuantity { get; set; }
+        public Nullable<decimal> CustomerApprovedPrice { get; set; }
+        public Nullable<bool> IsFailed { get; set; }
 
         public virtual DesignRequestBO DesignRequest { get; set; }
         public virtual MemberBO Member { get; set; }

@@ -31,6 +31,15 @@ namespace Web.Modules {
         protected global::System.Web.UI.WebControls.CheckBox cbCustomerApprove;
         
         /// <summary>
+        /// cbCustomerRefuse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbCustomerRefuse;
+        
+        /// <summary>
         /// panelApprovedDate control.
         /// </summary>
         /// <remarks>
@@ -47,6 +56,33 @@ namespace Web.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Web.Modules.DatePicker ctrlDatePickerCustomerApproveDate;
+        
+        /// <summary>
+        /// panelApproveDetail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelApproveDetail;
+        
+        /// <summary>
+        /// ctrlNumericTextBoxQuantity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Web.Modules.NumericTextBox ctrlNumericTextBoxQuantity;
+        
+        /// <summary>
+        /// ctrlDecimalTextBoxPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Web.Modules.DecimalTextBox ctrlDecimalTextBoxPrice;
         
         /// <summary>
         /// txtNote control.

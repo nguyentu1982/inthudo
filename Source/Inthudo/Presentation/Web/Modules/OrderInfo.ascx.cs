@@ -64,6 +64,11 @@ namespace Web.Modules
                     grvOrderDetails.Visible = false;
                     btAddNewOrderDetail.Visible = false;
                 }
+
+                if (order.OrderStatus == OrderStatusEnum.IsFailed)
+                {
+                    panelOrderDetailAddButtonReProduce.Visible = true;
+                }
             }
             else
             {

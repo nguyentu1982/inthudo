@@ -35,13 +35,14 @@
 </div>
 
 <script type="text/javascript">
-    function confirmDelete() {
+    function confirmDeleteManufactureRequest() {
         if (confirm("Bạn có chắc chắn xóa?") == true)
             return true;
         else
             return false;
     }
 </script>
+
 <script type="text/javascript">
     function RefreshParent() {
         if (window.opener != null && !window.opener.closed) {
