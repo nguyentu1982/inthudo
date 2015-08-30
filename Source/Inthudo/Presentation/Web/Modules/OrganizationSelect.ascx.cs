@@ -30,6 +30,7 @@ namespace Web.Modules
                 grvUserOrganiztion.Visible = true;
                 grvUserOrganiztion.DataSource = orgs;
                 grvUserOrganiztion.DataBind();
+                lbUserNotInAnyOrganization.Visible = false;
             }
             else
             {
@@ -46,7 +47,7 @@ namespace Web.Modules
                 ddlOrgainzation.Items.Add(new ListItem(o.Name, o.OrganizationId.ToString()));
             }
 
-            lbUserNotInAnyOrganization.Visible = !grvUserOrganiztion.Visible; 
+           
         }
 
         public int MemeberId

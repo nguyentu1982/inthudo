@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessObjects;
+using Common;
 
 namespace Web.Modules
 {
@@ -22,6 +23,7 @@ namespace Web.Modules
         private void BindData()
         {
             ManufactureRequestBO manu = this.OrderService.GetManufactureRequestById(this.ManufactureRequestId);
+            OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
             if (manu != null)
             {
                 bool isCustomerApproved = false;
@@ -53,12 +55,22 @@ namespace Web.Modules
                     ctrlDecimalTextBoxPrice.Value = approvedPrice;
                 }
                 else
-                {
-                    OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
+                {                    
                     ctrlNumericTextBoxQuantity.Value = orderDetail.Quantity;
                     ctrlDecimalTextBoxPrice.Value = orderDetail.Price;
                 }
-                
+
+                List<WebControl> buttons = new List<WebControl>();
+                buttons.Add(btSave);
+                base.CheckNotAllowOtherUserEditOrder(buttons, manu.CreatedBy);
+
+               
+                if (orderDetail.OrderDetailStatus >= OrderDetailStatusEnum.CustomerApproved)
+                {                    
+                    List<WebControl> manufactureRequestTaskControls = new List<WebControl>();
+                    manufactureRequestTaskControls.Add(btSave);
+                    base.DisableDeleteAndEditButton(manufactureRequestTaskControls);                    
+                }
             }
         }
 

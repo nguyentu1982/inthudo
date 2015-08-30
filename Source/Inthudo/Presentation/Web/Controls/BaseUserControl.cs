@@ -1,10 +1,12 @@
 ﻿using BusinessObjects;
+using Common;
 using InthudoService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace Web
 {
@@ -27,7 +29,47 @@ namespace Web
             ShowError(exc.Message, string.Empty);
             
         }
-        
+
+
+        protected void CheckNotAllowOtherUserEditOrder(List<WebControl> buttons, int createdBy)
+        {
+            //Check roles
+            if (this.SettingService.GetBoolSetting(Constant.Setting.Not_Allow_Other_User_Edit_Order))
+            {
+                if (LoggedInUserId != createdBy && LoggedInMember.RoleName.ToLower()!= Constant.ADMIN_ROLE_NAME.ToLower())
+                {
+                    foreach (WebControl b in buttons)
+                    {
+                        if (b is Button || b is HyperLink)
+                        {
+                            b.Visible = false;
+                        }
+                        else
+                        {
+                            b.Enabled = false;
+                        }
+                    }
+                }
+            }
+        }
+
+        protected void DisableDeleteAndEditButton(List<WebControl> controls)
+        {
+            if (LoggedInMember.RoleName.ToLower() != Constant.ADMIN_ROLE_NAME.ToLower())
+            {
+                foreach (WebControl c in controls)
+                {
+                    if (c is Button || c is HyperLink)
+                    {
+                        c.Visible = false;
+                    }
+                    else
+                    {
+                        c.Enabled = false;
+                    }
+                }
+            }
+        }
 
         protected void ShowError(string message, string completeMessage)
         {
@@ -57,6 +99,14 @@ namespace Web
             {
                 MemberBO mem = this.MemberService.GetMember(this.LoggedInUserId);
                 return mem.DepartmentName;
+            }
+        }
+
+        public MemberBO LoggedInMember
+        {
+            get
+            {
+                return this.MemberService.GetMember(this.LoggedInUserId);
             }
         }
 

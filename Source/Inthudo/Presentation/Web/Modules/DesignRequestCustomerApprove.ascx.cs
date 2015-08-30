@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessObjects;
+using Common;
 
 namespace Web.Modules
 {
@@ -28,6 +29,18 @@ namespace Web.Modules
                 bool.TryParse(designRequest.ApprovedByCustomer.ToString(), out approvedByCustomer);
                 cbApprovedByCustomer.Checked = approvedByCustomer;
                 txtApprovedByCustomerNote.Text = designRequest.Note;
+
+                List<WebControl> buttons = new List<WebControl>();
+                buttons.Add(btSave);
+                base.CheckNotAllowOtherUserEditOrder(buttons, designRequest.CreatedBy);
+
+                OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
+                if (orderDetail.OrderDetailStatus >= OrderDetailStatusEnum.DesignApprovedByCustomer)
+                {                    
+                    List<WebControl> designRequestTaskControls = new List<WebControl>();
+                    designRequestTaskControls.Add(btSave);
+                    base.DisableDeleteAndEditButton(designRequestTaskControls);                    
+                }
             }
         }
 
@@ -49,6 +62,14 @@ namespace Web.Modules
             get
             {
                 return CommonHelper.QueryStringInt("DesignRequestId");
+            }
+        }
+
+        public int OrderDetailId
+        {
+            get
+            {
+                return CommonHelper.QueryStringInt("OrderDetailId");
             }
         }
     }

@@ -13,7 +13,14 @@ namespace Common
 
         public const string USER_ROLE_NAME = "User";
         public const string ADMIN_ROLE_NAME = "Admin";
+        public const string SUPPERVISOR_ROLE_NAME = "Suppervisor";
 
         public const string QUERY_STRING_CUST_ID = "CustId";
+
+        public class Setting
+        {
+            public const string Not_Allow_Select_Business_Man_When_CreateOrder = "NotAllowSelectBusinessManWhenCreateOrder";
+            public const string Not_Allow_Other_User_Edit_Order = "NotAllowOtherUserEditOrder";
+        }
     }
 }

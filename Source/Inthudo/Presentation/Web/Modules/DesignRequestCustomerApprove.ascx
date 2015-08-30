@@ -8,18 +8,11 @@
             <span class="lbtitle">Ghi chú</span>
             <asp:TextBox ID="txtApprovedByCustomerNote" runat="server" TextMode="MultiLine"></asp:TextBox>
             <br />
-            <asp:Button runat="server" ID="btSave" OnClick="btSave_Click" Text="Lưu" OnClientClick="confirmChangeCustomerApproveStatus()" />
+            
         </div>
     </ContentTemplate>
-    <Triggers>
-        <asp:AsyncPostBackTrigger ControlID="btSave" EventName="Click" />
-    </Triggers>
 </asp:UpdatePanel>
-<asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel2">
-    <ProgressTemplate>
-        <div>Đang xử lý yêu cầu...</div>
-    </ProgressTemplate>
-</asp:UpdateProgress>
+<asp:Button runat="server" ID="btSave" OnClick="btSave_Click" Text="Lưu" OnClientClick="return confirmChangeCustomerApproveStatus()" />
 
 <script type="text/javascript">
     function confirmChangeCustomerApproveStatus() {

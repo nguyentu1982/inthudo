@@ -28,8 +28,8 @@ namespace Web.Modules
             {
                 try
                 {
-                    Save();
-                    Response.Redirect("Members.aspx");
+                    MemberBO mem = Save();
+                    Response.Redirect("Members.aspx?MemberId=" + mem.UserId.ToString());
                 }
                 catch (Exception ex)
                 {

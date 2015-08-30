@@ -32,13 +32,13 @@ namespace Web.Modules
                 ddlProducts.Items.Add(new ListItem( p.Name, p.ProductId.ToString()));
             }
             //Status
-            ddlDesignRequestStatus.Items.Clear();
-            ddlDesignRequestStatus.Items.Add(new ListItem(string.Empty, "0"));
-            List<OrderStatusBO> status = this.OrderService.GetAllOrderStatus();
-            foreach (OrderStatusBO s in status)
-            {
-                ddlDesignRequestStatus.Items.Add(new ListItem(s.Name, s.OrderStatusId.ToString()));
-            }
+            //ddlDesignRequestStatus.Items.Clear();
+            //ddlDesignRequestStatus.Items.Add(new ListItem(string.Empty, "0"));
+            //List<OrderStatusBO> status = this.OrderService.GetAllOrderStatus();
+            //foreach (OrderStatusBO s in status)
+            //{
+            //    ddlDesignRequestStatus.Items.Add(new ListItem(s.Name, s.OrderStatusId.ToString()));
+            //}
             //Designer
             ddlDesigner.Items.Clear();
             ddlDesigner.Items.Add(new ListItem(string.Empty, "0"));
@@ -93,13 +93,25 @@ namespace Web.Modules
                 RequestTo = requestTo,
                 CustomerId = custId,
                 ProductId = productId,
-                OrderDetailStatus = (OrderDetailStatusEnum)designRequestStatus,
+                DesignRequestStatus = (DesignRequestStatusEnum)designRequestStatus,
                 DesignerId = designerId
             };
 
             List<DesignRequestBO> designRequests = this.OrderService.GetDesignRequests(searchObj);
             grvDesignRequest.DataSource = designRequests;
             grvDesignRequest.DataBind();
+
+            List<OrderDetailBO> orderDetail = new List<OrderDetailBO>();
+            foreach(DesignRequestBO dr in designRequests)
+            {
+                orderDetail.Add(this.OrderService.GetOrderDetailById(dr.OrderItemId));    
+            }
+
+            lbTotalRequest.Text = designRequests.Count.ToString();
+            lbTotalDesignRequestCreated.Text = designRequests.Where(od => od.DesignRequestStatus == DesignRequestStatusEnum.DesignRequestCreated).Count().ToString();
+            lbTotalDesignRequestDesigning.Text = designRequests.Where(od => od.DesignRequestStatus == DesignRequestStatusEnum.Designing).Count().ToString();
+            lbTotalDesignRequestWaitForApproved.Text = designRequests.Where(od => od.DesignRequestStatus == DesignRequestStatusEnum.DesignCopmleted).Count().ToString();
+            lbTotalDesignRequestApproved.Text = designRequests.Where(od => od.DesignRequestStatus == DesignRequestStatusEnum.DesignApprovedByCustomer).Count().ToString();
         }
 
         protected void grvDesignRequest_RowDataBound(object sender, GridViewRowEventArgs e)

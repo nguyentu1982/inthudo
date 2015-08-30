@@ -76,6 +76,51 @@ namespace Web.Modules {
         protected global::System.Web.UI.WebControls.Button btFind;
         
         /// <summary>
+        /// lbTotalRequest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbTotalRequest;
+        
+        /// <summary>
+        /// lbTotalDesignRequestCreated control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbTotalDesignRequestCreated;
+        
+        /// <summary>
+        /// lbTotalDesignRequestDesigning control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbTotalDesignRequestDesigning;
+        
+        /// <summary>
+        /// lbTotalDesignRequestWaitForApproved control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbTotalDesignRequestWaitForApproved;
+        
+        /// <summary>
+        /// lbTotalDesignRequestApproved control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbTotalDesignRequestApproved;
+        
+        /// <summary>
         /// grvDesignRequest control.
         /// </summary>
         /// <remarks>

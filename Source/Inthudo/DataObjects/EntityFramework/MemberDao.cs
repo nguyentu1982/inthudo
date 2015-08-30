@@ -182,8 +182,16 @@ namespace DataObjects.EntityFramework
         {
             using(var context = new InThuDoEntities())
             {
-                var member = context.Users.Where(m=> m.UserName == user && m.Password == pass &&(m.Deteted == null || m.Deteted ==false));
-                if(member.Count() == 1)
+                var query = (from u in context.Users
+                            join d in context.LibDepartments on u.DepartmentId equals d.DepartmentId
+                            join o in context.UserOrganizationMapppings on u.UserId equals o.UserId
+                            where 
+                            (u.Deteted == false || u.Deteted == null)
+                            &&(u.UserName == user) 
+                            &&(u.Password==pass)
+                            select u).Distinct().ToList();
+
+                if (query.Count() == 1)
                 {
                     return true;    
                 }
@@ -263,12 +271,16 @@ namespace DataObjects.EntityFramework
             {
                 var member = context.Users.FirstOrDefault(c => c.UserName == userName) as User;
                 var result = Mapper.Map<User, MemberBO>(member);
-                result.Department = new DepartmentBO() { 
-                    DepartmentId = member.LibDepartment.DepartmentId,
-                    Code = member.LibDepartment.Code,
-                    Name = member.LibDepartment.Name,
-                    Description = member.LibDepartment.Description
-                };
+                if (result != null)
+                {
+                    result.Department = new DepartmentBO()
+                    {
+                        DepartmentId = member.LibDepartment.DepartmentId,
+                        Code = member.LibDepartment.Code,
+                        Name = member.LibDepartment.Name,
+                        Description = member.LibDepartment.Description
+                    };
+                }
                 return result;
             }
         }

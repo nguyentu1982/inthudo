@@ -30,6 +30,21 @@ namespace Web.Modules
                     pnlDesignRequestCustomerApprove.Visible = false;
                 }
             }
+
+            //Check whether other user can edit order
+            List<WebControl> buttons = new List<WebControl>();
+            buttons.Add(btSave);
+            buttons.Add(btDelete);
+            base.CheckNotAllowOtherUserEditOrder(buttons, designRequest.CreatedBy);
+
+            OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
+            if (orderDetail.OrderDetailStatus >= OrderDetailStatusEnum.Designing)
+            {
+                List<WebControl> controls = new List<WebControl>();
+                controls.Add(btSave);
+                controls.Add(btDelete);
+                base.DisableDeleteAndEditButton(controls);               
+            }
         }
 
         protected void btSave_Click(object sender, EventArgs e)

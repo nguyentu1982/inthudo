@@ -1,4 +1,5 @@
 ﻿using BusinessObjects;
+using Common;
 using Common.Utils;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,16 @@ namespace Web.Modules
             if (numberOfOrderItemManufactureCompleted != orderDetails.Count)
             {
                 pnlOrderCustomerApprove.Visible = false;
+            }
+
+            //Check whether other user can edit order
+            OrderBO order = this.OrderService.GetOrderById(this.OrderId);
+            if (this.LoggedInUserId != order.CreatedBy)
+            {
+                List<WebControl> buttons = new List<WebControl>();
+                buttons.Add(btSave);
+                buttons.Add(btDelete);
+                base.CheckNotAllowOtherUserEditOrder(buttons, order.CreatedBy);
             }
         }
 

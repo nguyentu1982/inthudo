@@ -4,6 +4,17 @@
     display:inline-block;
 }
 
+.lbtitle-total {
+    min-width:120px;
+    display:inline-block;
+}
+
+.total {
+    min-width:20px;
+    display:inline-block;
+    margin-left:10px;
+}
+
 .order-status {
     display:inline-block;
 }
@@ -22,6 +33,19 @@
 
 .clear {
     clear:both;
+}
+
+.search-input {
+    float: left;
+    border: 1px solid#c0c0c0;
+    padding: 10px;
+}
+
+.total-result {
+    border: 1px solid #c0c0c0;
+    float: left;
+    margin-left: 10px;
+    padding: 10px;
 }
 /*Customize*/
 

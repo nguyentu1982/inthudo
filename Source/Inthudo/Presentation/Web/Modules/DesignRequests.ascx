@@ -10,13 +10,33 @@
     <inthudo:CustomerSelect runat="server" ID="ctrlCustomerSelect" />
     <span class="lbtitle">Sản phẩm</span><asp:DropDownList runat="server" ID="ddlProducts"></asp:DropDownList>
     <br />
-    <span class="lbtitle">Trạng thái</span><asp:DropDownList runat="server" ID="ddlDesignRequestStatus"></asp:DropDownList>
+    <span class="lbtitle">Trạng thái</span><asp:DropDownList runat="server" ID="ddlDesignRequestStatus">
+        <asp:ListItem></asp:ListItem>
+        <asp:ListItem Value="1">Yêu cầu mới</asp:ListItem>
+        <asp:ListItem Value="2">Đang thiết kế</asp:ListItem>
+        <asp:ListItem Value="3">Thiết kế xong</asp:ListItem>
+        <asp:ListItem Value="4">Khách đã duyệt</asp:ListItem>
+    </asp:DropDownList>
     <br />
     <span class="lbtitle">NV Thiết kế</span><asp:DropDownList runat="server" ID="ddlDesigner"></asp:DropDownList>
+
+    <div class="buttons">
+        <asp:Button runat="server" ID="btFind" Text="Tìm" OnClick="btFind_Click" />
+    </div>
 </div>
-<div class="buttons">
-    <asp:Button runat="server" ID="btFind" Text="Tìm" OnClick="btFind_Click" />
+<div class="total-result">
+    <span class="lbtitle-total">Tổng số yêu cầu</span><asp:Label runat="server" ID="lbTotalRequest" CssClass="total"></asp:Label>
+    <h3>Trong đó</h3>
+    <span class="lbtitle-total">Yêu cầu mới</span><asp:Label runat="server" ID="lbTotalDesignRequestCreated" CssClass="total"></asp:Label>
+    <br />
+    <span class="lbtitle-total">Đang thiết kế</span><asp:Label runat="server" ID="lbTotalDesignRequestDesigning" CssClass="total"></asp:Label>
+    <br />
+    <span class="lbtitle-total">Đã thiết kế xong</span><asp:Label runat="server" ID="lbTotalDesignRequestWaitForApproved" CssClass="total"></asp:Label>
+    <br />
+    <span class="lbtitle-total">Khách đã duyệt mẫu</span><asp:Label runat="server" ID="lbTotalDesignRequestApproved" CssClass="total"></asp:Label>
+    <br />
 </div>
+<div class="clear"></div>
 <div class="design-request-grid">
     <asp:GridView ID="grvDesignRequest" runat="server" AutoGenerateColumns="False" OnRowDataBound="grvDesignRequest_RowDataBound">
         <Columns>
@@ -24,7 +44,7 @@
             <asp:BoundField HeaderText="Đơn hàng" DataField="OrderDate" DataFormatString="{0:dd-MM-yyyy}" />
             <asp:BoundField HeaderText="Sản phẩm" DataField="ProductName" />
             <asp:BoundField HeaderText="Yêu cầu" DataField="Description" HtmlEncode="False" />
-            <asp:BoundField HeaderText="Trạng thái" DataField="OrderDetailStatusString" />
+            <asp:BoundField HeaderText="Trạng thái" DataField="DesignRequestStatusString" />
             <asp:BoundField HeaderText="Nhận việc" DataField="BeginDate" DataFormatString="{0:dd-MM-yyyy}" />
             <asp:BoundField HeaderText="Hoàn thành" DataField="EndDate" DataFormatString="{0:dd-MM-yyyy}" />
             <asp:TemplateField>

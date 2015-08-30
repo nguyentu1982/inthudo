@@ -112,7 +112,18 @@ namespace Web.Modules
                     pnlCompany.Visible = false;
                 }
             }
-            
+
+
+            // Suppervisor role
+            if (mem.RoleName.ToLower() == Constant.SUPPERVISOR_ROLE_NAME.ToLower())
+            {
+                List<OrganizationBO> orgsOfMem = this.MemberService.GetOrganizationsByMemberId(mem.UserId);
+                if (orgsOfMem.Count == 1)
+                {
+                    ddlCompany.SelectedValue = orgsOfMem[0].OrganizationId.ToString();
+                    ddlCompany.Enabled = false;
+                }
+            }
         }
 
         protected void btFind_Click(object sender, EventArgs e)
@@ -165,6 +176,18 @@ namespace Web.Modules
             List<OrderBO> orders = this.OrderService.GetOrders(orderSearchObj);
             grvOrders.DataSource = orders;
             grvOrders.DataBind();
+
+            lbNumberOfOrders.Text = orders.Count.ToString();
+            lbOrderTotal.Text = orders.Sum(o => o.OrderTotal).ToString("C0");
+
+            lbNotCompletedNumberOfOrders.Text = orders.Where(o=>o.OrderStatus == OrderStatusEnum.NotCompleted).Count().ToString();
+            lbNotCompletedOrderTotal.Text = orders.Where(o => o.OrderStatus == OrderStatusEnum.NotCompleted).Sum(o => o.OrderTotal).ToString("C0");
+
+            lbCompletedNumberOfOrders.Text = orders.Where(o => o.OrderStatus == OrderStatusEnum.Completed).Count().ToString();
+            lbCompletedOrderTotal.Text = orders.Where(o => o.OrderStatus == OrderStatusEnum.Completed).Sum(o => o.OrderTotal).ToString("C0");
+
+            lbFailedNumberOfOrders.Text = orders.Where(o => o.OrderStatus == OrderStatusEnum.IsFailed).Count().ToString();
+            lbFailedOrderTotal.Text = orders.Where(o => o.OrderStatus == OrderStatusEnum.IsFailed).Sum(o => o.OrderTotal).ToString("C0");
         }
 
         protected void btAdd_Click(object sender, EventArgs e)

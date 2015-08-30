@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessObjects;
 using Common.Utils;
+using Common;
 
 namespace Web.Modules
 {
@@ -28,6 +29,22 @@ namespace Web.Modules
                 {
                     pnlManufactureCustomerApprove.Enabled = false;
                 }
+            }
+
+            //Check whether other user can edit order
+            List<WebControl> buttons = new List<WebControl>();
+            buttons.Add(btSave);
+            buttons.Add(btDelete);
+            base.CheckNotAllowOtherUserEditOrder(buttons, manu.CreatedBy);
+
+            OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
+            if (orderDetail.OrderDetailStatus >= OrderDetailStatusEnum.ManufactureCompleted)
+            {
+                List<WebControl> manufactureRequestTaskControls = new List<WebControl>();
+                manufactureRequestTaskControls.Add(btSave);
+                manufactureRequestTaskControls.Add(btDelete);
+                base.DisableDeleteAndEditButton(manufactureRequestTaskControls);
+                
             }
         }
 
@@ -64,6 +81,14 @@ namespace Web.Modules
             get
             {
                 return CommonHelper.QueryStringInt("ManufactureRequestId");
+            }
+        }
+
+        public int OrderDetailId
+        {
+            get
+            {
+                return CommonHelper.QueryStringInt("OrderDetailId");
             }
         }
     }

@@ -69,6 +69,15 @@ namespace Web.Modules
                 {
                     panelOrderDetailAddButtonReProduce.Visible = true;
                 }
+
+                //Check whether other user can edit order
+                if (this.LoggedInUserId != order.CreatedBy)
+                {
+                    List<WebControl> buttons = new List<WebControl>();
+                    buttons.Add(btAddNewOrderDetail);
+                    buttons.Add(btAddNewOrderDetailReproduce);
+                    base.CheckNotAllowOtherUserEditOrder(buttons, order.CreatedBy);
+                }
             }
             else
             {
@@ -117,7 +126,7 @@ namespace Web.Modules
 
             if (this.SettingService.GetBoolSetting(Not_Allow_Select_Business_Man_When_Create_Order))
             {
-                if (mem.RoleName.ToLower() == Constant.USER_ROLE_NAME.ToLower())
+                if (mem.RoleName.ToLower() == Constant.USER_ROLE_NAME.ToLower() || mem.RoleName.ToLower() == Constant.SUPPERVISOR_ROLE_NAME.ToLower())
                 {
                     ddlBusinessManId.SelectedValue = mem.UserId.ToString();
                     ddlBusinessManId.Enabled = false;
@@ -213,6 +222,7 @@ namespace Web.Modules
             {
                 //Design Request
                 int orderDetailId = int.Parse(e.Row.Cells[0].Text);
+                OrderDetailBO od = this.OrderService.GetOrderDetailById(orderDetailId);
                 DesignRequestBO ds = this.OrderService.GetDesignRequestByOrderDetailId(orderDetailId);
                 HyperLink designRequestHyperLink = e.Row.Cells[7].FindControl("hlDesignRequest") as HyperLink;
                 HyperLink manufactureRequestLink = e.Row.Cells[8].FindControl("hlManufactureRequest") as HyperLink;
@@ -241,6 +251,9 @@ namespace Web.Modules
                             manufactureRequestLink.Attributes.Add("onclick", "OpenWindow('" + ManuRequestURL + "')");
                             manufactureRequestLink.Attributes.Add("class", "a-popup");
                             manufactureRequestLink.Text = "Tạo";
+                            List<WebControl> buttons = new List<WebControl>();
+                            buttons.Add(manufactureRequestLink);
+                            CheckNotAllowOtherUserEditOrder(buttons, od.CreatedBy);
                         }
                     }
                 }
@@ -250,10 +263,28 @@ namespace Web.Modules
                     designRequestHyperLink.Attributes.Add("onclick", "OpenWindow('" + url + "')");
                     designRequestHyperLink.Attributes.Add("class", "a-popup");
                     designRequestHyperLink.Text = "Tạo";
+                    List<WebControl> buttons = new List<WebControl>();
+                    buttons.Add(designRequestHyperLink);
+                    CheckNotAllowOtherUserEditOrder(buttons, od.CreatedBy);
                 }
 
-                
 
+                //Delete button disable if not allow other user edit
+                Button deleteButton = e.Row.Cells[6].FindControl("btDeleteOrderDetail") as Button;
+                //Check whether other user can edit order
+                List<WebControl> buts = new List<WebControl>();
+                buts.Add(deleteButton);
+                CheckNotAllowOtherUserEditOrder(buts, od.CreatedBy);
+
+                if (od.OrderDetailStatus >= OrderDetailStatusEnum.Designing)
+                {
+                    if (LoggedInMember.RoleName.ToLower() != Constant.ADMIN_ROLE_NAME.ToLower())
+                    {
+                        List<WebControl> controls = new List<WebControl>();
+                        controls.Add(deleteButton);
+                        this.DisableDeleteAndEditButton(controls);
+                    }
+                }
             }
         }
 

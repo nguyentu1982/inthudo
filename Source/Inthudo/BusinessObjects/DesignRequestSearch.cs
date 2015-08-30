@@ -17,7 +17,7 @@ namespace BusinessObjects
         public DateTime? RequestTo { get; set; }
         public int CustomerId { get; set; }
         public int ProductId { get; set; }
-        public OrderDetailStatusEnum OrderDetailStatus { get; set; }
+        public DesignRequestStatusEnum DesignRequestStatus { get; set; }
         public int DesignerId { get; set; }
     }
 }

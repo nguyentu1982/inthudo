@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BusinessObjects;
+using Common;
 
 namespace Web.Modules
 {
@@ -12,8 +14,32 @@ namespace Web.Modules
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!Page.IsPostBack)
+            {
+                BindData();
+            }
         }
+
+        private void BindData()
+        {
+            //Check whether other user can edit order
+            OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
+            
+            List<WebControl> buttons = new List<WebControl>();
+            buttons.Add(btSave);
+            buttons.Add(btDelete);
+            this.CheckNotAllowOtherUserEditOrder(buttons, orderDetail.CreatedBy);
+
+            if (orderDetail.OrderDetailStatus >= OrderDetailStatusEnum.Designing)
+            {                
+                List<WebControl> controls = new List<WebControl>();
+                controls.Add(btSave);
+                controls.Add(btDelete);
+                this.DisableDeleteAndEditButton(controls);               
+            }
+        }
+
+        
 
         protected void btSave_Click(object sender, EventArgs e)
         {

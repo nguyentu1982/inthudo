@@ -49,10 +49,10 @@
             <asp:BoundField HeaderText="Đơn giá" DataField="Price"  DataFormatString="{0:C0}"  />
             <asp:TemplateField>
                 <HeaderTemplate>
-                    <asp:Label runat="server" Text="Sửa" ID="lbEditOrderDetail"></asp:Label>
+                    <asp:Label runat="server" Text="Xem" ID="lbEditOrderDetail"></asp:Label>
                 </HeaderTemplate>
                 <ItemTemplate>
-                    <a onclick="OpenOrderDetailEditWindow(<%#Eval("OrderItemId")%>); return false" class="a-popup">Sửa</a>
+                    <a onclick="OpenOrderDetailEditWindow(<%#Eval("OrderItemId")%>); return false" class="a-popup">Xem</a>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField>

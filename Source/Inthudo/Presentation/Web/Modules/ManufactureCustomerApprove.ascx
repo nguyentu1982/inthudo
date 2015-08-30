@@ -29,7 +29,7 @@
         <asp:AsyncPostBackTrigger ControlID="cbCustomerApprove" EventName="CheckedChanged" />
     </Triggers>
 </asp:UpdatePanel>
-<asp:Button runat="server" ID="btSave" OnClientClick="AreYouSure()" OnClick="btSave_Click" Text="Lưu" />
+<asp:Button runat="server" ID="btSave" OnClientClick="return AreYouSure()" OnClick="btSave_Click" Text="Lưu" />
 
 <script type="text/javascript">
     function AreYouSure() {

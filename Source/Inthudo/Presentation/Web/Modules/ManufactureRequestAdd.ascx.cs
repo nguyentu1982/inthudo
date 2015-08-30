@@ -13,7 +13,15 @@ namespace Web.Modules
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Page.IsPostBack)
+            {
+                BindData();
+            }
+        }
 
+        private void BindData()
+        {
+            
         }
 
         protected void btSave_Click(object sender, EventArgs e)

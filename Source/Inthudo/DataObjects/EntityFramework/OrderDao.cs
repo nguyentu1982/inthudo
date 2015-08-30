@@ -255,7 +255,10 @@ namespace DataObjects.EntityFramework
                                        ProductName = od.Product.Name
                                    }).FirstOrDefault();
 
-
+                if (orderDetail != null)
+                {
+                    orderDetail.OrderDetailStatus = this.GetOrderDetailStatus(orderDetail.OrderItemId);
+                }
                 return orderDetail;
             }
         }
@@ -750,12 +753,11 @@ namespace DataObjects.EntityFramework
                     od.OrderDetailStatus = this.GetOrderDetailStatus(od.OrderItemId);
                 }
 
-                if (searchObj.OrderDetailStatus != 0)
+                if (searchObj.DesignRequestStatus != 0)
                 {
-                    query = (from q in query
-                             join od in orderDetails on q.OrderItemId equals od.OrderItemId
+                    query = (from q in query                          
                              where
-                             od.OrderDetailStatus == searchObj.OrderDetailStatus
+                             q.DesignRequestStatus == searchObj.DesignRequestStatus
                              select q).ToList();
 
                 }

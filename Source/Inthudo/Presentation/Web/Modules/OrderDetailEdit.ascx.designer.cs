@@ -13,15 +13,6 @@ namespace Web.Modules {
     public partial class OrderDetailEdit {
         
         /// <summary>
-        /// ctrlOrderDetailInfo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Web.Modules.OrderDetailInfo ctrlOrderDetailInfo;
-        
-        /// <summary>
         /// btSave control.
         /// </summary>
         /// <remarks>
@@ -47,5 +38,14 @@ namespace Web.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btDelete;
+        
+        /// <summary>
+        /// ctrlOrderDetailInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Web.Modules.OrderDetailInfo ctrlOrderDetailInfo;
     }
 }

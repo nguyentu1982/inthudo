@@ -4,7 +4,7 @@
 
 
 <h1>Quản lý đơn hàng</h1>
-<div class="search-input" style="float:left">
+<div class="search-input" style="float: left">
     <span class="lbtitle">Từ ngày</span>
     <inthudo:DatePicker runat="server" ID="ctrlDatePickerFrom" Format="dd/MM/yyyy" />
     <span class="lbtitle">Đến ngày</span><inthudo:DatePicker runat="server" ID="ctrlDatePickerTo" Format="dd/MM/yyyy" />
@@ -41,29 +41,37 @@
             <span class="lbtitle">Nhân viên TK:</span>
             <asp:DropDownList ID="ddlDesingerId" runat="server"></asp:DropDownList>
             <br />
-            <div runat ="server" id="pnlCompany">
-                 <span class="lbtitle">Công ty</span> <asp:DropDownList runat="server" ID="ddlCompany" AutoPostBack="true" OnSelectedIndexChanged="ddlCompany_SelectedIndexChanged"></asp:DropDownList>
+            <div runat="server" id="pnlCompany">
+                <span class="lbtitle">Công ty</span>
+                <asp:DropDownList runat="server" ID="ddlCompany" AutoPostBack="true" OnSelectedIndexChanged="ddlCompany_SelectedIndexChanged"></asp:DropDownList>
             </div>
         </ContentTemplate>
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="ddlCompany" EventName="SelectedIndexChanged" />
         </Triggers>
     </asp:UpdatePanel>
-    
-   
-</div>
-<div class="total-result" style="float:right;min-width:600px">
-    <span class="lbtitle">Số đơn hàng: </span><asp:Label runat="server" ID="lbNumberOfOrders"></asp:Label>
-    <br />
-    <span class="lbtitle">Doanh số: </span><asp:Label runat="server" ID="lbOrderTotal"></asp:Label>
-</div>
-<div class="buttons">
-    <asp:Button runat="server" ID="btFind" Text="Tìm" OnClick="btFind_Click" />
-<asp:Button ID="btAdd" runat="server" Text="Tạo đơn hàng" OnClick="btAdd_Click" />
-<asp:Button ID="btDelete" runat="server" Text="Xóa đơn hàng đã chọn" OnClick="btDelete_Click" OnClientClick="return confirmDelete()" />
-<br />
-</div>
 
+    <div class="buttons">
+        <asp:Button runat="server" ID="btFind" Text="Tìm" OnClick="btFind_Click" />
+        <asp:Button ID="btAdd" runat="server" Text="Tạo đơn hàng" OnClick="btAdd_Click" />
+        <asp:Button ID="btDelete" runat="server" Text="Xóa đơn hàng đã chọn" OnClick="btDelete_Click" OnClientClick="return confirmDelete()" />
+    </div>
+</div>
+<div class="total-result">
+    <span class="lbtitle-total">Số đơn hàng </span>
+    <asp:Label runat="server" ID="lbNumberOfOrders" CssClass="total"></asp:Label>
+    <span class="lbtitle-total">Doanh số </span>
+    <asp:Label runat="server" ID="lbOrderTotal" CssClass="total"></asp:Label>
+    <h3>Trong đó</h3>
+    <span class="lbtitle-total">Chưa hoàn thành</span><asp:Label runat="server" ID="lbNotCompletedNumberOfOrders" CssClass="total"></asp:Label>
+    <span class="lbtitle-total">Doanh số</span><asp:Label runat="server" ID="lbNotCompletedOrderTotal" CssClass="total"></asp:Label>
+    <br />
+    <span class="lbtitle-total">Hoàn thành</span><asp:Label runat="server" ID="lbCompletedNumberOfOrders" CssClass="total"></asp:Label>
+    <span class="lbtitle-total">Doanh số</span><asp:Label runat="server" ID="lbCompletedOrderTotal" CssClass="total"></asp:Label>
+    <br />
+    <span class="lbtitle-total">Lỗi</span><asp:Label runat="server" ID="lbFailedNumberOfOrders" CssClass="total"></asp:Label>
+     <span class="lbtitle-total">Doanh số</span><asp:Label runat="server" ID="lbFailedOrderTotal" CssClass="total"></asp:Label>
+</div>
 <div class="orders-grid">
     <asp:GridView ID="grvOrders" runat="server" AutoGenerateColumns="false">
         <Columns>

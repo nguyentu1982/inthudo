@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessObjects;
 using Common.Utils;
+using Common;
 
 namespace Web.Modules
 {
@@ -21,8 +22,8 @@ namespace Web.Modules
 
         private void BindData()
         {
-            cbStartWork.Attributes.Add("onclick", "confirmChangeDesignRequestStatus()");
-            cbCompleteWork.Attributes.Add("onclick", "confirmChangeDesignRequestStatus()");
+            cbStartWork.Attributes.Add("onclick", "if(!confirmChangeDesignRequestStatus()) return false");
+            cbCompleteWork.Attributes.Add("onclick", "if(!confirmChangeDesignRequestStatus()) return false");
             DesignRequestBO dr = this.OrderService.GetDesignRequestById(this.DesignRequestId);
             if (dr != null)
             {
@@ -39,6 +40,22 @@ namespace Web.Modules
                     ctrlDatePickerEndDate.Visible = true;
                     ctrlDatePickerEndDate.SelectedDate = dr.EndDate;
                 }
+
+                List<WebControl> controls = new List<WebControl>();
+                controls.Add(cbStartWork);
+                controls.Add(cbCompleteWork);
+                int designerId = dr.CreatedBy;
+                int.TryParse(dr.DesignerId.ToString(), out designerId);
+                base.CheckNotAllowOtherUserEditOrder(controls, designerId);
+
+                OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
+                if (orderDetail.OrderDetailStatus >= OrderDetailStatusEnum.DesignCopmleted)
+                {                    
+                    List<WebControl> designRequestTaskControls = new List<WebControl>();
+                    designRequestTaskControls.Add(cbStartWork);
+                    designRequestTaskControls.Add(cbCompleteWork);
+                    base.DisableDeleteAndEditButton(designRequestTaskControls);                    
+                }
             }            
         }
 
@@ -47,6 +64,14 @@ namespace Web.Modules
             get
             {
                 return CommonHelper.QueryStringInt("DesignRequestId");
+            }
+        }
+
+        public int OrderDetailId
+        {
+            get
+            {
+                return CommonHelper.QueryStringInt("OrderDetailId");
             }
         }
 

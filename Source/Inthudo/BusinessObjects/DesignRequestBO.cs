@@ -5,6 +5,15 @@ using System.Text;
 
 namespace BusinessObjects
 {
+    public enum DesignRequestStatusEnum
+    {
+        NotExist =0,
+        DesignRequestCreated = 1,
+        Designing = 2,
+        DesignCopmleted = 3,
+        DesignApprovedByCustomer = 4
+    }
+
     public class DesignRequestBO :BusinessObject
     {
         public int DesignRequestId { get; set; }
@@ -33,6 +42,58 @@ namespace BusinessObjects
         public string OrderDetailStatusString {
             get {
                 return OrderItem.OrderDetailStatusString;
+            }
+        }
+
+        public DesignRequestStatusEnum DesignRequestStatus
+        {
+            get { 
+                DesignRequestStatusEnum status = DesignRequestStatusEnum.NotExist;
+                
+                if(!BeginDate.HasValue && !EndDate.HasValue)
+                {
+                    status = DesignRequestStatusEnum.DesignRequestCreated;
+                }
+
+                if(BeginDate.HasValue && !EndDate.HasValue)
+                {
+                    status = DesignRequestStatusEnum.Designing;
+                }
+
+                if(BeginDate.HasValue && EndDate.HasValue && (ApprovedByCustomer == null || ApprovedByCustomer==false) )
+                {
+                    status = DesignRequestStatusEnum.DesignCopmleted;
+                }
+
+                if(BeginDate.HasValue && EndDate.HasValue && ApprovedByCustomer == true )
+                {
+                    status = DesignRequestStatusEnum.DesignApprovedByCustomer;
+                }
+                
+
+                return status;
+            }
+        }
+
+        public string DesignRequestStatusString
+        {
+            get
+            { 
+                string result = "Trạng thái không tồn tại";
+
+                switch (DesignRequestStatus)
+                { 
+                    case DesignRequestStatusEnum.DesignRequestCreated:
+                        return "Yêu cầu mới";
+                    case DesignRequestStatusEnum.Designing:
+                        return "Đang thiết kế";
+                    case DesignRequestStatusEnum.DesignCopmleted:
+                        return "Đã thiết kế xong";
+                    case DesignRequestStatusEnum.DesignApprovedByCustomer:
+                        return "Khách hàng đã duyệt mẫu TK";
+                }
+
+                return result;
             }
         }
     }
