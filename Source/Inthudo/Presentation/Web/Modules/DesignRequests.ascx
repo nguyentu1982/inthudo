@@ -16,6 +16,7 @@
         <asp:ListItem Value="2">Đang thiết kế</asp:ListItem>
         <asp:ListItem Value="3">Thiết kế xong</asp:ListItem>
         <asp:ListItem Value="4">Khách đã duyệt</asp:ListItem>
+        <asp:ListItem Value="5">Khách KHÔNG duyệt</asp:ListItem>
     </asp:DropDownList>
     <br />
     <span class="lbtitle">NV Thiết kế</span><asp:DropDownList runat="server" ID="ddlDesigner"></asp:DropDownList>
@@ -34,6 +35,8 @@
     <span class="lbtitle-total">Đã thiết kế xong</span><asp:Label runat="server" ID="lbTotalDesignRequestWaitForApproved" CssClass="total"></asp:Label>
     <br />
     <span class="lbtitle-total">Khách đã duyệt mẫu</span><asp:Label runat="server" ID="lbTotalDesignRequestApproved" CssClass="total"></asp:Label>
+    <br />
+    <span class="lbtitle-total">Khách KHÔNG duyệt mẫu</span><asp:Label runat="server" ID="lbTotalDesignRequestNOTApproved" CssClass="total"></asp:Label>
     <br />
 </div>
 <div class="clear"></div>

@@ -169,5 +169,11 @@ namespace InthudoService
         {
             return orderDao.GetAllOrganizations();
         }
+
+
+        public List<ProductApprovedBO> GetApprovedProductByOrderId(int orderId)
+        {
+            return orderDao.GetApprovedProductByOrderId(orderId);
+        }
     }
 }

@@ -66,5 +66,7 @@ namespace DataObjects
         List<DesignRequestBO> GetDesignRequests(DesignRequestSearch searchObj);
 
         List<OrganizationBO> GetAllOrganizations();
+
+        List<ProductApprovedBO> GetApprovedProductByOrderId(int orderId);
     }
 }

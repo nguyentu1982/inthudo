@@ -101,6 +101,7 @@ namespace DataObjects.EntityFramework
                 entity.ApprovedByCustomer = order.ApprovedByCustomer;
                 entity.ApprovedDate = order.ApprovedDate;
                 entity.VAT = order.VAT;
+                entity.Note = order.Note;
 
                 context.Entry(entity).State = System.Data.EntityState.Modified;
                 context.SaveChanges();
@@ -708,8 +709,8 @@ namespace DataObjects.EntityFramework
                              (searchObj.CustomerId == 0 || o.CustomerId == searchObj.CustomerId) &&
                              (searchObj.ProductId == 0 || od.ProductId == searchObj.ProductId) &&
                              (searchObj.DesignerId == 0 || dr.DesignerId == searchObj.DesignerId) &&
-                             (searchObj.RequestFrom == null || dr.OrderItem.Order.OrderDate >= searchObj.RequestFrom) &&
-                             (searchObj.RequestTo == null || dr.OrderItem.Order.OrderDate <= searchObj.RequestTo)
+                             (searchObj.RequestFrom == null || dr.BeginDate >= searchObj.RequestFrom) &&
+                             (searchObj.RequestTo == null || dr.EndDate <= searchObj.RequestTo)
                              select new DesignRequestBO()
                              {
                                  DesignRequestId = dr.DesignRequestId,
@@ -901,6 +902,32 @@ namespace DataObjects.EntityFramework
         }
 
         #endregion ManufactureRequest
-   
+
+        #region Approved Products
+
+        public List<ProductApprovedBO> GetApprovedProductByOrderId(int orderId)
+        {
+            using (var context = new InThuDoEntities())
+            { 
+                var query = (from o in context.Orders
+                            join od in context.OrderItems on o.OrderId equals od.OrderId
+                            join dr in context.DesignRequests on od.OrderItemId equals dr.OrderItemId
+                            join mr in context.ManufactureRequests on dr.DesignRequestId equals mr.DesignRequestId
+                            where 
+                            (od.Deleted == false || od.Deleted == null)&&
+                            (dr.Deleted == false || dr.Deleted == null)&&
+                            (mr.Deleted == false || mr.Deleted == null)&&
+                            o.OrderId == orderId
+                            select new ProductApprovedBO(){
+                                ProductName = od.Product.Name,
+                                Quantity = mr.CustomerApprovedQuantity,
+                                Price = mr.CustomerApprovedPrice
+                            }).Distinct().ToList();
+                return query;
+
+            }
+        }
+
+        #endregion Approved Products
     }
 }

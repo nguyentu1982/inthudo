@@ -70,6 +70,13 @@ namespace Web.Modules
                     panelOrderDetailAddButtonReProduce.Visible = true;
                 }
 
+                List<ProductApprovedBO> approvedProducts = this.OrderService.GetApprovedProductByOrderId(this.OrderId);
+                grvApprovedProducts.DataSource = approvedProducts;
+                grvApprovedProducts.DataBind();
+
+                lbDepositAmount.Text = ctrlDepositAmount.Value.ToString("C0");
+                lbRemainAmount.Text = (total - ctrlDepositAmount.Value).ToString("C0");
+
                 //Check whether other user can edit order
                 if (this.LoggedInUserId != order.CreatedBy)
                 {
@@ -156,6 +163,7 @@ namespace Web.Modules
                 order.ExpectedCompleteDate = ctrlDatePickerEstimatedComplteDate.SelectedDate;
                 order.DeliveryAddress = txtDeliveryAddress.Text;
                 order.VAT = ctrlDecimalTextBoxVAT.Value;
+                order.Note = txtNote.Text;
                 
                 using(TransactionScope scope = new TransactionScope())
                 {                    
@@ -182,7 +190,8 @@ namespace Web.Modules
                     CreatedDate = DateTime.Now,
                     ExpectedCompleteDate = ctrlDatePickerEstimatedComplteDate.SelectedDate,
                     DeliveryAddress = txtDeliveryAddress.Text,
-                    VAT = ctrlDecimalTextBoxVAT.Value
+                    VAT = ctrlDecimalTextBoxVAT.Value,
+                    Note = txtNote.Text
                 };
 
                 using (TransactionScope scope = new TransactionScope())
@@ -313,6 +322,25 @@ namespace Web.Modules
                 lbRemaining.Text = (orderTotalIncludedVat - deposit).ToString("C0");
 
 
+            }
+        }
+
+        decimal total = 0;
+        protected void grvApprovedProducts_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+           
+            NumberFormatInfo NFI = new NumberFormatInfo();
+           // NFI.CurrencySymbol = "đ";
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                string subtotal = ((Label)e.Row.FindControl("lbSubTotal")).Text;
+                total += Common.Utils.CommonHelper.Parse(subtotal);
+            }
+
+            if (e.Row.RowType == DataControlRowType.Footer)
+            {
+                Label totalFooter = (Label)e.Row.FindControl("lbTotalFooter");
+                totalFooter.Text = string.Format("{0:C0}", total);
             }
         }
     }

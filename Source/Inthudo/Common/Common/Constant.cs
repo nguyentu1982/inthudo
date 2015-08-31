@@ -21,6 +21,7 @@ namespace Common
         {
             public const string Not_Allow_Select_Business_Man_When_CreateOrder = "NotAllowSelectBusinessManWhenCreateOrder";
             public const string Not_Allow_Other_User_Edit_Order = "NotAllowOtherUserEditOrder";
+            public const string Allow_Designer_Input_Approved_By_Customer_Info = "AllowDesignerInputApprovedByCustomerInfo";
         }
     }
 }

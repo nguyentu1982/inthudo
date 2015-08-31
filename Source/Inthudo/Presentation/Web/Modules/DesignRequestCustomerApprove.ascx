@@ -3,7 +3,10 @@
 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
     <ContentTemplate>
         <div>
-            <span class="lbtitle">Khách hàng đã duyệt mẫu TK</span><asp:CheckBox ID="cbApprovedByCustomer" runat="server" />
+            <asp:CheckBoxList ID="cblApprovedByCustomer" runat="server" RepeatColumns="2">
+                <asp:ListItem Value="1">Khách hàng đã duyệt mẫu TK</asp:ListItem>
+                <asp:ListItem Value="0">Khách hàng không duyệt mẫu thiết kế</asp:ListItem>
+            </asp:CheckBoxList>
             <br />
             <span class="lbtitle">Ghi chú</span>
             <asp:TextBox ID="txtApprovedByCustomerNote" runat="server" TextMode="MultiLine"></asp:TextBox>
@@ -20,6 +23,20 @@
             return true;
         else
             return false;
+    }
+
+    function radioMe(e) {
+        if (!e) e = window.event;
+        var sender = e.target || e.srcElement;
+
+        if (sender.nodeName != 'INPUT') return;
+        var checker = sender;
+        var chkBox = document.getElementById('<%= cblApprovedByCustomer.ClientID %>');
+        var chks = chkBox.getElementsByTagName('INPUT');
+        for (i = 0; i < chks.length; i++) {
+            if (chks[i] != checker)
+                chks[i].checked = false;
+        }
     }
 </script>
 

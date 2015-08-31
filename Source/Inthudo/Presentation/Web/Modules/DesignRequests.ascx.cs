@@ -112,6 +112,7 @@ namespace Web.Modules
             lbTotalDesignRequestDesigning.Text = designRequests.Where(od => od.DesignRequestStatus == DesignRequestStatusEnum.Designing).Count().ToString();
             lbTotalDesignRequestWaitForApproved.Text = designRequests.Where(od => od.DesignRequestStatus == DesignRequestStatusEnum.DesignCopmleted).Count().ToString();
             lbTotalDesignRequestApproved.Text = designRequests.Where(od => od.DesignRequestStatus == DesignRequestStatusEnum.DesignApprovedByCustomer).Count().ToString();
+            lbTotalDesignRequestNOTApproved.Text = designRequests.Where(od => od.DesignRequestStatus == DesignRequestStatusEnum.DesignNotApproved).Count().ToString();
         }
 
         protected void grvDesignRequest_RowDataBound(object sender, GridViewRowEventArgs e)

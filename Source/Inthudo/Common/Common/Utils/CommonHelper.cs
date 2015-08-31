@@ -35,6 +35,11 @@ namespace Common.Utils
     {
         #region Methods
 
+
+        public static decimal Parse(string input)
+        {
+            return decimal.Parse(Regex.Replace(input, @"[^\d.]", ""));
+        }
         /// <summary>
         /// Verifies that a string is in valid e-mail format
         /// </summary>

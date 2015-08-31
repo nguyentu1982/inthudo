@@ -11,7 +11,8 @@ namespace BusinessObjects
         DesignRequestCreated = 1,
         Designing = 2,
         DesignCopmleted = 3,
-        DesignApprovedByCustomer = 4
+        DesignApprovedByCustomer = 4,
+        DesignNotApproved=5
     }
 
     public class DesignRequestBO :BusinessObject
@@ -69,8 +70,11 @@ namespace BusinessObjects
                 {
                     status = DesignRequestStatusEnum.DesignApprovedByCustomer;
                 }
-                
 
+                if (BeginDate.HasValue && !EndDate.HasValue && (ApprovedByCustomer == null || ApprovedByCustomer == false))
+                {
+                    status = DesignRequestStatusEnum.DesignNotApproved;
+                }
                 return status;
             }
         }
@@ -91,6 +95,8 @@ namespace BusinessObjects
                         return "Đã thiết kế xong";
                     case DesignRequestStatusEnum.DesignApprovedByCustomer:
                         return "Khách hàng đã duyệt mẫu TK";
+                    case DesignRequestStatusEnum.DesignNotApproved:
+                        return "Khách hàng KHÔNG duyệt mẫu TK";
                 }
 
                 return result;

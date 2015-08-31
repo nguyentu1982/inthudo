@@ -22,13 +22,13 @@ namespace Web.Modules {
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
         
         /// <summary>
-        /// cbApprovedByCustomer control.
+        /// cblApprovedByCustomer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox cbApprovedByCustomer;
+        protected global::System.Web.UI.WebControls.CheckBoxList cblApprovedByCustomer;
         
         /// <summary>
         /// txtApprovedByCustomerNote control.

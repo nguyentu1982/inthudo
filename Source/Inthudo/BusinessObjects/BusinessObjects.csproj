@@ -66,6 +66,7 @@
     <Compile Include="OrderStatusBO.cs" />
     <Compile Include="OrderStatusMappingBO.cs" />
     <Compile Include="OrganizationBO.cs" />
+    <Compile Include="ProductApprovedBO.cs" />
     <Compile Include="ProductBO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleTypeBO.cs" />
