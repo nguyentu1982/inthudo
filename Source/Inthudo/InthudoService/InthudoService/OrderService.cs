@@ -175,5 +175,11 @@ namespace InthudoService
         {
             return orderDao.GetApprovedProductByOrderId(orderId);
         }
+
+
+        public List<ProductApprovedBO> GetFailedProductByOrderId(int orderId)
+        {
+            return orderDao.GetFailedProductByOrderId(orderId);
+        }
     }
 }

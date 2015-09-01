@@ -71,12 +71,15 @@ namespace Web.Modules
                 }
 
                 List<ProductApprovedBO> approvedProducts = this.OrderService.GetApprovedProductByOrderId(this.OrderId);
-                grvApprovedProducts.DataSource = approvedProducts;
-                grvApprovedProducts.DataBind();
+                if (approvedProducts.Count > 0)
+                {
+                    panelProductApprovedSummary.Visible = true;
+                    grvApprovedProducts.DataSource = approvedProducts;
+                    grvApprovedProducts.DataBind();
 
-                lbDepositAmount.Text = ctrlDepositAmount.Value.ToString("C0");
-                lbRemainAmount.Text = (total - ctrlDepositAmount.Value).ToString("C0");
-
+                    lbDepositAmount.Text = ctrlDepositAmount.Value.ToString("C0");
+                    lbRemainAmount.Text = (total - ctrlDepositAmount.Value).ToString("C0");
+                }
                 //Check whether other user can edit order
                 if (this.LoggedInUserId != order.CreatedBy)
                 {
@@ -327,10 +330,7 @@ namespace Web.Modules
 
         decimal total = 0;
         protected void grvApprovedProducts_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-           
-            NumberFormatInfo NFI = new NumberFormatInfo();
-           // NFI.CurrencySymbol = "đ";
+        {            
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 string subtotal = ((Label)e.Row.FindControl("lbSubTotal")).Text;

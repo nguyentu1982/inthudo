@@ -10,249 +10,213 @@
 namespace Web.Modules {
     
     
-    public partial class Orders {
+    public partial class BussinessReportByUser {
         
         /// <summary>
-        /// ctrlDatePickerFrom control.
+        /// lbUserName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Web.Modules.DatePicker ctrlDatePickerFrom;
+        protected global::System.Web.UI.WebControls.Label lbUserName;
         
         /// <summary>
-        /// ctrlDatePickerTo control.
+        /// lbUserId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Web.Modules.DatePicker ctrlDatePickerTo;
+        protected global::System.Web.UI.WebControls.Label lbUserId;
         
         /// <summary>
-        /// txtOrderCode control.
+        /// lbNumberOfOrderNOTCompleted control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtOrderCode;
+        protected global::System.Web.UI.WebControls.Label lbNumberOfOrderNOTCompleted;
         
         /// <summary>
-        /// ctrlCustomerSelect control.
+        /// lbOrderTotalNOTCompleted control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Web.Modules.CustomerSelect ctrlCustomerSelect;
+        protected global::System.Web.UI.WebControls.Label lbOrderTotalNOTCompleted;
         
         /// <summary>
-        /// ddlProduct control.
+        /// lbDepositNOTCompleted control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlProduct;
+        protected global::System.Web.UI.WebControls.Label lbDepositNOTCompleted;
         
         /// <summary>
-        /// ddlShipping control.
+        /// lbRemainingNOTCompleted control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlShipping;
+        protected global::System.Web.UI.WebControls.Label lbRemainingNOTCompleted;
         
         /// <summary>
-        /// ddlDeposit control.
+        /// hplViewDetailNotCompleted control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDeposit;
+        protected global::System.Web.UI.WebControls.HyperLink hplViewDetailNotCompleted;
         
         /// <summary>
-        /// ddlOrderDetailStatus control.
+        /// lbNumberOfOrderCompleted control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlOrderDetailStatus;
+        protected global::System.Web.UI.WebControls.Label lbNumberOfOrderCompleted;
         
         /// <summary>
-        /// cblOrderStatus control.
+        /// lbOrderTotalContractCompleted control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblOrderStatus;
+        protected global::System.Web.UI.WebControls.Label lbOrderTotalContractCompleted;
         
         /// <summary>
-        /// UpdatePanel1 control.
+        /// lbOrderTotalCompleted control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.WebControls.Label lbOrderTotalCompleted;
         
         /// <summary>
-        /// ddlBusinessManId control.
+        /// lbDepositCompleted control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlBusinessManId;
+        protected global::System.Web.UI.WebControls.Label lbDepositCompleted;
         
         /// <summary>
-        /// ddlDesingerId control.
+        /// lbRemainingCompleted control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDesingerId;
+        protected global::System.Web.UI.WebControls.Label lbRemainingCompleted;
         
         /// <summary>
-        /// pnlCompany control.
+        /// hplViewDetailCompleted control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pnlCompany;
+        protected global::System.Web.UI.WebControls.HyperLink hplViewDetailCompleted;
         
         /// <summary>
-        /// ddlCompany control.
+        /// lbNumberOfOrderFailed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCompany;
+        protected global::System.Web.UI.WebControls.Label lbNumberOfOrderFailed;
         
         /// <summary>
-        /// btFind control.
+        /// lbOrderTotalFailded control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btFind;
+        protected global::System.Web.UI.WebControls.Label lbOrderTotalFailded;
         
         /// <summary>
-        /// btAdd control.
+        /// lbOrderDetailTotalFailed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btAdd;
+        protected global::System.Web.UI.WebControls.Label lbOrderDetailTotalFailed;
         
         /// <summary>
-        /// btDelete control.
+        /// lbDepositFailed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btDelete;
+        protected global::System.Web.UI.WebControls.Label lbDepositFailed;
         
         /// <summary>
-        /// lbNumberOfOrders control.
+        /// hplViewDetailFailed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbNumberOfOrders;
+        protected global::System.Web.UI.WebControls.HyperLink hplViewDetailFailed;
         
         /// <summary>
-        /// lbOrderTotal control.
+        /// lbNumberOfOrderOverdue control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbOrderTotal;
+        protected global::System.Web.UI.WebControls.Label lbNumberOfOrderOverdue;
         
         /// <summary>
-        /// lbNotCompletedNumberOfOrders control.
+        /// lbOrderTotalOverdue control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbNotCompletedNumberOfOrders;
+        protected global::System.Web.UI.WebControls.Label lbOrderTotalOverdue;
         
         /// <summary>
-        /// lbNotCompletedOrderTotal control.
+        /// lbOrderDetailTotalOverdue control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbNotCompletedOrderTotal;
+        protected global::System.Web.UI.WebControls.Label lbOrderDetailTotalOverdue;
         
         /// <summary>
-        /// lbCompletedNumberOfOrders control.
+        /// lbDepositOverdue control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCompletedNumberOfOrders;
+        protected global::System.Web.UI.WebControls.Label lbDepositOverdue;
         
         /// <summary>
-        /// lbCompletedOrderTotal control.
+        /// hplViewDetailOverdue control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCompletedOrderTotal;
-        
-        /// <summary>
-        /// lbFailedNumberOfOrders control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbFailedNumberOfOrders;
-        
-        /// <summary>
-        /// lbFailedOrderTotal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbFailedOrderTotal;
-        
-        /// <summary>
-        /// lbFailedOrderDetailTotal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbFailedOrderDetailTotal;
-        
-        /// <summary>
-        /// grvOrders control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grvOrders;
+        protected global::System.Web.UI.WebControls.HyperLink hplViewDetailOverdue;
     }
 }

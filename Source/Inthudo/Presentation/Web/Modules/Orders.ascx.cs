@@ -188,6 +188,19 @@ namespace Web.Modules
 
             lbFailedNumberOfOrders.Text = orders.Where(o => o.OrderStatus == OrderStatusEnum.IsFailed).Count().ToString();
             lbFailedOrderTotal.Text = orders.Where(o => o.OrderStatus == OrderStatusEnum.IsFailed).Sum(o => o.OrderTotal).ToString("C0");
+
+            List<ProductApprovedBO> failedProductsResult = new List<ProductApprovedBO>();
+            foreach (OrderBO o in orders)
+            {
+                List<ProductApprovedBO> failedProducts = this.OrderService.GetFailedProductByOrderId(o.OrderId);
+                foreach (ProductApprovedBO pa in failedProducts)
+                {
+                    failedProductsResult.Add(pa);       
+                }
+            }
+
+            lbFailedOrderDetailTotal.Text = failedProductsResult.Sum(fd => fd.Total).ToString("C0");
+
         }
 
         protected void btAdd_Click(object sender, EventArgs e)

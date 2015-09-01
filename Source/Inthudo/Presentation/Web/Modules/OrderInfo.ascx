@@ -33,7 +33,7 @@
     <asp:GridView ID="grvOrderDetails" runat="server"
         AutoGenerateColumns="False" OnRowCommand="grvOrderDetails_RowCommand"
         OnRowDataBound="grvOrderDetails_RowDataBound" CellPadding="4" ForeColor="#333333" GridLines="None">
-        <AlternatingRowStyle BackColor="White" />
+        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <%--<asp:TemplateField>
                 <HeaderTemplate>
@@ -80,16 +80,16 @@
             </asp:TemplateField>
             <asp:BoundField HeaderText="Trạng thái" DataField="OrderDetailStatusString" />
         </Columns>
-        <EditRowStyle BackColor="#2461BF" />
-        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-        <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-        <RowStyle BackColor="#EFF3FB" />
-        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-        <SortedAscendingCellStyle BackColor="#F5F7FB" />
-        <SortedAscendingHeaderStyle BackColor="#6D95E1" />
-        <SortedDescendingCellStyle BackColor="#E9EBEF" />
-        <SortedDescendingHeaderStyle BackColor="#4870BE" />
+        <EditRowStyle BackColor="#999999" />
+        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+        <SortedAscendingCellStyle BackColor="#E9E7E2" />
+        <SortedAscendingHeaderStyle BackColor="#506C8C" />
+        <SortedDescendingCellStyle BackColor="#FFFDF8" />
+        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
     </asp:GridView>
 </div>
 
@@ -134,10 +134,10 @@
     </Triggers>
 </asp:UpdatePanel>
 
-<div class="product-approved-sumary">
+<div class="product-approved-sumary" runat="server" id="panelProductApprovedSummary" visible="false">
     <h3>Chi tiết duyệt đơn hàng</h3>
     <asp:GridView runat="server" ID="grvApprovedProducts" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" OnRowDataBound="grvApprovedProducts_RowDataBound" ShowFooter="True">
-        <AlternatingRowStyle BackColor="White" />
+        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
         <asp:BoundField HeaderText="Sản phẩm" DataField="ProductName" />
         <asp:BoundField HeaderText="Số lượng" DataField="Quantity" />
@@ -154,16 +154,16 @@
             </ItemTemplate>
         </asp:TemplateField> 
         </Columns>        
-        <EditRowStyle BackColor="#2461BF" />
-        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-        <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-        <RowStyle BackColor="#EFF3FB" />
-        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-        <SortedAscendingCellStyle BackColor="#F5F7FB" />
-        <SortedAscendingHeaderStyle BackColor="#6D95E1" />
-        <SortedDescendingCellStyle BackColor="#E9EBEF" />
-        <SortedDescendingHeaderStyle BackColor="#4870BE" />
+        <EditRowStyle BackColor="#999999" />
+        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+        <SortedAscendingCellStyle BackColor="#E9E7E2" />
+        <SortedAscendingHeaderStyle BackColor="#506C8C" />
+        <SortedDescendingCellStyle BackColor="#FFFDF8" />
+        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
     </asp:GridView>
     <span class="lbtitle-product-approve">Đặt cọc</span><asp:Label runat="server" ID="lbDepositAmount"></asp:Label>
     <br />

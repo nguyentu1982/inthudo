@@ -69,11 +69,14 @@
     <span class="lbtitle-total">Hoàn thành</span><asp:Label runat="server" ID="lbCompletedNumberOfOrders" CssClass="total"></asp:Label>
     <span class="lbtitle-total">Doanh số</span><asp:Label runat="server" ID="lbCompletedOrderTotal" CssClass="total"></asp:Label>
     <br />
-    <span class="lbtitle-total">Lỗi</span><asp:Label runat="server" ID="lbFailedNumberOfOrders" CssClass="total"></asp:Label>
+    <span class="lbtitle-total">Có Lỗi</span><asp:Label runat="server" ID="lbFailedNumberOfOrders" CssClass="total"></asp:Label>
      <span class="lbtitle-total">Doanh số</span><asp:Label runat="server" ID="lbFailedOrderTotal" CssClass="total"></asp:Label>
+    <br />
+    <span class="lbtitle-total">Doanh số lỗi</span><asp:Label runat ="server" ID="lbFailedOrderDetailTotal" CssClass="total"></asp:Label>
 </div>
 <div class="orders-grid">
-    <asp:GridView ID="grvOrders" runat="server" AutoGenerateColumns="false">
+    <asp:GridView ID="grvOrders" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
+        <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:TemplateField>
                 <HeaderTemplate>
@@ -95,6 +98,16 @@
             <asp:BoundField HeaderText="Tình trạng ĐH" DataField="OrderStatusString" />
             <asp:HyperLinkField HeaderText="Sửa" DataNavigateUrlFields="OrderId" DataNavigateUrlFormatString="~/OrderEdit.aspx?OrderId={0}" Text="Sửa" />
         </Columns>
+        <EditRowStyle BackColor="#999999" />
+        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+        <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+        <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+        <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+        <SortedAscendingCellStyle BackColor="#E9E7E2" />
+        <SortedAscendingHeaderStyle BackColor="#506C8C" />
+        <SortedDescendingCellStyle BackColor="#FFFDF8" />
+        <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
     </asp:GridView>
 </div>
 <script type="text/javascript">

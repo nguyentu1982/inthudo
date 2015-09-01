@@ -917,7 +917,8 @@ namespace DataObjects.EntityFramework
                             (od.Deleted == false || od.Deleted == null)&&
                             (dr.Deleted == false || dr.Deleted == null)&&
                             (mr.Deleted == false || mr.Deleted == null)&&
-                            o.OrderId == orderId
+                            (o.OrderId == orderId)&&
+                            mr.CustomerApproved == true
                             select new ProductApprovedBO(){
                                 ProductName = od.Product.Name,
                                 Quantity = mr.CustomerApprovedQuantity,
@@ -928,6 +929,34 @@ namespace DataObjects.EntityFramework
             }
         }
 
+        public List<ProductApprovedBO> GetFailedProductByOrderId(int orderId)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                var query = (from o in context.Orders
+                             join od in context.OrderItems on o.OrderId equals od.OrderId
+                             join dr in context.DesignRequests on od.OrderItemId equals dr.OrderItemId
+                             join mr in context.ManufactureRequests on dr.DesignRequestId equals mr.DesignRequestId
+                             where
+                             (od.Deleted == false || od.Deleted == null) &&
+                             (dr.Deleted == false || dr.Deleted == null) &&
+                             (mr.Deleted == false || mr.Deleted == null) &&
+                             (o.OrderId == orderId) &&
+                             mr.IsFailed == true
+                             select new ProductApprovedBO()
+                             {
+                                 ProductName = od.Product.Name,
+                                 Quantity = od.Quantity,
+                                 Price = od.Price
+                             }).Distinct().ToList();
+                return query;
+
+            }
+        }
+
         #endregion Approved Products
+
+
+       
     }
 }

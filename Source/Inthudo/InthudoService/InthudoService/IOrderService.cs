@@ -65,5 +65,7 @@ namespace InthudoService
         List<OrganizationBO> GetAllOrganizations();
 
         List<ProductApprovedBO> GetApprovedProductByOrderId(int orderId);
+
+        List<ProductApprovedBO> GetFailedProductByOrderId(int p);
     }
 }

@@ -8,7 +8,11 @@
     min-width:120px;
     display:inline-block;
 }
-
+.lbtitle-total-dashboard
+{
+    min-width:20px;
+    display:inline-block;
+}
 .lbtitle-product-approve {
     min-width:253px;
     display:inline-block;

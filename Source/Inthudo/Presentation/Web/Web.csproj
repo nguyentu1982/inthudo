@@ -194,6 +194,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="CustomerAdd.aspx" />
     <Content Include="CustomerEdit.aspx" />
+    <Content Include="Dashboard.aspx" />
     <Content Include="DesignRequestAdd.aspx" />
     <Content Include="DesignRequestEdit.aspx" />
     <Content Include="DesignRequests.aspx" />
@@ -219,11 +220,13 @@
     <Content Include="MemberAdd.aspx" />
     <Content Include="MemberEdit.aspx" />
     <Content Include="Members.aspx" />
+    <Content Include="Modules\BussinessReportByUser.ascx" />
     <Content Include="Modules\CustomerAdd.ascx" />
     <Content Include="Modules\CustomerEdit.ascx" />
     <Content Include="Modules\CustomerInfo.ascx" />
     <Content Include="Modules\CustomerSearch.ascx" />
     <Content Include="Modules\CustomerSelect.ascx" />
+    <Content Include="Modules\Dashboard.ascx" />
     <Content Include="Modules\DatePicker.ascx" />
     <Content Include="Modules\DecimalTextBox.ascx" />
     <Content Include="Modules\DesignRequestAdd.ascx" />
@@ -379,6 +382,13 @@
     <Compile Include="CustomerEdit.aspx.designer.cs">
       <DependentUpon>CustomerEdit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DesignRequestAdd.aspx.cs">
       <DependentUpon>DesignRequestAdd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -414,6 +424,13 @@
     <Compile Include="ManufactureRequestEdit.aspx.designer.cs">
       <DependentUpon>ManufactureRequestEdit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Modules\BussinessReportByUser.ascx.cs">
+      <DependentUpon>BussinessReportByUser.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\BussinessReportByUser.ascx.designer.cs">
+      <DependentUpon>BussinessReportByUser.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Modules\CustomerAdd.ascx.cs">
       <DependentUpon>CustomerAdd.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -448,6 +465,13 @@
     </Compile>
     <Compile Include="Modules\CustomerSelect.ascx.designer.cs">
       <DependentUpon>CustomerSelect.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Dashboard.ascx.cs">
+      <DependentUpon>Dashboard.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\Dashboard.ascx.designer.cs">
+      <DependentUpon>Dashboard.ascx</DependentUpon>
     </Compile>
     <Compile Include="Modules\DatePicker.ascx.cs">
       <DependentUpon>DatePicker.ascx</DependentUpon>

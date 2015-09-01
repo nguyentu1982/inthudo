@@ -68,5 +68,7 @@ namespace DataObjects
         List<OrganizationBO> GetAllOrganizations();
 
         List<ProductApprovedBO> GetApprovedProductByOrderId(int orderId);
+
+        List<ProductApprovedBO> GetFailedProductByOrderId(int orderId);
     }
 }

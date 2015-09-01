@@ -12,7 +12,7 @@ namespace BusinessObjects
         NotCompleted=1,
         Completed=2,
         IsFailed =3,
-
+        Overdue=4,
     }
     
     public class OrderBO : BusinessObject
@@ -97,6 +97,8 @@ namespace BusinessObjects
                         return "Chưa hoàn thành";
                     case OrderStatusEnum.IsFailed:
                         return "Đơn hàng có lỗi";
+                    case OrderStatusEnum.Overdue:
+                        return "Quá hạn";
                     default : return "Chưa hoàn thành";
                 }
             }

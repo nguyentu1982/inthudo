@@ -22,6 +22,7 @@ namespace BusinessObjects
         ManufactureCompleted = 8,
         CustomerApproved=9,
         CustomerRefused=10,
+        Overdue=11
     }
 
     public class OrderDetailBO : BusinessObject
@@ -84,6 +85,8 @@ namespace BusinessObjects
                         return "Khách hàng đã duyệt sản phẩm";
                     case OrderDetailStatusEnum.CustomerRefused:
                         return "Lỗi - Khách hàng từ chối";
+                    case OrderDetailStatusEnum.Overdue:
+                        return "Quá hạn";
                     default: return "Đơn hàng không tồn tại / Chưa hoàn thành";
                 }
             }
