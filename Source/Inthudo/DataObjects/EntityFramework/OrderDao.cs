@@ -167,13 +167,15 @@ namespace DataObjects.EntityFramework
                                       select new OrderDetailBO()
                                       {
                                           OrderItemId = od.OrderItemId,
-                                          OrderId = od.OrderId
+                                          OrderId = od.OrderId,
+                                          Quantity= od.Quantity,
+                                          Price = od.Price
                                       }).ToList();
                     if (orderItems.Count > 0)
                     {
                         foreach (OrderDetailBO od in orderItems)
                         {
-                            od.OrderDetailStatus = this.GetOrderDetailStatus(od.OrderItemId);
+                            od.OrderDetailStatus = this.GetOrderDetailStatusIncludedOverDue(od.OrderItemId);
                         }
 
                         o.OrderItems = orderItems.Distinct().ToList();
@@ -191,13 +193,15 @@ namespace DataObjects.EntityFramework
                                       select new OrderDetailBO()
                                       {
                                           OrderItemId = od.OrderItemId,
-                                          OrderId = od.OrderId
+                                          OrderId = od.OrderId,
+                                          Quantity = od.Quantity,
+                                          Price = od.Price
                                       }).ToList();
                     if (orderItems.Count > 0)
                     {
                         foreach (OrderDetailBO od in orderItems)
                         {
-                            od.OrderDetailStatus = this.GetOrderDetailStatus(od.OrderItemId);
+                            od.OrderDetailStatus = this.GetOrderDetailStatusIncludedOverDue(od.OrderItemId);
                         }
                     }
 
@@ -258,7 +262,7 @@ namespace DataObjects.EntityFramework
 
                 if (orderDetail != null)
                 {
-                    orderDetail.OrderDetailStatus = this.GetOrderDetailStatus(orderDetail.OrderItemId);
+                    orderDetail.OrderDetailStatus = this.GetOrderDetailStatusIncludedOverDue(orderDetail.OrderItemId);
                 }
                 return orderDetail;
             }
@@ -289,7 +293,7 @@ namespace DataObjects.EntityFramework
                         }).ToList();
                 foreach (OrderDetailBO od in orderDetails)
                 {
-                    od.OrderDetailStatus = this.GetOrderDetailStatus(od.OrderItemId);
+                    od.OrderDetailStatus = this.GetOrderDetailStatusIncludedOverDue(od.OrderItemId);
                 }
 
                 return orderDetails;
@@ -353,12 +357,13 @@ namespace DataObjects.EntityFramework
                     {
                         if (oi.Deleted == false || oi.Deleted == null)
                         {
-                            statuslist.Add(this.GetOrderDetailStatus(oi.OrderItemId));
+                            statuslist.Add(this.GetOrderDetailStatusIncludedOverDue(oi.OrderItemId));
                         }
                     }
 
                     int i = 0;
                     int j = 0;
+                    int k = 0;
                     foreach (OrderDetailStatusEnum odse in statuslist)
                     {
                         if (odse == OrderDetailStatusEnum.CustomerApproved)
@@ -370,6 +375,11 @@ namespace DataObjects.EntityFramework
                         {
                             j++;
                         }
+
+                        if (odse == OrderDetailStatusEnum.Overdue)
+                        {
+                            k++;
+                        }
                     }
 
                     if (i == statuslist.Count)
@@ -380,6 +390,11 @@ namespace DataObjects.EntityFramework
                     if (j > 0)
                     {
                         status = OrderStatusEnum.IsFailed;
+                    }
+
+                    if (k > 0)
+                    {
+                        status = OrderStatusEnum.Overdue;
                     }
                 }
                 return status;
@@ -478,6 +493,36 @@ namespace DataObjects.EntityFramework
                 return status;
             }
 
+        }
+
+        public OrderDetailStatusEnum GetOrderDetailStatusIncludedOverDue(int orderDetailId)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                OrderDetailStatusEnum status = OrderDetailStatusEnum.DesignRequestNotCreated;
+                OrderItem orderItem = context.OrderItems.Where(oi => oi.OrderItemId == orderDetailId && (oi.Deleted == null || oi.Deleted == false)).FirstOrDefault();
+                if (orderItem != null)
+                {
+                    if (orderItem.Order.ExpectedCompleteDate < DateTime.Now)
+                    {
+                        var orderDetailStatus = this.GetOrderDetailStatus(orderDetailId);
+                        if (orderDetailStatus < OrderDetailStatusEnum.CustomerApproved)
+                        {
+                            status = OrderDetailStatusEnum.Overdue;
+                        }
+                        else
+                        {
+                            status = orderDetailStatus;
+                        }
+                    }
+                    else
+                    {
+                        status = this.GetOrderDetailStatus(orderDetailId);
+                    }
+                }
+
+                return status;
+            }
         }
 
         public List<OrderStatusBO> GetAllOrderStatus()
@@ -751,7 +796,7 @@ namespace DataObjects.EntityFramework
                                     }).Distinct().ToList();
                 foreach (OrderDetailBO od in orderDetails)
                 {
-                    od.OrderDetailStatus = this.GetOrderDetailStatus(od.OrderItemId);
+                    od.OrderDetailStatus = this.GetOrderDetailStatusIncludedOverDue(od.OrderItemId);
                 }
 
                 if (searchObj.DesignRequestStatus != 0)
@@ -765,7 +810,7 @@ namespace DataObjects.EntityFramework
 
                 foreach (DesignRequestBO dr in query)
                 {
-                    dr.OrderItem.OrderDetailStatus = this.GetOrderDetailStatus(dr.OrderItem.OrderItemId);
+                    dr.OrderItem.OrderDetailStatus = this.GetOrderDetailStatusIncludedOverDue(dr.OrderItem.OrderItemId);
                 }
 
                 return query;

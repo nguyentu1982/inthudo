@@ -3,9 +3,10 @@
     <thead>
         <tr>
             <td colspan="9">
-                <span class="lbtitle"><strong>Tên NVKD</strong></span><strong><asp:Label runat="server" ID="lbUserName"></asp:Label>
+                <span><strong>Tên NVKD: </strong></span><strong><asp:Label runat="server" ID="lbUserName"></asp:Label>
                 </strong>
-                <span class="lbtitle"><strong>Mã NV - Account</strong></span><strong><asp:Label runat="server" ID="lbUserId"></asp:Label>
+                <br />
+                <span><strong>Mã NV - Account: </strong></span><strong><asp:Label runat="server" ID="lbUserId"></asp:Label>
                 </strong>
             </td>
 

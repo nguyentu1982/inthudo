@@ -234,6 +234,7 @@
     <Content Include="Modules\DesignRequestDesignerTask.ascx" />
     <Content Include="Modules\DesignRequestEdit.ascx" />
     <Content Include="Modules\DesignRequestInfo.ascx" />
+    <Content Include="Modules\DesignRequestReportByDesigner.ascx" />
     <Content Include="Modules\DesignRequests.ascx" />
     <Content Include="Modules\EmailTextBox.ascx" />
     <Content Include="Modules\Login.ascx" />
@@ -521,6 +522,13 @@
     </Compile>
     <Compile Include="Modules\DesignRequestInfo.ascx.designer.cs">
       <DependentUpon>DesignRequestInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DesignRequestReportByDesigner.ascx.cs">
+      <DependentUpon>DesignRequestReportByDesigner.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\DesignRequestReportByDesigner.ascx.designer.cs">
+      <DependentUpon>DesignRequestReportByDesigner.ascx</DependentUpon>
     </Compile>
     <Compile Include="Modules\DesignRequests.ascx.cs">
       <DependentUpon>DesignRequests.ascx</DependentUpon>

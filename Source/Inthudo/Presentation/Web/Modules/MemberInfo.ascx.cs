@@ -16,7 +16,7 @@ namespace Web.Modules
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
-            {
+            {               
                 this.FillDropDowns();
                 this.BindData();
             }
@@ -28,7 +28,13 @@ namespace Web.Modules
             MemberBO member = memberService.GetMember(this.MemeberId);
             if (member != null)
             {
-                
+                if (this.LoggedInMember.RoleName.ToLower() == Constant.USER_ROLE_NAME.ToLower())
+                {
+                    if (this.LoggedInUserId != this.MemeberId)
+                    {
+                        Response.Redirect("Login.aspx");
+                    }
+                }
                 txtUserName.Text = member.UserName;
                 ddlDepartment.SelectedValue = member.DepartmentId.ToString();
                 txtFullName.Text = member.FullName;

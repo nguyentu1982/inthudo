@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessObjects;
+using Common.Utils;
 
 namespace Web.Modules
 {
@@ -18,7 +19,22 @@ namespace Web.Modules
             if (!Page.IsPostBack)
             {
                 LoadDefaultData();
+                BindData();
             }
+        }
+
+        private void BindData()
+        {
+            if (this.MemberId != 0)
+                ddlDesigner.SelectedValue = this.MemberId.ToString();
+            if (this.From != null)
+                ctrlDatePickerFrom.SelectedDate = this.From;
+            if (this.To != null)
+                ctrlDatePickerTo.SelectedDate = this.To;
+            if (this.DesignRequestStatus != 0)
+                ddlDesignRequestStatus.SelectedValue = ((int)this.DesignRequestStatus).ToString();
+            if (this.MemberId != 0)
+                btFind_Click(new object(), new EventArgs());
         }
 
         private void LoadDefaultData()
@@ -132,6 +148,42 @@ namespace Web.Modules
                     designRequestHyperLink.Attributes.Add("class", "a-popup");
                     designRequestHyperLink.Text = "Xem";
                 }
+            }
+        }
+
+        public int MemberId
+        {
+            get
+            {
+                return CommonHelper.QueryStringInt("MemberId");
+            }
+        }
+
+        public DateTime From
+        {
+            get
+            {
+                DateTime from;
+                DateTime.TryParse(CommonHelper.QueryString("From"), out from);
+                return from;
+            }
+        }
+
+        public DateTime To
+        {
+            get
+            {
+                DateTime to;
+                DateTime.TryParse(CommonHelper.QueryString("To"), out to);
+                return to;
+            }
+        }
+
+        public DesignRequestStatusEnum DesignRequestStatus
+        {
+            get
+            {
+                return (DesignRequestStatusEnum)CommonHelper.QueryStringInt("DesignRequestStatus");
             }
         }
     }

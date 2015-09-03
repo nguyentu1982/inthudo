@@ -26,15 +26,21 @@ namespace Web.Module
                 Session["IsLogedin"] = true;
                 MemberBO mem = this.MemberService.GetMemberByUserName(loginCtrl.UserName);
                 Session["UserId"] = mem.UserId;
-
+                mem = this.MemberService.GetMember(mem.UserId);
                 if (string.IsNullOrEmpty(ReturnURL))
                 {
-                    if(mem.Department.Code == Constant.PKD)
-                        Response.Redirect("Orders.aspx");
+                    if (mem.RoleName.ToLower() == Constant.USER_ROLE_NAME.ToLower())
+                    {
+                        if (mem.Department.Code == Constant.PKD)
+                            Response.Redirect("Orders.aspx");
 
-                    if (mem.Department.Code == Constant.PTK)
-                        Response.Redirect("DesignRequests.aspx");
-                    return;
+                        if (mem.Department.Code == Constant.PTK)
+                            Response.Redirect("DesignRequests.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("Dashboard.aspx");
+                    }
                 }
 
                 Response.Redirect(ReturnURL);

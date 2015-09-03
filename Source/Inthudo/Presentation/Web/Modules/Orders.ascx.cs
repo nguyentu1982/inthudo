@@ -20,7 +20,22 @@ namespace Web.Modules
             if (!Page.IsPostBack)
             {
                 LoadDefaultData();
+                BindData();
             }
+        }
+
+        private void BindData()
+        {
+            if(this.MemId !=0)
+                ddlBusinessManId.SelectedValue = this.MemId.ToString();
+            if(this.From != null)
+                ctrlDatePickerFrom.SelectedDate = this.From;
+            if(this.To != null)
+                ctrlDatePickerTo.SelectedDate = this.To;
+            if (this.OrderStatus != 0)
+                cblOrderStatus.SelectedValue = ((int)this.OrderStatus).ToString();
+            if(this.MemId != 0)
+                btFind_Click(new object(), new EventArgs());
         }
 
         private void LoadDefaultData()
@@ -201,6 +216,21 @@ namespace Web.Modules
 
             lbFailedOrderDetailTotal.Text = failedProductsResult.Sum(fd => fd.Total).ToString("C0");
 
+            lbOverdueNumberOfOrders.Text = orders.Where(o => o.OrderStatus == OrderStatusEnum.Overdue).Count().ToString();
+            lbOverdueOrderTotal.Text = orders.Where(o => o.OrderStatus == OrderStatusEnum.Overdue).Sum(o => o.OrderTotal).ToString("C0");
+            var overdueOrders = orders.Where(o => o.OrderStatus == OrderStatusEnum.Overdue);
+            decimal overdueOrderDetailTotal = 0;
+            foreach (OrderBO o in overdueOrders)
+            {
+                foreach (OrderDetailBO od in o.OrderItems)
+                {
+                    if (od.OrderDetailStatus == OrderDetailStatusEnum.Overdue)
+                    {
+                        overdueOrderDetailTotal += od.Quantity * od.Price;
+                    }
+                }
+            }
+            lbOverdueOrderDetailTotal.Text = overdueOrderDetailTotal.ToString("C0");
         }
 
         protected void btAdd_Click(object sender, EventArgs e)
@@ -256,6 +286,42 @@ namespace Web.Modules
             foreach (MemberBO m in designers)
             {
                 ddlDesingerId.Items.Add(new ListItem(m.FullName, m.UserId.ToString()));
+            }
+        }
+
+        public int MemId
+        {
+            get
+            {
+                return Common.Utils.CommonHelper.QueryStringInt("MemId");
+            }
+        }
+
+        public DateTime From
+        {
+            get
+            {
+                DateTime from;
+                DateTime.TryParse(Common.Utils.CommonHelper.QueryString("From"), out from);
+                return from;
+            }
+        }
+
+        public DateTime To
+        {
+            get
+            {
+                DateTime to;
+                DateTime.TryParse(Common.Utils.CommonHelper.QueryString("To"), out to);
+                return to;
+            }
+        }
+
+        public OrderStatusEnum OrderStatus
+        {
+            get
+            {
+                return (OrderStatusEnum)Common.Utils.CommonHelper.QueryStringInt("OrderStatus");
             }
         }
     }

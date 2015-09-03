@@ -26,11 +26,12 @@
     <asp:DropDownList ID="ddlOrderDetailStatus" runat="server"></asp:DropDownList>
     <br />
     <span class="lbtitle">Trạng thái đơn hàng: </span>
-    <asp:CheckBoxList ID="cblOrderStatus" runat="server" RepeatColumns="4" CssClass="order-status">
+    <asp:CheckBoxList ID="cblOrderStatus" runat="server" RepeatColumns="3" CssClass="order-status">
         <asp:ListItem Value="0">Tất cả</asp:ListItem>
         <asp:ListItem Value="1">Chưa hoàn thành</asp:ListItem>
         <asp:ListItem Value="2">Đã hoàn thành</asp:ListItem>
         <asp:ListItem Value="3">Đơn hàng có lỗi</asp:ListItem>
+        <asp:ListItem Value="4">Đơn hàng quá hạn</asp:ListItem>
     </asp:CheckBoxList>
     <br />
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -72,7 +73,14 @@
     <span class="lbtitle-total">Có Lỗi</span><asp:Label runat="server" ID="lbFailedNumberOfOrders" CssClass="total"></asp:Label>
      <span class="lbtitle-total">Doanh số</span><asp:Label runat="server" ID="lbFailedOrderTotal" CssClass="total"></asp:Label>
     <br />
+    <span class="lbtitle-total"></span><span class="total"></span>
     <span class="lbtitle-total">Doanh số lỗi</span><asp:Label runat ="server" ID="lbFailedOrderDetailTotal" CssClass="total"></asp:Label>
+    <br />
+    <span class="lbtitle-total">Quá hạn</span><asp:Label runat="server" ID="lbOverdueNumberOfOrders" CssClass="total"></asp:Label>
+     <span class="lbtitle-total">Doanh số</span><asp:Label runat="server" ID="lbOverdueOrderTotal" CssClass="total"></asp:Label>
+    <br />
+    <span class="lbtitle-total"></span><span class="total"></span>
+    <span class="lbtitle-total">Doanh quá hạn</span><asp:Label runat ="server" ID="lbOverdueOrderDetailTotal" CssClass="total"></asp:Label>
 </div>
 <div class="orders-grid">
     <asp:GridView ID="grvOrders" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Common;
 
 namespace Web.Modules
 {
@@ -15,6 +16,10 @@ namespace Web.Modules
         {
             if (!IsPostBack)
             {
+                if (this.LoggedInMember.RoleName.ToLower() == Constant.USER_ROLE_NAME.ToLower())
+                {
+                    Response.Redirect("Login.aspx");
+                }
                 LoadDefaultData();
             }
         }
