@@ -31,11 +31,7 @@ namespace DataObjects.EntityFramework
         public Nullable<System.DateTime> LastEditedOn { get; set; }
         public Nullable<bool> Deleted { get; set; }
         public int OrderId { get; set; }
-        public Nullable<int> DesignerId { get; set; }
-        public Nullable<decimal> VAT { get; set; }
-        public Nullable<bool> CustomerApproved { get; set; }
-        public Nullable<System.DateTime> CustomerApprovedDate { get; set; }
-        public string Note { get; set; }
+        public bool IsCustomerHasDesign { get; set; }
     
         public virtual Order Order { get; set; }
         public virtual User User { get; set; }
@@ -43,7 +39,6 @@ namespace DataObjects.EntityFramework
         public virtual OrderItem OrderItem1 { get; set; }
         public virtual OrderItem OrderItem2 { get; set; }
         public virtual Product Product { get; set; }
-        public virtual User User2 { get; set; }
         public virtual ICollection<OrderStatusMapping> OrderStatusMappings { get; set; }
         public virtual ICollection<DesignRequest> DesignRequests { get; set; }
     }

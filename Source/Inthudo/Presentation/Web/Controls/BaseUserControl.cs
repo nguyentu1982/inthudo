@@ -110,6 +110,20 @@ namespace Web
             }
         }
 
+        public List<int> LoggedInOrganizationIds
+        {
+            get
+            {
+                List<int> result = new List<int>();
+                List<OrganizationBO> orgs = this.MemberService.GetOrganizationsByMemberId(LoggedInUserId);
+                foreach (OrganizationBO o in orgs)
+                {
+                    result.Add(o.OrganizationId);
+                }
+                return result;
+            }
+        }
+
         public IMemberService MemberService
         {
             get

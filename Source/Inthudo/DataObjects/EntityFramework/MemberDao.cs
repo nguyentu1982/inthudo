@@ -374,7 +374,7 @@ namespace DataObjects.EntityFramework
             }
         }
 
-        public List<MemberBO> GetDesigners(int organizationId)
+        public List<MemberBO> GetDesigners(List<int> orgsId)
         {
             using (var context = new InThuDoEntities())
             {
@@ -384,7 +384,7 @@ namespace DataObjects.EntityFramework
                             where
                             (m.Deteted == false || m.Deteted == null) &&
                             (d.Code == "PTK")&&
-                            (organizationId ==0 || o.OrganizationId == organizationId)
+                            (orgsId.Count == 0 || orgsId.Contains(o.OrganizationId))
                             select new MemberBO()
                             {
                                 UserId = m.UserId,

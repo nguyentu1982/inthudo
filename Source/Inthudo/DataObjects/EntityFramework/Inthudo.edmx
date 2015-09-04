@@ -9,6 +9,7 @@
           <EntitySet Name="Customer" EntityType="InThuDoMNGModel.Store.Customer" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="DesignRequest" EntityType="InThuDoMNGModel.Store.DesignRequest" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="EmployeeDepartmentMapping" EntityType="InThuDoMNGModel.Store.EmployeeDepartmentMapping" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LibCustomerType" EntityType="InThuDoMNGModel.Store.LibCustomerType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LibDepartment" EntityType="InThuDoMNGModel.Store.LibDepartment" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LibDepositType" EntityType="InThuDoMNGModel.Store.LibDepositType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LibOrderStatus" EntityType="InThuDoMNGModel.Store.LibOrderStatus" store:Type="Tables" Schema="dbo" />
@@ -24,6 +25,10 @@
           <EntitySet Name="Setting" EntityType="InThuDoMNGModel.Store.Setting" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="InThuDoMNGModel.Store.User" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserOrganizationMappping" EntityType="InThuDoMNGModel.Store.UserOrganizationMappping" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Customer_LibCustomerType" Association="InThuDoMNGModel.Store.FK_Customer_LibCustomerType">
+            <End Role="LibCustomerType" EntitySet="LibCustomerType" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
           <AssociationSet Name="FK_Customer_User" Association="InThuDoMNGModel.Store.FK_Customer_User">
             <End Role="User" EntitySet="User" />
             <End Role="Customer" EntitySet="Customer" />
@@ -112,10 +117,6 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="OrderItem" EntitySet="OrderItem" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderItem_User" Association="InThuDoMNGModel.Store.FK_OrderItem_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="OrderItem" EntitySet="OrderItem" />
-          </AssociationSet>
           <AssociationSet Name="FK_OrderStatusMapping_LibOrderStatus" Association="InThuDoMNGModel.Store.FK_OrderStatusMapping_LibOrderStatus">
             <End Role="LibOrderStatus" EntitySet="LibOrderStatus" />
             <End Role="OrderStatusMapping" EntitySet="OrderStatusMapping" />
@@ -164,6 +165,7 @@
           <Property Name="Deleted" Type="bit" />
           <Property Name="TaxCode" Type="nvarchar" MaxLength="50" />
           <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="CustomerTypeId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DesignRequest">
           <Key>
@@ -192,6 +194,15 @@
           <Property Name="EmployeeDepartmentMappingId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="DepartmentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LibCustomerType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="LibDepartment">
           <Key>
@@ -304,11 +315,7 @@
           <Property Name="LastEditedOn" Type="datetime" />
           <Property Name="Deleted" Type="bit" />
           <Property Name="OrderId" Type="int" Nullable="false" />
-          <Property Name="DesignerId" Type="int" />
-          <Property Name="VAT" Type="money" />
-          <Property Name="CustomerApproved" Type="bit" />
-          <Property Name="CustomerApprovedDate" Type="datetime" />
-          <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="IsCustomerHasDesign" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderStatusMapping">
           <Key>
@@ -375,6 +382,18 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="OrganizationId" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Customer_LibCustomerType">
+          <End Role="LibCustomerType" Type="InThuDoMNGModel.Store.LibCustomerType" Multiplicity="1" />
+          <End Role="Customer" Type="InThuDoMNGModel.Store.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LibCustomerType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CustomerTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Customer_User">
           <End Role="User" Type="InThuDoMNGModel.Store.User" Multiplicity="1" />
           <End Role="Customer" Type="InThuDoMNGModel.Store.Customer" Multiplicity="*" />
@@ -639,18 +658,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderItem_User">
-          <End Role="User" Type="InThuDoMNGModel.Store.User" Multiplicity="0..1" />
-          <End Role="OrderItem" Type="InThuDoMNGModel.Store.OrderItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="OrderItem">
-              <PropertyRef Name="DesignerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OrderStatusMapping_LibOrderStatus">
           <End Role="LibOrderStatus" Type="InThuDoMNGModel.Store.LibOrderStatus" Multiplicity="1" />
           <End Role="OrderStatusMapping" Type="InThuDoMNGModel.Store.OrderStatusMapping" Multiplicity="*" />
@@ -826,10 +833,6 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="OrderItem" EntitySet="OrderItems" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderItem_User" Association="InThuDoMNGModel.FK_OrderItem_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="OrderItem" EntitySet="OrderItems" />
-          </AssociationSet>
           <AssociationSet Name="FK_OrderStatusMapping_OrderItem" Association="InThuDoMNGModel.FK_OrderStatusMapping_OrderItem">
             <End Role="OrderItem" EntitySet="OrderItems" />
             <End Role="OrderStatusMapping" EntitySet="OrderStatusMappings" />
@@ -878,6 +881,11 @@
             <End Role="User" EntitySet="Users" />
             <End Role="UserOrganizationMappping" EntitySet="UserOrganizationMapppings" />
           </AssociationSet>
+          <EntitySet Name="LibCustomerTypes" EntityType="InThuDoMNGModel.LibCustomerType" />
+          <AssociationSet Name="FK_Customer_LibCustomerType" Association="InThuDoMNGModel.FK_Customer_LibCustomerType">
+            <End Role="LibCustomerType" EntitySet="LibCustomerTypes" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer">
           <Key>
@@ -901,6 +909,8 @@
           <NavigationProperty Name="User1" Relationship="InThuDoMNGModel.FK_Customer_User1" FromRole="Customer" ToRole="User" />
           <NavigationProperty Name="Orders" Relationship="InThuDoMNGModel.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
           <Property Type="String" Name="Note" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CustomerTypeId" Nullable="false" />
+          <NavigationProperty Name="LibCustomerType" Relationship="InThuDoMNGModel.FK_Customer_LibCustomerType" FromRole="Customer" ToRole="LibCustomerType" />
         </EntityType>
         <EntityType Name="EmployeeDepartmentMapping">
           <Key>
@@ -1014,20 +1024,15 @@
           <Property Name="LastEditedOn" Type="DateTime" Precision="3" />
           <Property Name="Deleted" Type="Boolean" />
           <Property Name="OrderId" Type="Int32" Nullable="false" />
-          <Property Name="DesignerId" Type="Int32" />
           <NavigationProperty Name="Order" Relationship="InThuDoMNGModel.FK_OrderItem_Order" FromRole="OrderItem" ToRole="Order" />
           <NavigationProperty Name="User" Relationship="InThuDoMNGModel.FK_Order_User" FromRole="OrderItem" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="InThuDoMNGModel.FK_Order_User1" FromRole="OrderItem" ToRole="User" />
           <NavigationProperty Name="OrderItem1" Relationship="InThuDoMNGModel.FK_OrderItem_OrderItem" FromRole="OrderItem" ToRole="OrderItem1" />
           <NavigationProperty Name="OrderItem2" Relationship="InThuDoMNGModel.FK_OrderItem_OrderItem" FromRole="OrderItem1" ToRole="OrderItem" />
           <NavigationProperty Name="Product" Relationship="InThuDoMNGModel.FK_OrderItem_Product" FromRole="OrderItem" ToRole="Product" />
-          <NavigationProperty Name="User2" Relationship="InThuDoMNGModel.FK_OrderItem_User" FromRole="OrderItem" ToRole="User" />
           <NavigationProperty Name="OrderStatusMappings" Relationship="InThuDoMNGModel.FK_OrderStatusMapping_OrderItem" FromRole="OrderItem" ToRole="OrderStatusMapping" />
           <NavigationProperty Name="DesignRequests" Relationship="InThuDoMNGModel.FK_Design_OrderItem1" FromRole="OrderItem" ToRole="DesignRequest" />
-          <Property Type="Decimal" Name="VAT" Precision="19" Scale="4" />
-          <Property Type="Boolean" Name="CustomerApproved" />
-          <Property Type="DateTime" Name="CustomerApprovedDate" Precision="3" />
-          <Property Type="String" Name="Note" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsCustomerHasDesign" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderStatusMapping">
           <Key>
@@ -1085,7 +1090,6 @@
           <NavigationProperty Name="Orders2" Relationship="InThuDoMNGModel.FK_Order_User4" FromRole="User" ToRole="Order" />
           <NavigationProperty Name="OrderItems" Relationship="InThuDoMNGModel.FK_Order_User" FromRole="User" ToRole="OrderItem" />
           <NavigationProperty Name="OrderItems1" Relationship="InThuDoMNGModel.FK_Order_User1" FromRole="User" ToRole="OrderItem" />
-          <NavigationProperty Name="OrderItems2" Relationship="InThuDoMNGModel.FK_OrderItem_User" FromRole="User" ToRole="OrderItem" />
           <NavigationProperty Name="DesignRequests" Relationship="InThuDoMNGModel.FK_Design_User1" FromRole="User" ToRole="DesignRequest" />
           <NavigationProperty Name="DesignRequests1" Relationship="InThuDoMNGModel.FK_Design_UserCreatedBy1" FromRole="User" ToRole="DesignRequest" />
           <NavigationProperty Name="DesignRequests2" Relationship="InThuDoMNGModel.FK_Design_UserLastEditedBy1" FromRole="User" ToRole="DesignRequest" />
@@ -1311,18 +1315,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderItem_User">
-          <End Role="User" Type="InThuDoMNGModel.User" Multiplicity="0..1" />
-          <End Role="OrderItem" Type="InThuDoMNGModel.OrderItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="OrderItem">
-              <PropertyRef Name="DesignerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OrderStatusMapping_OrderItem">
           <End Role="OrderItem" Type="InThuDoMNGModel.OrderItem" Multiplicity="1" />
           <End Role="OrderStatusMapping" Type="InThuDoMNGModel.OrderStatusMapping" Multiplicity="*" />
@@ -1529,6 +1521,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="LibCustomerType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customers" Relationship="InThuDoMNGModel.FK_Customer_LibCustomerType" FromRole="LibCustomerType" ToRole="Customer" />
+        </EntityType>
+        <Association Name="FK_Customer_LibCustomerType">
+          <End Type="InThuDoMNGModel.LibCustomerType" Role="LibCustomerType" Multiplicity="1" />
+          <End Type="InThuDoMNGModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LibCustomerType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CustomerTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1538,6 +1552,7 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="InThuDoMNGModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerTypeId" ColumnName="CustomerTypeId" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1648,10 +1663,7 @@
           <EntitySetMapping Name="OrderItems">
             <EntityTypeMapping TypeName="InThuDoMNGModel.OrderItem">
               <MappingFragment StoreEntitySet="OrderItem">
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="CustomerApprovedDate" ColumnName="CustomerApprovedDate" />
-                <ScalarProperty Name="CustomerApproved" ColumnName="CustomerApproved" />
-                <ScalarProperty Name="VAT" ColumnName="VAT" />
+                <ScalarProperty Name="IsCustomerHasDesign" ColumnName="IsCustomerHasDesign" />
                 <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="Specification" ColumnName="Specification" />
@@ -1663,7 +1675,6 @@
                 <ScalarProperty Name="LastEditedOn" ColumnName="LastEditedOn" />
                 <ScalarProperty Name="Deleted" ColumnName="Deleted" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="DesignerId" ColumnName="DesignerId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1779,6 +1790,16 @@
               <MappingFragment StoreEntitySet="UserOrganizationMappping">
                 <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LibCustomerTypes">
+            <EntityTypeMapping TypeName="InThuDoMNGModel.LibCustomerType">
+              <MappingFragment StoreEntitySet="LibCustomerType">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

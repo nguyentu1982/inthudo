@@ -92,6 +92,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Inthudo.edmx</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\LibCustomerType.cs">
+      <DependentUpon>Inthudo.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\LibDepartment.cs">
       <DependentUpon>Inthudo.tt</DependentUpon>
     </Compile>

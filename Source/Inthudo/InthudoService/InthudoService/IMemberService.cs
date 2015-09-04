@@ -38,7 +38,7 @@ namespace InthudoService
 
         void DeleteUserOrganizationMapping(int memberId, int organizationId);
 
-        List<MemberBO> GetDesigners(int organizationId);
+        List<MemberBO> GetDesigners(List<int> orgsId);
 
         List<MemberBO> GetBusinessMen(int organizationId);
     }

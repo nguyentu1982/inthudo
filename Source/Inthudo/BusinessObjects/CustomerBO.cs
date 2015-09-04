@@ -22,9 +22,11 @@ namespace BusinessObjects
         public Nullable<bool> Deleted { get; set; }
         public string TaxCode { get; set; }
         public string Note { get; set; }
+        public int CustomerTypeId { get; set; }
 
         public virtual MemberBO User { get; set; }
         public virtual MemberBO User1 { get; set; }
         public virtual ICollection<OrderBO> Orders { get; set; }
+        public virtual CustomerTypeBO CustomerType { get; set; }
     }
 }

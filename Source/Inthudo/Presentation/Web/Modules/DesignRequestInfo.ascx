@@ -4,30 +4,31 @@
 <%@ Register TagPrefix="inthudo" TagName="DecimalTextBox" Src="~/Modules/DecimalTextBox.ascx" %>
 
 <div runat="server" id="panelDesignRequestId" class="design-request-id">
-    <span class="lbtitle">Mã yêu cầu thiết kế: </span>
+    <span class="lbtitle">Mã yêu cầu thiết kế</span>
     <asp:Label ID="lbDesignRequestId" runat="server"></asp:Label>
     <br />
-    <span class="lbtitle">Ngày tạo yêu cầu:</span><asp:Label ID="lbDesignRequestDate" runat="server"></asp:Label>
+    <span class="lbtitle">Ngày tạo yêu cầu</span><asp:Label ID="lbDesignRequestDate" runat="server"></asp:Label>
 </div>
 
 <div class="order-info">
-    <span class="lbtitle">Mã đơn hàng: </span>
+    <span class="lbtitle">Mã đơn hàng</span>
     <asp:Label runat="server" ID="lbOrderId"></asp:Label>
     <br />
-    <span class="lbtitle">Khách hàng: </span>
+    <span class="lbtitle">Khách hàng </span>
     <asp:Label ID="lbCustomer" runat="server"></asp:Label>
     <br />
-    <span class="lbtitle">NVKD: </span>
+    <span class="lbtitle">NVKD </span>
     <asp:Label ID="lbBusinessMan" runat="server"></asp:Label>
     <br />
-    <span class="lbtitle">Mã nội dung đơn hàng: </span>
+    <span class="lbtitle">Mã nội dung đơn hàng </span>
     <asp:Label ID="lbOrderDetailId" runat="server"></asp:Label>
 </div>
 
 <div class="design-request">
-    <span class="lbtitle">NV thiết kế: </span>
+    <span class="lbtitle">NV thiết kế </span>
     <asp:DropDownList runat="server" ID="ddlDesigner" ValidationGroup="val"></asp:DropDownList>
-    <asp:RequiredFieldValidator ID="requiredFieldValidatorDesigner" runat="server" ErrorMessage="Bạn hãy chọn NV Thiết kế" ControlToValidate="ddlDesigner" ValidationGroup="val" InitialValue="0" ForeColor="Red"></asp:RequiredFieldValidator>
+    <span class="lbtitle">Khách đã có bản TK</span>
+    <asp:CheckBox ID="cbIsDesignOfCustomer" runat="server"  Enabled="false" />
     <br />
     <span class="lbtitle">Ngày nhận việc: </span>
     <inthudo:DatePicker runat="server" ID="ctrlDatePickerFrom" Format="dd/MM/yyyy" Visible="false" />

@@ -40,6 +40,8 @@
         <ajaxToolkit:HtmlEditorExtender ID="txtProductRequirement_HtmlEditorExtender" runat="server" BehaviorID="txtProductRequirement_HtmlEditorExtender" TargetControlID="txtProductRequirement" EnableSanitization="false">
         </ajaxToolkit:HtmlEditorExtender>
     </div>
+    <span class="lbtitle">KH có mẫu thiết kế</span><asp:CheckBox runat="server" ID="cbIsCustomerHasDesign" />
+    <br />
     <span class="lbtitle">Số lượng: </span>
     <inthudo:NumericTextBox runat="server" ID="ctrltxtQuantity" Value="1" MaximumValue="1000000" MinimumValue="1" RequiredErrorMessage="Bạn hãy nhập số lượng!" RangeErrorMessage="Số lượng từ 1 đến 1.000.000" />
     <br />

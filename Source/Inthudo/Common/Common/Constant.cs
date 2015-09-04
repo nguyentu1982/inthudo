@@ -23,5 +23,12 @@ namespace Common
             public const string Not_Allow_Other_User_Edit_Order = "NotAllowOtherUserEditOrder";
             public const string Allow_Designer_Input_Approved_By_Customer_Info = "AllowDesignerInputApprovedByCustomerInfo";
         }
+
+        public class Customer
+        {
+            public const string KH = "KH";
+            public const string DVSX = "DVSX";
+            public const string QUERY_STRING_CUSTOMER_TYPE = "CustType";
+        }
     }
 }

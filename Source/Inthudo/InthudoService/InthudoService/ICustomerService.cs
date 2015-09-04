@@ -20,5 +20,9 @@ namespace InthudoService
         int InsertCustomer(CustomerBO customer);
 
         void MarkCustomerAsDeleted(int custId);
+
+        int GetCustomerTypeId(string code);
+
+        CustomerTypeBO GetCustomerTypeById(int p);
     }
 }

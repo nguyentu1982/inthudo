@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessObjects;
+using Common;
 
 namespace Web.Modules
 {
@@ -12,7 +13,16 @@ namespace Web.Modules
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Page.IsPostBack)
+            {
+                BindData();
+            }
+        }
 
+        private void BindData()
+        {
+            int customerTypeId = this.CustomerService.GetCustomerTypeId(Constant.Customer.KH);
+            btAddNew.Attributes.Add("onclick", string.Format("OpenWindow('CustomerAdd.aspx?{0}={1}')", Constant.Customer.QUERY_STRING_CUSTOMER_TYPE,customerTypeId));
         }
 
         protected void btFind_Click(object sender, EventArgs e)
@@ -47,8 +57,9 @@ namespace Web.Modules
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 int custId = int.Parse(e.Row.Cells[0].Text);
+                int customerTypeId = this.CustomerService.GetCustomerTypeId(Constant.Customer.KH);
                 HyperLink hlEidtCustomer = e.Row.Cells[7].FindControl("hlEidtCustomer") as HyperLink;
-                string url = string.Format("CustomerEdit.aspx?CustId={0}", custId);
+                string url = string.Format("CustomerEdit.aspx?CustId={0}&{1}={2}", custId, Constant.Customer.QUERY_STRING_CUSTOMER_TYPE, customerTypeId);
                 hlEidtCustomer.Attributes.Add("onclick", "OpenWindow('" + url + "')");
                 hlEidtCustomer.Attributes.Add("class", "a-popup");
                 hlEidtCustomer.Text = "Xem";

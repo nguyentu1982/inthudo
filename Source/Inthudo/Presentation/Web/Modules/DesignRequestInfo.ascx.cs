@@ -24,6 +24,7 @@ namespace Web.Modules
         private void BindData()
         {
             DesignRequestBO design = this.OrderService.GetDesignRequestById(this.DesignRequestId);
+            OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
             if (design != null)
             {
                 lbDesignRequestId.Text = design.DesignRequestId.ToString();                
@@ -36,7 +37,8 @@ namespace Web.Modules
                 txtDesignRequirement.Text = design.Description;
                 decimal cost = 0;
                 decimal.TryParse(design.Cost.ToString(), out cost);
-                ctrlDecimalTextBoxDesignCost.Value = cost;                 
+                ctrlDecimalTextBoxDesignCost.Value = cost;
+                cbIsDesignOfCustomer.Checked = orderDetail.IsCustomerHasDesign;
             }
             else
             {
@@ -44,14 +46,7 @@ namespace Web.Modules
                 //OrderDetailId
                 lbOrderDetailId.Text = this.OrderDetailId.ToString();
                 //OrderId
-                OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
-                lbOrderId.Text = orderDetail.OrderId.ToString();
-                
-                //Designer man
-                if (orderDetail.DesignerId != null)
-                {
-                    ddlDesigner.SelectedValue = orderDetail.DesignerId.ToString();
-                }
+                lbOrderId.Text = orderDetail.OrderId.ToString();                
             }
         }
 
@@ -64,8 +59,8 @@ namespace Web.Modules
             CustomerBO cust = this.CustomerService.GetCustomerByOrder(this.OrderId);
             lbCustomer.Text = string.Format("Tên: {0}, Địa chỉ: {1}, SĐT: {2}", cust.Name, cust.Address, cust.Telephone);
 
-
-            List<MemberBO> mems = this.MemberService.GetDesigners(0);
+            
+            List<MemberBO> mems = this.MemberService.GetDesigners(base.LoggedInOrganizationIds);
            
             //Designer man
             ddlDesigner.Items.Clear();
@@ -75,8 +70,7 @@ namespace Web.Modules
                 ddlDesigner.Items.Add(new ListItem(m.FullName, m.UserId.ToString()));
             } 
            
-            lbOrderDetailId.Text = this.OrderDetailId.ToString();
-            
+            lbOrderDetailId.Text = this.OrderDetailId.ToString();            
         }
 
         public DesignRequestBO SaveDesignRequestInfo()
@@ -85,12 +79,27 @@ namespace Web.Modules
             if (designReq != null)
             {
                 designReq.Description = txtDesignRequirement.Text;
-                designReq.DesignerId = int.Parse(ddlDesigner.SelectedValue);
+                //designReq.DesignerId = int.Parse(ddlDesigner.SelectedValue);
                 //designReq.BeginDate = ctrlDatePickerFrom.SelectedDate;
                 //designReq.EndDate = ctrlDatePickerTo.SelectedDate;
                 designReq.Cost = ctrlDecimalTextBoxDesignCost.Value;
                 designReq.LastEditedBy = LoggedInUserId;
-                designReq.LastEditedOn = DateTime.Now;                
+                designReq.LastEditedOn = DateTime.Now;
+
+                int designerId = int.Parse(ddlDesigner.SelectedValue);
+
+                if (designerId != 0)
+                {
+                    designReq.DesignerId = designerId;
+                }
+
+                if (cbIsDesignOfCustomer.Checked && designerId == 0)
+                {
+                    designReq.BeginDate = DateTime.Now;
+                    designReq.EndDate = DateTime.Now;
+                    designReq.ApprovedByCustomer = true;
+                    designReq.ApprovedDate = DateTime.Now;
+                }   
 
                 this.OrderService.UpdateDesignRequest(designReq);
             }
@@ -99,7 +108,7 @@ namespace Web.Modules
                 designReq = new DesignRequestBO()
                 {                    
                     Description = txtDesignRequirement.Text,
-                    DesignerId = int.Parse(ddlDesigner.SelectedValue),
+                    //DesignerId = int.Parse(ddlDesigner.SelectedValue),
                     //BeginDate = ctrlDatePickerFrom.SelectedDate,
                     //EndDate = ctrlDatePickerTo.SelectedDate,
                     Cost = ctrlDecimalTextBoxDesignCost.Value,
@@ -107,6 +116,20 @@ namespace Web.Modules
                     CreatedOn = DateTime.Now,
                     OrderItemId = int.Parse(lbOrderDetailId.Text)
                 };
+                int designerId = int.Parse(ddlDesigner.SelectedValue);
+
+                if (designerId != 0)
+                {
+                    designReq.DesignerId = designerId;
+                }
+
+                if (cbIsDesignOfCustomer.Checked && designerId == 0)
+                {
+                    designReq.BeginDate = DateTime.Now;
+                    designReq.EndDate = DateTime.Now;
+                    designReq.ApprovedByCustomer = true;
+                    designReq.ApprovedDate = DateTime.Now;
+                }               
 
                 designReq.DesignRequestId = this.OrderService.InsertDesignRequest(designReq);
             }

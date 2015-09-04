@@ -31,7 +31,7 @@ namespace Web.Modules
 
             ddlCompany.Items.Clear();
             ddlCompany.Items.Add(new ListItem(string.Empty, "0"));
-            List<OrganizationBO> orgs = this.OrderService.GetAllOrganizations();
+            List<OrganizationBO> orgs = this.MemberService.GetOrganizationsByMemberId(this.LoggedInUserId);
             foreach (OrganizationBO o in orgs)
             { 
                 ddlCompany.Items.Add(new ListItem(o.Name, o.OrganizationId.ToString()));
@@ -54,8 +54,21 @@ namespace Web.Modules
                 report.MemberId = m.UserId;
                 panelBusiness.Controls.Add(report);
             }
-
-            List<MemberBO> designers = this.MemberService.GetDesigners(int.Parse(ddlCompany.SelectedValue));
+            List<int> orgsId = new List<int>();
+            if (int.Parse(ddlCompany.SelectedValue) == 0)
+            {
+                foreach (ListItem i in ddlCompany.Items)
+                {
+                    if (int.Parse(i.Value) != 0)
+                        orgsId.Add(int.Parse(i.Value));
+                }
+            }
+            else
+            {
+                orgsId.Add(int.Parse(ddlCompany.SelectedValue));
+            }
+            
+            List<MemberBO> designers = this.MemberService.GetDesigners(orgsId);
             foreach (MemberBO m in designers)
             {
                 DesignRequestReportByDesigner designReport = new DesignRequestReportByDesigner();

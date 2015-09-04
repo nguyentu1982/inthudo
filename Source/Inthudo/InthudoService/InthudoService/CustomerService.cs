@@ -45,5 +45,17 @@ namespace InthudoService
         {
             customerDao.MarkCustomerAsDeleted(custId);
         }
+
+
+        public int GetCustomerTypeId(string code)
+        {
+            return customerDao.GetCustomerTypeId(code);
+        }
+
+
+        public CustomerTypeBO GetCustomerTypeById(int id)
+        {
+            return customerDao.GetCustomerTypeById(id);
+        }
     }
 }

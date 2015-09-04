@@ -37,7 +37,6 @@
         <AssociationConnector Association="InThuDoMNGModel.FK_Order_User1" ManuallyRouted="false" />
         <AssociationConnector Association="InThuDoMNGModel.FK_OrderItem_OrderItem" ManuallyRouted="false" />
         <AssociationConnector Association="InThuDoMNGModel.FK_OrderItem_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="InThuDoMNGModel.FK_OrderItem_User" ManuallyRouted="false" />
         <AssociationConnector Association="InThuDoMNGModel.FK_OrderStatusMapping_OrderItem" ManuallyRouted="false" />
         <EntityTypeShape EntityType="InThuDoMNGModel.DesignRequest" Width="1.5" PointX="0.27281070327051482" PointY="5.3436213011590867" />
         <EntityTypeShape EntityType="InThuDoMNGModel.ManufactureRequest" Width="1.5" PointX="11.58735469336964" PointY="21.014405260334911" />
@@ -53,6 +52,8 @@
         <EntityTypeShape EntityType="InThuDoMNGModel.UserOrganizationMappping" Width="1.5" PointX="3.0798754929936845" PointY="25.696260285422326" />
         <AssociationConnector Association="InThuDoMNGModel.FK_UserOrganizationMappping_Organization" />
         <AssociationConnector Association="InThuDoMNGModel.FK_UserOrganizationMappping_User" />
+        <EntityTypeShape EntityType="InThuDoMNGModel.LibCustomerType" Width="1.5" PointX="10.947091340528377" PointY="23.215042944632025" />
+        <AssociationConnector Association="InThuDoMNGModel.FK_Customer_LibCustomerType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

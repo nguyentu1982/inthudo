@@ -117,6 +117,8 @@ namespace DataObjects.EntityFramework
                 var query = (from o in context.Orders
                              join oitem in context.OrderItems on o.OrderId equals oitem.OrderId into orderItemGrop
                              from oitem2 in orderItemGrop.DefaultIfEmpty()
+                             join designRequest in context.DesignRequests on oitem2.OrderItemId equals designRequest.OrderItemId into dsGroup
+                             from designRequest2 in dsGroup.DefaultIfEmpty()
                              join or in context.UserOrganizationMapppings on o.UserId equals or.UserId
                              //join oStatusMapping in context.OrderStatusMappings on oitem2.OrderItemId equals oStatusMapping.OrderItemId into oStatusMappingGroup
                              //from oStatusMapping2 in oStatusMappingGroup.DefaultIfEmpty()
@@ -129,7 +131,7 @@ namespace DataObjects.EntityFramework
                              (orderSearchObj.DepositMethodId == 0 || o.DepositTypeId == orderSearchObj.DepositMethodId) &&
                                  //(orderSearchObj.OrderStatusId == 0 || oStatusMapping2.OrderStatusId == orderSearchObj.OrderStatusId)&&
                              (orderSearchObj.BusManId == 0 || o.UserId == orderSearchObj.BusManId) &&
-                             (orderSearchObj.DesignerManId == 0 || oitem2.DesignerId == orderSearchObj.DesignerManId) &&
+                             (orderSearchObj.DesignerManId == 0 || designRequest2.DesignerId == orderSearchObj.DesignerManId) &&
                              (orderSearchObj.OrderFrom == null || o.OrderDate >= orderSearchObj.OrderFrom) &&
                              (orderSearchObj.OrderTo == null || o.OrderDate <= orderSearchObj.OrderTo) &&
                              (orderSearchObj.OrganizationId == 0 || or.OrganizationId == orderSearchObj.OrganizationId) &&
@@ -241,24 +243,11 @@ namespace DataObjects.EntityFramework
         {
             using (var context = new InThuDoEntities())
             {
-                var orderDetail = (from od in context.OrderItems
+                var query = (from od in context.OrderItems
                                    where od.OrderItemId == id &&
                                    (od.Deleted == null || od.Deleted == false)
-                                   select new OrderDetailBO()
-                                   {
-                                       OrderItemId = od.OrderItemId,
-                                       ProductId = od.ProductId,
-                                       Specification = od.Specification,
-                                       Quantity = od.Quantity,
-                                       Price = od.Price,
-                                       CreatedBy = od.CreatedBy,
-                                       CreatedOn = od.CreatedOn,
-                                       LastEditedBy = od.LastEditedBy,
-                                       LastEditedOn = od.LastEditedOn,
-                                       OrderId = od.OrderId,
-                                       DesignerId = od.DesignerId,
-                                       ProductName = od.Product.Name
-                                   }).FirstOrDefault();
+                                   select od).FirstOrDefault();
+                OrderDetailBO orderDetail = this.MapOrderDetail(query);
 
                 if (orderDetail != null)
                 {
@@ -272,25 +261,13 @@ namespace DataObjects.EntityFramework
         {
             using (var context = new InThuDoEntities())
             {
-                var orderDetails = (from od in context.OrderItems
+                var query = from od in context.OrderItems
                         where
                         (od.OrderId == orderId) &&
                         (od.Deleted == null || od.Deleted == false)
-                        select new OrderDetailBO()
-                        {
-                            OrderItemId = od.OrderItemId,
-                            ProductId = od.ProductId,
-                            Specification = od.Specification,
-                            Quantity = od.Quantity,
-                            Price = od.Price,
-                            CreatedBy = od.CreatedBy,
-                            CreatedOn = od.CreatedOn,
-                            LastEditedBy = od.LastEditedBy,
-                            LastEditedOn = od.LastEditedOn,
-                            Deleted = od.Deleted,
-                            OrderId = od.OrderId,
-                            ProductName = od.Product.Name
-                        }).ToList();
+                        select od;
+                List<OrderDetailBO> orderDetails = this.MapOrderDetailList(query);
+
                 foreach (OrderDetailBO od in orderDetails)
                 {
                     od.OrderDetailStatus = this.GetOrderDetailStatusIncludedOverDue(od.OrderItemId);
@@ -312,7 +289,8 @@ namespace DataObjects.EntityFramework
                 entity.Price = orderDetail.Price;
                 entity.LastEditedBy = orderDetail.LastEditedBy;
                 entity.LastEditedOn = orderDetail.LastEditedOn;
-                entity.DesignerId = orderDetail.DesignerId;
+                entity.IsCustomerHasDesign = orderDetail.IsCustomerHasDesign;
+                
                 context.SaveChanges();
             }
         }
@@ -338,6 +316,37 @@ namespace DataObjects.EntityFramework
                 orderDetail.Deleted = true;
                 contex.SaveChanges();
             }
+        }
+
+        public OrderDetailBO MapOrderDetail(OrderItem oi)
+        {
+            if (oi == null) return null;
+            return new OrderDetailBO()
+            {
+                OrderItemId = oi.OrderItemId,
+                ProductId = oi.ProductId,
+                Specification = oi.Specification,
+                Quantity = oi.Quantity,
+                Price = oi.Price,
+                CreatedBy = oi.CreatedBy,
+                CreatedOn = oi.CreatedOn,
+                LastEditedBy = oi.LastEditedBy,
+                LastEditedOn = oi.LastEditedOn,
+                Deleted = oi.Deleted,
+                OrderId = oi.OrderId,
+                ProductName = oi.Product.Name,
+                IsCustomerHasDesign = oi.IsCustomerHasDesign
+            };
+        }
+
+        public List<OrderDetailBO> MapOrderDetailList(IQueryable<OrderItem> orderItems)
+        {
+            List<OrderDetailBO> result = new List<OrderDetailBO>();
+            foreach (OrderItem oi in orderItems)
+            {
+                result.Add(this.MapOrderDetail(oi));
+            }
+            return result;
         }
 
         #endregion OrderDetail
@@ -632,8 +641,7 @@ namespace DataObjects.EntityFramework
                                 CreatedOn = dr.OrderItem.CreatedOn,
                                 LastEditedBy = dr.OrderItem.LastEditedBy,
                                 LastEditedOn = dr.OrderItem.LastEditedOn,
-                                OrderId = dr.OrderItem.OrderId,
-                                DesignerId = dr.OrderItem.DesignerId,
+                                OrderId = dr.OrderItem.OrderId,                                
                                 ProductName = dr.OrderItem.Product.Name
                             },
                             ApprovedByCustomer = dr.ApprovedByCustomer,
@@ -730,8 +738,7 @@ namespace DataObjects.EntityFramework
                                     CreatedOn = dr.OrderItem.CreatedOn,
                                     LastEditedBy = dr.OrderItem.LastEditedBy,
                                     LastEditedOn = dr.OrderItem.LastEditedOn,
-                                    OrderId = dr.OrderItem.OrderId,
-                                    DesignerId = dr.OrderItem.DesignerId,
+                                    OrderId = dr.OrderItem.OrderId,                                   
                                     ProductName = dr.OrderItem.Product.Name
                                 },
                                 ApprovedByCustomer =dr.ApprovedByCustomer,

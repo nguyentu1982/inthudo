@@ -37,7 +37,7 @@ namespace Web.Modules
                 txtProductRequirement.Text = orderDetail.Specification;
                 ctrltxtQuantity.Value = orderDetail.Quantity;
                 ctrltxtPrice.Value = orderDetail.Price;
-                
+                cbIsCustomerHasDesign.Checked = orderDetail.IsCustomerHasDesign;
             }
             else
             {
@@ -111,6 +111,7 @@ namespace Web.Modules
                 orderDetail.Price = ctrltxtPrice.Value;
                 orderDetail.LastEditedOn = DateTime.Now;
                 orderDetail.LastEditedBy = this.LoggedInUserId;
+                orderDetail.IsCustomerHasDesign = cbIsCustomerHasDesign.Checked;
               
                 this.OrderService.UpdateOrderDetail(orderDetail);
             }
@@ -126,7 +127,7 @@ namespace Web.Modules
                      Price = ctrltxtPrice.Value,
                      CreatedBy = this.UserId,
                      CreatedOn = DateTime.Now,
-                     
+                     IsCustomerHasDesign = cbIsCustomerHasDesign.Checked                     
                 };
 
                 orderDetail.OrderItemId = this.OrderService.InsertOrderDetail(orderDetail);

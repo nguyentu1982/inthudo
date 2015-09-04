@@ -26,7 +26,9 @@ namespace Web.Modules
             CustomerBO customer = this.CustomerService.GetCustomerById(this.CustomerId);
             if (customer != null)
             {
+                lbCustomerIDTitle.Text = string.Format("Mã số {0} :", customer.CustomerType.Name);
                 lbCustomerID.Text = customer.CustomerId.ToString();
+                lbCustomerNameTitle.Text = string.Format("Tên {0} :", customer.CustomerType.Name);
                 txtCustomerName.Text = customer.Name;
                 txtTelephone.Text = customer.Telephone;
                 txtAddress.Text = customer.Address;
@@ -40,6 +42,10 @@ namespace Web.Modules
             else
             {
                 panelCustomerId.Visible = false;
+                CustomerTypeBO custType = this.CustomerService.GetCustomerTypeById(this.CustomerTypeId);
+                if (custType == null) throw new Exception("Bạn hãy liên hệ với Admin");
+                lbCustomerNameTitle.Text = string.Format("Tên {0} :", custType.Name);
+                
             }
         }
 
@@ -59,6 +65,7 @@ namespace Web.Modules
                 customer.TaxCode = txtTaxCode.Text;
                 customer.LastEditedOn = DateTime.Now;
                 customer.LastEditedBy = this.LoggedInUserId;
+                customer.CustomerTypeId = this.CustomerTypeId;
 
                 this.CustomerService.UpdateCustomer(customer);
             }
@@ -75,7 +82,8 @@ namespace Web.Modules
                     FaxNumber = txtFaxNumber.Text,
                     TaxCode = txtTaxCode.Text,
                     CreatedOn = DateTime.Now,
-                    CreatedBy = this.LoggedInUserId
+                    CreatedBy = this.LoggedInUserId,
+                    CustomerTypeId = this.CustomerTypeId
                 };
 
                 customer.CustomerId = this.CustomerService.InsertCustomer(customer);
@@ -89,6 +97,13 @@ namespace Web.Modules
             get
             {
                 return CommonHelper.QueryStringInt(Constant.QUERY_STRING_CUST_ID);
+            }
+        }
+
+        public int CustomerTypeId
+        {
+            get {
+                return CommonHelper.QueryStringInt(Constant.Customer.QUERY_STRING_CUSTOMER_TYPE);
             }
         }
     }

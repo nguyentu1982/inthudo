@@ -86,7 +86,7 @@ namespace Web.Modules
             //Designner man
             ddlDesingerId.Items.Clear();
             ddlDesingerId.Items.Add(new ListItem(string.Empty, "0"));
-            List<MemberBO> designers = this.MemberService.GetDesigners(0);
+            List<MemberBO> designers = this.MemberService.GetDesigners(base.LoggedInOrganizationIds);
             foreach (MemberBO m in designers)
             {
                 ddlDesingerId.Items.Add(new ListItem(m.FullName, m.UserId.ToString()));
@@ -269,8 +269,21 @@ namespace Web.Modules
 
         protected void ddlCompany_SelectedIndexChanged(object sender, EventArgs e)
         {
+            List<int> orgsId = new List<int>();
             int companyId = 0;
             int.TryParse(ddlCompany.SelectedValue, out companyId);
+            if (companyId == 0)
+            {
+                foreach (ListItem li in ddlCompany.Items)
+                {
+                    if (int.Parse(li.Value) != 0)
+                        orgsId.Add(int.Parse(li.Value));
+                }
+            }
+            else
+            {
+                orgsId.Add(int.Parse(ddlCompany.SelectedValue));
+            }
             //Business man
             ddlBusinessManId.Items.Clear();
             ddlBusinessManId.Items.Add(new ListItem(string.Empty, "0"));
@@ -282,7 +295,7 @@ namespace Web.Modules
             //Designner man
             ddlDesingerId.Items.Clear();
             ddlDesingerId.Items.Add(new ListItem(string.Empty, "0"));
-            List<MemberBO> designers = this.MemberService.GetDesigners(companyId);
+            List<MemberBO> designers = this.MemberService.GetDesigners(orgsId);
             foreach (MemberBO m in designers)
             {
                 ddlDesingerId.Items.Add(new ListItem(m.FullName, m.UserId.ToString()));

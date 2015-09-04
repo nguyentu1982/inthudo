@@ -3,11 +3,13 @@
 
 <div class="customer-info">
     <div runat="server" id="panelCustomerId">
-        <span class="lbtitle">Mã khách hàng </span>
-        <asp:Label runat="server" ID="lbCustomerID"></asp:Label>
+        <span class="lbtitle">
+            <asp:Label ID="lbCustomerIDTitle" runat="server" Text=""></asp:Label></span>
+            <asp:Label runat="server" ID="lbCustomerID"></asp:Label>
     </div>
-    <span class="lbtitle">Tên khách hàng </span>
-    <asp:TextBox runat="server" ID="txtCustomerName"></asp:TextBox>
+    <span class="lbtitle">
+        <asp:Label ID="lbCustomerNameTitle" runat="server" Text=""></asp:Label> </span>
+        <asp:TextBox runat="server" ID="txtCustomerName"></asp:TextBox>
     <asp:RequiredFieldValidator ID="RequiredFieldValidatorCustomerName" runat="server" ErrorMessage="Bạn hãy nhập tên khách hàng!" ForeColor="Red" ControlToValidate="txtCustomerName"></asp:RequiredFieldValidator>
     <br />
     <span class="lbtitle">Mobile </span>

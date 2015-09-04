@@ -54,6 +54,7 @@
     <Compile Include="BusinessRules\ValidationOperator.cs" />
     <Compile Include="CategoryBO.cs" />
     <Compile Include="CustomerBO.cs" />
+    <Compile Include="CustomerTypeBO.cs" />
     <Compile Include="DepartmentBO.cs" />
     <Compile Include="DepositMethodBO.cs" />
     <Compile Include="DesignRequestBO.cs" />

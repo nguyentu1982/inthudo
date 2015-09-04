@@ -13,6 +13,15 @@ namespace Web.Modules {
     public partial class CustomerEdit {
         
         /// <summary>
+        /// lbCustomerEditHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbCustomerEditHeader;
+        
+        /// <summary>
         /// btSave control.
         /// </summary>
         /// <remarks>

@@ -24,7 +24,6 @@ namespace DataObjects.EntityFramework
             this.Orders2 = new HashSet<Order>();
             this.OrderItems = new HashSet<OrderItem>();
             this.OrderItems1 = new HashSet<OrderItem>();
-            this.OrderItems2 = new HashSet<OrderItem>();
             this.DesignRequests = new HashSet<DesignRequest>();
             this.DesignRequests1 = new HashSet<DesignRequest>();
             this.DesignRequests2 = new HashSet<DesignRequest>();
@@ -55,7 +54,6 @@ namespace DataObjects.EntityFramework
         public virtual ICollection<Order> Orders2 { get; set; }
         public virtual ICollection<OrderItem> OrderItems { get; set; }
         public virtual ICollection<OrderItem> OrderItems1 { get; set; }
-        public virtual ICollection<OrderItem> OrderItems2 { get; set; }
         public virtual ICollection<DesignRequest> DesignRequests { get; set; }
         public virtual ICollection<DesignRequest> DesignRequests1 { get; set; }
         public virtual ICollection<DesignRequest> DesignRequests2 { get; set; }

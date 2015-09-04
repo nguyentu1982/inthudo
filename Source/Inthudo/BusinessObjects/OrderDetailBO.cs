@@ -38,7 +38,7 @@ namespace BusinessObjects
         public Nullable<System.DateTime> LastEditedOn { get; set; }
         public Nullable<bool> Deleted { get; set; }
         public int OrderId { get; set; }
-        public int? DesignerId { get; set; }
+        public bool IsCustomerHasDesign { get; set; }
 
         public virtual MemberBO User { get; set; }
         public virtual MemberBO User1 { get; set; }

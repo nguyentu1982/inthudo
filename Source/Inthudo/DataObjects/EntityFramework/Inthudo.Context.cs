@@ -43,5 +43,6 @@ namespace DataObjects.EntityFramework
         public DbSet<ManufactureRequest> ManufactureRequests { get; set; }
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<UserOrganizationMappping> UserOrganizationMapppings { get; set; }
+        public DbSet<LibCustomerType> LibCustomerTypes { get; set; }
     }
 }

@@ -34,9 +34,11 @@ namespace DataObjects.EntityFramework
         public Nullable<bool> Deleted { get; set; }
         public string TaxCode { get; set; }
         public string Note { get; set; }
+        public int CustomerTypeId { get; set; }
     
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
+        public virtual LibCustomerType LibCustomerType { get; set; }
     }
 }
