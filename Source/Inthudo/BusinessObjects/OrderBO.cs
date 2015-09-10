@@ -25,7 +25,7 @@ namespace BusinessObjects
         public Nullable<int> ShippingMethodId { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }
         public int CustomerId { get; set; }
-        public int UserId { get; set; }
+        public int BusinessManId { get; set; }
         public int CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<int> LastEditedBy { get; set; }
@@ -45,7 +45,7 @@ namespace BusinessObjects
         public virtual MemberBO User2 { get; set; }
         public virtual DepositMethodBO DepositType { get; set; }
         public virtual ShippingMethodBO ShippingMethod { get; set; }
-        public virtual IList<OrderDetailBO> OrderItems { get; set; }
+        public virtual IList<OrderItemlBO> OrderItems { get; set; }
 
 
         

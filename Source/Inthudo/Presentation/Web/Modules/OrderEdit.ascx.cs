@@ -23,12 +23,12 @@ namespace Web.Modules
 
         private void BindData()
         {           
-            List<OrderDetailBO> orderDetails = this.OrderService.GetOrderDetailsByOrderId(this.OrderId);
+            List<OrderItemlBO> orderDetails = this.OrderService.GetOrderDetailsByOrderId(this.OrderId);
 
             int numberOfOrderItemManufactureCompleted = 0;
-            foreach(OrderDetailBO od in orderDetails)
+            foreach(OrderItemlBO od in orderDetails)
             {
-                if (od.OrderDetailStatus == OrderDetailStatusEnum.ManufactureCompleted)
+                if (od.OrderItemStatus == OrderItemStatusEnum.ManufactureCompleted)
                 {
                     numberOfOrderItemManufactureCompleted++;
                 }
@@ -41,12 +41,12 @@ namespace Web.Modules
 
             //Check whether other user can edit order
             OrderBO order = this.OrderService.GetOrderById(this.OrderId);
-            if (this.LoggedInUserId != order.CreatedBy)
+            if (this.LoggedInUserId != order.BusinessManId)
             {
                 List<WebControl> buttons = new List<WebControl>();
                 buttons.Add(btSave);
                 buttons.Add(btDelete);
-                base.CheckNotAllowOtherUserEditOrder(buttons, order.CreatedBy);
+                base.CheckNotAllowOtherUserEditOrder(buttons, order.BusinessManId);
             }
         }
 

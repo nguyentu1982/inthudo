@@ -9,7 +9,7 @@ namespace BusinessObjects
     
     // Order Detail business object
     // ** Enterprise Design Pattern: Domain Model, Identity Field, Foreign key mapping
-    public enum OrderDetailStatusEnum
+    public enum OrderItemStatusEnum
     {
         OrderNotExist = 0,
         DesignRequestNotCreated = 1,
@@ -25,7 +25,7 @@ namespace BusinessObjects
         Overdue=11
     }
 
-    public class OrderDetailBO : BusinessObject
+    public class OrderItemlBO : BusinessObject
     {
         public int OrderItemId { get; set; }
         public int ProductId { get; set; }
@@ -39,6 +39,7 @@ namespace BusinessObjects
         public Nullable<bool> Deleted { get; set; }
         public int OrderId { get; set; }
         public bool IsCustomerHasDesign { get; set; }
+        public int PrintingTypeId { get; set; }
 
         public virtual MemberBO User { get; set; }
         public virtual MemberBO User1 { get; set; }
@@ -51,41 +52,41 @@ namespace BusinessObjects
             set;
         }
 
-        public OrderDetailStatusEnum OrderDetailStatus
+        public OrderItemStatusEnum OrderItemStatus
         {
             get;
             set;
         }
 
-        public string OrderDetailStatusString
+        public string OrderItemStatusString
         {
             get
             {
-                switch (OrderDetailStatus)
+                switch (OrderItemStatus)
                 {
-                    case OrderDetailStatusEnum.OrderNotExist:
+                    case OrderItemStatusEnum.OrderNotExist:
                         return "Đơn hàng không tồn tại / Chưa hoàn thành";
-                    case OrderDetailStatusEnum.DesignRequestNotCreated:
+                    case OrderItemStatusEnum.DesignRequestNotCreated:
                         return "Chưa tạo yêu cầu thiết kế";
-                    case OrderDetailStatusEnum.DesignRequestCreated:
+                    case OrderItemStatusEnum.DesignRequestCreated:
                         return "Đã tạo yêu cầu thiết kế";
-                    case OrderDetailStatusEnum.Designing:
+                    case OrderItemStatusEnum.Designing:
                         return "Đang thiết kế";
-                    case OrderDetailStatusEnum.DesignCopmleted:
+                    case OrderItemStatusEnum.DesignCopmleted:
                         return "Đã thiết kế xong";
-                    case OrderDetailStatusEnum.DesignApprovedByCustomer:
+                    case OrderItemStatusEnum.DesignApprovedByCustomer:
                         return "Khách hàng đã duyệt mẫu thiết kế";
-                    case OrderDetailStatusEnum.ManufactureRequestCreated:
+                    case OrderItemStatusEnum.ManufactureRequestCreated:
                         return "Yêu cầu sản xuất đã tạo";
-                    case OrderDetailStatusEnum.Manufacturing:
+                    case OrderItemStatusEnum.Manufacturing:
                         return "Đang sản xuất";
-                    case OrderDetailStatusEnum.ManufactureCompleted:
+                    case OrderItemStatusEnum.ManufactureCompleted:
                         return "Đã sản xuất xong";
-                    case OrderDetailStatusEnum.CustomerApproved:
+                    case OrderItemStatusEnum.CustomerApproved:
                         return "Khách hàng đã duyệt sản phẩm";
-                    case OrderDetailStatusEnum.CustomerRefused:
+                    case OrderItemStatusEnum.CustomerRefused:
                         return "Lỗi - Khách hàng từ chối";
-                    case OrderDetailStatusEnum.Overdue:
+                    case OrderItemStatusEnum.Overdue:
                         return "Quá hạn";
                     default: return "Đơn hàng không tồn tại / Chưa hoàn thành";
                 }

@@ -15,7 +15,7 @@ namespace DataObjects.EntityFramework
            
         }
 
-        public List<CustomerBO> GetCustomers(string customerName, string telephone, string email, string companyName)
+        public List<CustomerBO> GetCustomers(string customerName, string telephone, string email, string companyName, int customerTypeId)
         {
             using (var context = new InThuDoEntities())
             {
@@ -25,6 +25,7 @@ namespace DataObjects.EntityFramework
                             (string.IsNullOrEmpty(telephone) || c.Telephone.Contains(telephone)) &&
                             (string.IsNullOrEmpty(email) || c.Email.Contains(email)) &&
                             (string.IsNullOrEmpty(companyName) || c.Company.Contains(companyName)) &&
+                            (customerTypeId ==0 || c.CustomerTypeId == customerTypeId)&&
                             (c.Deleted == false || c.Deleted == null)
                             select c;
 

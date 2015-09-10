@@ -24,12 +24,13 @@ namespace Web.Modules
         private void BindData()
         {
             DesignRequestBO design = this.OrderService.GetDesignRequestById(this.DesignRequestId);
-            OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
+            OrderItemlBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
             if (design != null)
             {
                 lbDesignRequestId.Text = design.DesignRequestId.ToString();                
                 lbDesignRequestDate.Text = design.CreatedOn.ToShortDateString();
-                ddlDesigner.SelectedValue = design.DesignerId.ToString();
+                if (design.DesignerId != null)
+                    ddlDesigner.SelectedValue = design.DesignerId.ToString();
                 ctrlDatePickerFrom.Visible = true;
                 ctrlDatePickerFrom.SelectedDate = design.BeginDate;
                 ctrlDatePickerTo.Visible = true;
@@ -92,6 +93,10 @@ namespace Web.Modules
                 {
                     designReq.DesignerId = designerId;
                 }
+                else
+                {
+                    designReq.DesignerId = null;
+                }
 
                 if (cbIsDesignOfCustomer.Checked && designerId == 0)
                 {
@@ -121,6 +126,10 @@ namespace Web.Modules
                 if (designerId != 0)
                 {
                     designReq.DesignerId = designerId;
+                }
+                else
+                {
+                    designReq.DesignerId = null;
                 }
 
                 if (cbIsDesignOfCustomer.Checked && designerId == 0)

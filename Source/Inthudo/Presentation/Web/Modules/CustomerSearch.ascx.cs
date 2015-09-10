@@ -21,17 +21,22 @@ namespace Web.Modules
 
         private void BindData()
         {
-            int customerTypeId = this.CustomerService.GetCustomerTypeId(Constant.Customer.KH);
+            CustomerSelect custSelect = this.Parent.Parent.Parent.Parent as CustomerSelect;
+            int customerTypeId = custSelect.CustomerTypeId;
             btAddNew.Attributes.Add("onclick", string.Format("OpenWindow('CustomerAdd.aspx?{0}={1}')", Constant.Customer.QUERY_STRING_CUSTOMER_TYPE,customerTypeId));
+            CustomerTypeBO custType = this.CustomerService.GetCustomerTypeById(customerTypeId);
+            btAddNew.Value = string.Format("Thêm {0}", custType.Name);
         }
 
         protected void btFind_Click(object sender, EventArgs e)
         {
+            CustomerSelect custSelect = this.Parent.Parent.Parent.Parent as CustomerSelect;
+            int customerTypeId = custSelect.CustomerTypeId;
             string customerName = txtCustomerName.Text;
             string telephone = txtTelephone.Text;
             string email = txtEmail.Text;
             string companyName = txtCompanyName.Text;
-            List<CustomerBO> customers = this.CustomerService.GetCustomers(customerName, telephone, email, companyName);
+            List<CustomerBO> customers = this.CustomerService.GetCustomers(customerName, telephone, email, companyName, customerTypeId);
             grvCustomers.DataSource = customers;
             grvCustomers.DataBind();
         }
@@ -44,7 +49,7 @@ namespace Web.Modules
                 GridViewRow row = grvCustomers.Rows[index];
                 var custId = row.Cells[0].Text;
                 
-                CustomerSelect ctrlCustomerSelect = this.Parent.Parent.Parent as CustomerSelect;                
+                CustomerSelect ctrlCustomerSelect = this.Parent.Parent.Parent.Parent as CustomerSelect;                
                 TextBox txtCustCode = ctrlCustomerSelect.FindControl("txtCustomerCode") as TextBox;
                 txtCustCode.Text = custId;
                 ctrlCustomerSelect.txtCustomerCode_TextChanged(new object(), new EventArgs());

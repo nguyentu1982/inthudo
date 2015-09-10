@@ -9,7 +9,7 @@ namespace DataObjects
 {
     public interface IOrderDao
     {
-        OrderDetailBO GetOrderDetailById(int id);
+        OrderItemlBO GetOrderDetailById(int id);
 
         OrderBO GetOrderById(int orderId);
 
@@ -25,15 +25,15 @@ namespace DataObjects
 
         void InsertOrderStatusMapping(OrderStatusMappingBO orderStatusMapping);
 
-        void UpdateOrderDetail(OrderDetailBO orderDetail);
+        void UpdateOrderDetail(OrderItemlBO orderDetail);
 
-        int InsertOrderDetail(OrderDetailBO orderDetail);
+        int InsertOrderDetail(OrderItemlBO orderDetail);
 
         void UpdateOrderInfo(OrderBO order);
 
         List<OrderBO> GetOrders(OrderSearch orderSearchObj);
 
-        List<OrderDetailBO> GetOrderDetailsByOrderId(int orderId);
+        List<OrderItemlBO> GetOrderDetailsByOrderId(int orderId);
 
         void MarkOrderDetailAsDeleted(int orderDetailId);
 
@@ -70,5 +70,11 @@ namespace DataObjects
         List<ProductApprovedBO> GetApprovedProductByOrderId(int orderId);
 
         List<ProductApprovedBO> GetFailedProductByOrderId(int orderId);
+
+        List<PrintingTypeBO> GetAllPrintingType();
+
+        PrintingTypeBO GetPrintTypeByCode(string code);
+
+        List<ManufactureRequestBO> GetManufactureRequests(ManufactureRequestSearch manuSearchObj);
     }
 }

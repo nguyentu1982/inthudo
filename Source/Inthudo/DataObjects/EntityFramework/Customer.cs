@@ -17,6 +17,7 @@ namespace DataObjects.EntityFramework
         public Customer()
         {
             this.Orders = new HashSet<Order>();
+            this.ManufactureRequests = new HashSet<ManufactureRequest>();
         }
     
         public int CustomerId { get; set; }
@@ -40,5 +41,6 @@ namespace DataObjects.EntityFramework
         public virtual User User1 { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual LibCustomerType LibCustomerType { get; set; }
+        public virtual ICollection<ManufactureRequest> ManufactureRequests { get; set; }
     }
 }

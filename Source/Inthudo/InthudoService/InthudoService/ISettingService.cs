@@ -9,5 +9,7 @@ namespace InthudoService
     public interface ISettingService
     {
         bool GetBoolSetting(string name);
+
+        string GetStringSetting(string p);
     }
 }

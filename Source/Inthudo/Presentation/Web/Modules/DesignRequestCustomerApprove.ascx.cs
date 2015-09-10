@@ -47,8 +47,8 @@ namespace Web.Modules
                     }
                 }
 
-                OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
-                if (orderDetail.OrderDetailStatus >= OrderDetailStatusEnum.DesignApprovedByCustomer)
+                OrderItemlBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
+                if (orderDetail.OrderItemStatus >= OrderItemStatusEnum.DesignApprovedByCustomer)
                 {                    
                     List<WebControl> designRequestTaskControls = new List<WebControl>();
                     designRequestTaskControls.Add(btSave);

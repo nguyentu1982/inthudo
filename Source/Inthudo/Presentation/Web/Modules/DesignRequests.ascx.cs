@@ -93,7 +93,7 @@ namespace Web.Modules
             DateTime? requestTo = ctrlDatePickerTo.SelectedDate;
             
             int custId = 0;
-            int.TryParse(ctrlCustomerSelect.CustomerCode, out custId);
+            int.TryParse(ctrlCustomerSelect.CustomerId, out custId);
             
             int productId = 0;
             int.TryParse(ddlProducts.SelectedValue, out productId);
@@ -118,7 +118,7 @@ namespace Web.Modules
             grvDesignRequest.DataSource = designRequests;
             grvDesignRequest.DataBind();
 
-            List<OrderDetailBO> orderDetail = new List<OrderDetailBO>();
+            List<OrderItemlBO> orderDetail = new List<OrderItemlBO>();
             foreach(DesignRequestBO dr in designRequests)
             {
                 orderDetail.Add(this.OrderService.GetOrderDetailById(dr.OrderItemId));    

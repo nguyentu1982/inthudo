@@ -32,6 +32,7 @@ namespace DataObjects.EntityFramework
         public Nullable<bool> Deleted { get; set; }
         public int OrderId { get; set; }
         public bool IsCustomerHasDesign { get; set; }
+        public int PrintingTypeId { get; set; }
     
         public virtual Order Order { get; set; }
         public virtual User User { get; set; }
@@ -41,5 +42,6 @@ namespace DataObjects.EntityFramework
         public virtual Product Product { get; set; }
         public virtual ICollection<OrderStatusMapping> OrderStatusMappings { get; set; }
         public virtual ICollection<DesignRequest> DesignRequests { get; set; }
+        public virtual LibPrintingType LibPrintingType { get; set; }
     }
 }

@@ -40,6 +40,6 @@ namespace InthudoService
 
         List<MemberBO> GetDesigners(List<int> orgsId);
 
-        List<MemberBO> GetBusinessMen(int organizationId);
+        List<MemberBO> GetBusinessMen(List<int> orgsId);
     }
 }

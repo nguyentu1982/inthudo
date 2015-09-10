@@ -54,6 +54,9 @@
         <AssociationConnector Association="InThuDoMNGModel.FK_UserOrganizationMappping_User" />
         <EntityTypeShape EntityType="InThuDoMNGModel.LibCustomerType" Width="1.5" PointX="10.947091340528377" PointY="23.215042944632025" />
         <AssociationConnector Association="InThuDoMNGModel.FK_Customer_LibCustomerType" />
+        <AssociationConnector Association="InThuDoMNGModel.FK_ManufactureRequest_Customer" />
+        <EntityTypeShape EntityType="InThuDoMNGModel.LibPrintingType" Width="1.5" PointX="11.630268908864945" PointY="8.1643468179574" />
+        <AssociationConnector Association="InThuDoMNGModel.FK_OrderItem_LibPrintingType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -41,6 +41,7 @@ namespace Web.Modules
         private void LoadDefaultData()
         {
             cblOrderStatus.Attributes.Add("onclick", "radioMe(event);");
+           
             //Product drop down
             ddlProduct.Items.Clear();
             ddlProduct.Items.Add(new ListItem(string.Empty, "0"));
@@ -65,20 +66,21 @@ namespace Web.Modules
             {
                 ddlDeposit.Items.Add(new ListItem(d.Name, d.DepositTypeId.ToString()));
             }
-            //Order Status
+            //Order detail Status
             ddlOrderDetailStatus.Items.Clear();
             ddlOrderDetailStatus.Items.Add(new ListItem(string.Empty, "0"));
             List<OrderStatusBO> status = this.OrderService.GetAllOrderStatus();
             foreach (OrderStatusBO s in status)
             {
-                ddlOrderDetailStatus.Items.Add(new ListItem(s.Name, s.OrderStatusId.ToString()));
+                ListItem i = new ListItem(s.Name, s.OrderStatusId.ToString());
+                ddlOrderDetailStatus.Items.Add(i);
             }
 
             
             //Business man
             ddlBusinessManId.Items.Clear();
             ddlBusinessManId.Items.Add(new ListItem(string.Empty, "0"));
-            List<MemberBO> businessMans = this.MemberService.GetBusinessMen(0);
+            List<MemberBO> businessMans = this.MemberService.GetBusinessMen(this.LoggedInOrganizationIds);
             foreach (MemberBO m in businessMans)
             {
                 ddlBusinessManId.Items.Add(new ListItem(m.FullName, m.UserId.ToString()));
@@ -99,7 +101,7 @@ namespace Web.Modules
             foreach (OrganizationBO og in organizations)
             {
                 ddlCompany.Items.Add(new ListItem(og.Name, og.OrganizationId.ToString()));
-            }
+            }            
 
             //Check Roles and Department to bindata
             MemberBO mem = this.MemberService.GetMember(this.LoggedInUserId);
@@ -150,7 +152,7 @@ namespace Web.Modules
             int.TryParse(txtOrderCode.Text, out orderId);
             
             int custId = 0;
-            int.TryParse(ctrlCustomerSelect.CustomerCode, out custId);
+            int.TryParse(ctrlCustomerSelect.CustomerId, out custId);
             
             int productId = 0;
             int.TryParse(ddlProduct.SelectedValue, out productId);
@@ -170,8 +172,16 @@ namespace Web.Modules
             int designerManId = 0;
             int.TryParse(ddlDesingerId.SelectedValue, out designerManId);
 
-            int orderStatusValue = 0;
-            int.TryParse(cblOrderStatus.SelectedValue, out orderStatusValue);
+            List<OrderStatusEnum> orderStatus = new List<OrderStatusEnum>();
+            foreach(ListItem i in cblOrderStatus.Items)
+            {
+                if (i.Selected)
+                {
+                    orderStatus.Add((OrderStatusEnum)int.Parse(i.Value));
+                }
+            }
+
+            List<int> printingTypeIds = ctrlPrintingTypeSelect.SelectedValues;
 
             OrderSearch orderSearchObj = new OrderSearch()
             {
@@ -182,10 +192,11 @@ namespace Web.Modules
                 ProductId = productId,
                 ShipMethodId = shipMethodId,
                 DepositMethodId = depositMethodId,
-                OrderDetailStatus = (OrderDetailStatusEnum)orderDetailStatusId,
-                OrderStatus = (OrderStatusEnum)orderStatusValue,
+                OrderDetailStatus = (OrderItemStatusEnum)orderDetailStatusId,
+                OrderStatus = orderStatus,
                 BusManId = busManId,
-                DesignerManId = designerManId
+                DesignerManId = designerManId,
+                PrintingTypeIds = printingTypeIds
             };
 
             List<OrderBO> orders = this.OrderService.GetOrders(orderSearchObj);
@@ -222,9 +233,9 @@ namespace Web.Modules
             decimal overdueOrderDetailTotal = 0;
             foreach (OrderBO o in overdueOrders)
             {
-                foreach (OrderDetailBO od in o.OrderItems)
+                foreach (OrderItemlBO od in o.OrderItems)
                 {
-                    if (od.OrderDetailStatus == OrderDetailStatusEnum.Overdue)
+                    if (od.OrderItemStatus == OrderItemStatusEnum.Overdue)
                     {
                         overdueOrderDetailTotal += od.Quantity * od.Price;
                     }
@@ -287,7 +298,7 @@ namespace Web.Modules
             //Business man
             ddlBusinessManId.Items.Clear();
             ddlBusinessManId.Items.Add(new ListItem(string.Empty, "0"));
-            List<MemberBO> businessMans = this.MemberService.GetBusinessMen(companyId);
+            List<MemberBO> businessMans = this.MemberService.GetBusinessMen(orgsId);
             foreach (MemberBO m in businessMans)
             {
                 ddlBusinessManId.Items.Add(new ListItem(m.FullName, m.UserId.ToString()));

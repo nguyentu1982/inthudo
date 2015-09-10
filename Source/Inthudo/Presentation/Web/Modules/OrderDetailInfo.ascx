@@ -42,6 +42,8 @@
     </div>
     <span class="lbtitle">KH có mẫu thiết kế</span><asp:CheckBox runat="server" ID="cbIsCustomerHasDesign" />
     <br />
+    <span class="lbtitle">Hình thức in</span><asp:CheckBoxList runat="server" ID="cblPrintingType" RepeatColumns="3" CssClass="checkboxlist"></asp:CheckBoxList>
+    <br />
     <span class="lbtitle">Số lượng: </span>
     <inthudo:NumericTextBox runat="server" ID="ctrltxtQuantity" Value="1" MaximumValue="1000000" MinimumValue="1" RequiredErrorMessage="Bạn hãy nhập số lượng!" RangeErrorMessage="Số lượng từ 1 đến 1.000.000" />
     <br />
@@ -58,7 +60,17 @@
     }
     window.onunload = RefreshParent;
 
+    function radioMe(e) {
+        if (!e) e = window.event;
+        var sender = e.target || e.srcElement;
 
-
-
+        if (sender.nodeName != 'INPUT') return;
+        var checker = sender;
+        var chkBox = document.getElementById('<%= cblPrintingType.ClientID %>');
+        var chks = chkBox.getElementsByTagName('INPUT');
+        for (i = 0; i < chks.length; i++) {
+            if (chks[i] != checker)
+                chks[i].checked = false;
+        }
+    }
 </script>

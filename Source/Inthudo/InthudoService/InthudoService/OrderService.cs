@@ -13,18 +13,18 @@ namespace InthudoService
         static readonly IOrderDao orderDao = factory.OrderDao;
 
 
-        public OrderDetailBO GetOrderDetailById(int id)
+        public OrderItemlBO GetOrderDetailById(int id)
         {
             return orderDao.GetOrderDetailById(id);
         }
 
-        public void UpdateOrderDetail(OrderDetailBO orderDetail)
+        public void UpdateOrderDetail(OrderItemlBO orderDetail)
         {
             orderDao.UpdateOrderDetail(orderDetail);
         }
 
 
-        public int InsertOrderDetail(OrderDetailBO orderDetail)
+        public int InsertOrderDetail(OrderItemlBO orderDetail)
         {
             return orderDao.InsertOrderDetail(orderDetail);
         }
@@ -83,7 +83,7 @@ namespace InthudoService
         }
 
 
-        public List<OrderDetailBO> GetOrderDetailsByOrderId(int orderId)
+        public List<OrderItemlBO> GetOrderDetailsByOrderId(int orderId)
         {
             return orderDao.GetOrderDetailsByOrderId(orderId);
         }
@@ -180,6 +180,25 @@ namespace InthudoService
         public List<ProductApprovedBO> GetFailedProductByOrderId(int orderId)
         {
             return orderDao.GetFailedProductByOrderId(orderId);
+        }
+
+
+        public List<PrintingTypeBO> GetAllPrintingType()
+        {
+            return orderDao.GetAllPrintingType();
+
+        }
+
+
+        public PrintingTypeBO GetPrintTypeByCode(string code)
+        {
+            return orderDao.GetPrintTypeByCode(code);
+        }
+
+
+        public List<ManufactureRequestBO> GetManufactureRequests(ManufactureRequestSearch manuSearchObj)
+        {
+            return orderDao.GetManufactureRequests(manuSearchObj);
         }
     }
 }

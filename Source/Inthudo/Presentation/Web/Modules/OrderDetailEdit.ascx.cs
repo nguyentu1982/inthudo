@@ -23,14 +23,14 @@ namespace Web.Modules
         private void BindData()
         {
             //Check whether other user can edit order
-            OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
+            OrderItemlBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
             
             List<WebControl> buttons = new List<WebControl>();
             buttons.Add(btSave);
             buttons.Add(btDelete);
             this.CheckNotAllowOtherUserEditOrder(buttons, orderDetail.CreatedBy);
 
-            if (orderDetail.OrderDetailStatus >= OrderDetailStatusEnum.Designing)
+            if (orderDetail.OrderItemStatus >= OrderItemStatusEnum.Designing)
             {                
                 List<WebControl> controls = new List<WebControl>();
                 controls.Add(btSave);

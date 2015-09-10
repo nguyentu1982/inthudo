@@ -15,5 +15,11 @@ namespace InthudoService
         {
             return settingDao.GetBoolSetting(name);
         }
+
+
+        public string GetStringSetting(string name)
+        {
+            return settingDao.GetStringSetting(name);
+        }
     }
 }

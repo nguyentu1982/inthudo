@@ -1,4 +1,21 @@
 ﻿/*Customize*/
+.checkboxlist {
+    display:inline-block;
+}
+
+.checkboxlist td {
+    width:80px;
+}
+
+.checkboxlist input{
+    float:left;
+}
+
+.checkboxlist label{
+    display: block;
+    font-size: 1em;
+}
+
 .lbtitle {
     min-width:160px;
     display:inline-block;
@@ -22,10 +39,6 @@
     min-width:20px;
     display:inline-block;
     margin-left:10px;
-}
-
-.order-status {
-    display:inline-block;
 }
 
 .ajax__html_editor_extender_popupDiv {
@@ -63,7 +76,6 @@
 {
     color: White;
     background-color: white;
-    font-variant: small-caps;
     font-size: large;
     font-weight: bold;
     padding:10px;
@@ -95,7 +107,7 @@
     background-color: Gray !important;
     color: White !important;
     font-size: small;
-} 
+}
 /*/End Menu/*/
 
 html {
@@ -609,7 +621,6 @@ table {
 }
 
 th {
-	font-size: 1.2em;
     text-align: left;
     border: none 0px;
     padding-left: 0;

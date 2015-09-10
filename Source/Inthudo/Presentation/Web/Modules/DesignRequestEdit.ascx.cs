@@ -23,6 +23,7 @@ namespace Web.Modules
         private void BindData()
         {
             DesignRequestBO designRequest = this.OrderService.GetDesignRequestById(this.DesignRequestId);
+            OrderBO order = this.OrderService.GetOrderById(this.OrderId);
             if (designRequest != null)
             {
                 if (!designRequest.BeginDate.HasValue || !designRequest.EndDate.HasValue)
@@ -31,14 +32,14 @@ namespace Web.Modules
                 }
             }
 
-            //Check whether other user can edit order
+            //Check whether other user can edit design request
             List<WebControl> buttons = new List<WebControl>();
             buttons.Add(btSave);
             buttons.Add(btDelete);
-            base.CheckNotAllowOtherUserEditOrder(buttons, designRequest.CreatedBy);
+            base.CheckNotAllowOtherUserEditOrder(buttons, order.BusinessManId);
 
-            OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
-            if (orderDetail.OrderDetailStatus >= OrderDetailStatusEnum.Designing)
+            OrderItemlBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
+            if (orderDetail.OrderItemStatus >= OrderItemStatusEnum.Designing)
             {
                 List<WebControl> controls = new List<WebControl>();
                 controls.Add(btSave);

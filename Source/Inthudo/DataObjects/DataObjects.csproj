@@ -104,6 +104,9 @@
     <Compile Include="EntityFramework\LibOrderStatu.cs">
       <DependentUpon>Inthudo.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\LibPrintingType.cs">
+      <DependentUpon>Inthudo.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\LibRoleType.cs">
       <DependentUpon>Inthudo.tt</DependentUpon>
     </Compile>

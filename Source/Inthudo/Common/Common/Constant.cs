@@ -22,6 +22,8 @@ namespace Common
             public const string Not_Allow_Select_Business_Man_When_CreateOrder = "NotAllowSelectBusinessManWhenCreateOrder";
             public const string Not_Allow_Other_User_Edit_Order = "NotAllowOtherUserEditOrder";
             public const string Allow_Designer_Input_Approved_By_Customer_Info = "AllowDesignerInputApprovedByCustomerInfo";
+
+            public const string Default_PrintingType_Code = "DefaultPrintingTypeCode";
         }
 
         public class Customer
@@ -29,6 +31,13 @@ namespace Common
             public const string KH = "KH";
             public const string DVSX = "DVSX";
             public const string QUERY_STRING_CUSTOMER_TYPE = "CustType";
+        }
+
+        public class PrintType
+        {
+            public const string INTHUONG = "INTHUONG";
+            public const string INNHANH = "INNHANH";
+            public const string INTM = "INTM";
         }
     }
 }

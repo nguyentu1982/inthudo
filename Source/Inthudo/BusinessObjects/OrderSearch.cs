@@ -19,10 +19,11 @@ namespace BusinessObjects
         public int ProductId { get; set; }
         public int ShipMethodId { get; set; }
         public int DepositMethodId { get; set; }
-        public OrderDetailStatusEnum OrderDetailStatus { get; set; }
-        public OrderStatusEnum OrderStatus { get; set; }
+        public OrderItemStatusEnum OrderDetailStatus { get; set; }
+        public List<OrderStatusEnum> OrderStatus { get; set; }
         public int BusManId { get; set; }
         public int DesignerManId { get; set; }
         public int OrganizationId { get; set; }
+        public List<int> PrintingTypeIds { get; set; }
     }
 }

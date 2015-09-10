@@ -23,6 +23,7 @@ namespace Web.Modules
         private void BindData()
         {
             ManufactureRequestBO manu = this.OrderService.GetManufactureRequestById(this.ManufactureRequestId);
+            OrderBO order = this.OrderService.GetOrderById(this.OrderId);
             if (manu != null)
             {
                 if (!manu.BeginDate.HasValue || !manu.EndDate.HasValue)
@@ -35,10 +36,10 @@ namespace Web.Modules
             List<WebControl> buttons = new List<WebControl>();
             buttons.Add(btSave);
             buttons.Add(btDelete);
-            base.CheckNotAllowOtherUserEditOrder(buttons, manu.CreatedBy);
+            base.CheckNotAllowOtherUserEditOrder(buttons, order.BusinessManId);
 
-            OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
-            if (orderDetail.OrderDetailStatus >= OrderDetailStatusEnum.ManufactureCompleted)
+            OrderItemlBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
+            if (orderDetail.OrderItemStatus >= OrderItemStatusEnum.ManufactureCompleted)
             {
                 List<WebControl> manufactureRequestTaskControls = new List<WebControl>();
                 manufactureRequestTaskControls.Add(btSave);
@@ -89,6 +90,14 @@ namespace Web.Modules
             get
             {
                 return CommonHelper.QueryStringInt("OrderDetailId");
+            }
+        }
+
+        public int OrderId
+        {
+            get
+            {
+                return CommonHelper.QueryStringInt("OrderId");
             }
         }
     }

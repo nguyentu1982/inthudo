@@ -12,9 +12,9 @@ namespace InthudoService
     {
         static readonly ICustomerDao customerDao = factory.CustomerDao;
 
-        public List<CustomerBO> GetCustomers(string customerName, string telephone, string email, string companyName)
+        public List<CustomerBO> GetCustomers(string customerName, string telephone, string email, string companyName, int customerTypeId)
         {
-            return customerDao.GetCustomers(customerName, telephone, email, companyName);
+            return customerDao.GetCustomers(customerName, telephone, email, companyName, customerTypeId);
         }
 
 

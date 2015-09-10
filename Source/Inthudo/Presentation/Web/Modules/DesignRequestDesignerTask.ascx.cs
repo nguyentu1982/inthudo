@@ -48,8 +48,8 @@ namespace Web.Modules
                 int.TryParse(dr.DesignerId.ToString(), out designerId);
                 base.CheckNotAllowOtherUserEditOrder(controls, designerId);
 
-                OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
-                if (orderDetail.OrderDetailStatus >= OrderDetailStatusEnum.DesignCopmleted)
+                OrderItemlBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
+                if (orderDetail.OrderItemStatus >= OrderItemStatusEnum.DesignCopmleted)
                 {                    
                     List<WebControl> designRequestTaskControls = new List<WebControl>();
                     designRequestTaskControls.Add(cbStartWork);

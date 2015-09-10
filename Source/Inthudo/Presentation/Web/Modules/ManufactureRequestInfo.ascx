@@ -2,6 +2,7 @@
 <%@ Register TagPrefix="inthudo" TagName="NumericTextBox" Src="~/Modules/NumericTextBox.ascx" %>
 <%@ Register TagPrefix="inthudo" TagName="DatePicker" Src="~/Modules/DatePicker.ascx" %>
 <%@ Register TagPrefix="inthudo" TagName="DecimalTextBox" Src="~/Modules/DecimalTextBox.ascx" %>
+<%@ Register TagPrefix="inthudo" TagName="ManufactureSelect" Src="~/Modules/CustomerSelect.ascx" %>
 
 <div runat="server" id="panelManufactureRequestID" class="manufacture-request-id">
     <span class="lbtitle">Mã yêu cầu sản xuất </span><asp:Label ID="lbManufactureRequestId" runat="server"></asp:Label>
@@ -21,6 +22,7 @@
     <span class="lbtitle">Mã yêu cầu thiết kế: </span><asp:Label ID="lbDesignRequestId" runat="server"></asp:Label>    
 </div>
 <div class="manufacture-request">
+    <inthudo:ManufactureSelect runat="server" ID="ctrlManufactureSelect" CustomerTypeCode="DVSX" />
     <span class="lbtitle">Ngày bắt đầu</span><inthudo:DatePicker runat="server" ID="ctrlDatePickerBeginDate" Format="dd/MM/yyyy" />
     <br />
     <span class="lbtitle">Ngày hoàn thành</span><inthudo:DatePicker runat="server" ID="ctrlDatePickerEndDate" Format="dd/MM/yyyy" />

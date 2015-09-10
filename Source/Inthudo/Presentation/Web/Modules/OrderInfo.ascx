@@ -14,7 +14,7 @@
 <br />
 <span class="lbtitle">Tình trạng ĐH:</span><asp:Label runat="server" ID="lbOrderStatus"></asp:Label>
 <br />
-<inthudo:CustomerSelect runat="server" ID="ctrlCustomerSelect" />
+<inthudo:CustomerSelect runat="server" ID="ctrlCustomerSelect" CustomerTypeCode="KH" />
 <br />
 
 <span class="lbtitle">Phương thức giao hàng: </span>
@@ -32,7 +32,7 @@
 <div id="panelOrderDetails" runat="server">
     <asp:GridView ID="grvOrderDetails" runat="server"
         AutoGenerateColumns="False" OnRowCommand="grvOrderDetails_RowCommand"
-        OnRowDataBound="grvOrderDetails_RowDataBound" CellPadding="4" ForeColor="#333333" GridLines="None">
+        OnRowDataBound="grvOrderDetails_RowDataBound" CellPadding="15" ForeColor="#333333" GridLines="None">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <%--<asp:TemplateField>
@@ -50,13 +50,14 @@
             <asp:BoundField HeaderText="Đơn giá" DataField="Price"  DataFormatString="{0:C0}"  />
             <asp:TemplateField>
                 <HeaderTemplate>
-                    <asp:Label runat="server" Text="Xem" ID="lbEditOrderDetail"></asp:Label>
+                    <asp:Label runat="server" Text="Đơn hàng" ID="lbEditOrderDetail"></asp:Label>
                 </HeaderTemplate>
                 <ItemTemplate>
                     <a onclick="OpenOrderDetailEditWindow(<%#Eval("OrderItemId")%>); return false" class="a-popup">Xem</a>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField>
+                <HeaderTemplate>Xóa</HeaderTemplate>
                 <ItemTemplate>
                     <asp:Button ID="btDeleteOrderDetail" runat="server" Text="Xóa" CommandName="DeleteOrderDetail" OnClientClick="return confirmDelete()" CommandArgument='<%# DataBinder.Eval(Container, "RowIndex") %>' />
                 </ItemTemplate>
@@ -78,7 +79,7 @@
                     <asp:HyperLink ID="hlManufactureRequest" runat="server"></asp:HyperLink>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField HeaderText="Trạng thái" DataField="OrderDetailStatusString" />
+            <asp:BoundField HeaderText="Trạng thái" DataField="OrderItemStatusString" />
         </Columns>
         <EditRowStyle BackColor="#999999" />
         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -108,7 +109,7 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
         <div id="panelOrderSumary" runat="server">
-    <h3></h3>
+    <h3>Tổng kết đơn hàng</h3>
     <span class="lbtitle">Giá trị đơn hàng </span>
     <asp:Label ID="lbOrderTotal" runat="server"  ></asp:Label>
     <br />

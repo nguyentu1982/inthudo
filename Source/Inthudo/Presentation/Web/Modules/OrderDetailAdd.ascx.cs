@@ -22,7 +22,7 @@ namespace Web.Modules
             {
                 try
                 {
-                    OrderDetailBO od = ctrlOrderDetailInfo.SaveInfo(this.OrderId);
+                    OrderItemlBO od = ctrlOrderDetailInfo.SaveInfo(this.OrderId);
                     Response.Redirect(string.Format("/OrderDetailEdit.aspx?OrderDetailId={0}",od.OrderItemId));
                 }
                 catch (Exception ex)

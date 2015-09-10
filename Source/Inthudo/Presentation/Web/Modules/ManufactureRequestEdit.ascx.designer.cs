@@ -58,6 +58,24 @@ namespace Web.Modules {
         protected global::Web.Modules.ManufactureRequestInfo ctrlManufactureRequestInfo;
         
         /// <summary>
+        /// pnlManufactureRequestTask control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabPanel pnlManufactureRequestTask;
+        
+        /// <summary>
+        /// ctrlManufactureRequestTask control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Web.Modules.ManufactureRequestTask ctrlManufactureRequestTask;
+        
+        /// <summary>
         /// pnlManufactureCustomerApprove control.
         /// </summary>
         /// <remarks>

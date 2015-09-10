@@ -1,4 +1,5 @@
 ﻿using BusinessObjects;
+using Common;
 using Common.Utils;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace Web.Modules
         private void BindData()
         {
             
-            OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);            
+            OrderItemlBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);            
 
             if (orderDetail != null)
             {
@@ -62,6 +63,8 @@ namespace Web.Modules
 
         private void FillDropDowns()
         {
+            cblPrintingType.Attributes.Add("onclick", "radioMe(event);");            
+
             lbOrderId.Text = this.OrderId.ToString();           
             MemberBO mem = this.MemberService.GetMemberByOrder(this.OrderId);
             if (mem != null)
@@ -73,16 +76,18 @@ namespace Web.Modules
             {
                 lbCustomer.Text = string.Format("Tên: {0}, Địa chỉ: {1}, SĐT: {2}", cust.Name, cust.Address, cust.Telephone);
             }
-            //Product dropdown
-            List<ProductBO> products = this.ProductService.GetAllProucts();
-            //cboxProduct.Items.Clear();
-            //foreach (ProductBO p in products)
-            //{
-            //    cboxProduct.Items.Add(new ListItem(p.Name, p.ProductId.ToString()));
-            //}            
+            //Printing Type
+            List<PrintingTypeBO> printingTypes = this.OrderService.GetAllPrintingType();
+            cblPrintingType.Items.Clear();
+            foreach (PrintingTypeBO pt in printingTypes)
+            {
+                cblPrintingType.Items.Add(new ListItem(pt.Name, pt.Id.ToString()));
+            }
+            string defaultPrintingTypeCode = this.SettingService.GetStringSetting(Constant.Setting.Default_PrintingType_Code);
+            cblPrintingType.SelectedValue = this.OrderService.GetPrintTypeByCode(defaultPrintingTypeCode).Id.ToString();
         }
 
-        public OrderDetailBO SaveInfo(int orderId)
+        public OrderItemlBO SaveInfo(int orderId)
         {
             if (txtProduct.Text == string.Empty)
             {
@@ -102,7 +107,7 @@ namespace Web.Modules
                 productId = product.ProductId;
             }
 
-            OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
+            OrderItemlBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
             if (orderDetail != null)
             {  
                 orderDetail.ProductId = productId;
@@ -112,13 +117,14 @@ namespace Web.Modules
                 orderDetail.LastEditedOn = DateTime.Now;
                 orderDetail.LastEditedBy = this.LoggedInUserId;
                 orderDetail.IsCustomerHasDesign = cbIsCustomerHasDesign.Checked;
+                orderDetail.PrintingTypeId = int.Parse(cblPrintingType.SelectedValue);
               
                 this.OrderService.UpdateOrderDetail(orderDetail);
             }
             else
             {
                 
-                orderDetail = new OrderDetailBO() 
+                orderDetail = new OrderItemlBO() 
                 { 
                      OrderId = orderId,
                      ProductId = productId,
@@ -127,16 +133,14 @@ namespace Web.Modules
                      Price = ctrltxtPrice.Value,
                      CreatedBy = this.UserId,
                      CreatedOn = DateTime.Now,
-                     IsCustomerHasDesign = cbIsCustomerHasDesign.Checked                     
+                     IsCustomerHasDesign = cbIsCustomerHasDesign.Checked,
+                     PrintingTypeId = int.Parse(cblPrintingType.SelectedValue)
                 };
 
                 orderDetail.OrderItemId = this.OrderService.InsertOrderDetail(orderDetail);
             }
             return orderDetail;
         }
-
-        
-        
 
         public int OrderId
         { 
@@ -164,7 +168,7 @@ namespace Web.Modules
 
                 if (CommonHelper.QueryStringInt("AddNew") == 1) return 0;
 
-                List<OrderDetailBO> orderDetails = this.OrderService.GetOrderDetailsByOrderId(this.OrderId);
+                List<OrderItemlBO> orderDetails = this.OrderService.GetOrderDetailsByOrderId(this.OrderId);
 
                 if (orderDetails != null)
                 {

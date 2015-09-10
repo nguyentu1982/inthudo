@@ -33,7 +33,7 @@ namespace BusinessObjects
         public string Note { get; set; }
         public Nullable<System.DateTime> ApprovedDate { get; set; }
 
-        public virtual OrderDetailBO OrderItem { get; set; }
+        public virtual OrderItemlBO OrderItem { get; set; }
         public virtual MemberBO User { get; set; }
         public virtual MemberBO User1 { get; set; }
         public virtual MemberBO User2 { get; set; }
@@ -42,7 +42,7 @@ namespace BusinessObjects
         public string ProductName { get; set; }
         public string OrderDetailStatusString {
             get {
-                return OrderItem.OrderDetailStatusString;
+                return OrderItem.OrderItemStatusString;
             }
         }
 
@@ -61,7 +61,7 @@ namespace BusinessObjects
                     status = DesignRequestStatusEnum.Designing;
                 }
 
-                if(BeginDate.HasValue && EndDate.HasValue && (ApprovedByCustomer == null || ApprovedByCustomer==false) )
+                if(BeginDate.HasValue && EndDate.HasValue && (ApprovedByCustomer == null) )
                 {
                     status = DesignRequestStatusEnum.DesignCopmleted;
                 }
@@ -71,7 +71,7 @@ namespace BusinessObjects
                     status = DesignRequestStatusEnum.DesignApprovedByCustomer;
                 }
 
-                if (BeginDate.HasValue && !EndDate.HasValue && (ApprovedByCustomer == null || ApprovedByCustomer == false))
+                if (BeginDate.HasValue && !EndDate.HasValue && (ApprovedByCustomer == false))
                 {
                     status = DesignRequestStatusEnum.DesignNotApproved;
                 }

@@ -60,13 +60,15 @@
     <Compile Include="DesignRequestBO.cs" />
     <Compile Include="DesignRequestSearch.cs" />
     <Compile Include="ManufactureRequestBO.cs" />
+    <Compile Include="ManufactureRequestSearch.cs" />
     <Compile Include="MemberBO.cs" />
     <Compile Include="OrderBO.cs" />
-    <Compile Include="OrderDetailBO.cs" />
+    <Compile Include="OrderItemBO.cs" />
     <Compile Include="OrderSearch.cs" />
     <Compile Include="OrderStatusBO.cs" />
     <Compile Include="OrderStatusMappingBO.cs" />
     <Compile Include="OrganizationBO.cs" />
+    <Compile Include="PrintingTypeBO.cs" />
     <Compile Include="ProductApprovedBO.cs" />
     <Compile Include="ProductBO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

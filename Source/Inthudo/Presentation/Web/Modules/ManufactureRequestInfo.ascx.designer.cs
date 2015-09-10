@@ -85,6 +85,15 @@ namespace Web.Modules {
         protected global::System.Web.UI.WebControls.Label lbDesignRequestId;
         
         /// <summary>
+        /// ctrlManufactureSelect control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Web.Modules.CustomerSelect ctrlManufactureSelect;
+        
+        /// <summary>
         /// ctrlDatePickerBeginDate control.
         /// </summary>
         /// <remarks>

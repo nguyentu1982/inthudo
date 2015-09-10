@@ -10,11 +10,11 @@ namespace InthudoService
     public interface IOrderService
     {
 
-        OrderDetailBO GetOrderDetailById(int p);
+        OrderItemlBO GetOrderDetailById(int p);
 
-        void UpdateOrderDetail(OrderDetailBO orderDetail);
+        void UpdateOrderDetail(OrderItemlBO orderDetail);
 
-        int InsertOrderDetail(OrderDetailBO orderDetail);
+        int InsertOrderDetail(OrderItemlBO orderDetail);
 
         OrderBO GetOrderById(int orderId);
 
@@ -34,7 +34,7 @@ namespace InthudoService
 
         List<OrderBO> GetOrders(OrderSearch orderSearchObj);
 
-        List<OrderDetailBO> GetOrderDetailsByOrderId(int p);
+        List<OrderItemlBO> GetOrderDetailsByOrderId(int p);
 
         void MarkOrderDetailAsDeleted(int orderDetailId);
 
@@ -67,5 +67,11 @@ namespace InthudoService
         List<ProductApprovedBO> GetApprovedProductByOrderId(int orderId);
 
         List<ProductApprovedBO> GetFailedProductByOrderId(int p);
+
+        List<PrintingTypeBO> GetAllPrintingType();
+
+        PrintingTypeBO GetPrintTypeByCode(string p);
+
+        List<ManufactureRequestBO> GetManufactureRequests(ManufactureRequestSearch manuSearchObj);
     }
 }

@@ -394,8 +394,8 @@ namespace DataObjects.EntityFramework
                 return query.Distinct().ToList();
             }
         }
-
-        public List<MemberBO> GetBusinessMen(int organizationId)
+        
+        public List<MemberBO> GetBusinessMen(List<int> orgsId)
         {
             using (var context = new InThuDoEntities())
             {
@@ -405,7 +405,7 @@ namespace DataObjects.EntityFramework
                             where
                             (m.Deteted == false || m.Deteted == null) &&
                             (d.Code == "PKD")&&
-                             (organizationId == 0 || o.OrganizationId == organizationId)
+                             (orgsId.Count == 0 || orgsId.Contains(o.OrganizationId))
                             select new MemberBO()
                             {
                                 UserId = m.UserId,

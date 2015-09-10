@@ -43,7 +43,7 @@ namespace Web.Modules
             DateTime? from = ctrlDateFrom.SelectedDate;
             DateTime? to = ctrlDateTo.SelectedDate;
 
-            List<MemberBO> businessMen = this.MemberService.GetBusinessMen(int.Parse(ddlCompany.SelectedValue));
+            List<MemberBO> businessMen = this.MemberService.GetBusinessMen(this.LoggedInOrganizationIds);
             foreach (MemberBO m in businessMen)
             {
                 BussinessReportByUser report = new BussinessReportByUser();

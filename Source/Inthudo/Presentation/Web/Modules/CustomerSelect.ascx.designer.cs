@@ -22,6 +22,15 @@ namespace Web.Modules {
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
+        /// lbCustomerIdHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbCustomerIdHeader;
+        
+        /// <summary>
         /// txtCustomerCode control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,15 @@ namespace Web.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCustomerCode;
+        
+        /// <summary>
+        /// panelFind control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelFind;
         
         /// <summary>
         /// panelCustomerInfo control.
@@ -47,6 +65,15 @@ namespace Web.Modules {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbCustomerInfo;
+        
+        /// <summary>
+        /// panelCustomerSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelCustomerSearch;
         
         /// <summary>
         /// ctrlCustomerSearch control.

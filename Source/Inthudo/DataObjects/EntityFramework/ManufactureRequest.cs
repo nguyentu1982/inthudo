@@ -32,9 +32,11 @@ namespace DataObjects.EntityFramework
         public Nullable<int> CustomerApprovedQuantity { get; set; }
         public Nullable<decimal> CustomerApprovedPrice { get; set; }
         public Nullable<bool> IsFailed { get; set; }
+        public int ManufactureId { get; set; }
     
         public virtual DesignRequest DesignRequest { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

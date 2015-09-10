@@ -9,5 +9,7 @@ namespace DataObjects
     public interface ISettingDao
     {
         bool GetBoolSetting(string name);
+
+        string GetStringSetting(string name);
     }
 }

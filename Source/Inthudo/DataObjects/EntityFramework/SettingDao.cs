@@ -21,5 +21,19 @@ namespace DataObjects.EntityFramework
                 return result;
             }
         }
+
+
+        public string GetStringSetting(string name)
+        {
+            using (var context = new InThuDoEntities())
+            {
+                var query = from s in context.Settings
+                            where s.Name == name
+                            select s;
+                if (query.FirstOrDefault() == null) return string.Empty;
+
+                return query.FirstOrDefault().Value;
+            }
+        }
     }
 }

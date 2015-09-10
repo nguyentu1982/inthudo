@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Orders.ascx.cs" Inherits="Web.Modules.Orders" %>
 <%@ Register TagPrefix="inthudo" TagName="CustomerSelect" Src="~/Modules/CustomerSelect.ascx" %>
 <%@ Register TagPrefix="inthudo" Src="~/Modules/DatePicker.ascx" TagName="DatePicker" %>
-
+<%@ Register TagPrefix="inthudo" TagName="PrintingTypeSelect" Src="~/Modules/PrintingTypeSelect.ascx" %>
 
 <h1>Quản lý đơn hàng</h1>
 <div class="search-input" style="float: left">
@@ -11,7 +11,7 @@
     <span class="lbtitle">Mã đơn hàng: </span>
     <asp:TextBox ID="txtOrderCode" runat="server"></asp:TextBox>
     <br />
-    <inthudo:CustomerSelect runat="server" ID="ctrlCustomerSelect" />
+    <inthudo:CustomerSelect runat="server" ID="ctrlCustomerSelect" CustomerTypeCode="KH" />
     <br />
     <span class="lbtitle">Sản phẩm: </span>
     <asp:DropDownList ID="ddlProduct" runat="server"></asp:DropDownList>
@@ -26,14 +26,15 @@
     <asp:DropDownList ID="ddlOrderDetailStatus" runat="server"></asp:DropDownList>
     <br />
     <span class="lbtitle">Trạng thái đơn hàng: </span>
-    <asp:CheckBoxList ID="cblOrderStatus" runat="server" RepeatColumns="3" CssClass="order-status">
-        <asp:ListItem Value="0">Tất cả</asp:ListItem>
-        <asp:ListItem Value="1">Chưa hoàn thành</asp:ListItem>
-        <asp:ListItem Value="2">Đã hoàn thành</asp:ListItem>
-        <asp:ListItem Value="3">Đơn hàng có lỗi</asp:ListItem>
-        <asp:ListItem Value="4">Đơn hàng quá hạn</asp:ListItem>
+    <asp:CheckBoxList ID="cblOrderStatus" runat="server" RepeatColumns="5" CssClass="checkboxlist">
+        <asp:ListItem Value="0" Selected="True">Tất cả</asp:ListItem>
+        <asp:ListItem Value="1" Selected="True">Chưa hoàn thành</asp:ListItem>
+        <asp:ListItem Value="2" Selected="True">Hoàn thành</asp:ListItem>
+        <asp:ListItem Value="3" Selected="True">Có lỗi</asp:ListItem>
+        <asp:ListItem Value="4" Selected="True">Quá hạn</asp:ListItem>
     </asp:CheckBoxList>
     <br />
+    <inthudo:PrintingTypeSelect runat="server" ID="ctrlPrintingTypeSelect"></inthudo:PrintingTypeSelect>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <span class="lbtitle">Nhân viên KD:</span>
@@ -141,9 +142,14 @@
         var checker = sender;
         var chkBox = document.getElementById('<%= cblOrderStatus.ClientID %>');
         var chks = chkBox.getElementsByTagName('INPUT');
-        for (i = 0; i < chks.length; i++) {
-            if (chks[i] != checker)
-                chks[i].checked = false;
+        if (checker.value == 0) {
+            for (i = 0; i < chks.length; i++) {
+                chks[i].checked = checker.checked;
+            }
+        }
+        else {
+            chks[0].checked = false;
         }
     }
+
 </script>

@@ -32,7 +32,7 @@ namespace Web.Modules
                 lbOrderId.Text = order.OrderId.ToString();
                 ctrlDatePicker.SelectedDate = order.OrderDate;
                 ddlShippingMethod.SelectedValue = order.ShippingMethodId.ToString();
-                ctrlCustomerSelect.CustomerCode = order.CustomerId.ToString();
+                ctrlCustomerSelect.CustomerId = order.CustomerId.ToString();
                 ctrlCustomerSelect.txtCustomerCode_TextChanged(new object(), new EventArgs());
                 lbOrderStatus.Text = order.OrderStatusString;
                 lbOrderTotal.Text = order.OrderTotal.ToString("C0");                
@@ -49,10 +49,10 @@ namespace Web.Modules
                 lbOrderTotalIncludeVAT.Text = (order.OrderTotal + vat).ToString("C0");
                 lbRemaining.Text = (order.OrderTotal + vat - deposit).ToString("C0");
                 //Business man
-                ddlBusinessManId.SelectedValue = order.UserId.ToString();
+                ddlBusinessManId.SelectedValue = order.BusinessManId.ToString();
                 //Order Items
 
-                List<OrderDetailBO> orderItems = this.OrderService.GetOrderDetailsByOrderId(this.OrderId);
+                List<OrderItemlBO> orderItems = this.OrderService.GetOrderDetailsByOrderId(this.OrderId);
                 if (orderItems.Count >= 1)
                 {
                     grvOrderDetails.DataSource = orderItems;
@@ -81,12 +81,12 @@ namespace Web.Modules
                     lbRemainAmount.Text = (total - ctrlDepositAmount.Value).ToString("C0");
                 }
                 //Check whether other user can edit order
-                if (this.LoggedInUserId != order.CreatedBy)
+                if (this.LoggedInUserId != order.BusinessManId)
                 {
                     List<WebControl> buttons = new List<WebControl>();
                     buttons.Add(btAddNewOrderDetail);
                     buttons.Add(btAddNewOrderDetailReproduce);
-                    base.CheckNotAllowOtherUserEditOrder(buttons, order.CreatedBy);
+                    base.CheckNotAllowOtherUserEditOrder(buttons, order.BusinessManId);
                 }
             }
             else
@@ -99,14 +99,7 @@ namespace Web.Modules
 
         private void FillDropDowns()
         {
-            //Order Status
-             //ddlOrderStatus.Items.Clear();
-             //ddlOrderStatus.Items.Add(new ListItem("","0"));
-             //List<OrderStatusBO> status = this.OrderService.GetAllOrderStatus();
-             //foreach (OrderStatusBO s in status)
-             //{ 
-             //   ddlOrderStatus.Items.Add(new ListItem(s.Name, s.OrderStatusId.ToString()));
-             //}
+            //Customer          
             
             //Deposit Method
             ddlDepositMethod.Items.Clear();
@@ -118,7 +111,7 @@ namespace Web.Modules
             //Business Man
             ddlBusinessManId.Items.Clear();
 
-            List<MemberBO> mems = this.MemberService.GetBusinessMen(0);
+            List<MemberBO> mems = this.MemberService.GetBusinessMen(this.LoggedInOrganizationIds);
             foreach (MemberBO m in mems)
             {
                 ddlBusinessManId.Items.Add(new ListItem(m.FullName, m.UserId.ToString()));
@@ -148,10 +141,18 @@ namespace Web.Modules
 
         public OrderBO SaveInfo()
         {
-            if (ctrlCustomerSelect.CustomerCode == string.Empty)
+            if (ctrlCustomerSelect.CustomerId == string.Empty)
             {
                 throw new Exception("Bạn hãy nhập mã số khách hàng!");
             }
+
+            int custId = 0;
+            int.TryParse(ctrlCustomerSelect.CustomerId, out custId);
+            if (this.CustomerService.GetCustomerById(custId) == null)
+            {
+                throw new Exception("Mã số khách hàng không đúng!");
+            }
+
             OrderBO order = this.OrderService.GetOrderById(this.OrderId);
             if (order != null)
             {
@@ -159,8 +160,8 @@ namespace Web.Modules
                 order.Deposit = ctrlDepositAmount.Value;
                 order.DepositTypeId = int.Parse(ddlDepositMethod.SelectedValue);
                 order.ShippingMethodId = int.Parse(ddlShippingMethod.SelectedValue);
-                order.CustomerId = int.Parse(ctrlCustomerSelect.CustomerCode);
-                order.UserId = int.Parse(ddlBusinessManId.SelectedValue);
+                order.CustomerId = int.Parse(ctrlCustomerSelect.CustomerId);
+                order.BusinessManId = int.Parse(ddlBusinessManId.SelectedValue);
                 order.LastEditedBy = LoggedInUserId;
                 order.LastEditedDate = DateTime.Now;
                 order.ExpectedCompleteDate = ctrlDatePickerEstimatedComplteDate.SelectedDate;
@@ -187,8 +188,8 @@ namespace Web.Modules
                     Deposit = ctrlDepositAmount.Value,
                     DepositTypeId = int.Parse(ddlDepositMethod.SelectedValue),
                     ShippingMethodId = int.Parse(ddlShippingMethod.SelectedValue),
-                    CustomerId = int.Parse(ctrlCustomerSelect.CustomerCode),
-                    UserId = int.Parse(ddlBusinessManId.SelectedValue),
+                    CustomerId = int.Parse(ctrlCustomerSelect.CustomerId),
+                    BusinessManId = int.Parse(ddlBusinessManId.SelectedValue),
                     CreatedBy = LoggedInUserId,
                     CreatedDate = DateTime.Now,
                     ExpectedCompleteDate = ctrlDatePickerEstimatedComplteDate.SelectedDate,
@@ -234,7 +235,8 @@ namespace Web.Modules
             {
                 //Design Request
                 int orderDetailId = int.Parse(e.Row.Cells[0].Text);
-                OrderDetailBO od = this.OrderService.GetOrderDetailById(orderDetailId);
+                OrderBO order = this.OrderService.GetOrderById(this.OrderId);
+                OrderItemlBO od = this.OrderService.GetOrderDetailById(orderDetailId);
                 DesignRequestBO ds = this.OrderService.GetDesignRequestByOrderDetailId(orderDetailId);
                 HyperLink designRequestHyperLink = e.Row.Cells[7].FindControl("hlDesignRequest") as HyperLink;
                 HyperLink manufactureRequestLink = e.Row.Cells[8].FindControl("hlManufactureRequest") as HyperLink;
@@ -265,7 +267,7 @@ namespace Web.Modules
                             manufactureRequestLink.Text = "Tạo";
                             List<WebControl> buttons = new List<WebControl>();
                             buttons.Add(manufactureRequestLink);
-                            CheckNotAllowOtherUserEditOrder(buttons, od.CreatedBy);
+                            CheckNotAllowOtherUserEditOrder(buttons, order.BusinessManId);
                         }
                     }
                 }
@@ -277,7 +279,7 @@ namespace Web.Modules
                     designRequestHyperLink.Text = "Tạo";
                     List<WebControl> buttons = new List<WebControl>();
                     buttons.Add(designRequestHyperLink);
-                    CheckNotAllowOtherUserEditOrder(buttons, od.CreatedBy);
+                    CheckNotAllowOtherUserEditOrder(buttons, order.BusinessManId);
                 }
 
 
@@ -286,9 +288,9 @@ namespace Web.Modules
                 //Check whether other user can edit order
                 List<WebControl> buts = new List<WebControl>();
                 buts.Add(deleteButton);
-                CheckNotAllowOtherUserEditOrder(buts, od.CreatedBy);
+                CheckNotAllowOtherUserEditOrder(buts, order.BusinessManId);
 
-                if (od.OrderDetailStatus >= OrderDetailStatusEnum.Designing)
+                if (od.OrderItemStatus >= OrderItemStatusEnum.Designing)
                 {
                     if (LoggedInMember.RoleName.ToLower() != Constant.ADMIN_ROLE_NAME.ToLower())
                     {

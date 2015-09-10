@@ -13,6 +13,7 @@
           <EntitySet Name="LibDepartment" EntityType="InThuDoMNGModel.Store.LibDepartment" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LibDepositType" EntityType="InThuDoMNGModel.Store.LibDepositType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LibOrderStatus" EntityType="InThuDoMNGModel.Store.LibOrderStatus" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LibPrintingType" EntityType="InThuDoMNGModel.Store.LibPrintingType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LibRoleType" EntityType="InThuDoMNGModel.Store.LibRoleType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LibShippingMethod" EntityType="InThuDoMNGModel.Store.LibShippingMethod" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LocaleStringResource" EntityType="InThuDoMNGModel.Store.LocaleStringResource" store:Type="Tables" Schema="dbo" />
@@ -61,6 +62,10 @@
             <End Role="LibDepartment" EntitySet="LibDepartment" />
             <End Role="EmployeeDepartmentMapping" EntitySet="EmployeeDepartmentMapping" />
           </AssociationSet>
+          <AssociationSet Name="FK_ManufactureRequest_Customer" Association="InThuDoMNGModel.Store.FK_ManufactureRequest_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="ManufactureRequest" EntitySet="ManufactureRequest" />
+          </AssociationSet>
           <AssociationSet Name="FK_ManufactureRequest_DesignRequest" Association="InThuDoMNGModel.Store.FK_ManufactureRequest_DesignRequest">
             <End Role="DesignRequest" EntitySet="DesignRequest" />
             <End Role="ManufactureRequest" EntitySet="ManufactureRequest" />
@@ -104,6 +109,10 @@
           <AssociationSet Name="FK_Order_User4" Association="InThuDoMNGModel.Store.FK_Order_User4">
             <End Role="User" EntitySet="User" />
             <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderItem_LibPrintingType" Association="InThuDoMNGModel.Store.FK_OrderItem_LibPrintingType">
+            <End Role="LibPrintingType" EntitySet="LibPrintingType" />
+            <End Role="OrderItem" EntitySet="OrderItem" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderItem_Order" Association="InThuDoMNGModel.Store.FK_OrderItem_Order">
             <End Role="Order" EntitySet="Order" />
@@ -230,6 +239,15 @@
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="ProcessingOrder" Type="int" />
         </EntityType>
+        <EntityType Name="LibPrintingType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar" MaxLength="2000" />
+        </EntityType>
         <EntityType Name="LibRoleType">
           <Key>
             <PropertyRef Name="RoleTypeId" />
@@ -276,6 +294,7 @@
           <Property Name="CustomerApprovedQuantity" Type="int" />
           <Property Name="CustomerApprovedPrice" Type="money" />
           <Property Name="IsFailed" Type="bit" />
+          <Property Name="ManufactureId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -316,6 +335,7 @@
           <Property Name="Deleted" Type="bit" />
           <Property Name="OrderId" Type="int" Nullable="false" />
           <Property Name="IsCustomerHasDesign" Type="bit" Nullable="false" />
+          <Property Name="PrintingTypeId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderStatusMapping">
           <Key>
@@ -490,6 +510,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ManufactureRequest_Customer">
+          <End Role="Customer" Type="InThuDoMNGModel.Store.Customer" Multiplicity="1" />
+          <End Role="ManufactureRequest" Type="InThuDoMNGModel.Store.ManufactureRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="ManufactureRequest">
+              <PropertyRef Name="ManufactureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ManufactureRequest_DesignRequest">
           <End Role="DesignRequest" Type="InThuDoMNGModel.Store.DesignRequest" Multiplicity="1" />
           <End Role="ManufactureRequest" Type="InThuDoMNGModel.Store.ManufactureRequest" Multiplicity="*" />
@@ -619,6 +651,18 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="LastEditedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderItem_LibPrintingType">
+          <End Role="LibPrintingType" Type="InThuDoMNGModel.Store.LibPrintingType" Multiplicity="1" />
+          <End Role="OrderItem" Type="InThuDoMNGModel.Store.OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LibPrintingType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="PrintingTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -886,6 +930,15 @@
             <End Role="LibCustomerType" EntitySet="LibCustomerTypes" />
             <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
+          <AssociationSet Name="FK_ManufactureRequest_Customer" Association="InThuDoMNGModel.FK_ManufactureRequest_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="ManufactureRequest" EntitySet="ManufactureRequests" />
+          </AssociationSet>
+          <EntitySet Name="LibPrintingTypes" EntityType="InThuDoMNGModel.LibPrintingType" />
+          <AssociationSet Name="FK_OrderItem_LibPrintingType" Association="InThuDoMNGModel.FK_OrderItem_LibPrintingType">
+            <End Role="LibPrintingType" EntitySet="LibPrintingTypes" />
+            <End Role="OrderItem" EntitySet="OrderItems" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer">
           <Key>
@@ -911,6 +964,7 @@
           <Property Type="String" Name="Note" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="CustomerTypeId" Nullable="false" />
           <NavigationProperty Name="LibCustomerType" Relationship="InThuDoMNGModel.FK_Customer_LibCustomerType" FromRole="Customer" ToRole="LibCustomerType" />
+          <NavigationProperty Name="ManufactureRequests" Relationship="InThuDoMNGModel.FK_ManufactureRequest_Customer" FromRole="Customer" ToRole="ManufactureRequest" />
         </EntityType>
         <EntityType Name="EmployeeDepartmentMapping">
           <Key>
@@ -1033,6 +1087,8 @@
           <NavigationProperty Name="OrderStatusMappings" Relationship="InThuDoMNGModel.FK_OrderStatusMapping_OrderItem" FromRole="OrderItem" ToRole="OrderStatusMapping" />
           <NavigationProperty Name="DesignRequests" Relationship="InThuDoMNGModel.FK_Design_OrderItem1" FromRole="OrderItem" ToRole="DesignRequest" />
           <Property Type="Boolean" Name="IsCustomerHasDesign" Nullable="false" />
+          <Property Type="Int32" Name="PrintingTypeId" Nullable="false" />
+          <NavigationProperty Name="LibPrintingType" Relationship="InThuDoMNGModel.FK_OrderItem_LibPrintingType" FromRole="OrderItem" ToRole="LibPrintingType" />
         </EntityType>
         <EntityType Name="OrderStatusMapping">
           <Key>
@@ -1377,6 +1433,8 @@
           <Property Type="Int32" Name="CustomerApprovedQuantity" />
           <Property Type="Decimal" Name="CustomerApprovedPrice" Precision="19" Scale="4" />
           <Property Type="Boolean" Name="IsFailed" />
+          <Property Type="Int32" Name="ManufactureId" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="InThuDoMNGModel.FK_ManufactureRequest_Customer" FromRole="ManufactureRequest" ToRole="Customer" />
         </EntityType>
         <Association Name="FK_Design_OrderItem1">
           <End Type="InThuDoMNGModel.OrderItem" Role="OrderItem" Multiplicity="1" />
@@ -1543,6 +1601,40 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ManufactureRequest_Customer">
+          <End Type="InThuDoMNGModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="InThuDoMNGModel.ManufactureRequest" Role="ManufactureRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="ManufactureRequest">
+              <PropertyRef Name="ManufactureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LibPrintingType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderItems" Relationship="InThuDoMNGModel.FK_OrderItem_LibPrintingType" FromRole="LibPrintingType" ToRole="OrderItem" />
+        </EntityType>
+        <Association Name="FK_OrderItem_LibPrintingType">
+          <End Type="InThuDoMNGModel.LibPrintingType" Role="LibPrintingType" Multiplicity="1" />
+          <End Type="InThuDoMNGModel.OrderItem" Role="OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LibPrintingType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderItem">
+              <PropertyRef Name="PrintingTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1663,6 +1755,7 @@
           <EntitySetMapping Name="OrderItems">
             <EntityTypeMapping TypeName="InThuDoMNGModel.OrderItem">
               <MappingFragment StoreEntitySet="OrderItem">
+                <ScalarProperty Name="PrintingTypeId" ColumnName="PrintingTypeId" />
                 <ScalarProperty Name="IsCustomerHasDesign" ColumnName="IsCustomerHasDesign" />
                 <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
@@ -1751,6 +1844,7 @@
           <EntitySetMapping Name="ManufactureRequests">
             <EntityTypeMapping TypeName="InThuDoMNGModel.ManufactureRequest">
               <MappingFragment StoreEntitySet="ManufactureRequest">
+                <ScalarProperty Name="ManufactureId" ColumnName="ManufactureId" />
                 <ScalarProperty Name="IsFailed" ColumnName="IsFailed" />
                 <ScalarProperty Name="CustomerApprovedPrice" ColumnName="CustomerApprovedPrice" />
                 <ScalarProperty Name="CustomerApprovedQuantity" ColumnName="CustomerApprovedQuantity" />
@@ -1797,6 +1891,16 @@
           <EntitySetMapping Name="LibCustomerTypes">
             <EntityTypeMapping TypeName="InThuDoMNGModel.LibCustomerType">
               <MappingFragment StoreEntitySet="LibCustomerType">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LibPrintingTypes">
+            <EntityTypeMapping TypeName="InThuDoMNGModel.LibPrintingType">
+              <MappingFragment StoreEntitySet="LibPrintingType">
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />

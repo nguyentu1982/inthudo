@@ -23,7 +23,7 @@ namespace Web.Modules
         private void BindData()
         {
             ManufactureRequestBO manu = this.OrderService.GetManufactureRequestById(this.ManufactureRequestId);
-            OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
+            OrderItemlBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
             if (manu != null)
             {
                 bool isCustomerApproved = false;
@@ -65,7 +65,7 @@ namespace Web.Modules
                 base.CheckNotAllowOtherUserEditOrder(buttons, manu.CreatedBy);
 
                
-                if (orderDetail.OrderDetailStatus >= OrderDetailStatusEnum.CustomerApproved)
+                if (orderDetail.OrderItemStatus >= OrderItemStatusEnum.CustomerApproved)
                 {                    
                     List<WebControl> manufactureRequestTaskControls = new List<WebControl>();
                     manufactureRequestTaskControls.Add(btSave);
@@ -171,7 +171,7 @@ namespace Web.Modules
                     }
                     else
                     {
-                        OrderDetailBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
+                        OrderItemlBO orderDetail = this.OrderService.GetOrderDetailById(this.OrderDetailId);
                         ctrlNumericTextBoxQuantity.Value = orderDetail.Quantity;
                         ctrlDecimalTextBoxPrice.Value = orderDetail.Price;
                         panelApprovedDate.Visible = false;

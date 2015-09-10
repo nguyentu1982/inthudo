@@ -217,6 +217,7 @@
     <Content Include="Login.aspx" />
     <Content Include="ManufactureRequestAdd.aspx" />
     <Content Include="ManufactureRequestEdit.aspx" />
+    <Content Include="Manufactures.aspx" />
     <Content Include="MemberAdd.aspx" />
     <Content Include="MemberEdit.aspx" />
     <Content Include="Members.aspx" />
@@ -242,6 +243,8 @@
     <Content Include="Modules\ManufactureRequestAdd.ascx" />
     <Content Include="Modules\ManufactureRequestEdit.ascx" />
     <Content Include="Modules\ManufactureRequestInfo.ascx" />
+    <Content Include="Modules\ManufactureRequestTask.ascx" />
+    <Content Include="Modules\Manufactures.ascx" />
     <Content Include="Modules\MemberAdd.ascx" />
     <Content Include="Modules\MemberEdit.ascx" />
     <Content Include="Modules\MemberInfo.ascx" />
@@ -256,6 +259,8 @@
     <Content Include="Modules\OrderInfo.ascx" />
     <Content Include="Modules\Orders.ascx" />
     <Content Include="Modules\OrganizationSelect.ascx" />
+    <Content Include="Modules\PrintingTypeSelect.ascx" />
+    <Content Include="Modules\PrintProcessConfig.ascx" />
     <Content Include="Modules\SimpleTextBox.ascx" />
     <Content Include="OrderAdd.aspx" />
     <Content Include="OrderDetailAdd.aspx" />
@@ -425,6 +430,13 @@
     <Compile Include="ManufactureRequestEdit.aspx.designer.cs">
       <DependentUpon>ManufactureRequestEdit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Manufactures.aspx.cs">
+      <DependentUpon>Manufactures.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manufactures.aspx.designer.cs">
+      <DependentUpon>Manufactures.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Modules\BussinessReportByUser.ascx.cs">
       <DependentUpon>BussinessReportByUser.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -565,6 +577,20 @@
     <Compile Include="Modules\ManufactureRequestInfo.ascx.designer.cs">
       <DependentUpon>ManufactureRequestInfo.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Modules\ManufactureRequestTask.ascx.cs">
+      <DependentUpon>ManufactureRequestTask.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\ManufactureRequestTask.ascx.designer.cs">
+      <DependentUpon>ManufactureRequestTask.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Manufactures.ascx.cs">
+      <DependentUpon>Manufactures.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\Manufactures.ascx.designer.cs">
+      <DependentUpon>Manufactures.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Modules\NumericTextBox.ascx.cs">
       <DependentUpon>NumericTextBox.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -634,6 +660,20 @@
     </Compile>
     <Compile Include="Modules\OrganizationSelect.ascx.designer.cs">
       <DependentUpon>OrganizationSelect.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PrintingTypeSelect.ascx.cs">
+      <DependentUpon>PrintingTypeSelect.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\PrintingTypeSelect.ascx.designer.cs">
+      <DependentUpon>PrintingTypeSelect.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\PrintProcessConfig.ascx.cs">
+      <DependentUpon>PrintProcessConfig.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\PrintProcessConfig.ascx.designer.cs">
+      <DependentUpon>PrintProcessConfig.ascx</DependentUpon>
     </Compile>
     <Compile Include="OrderAdd.aspx.cs">
       <DependentUpon>OrderAdd.aspx</DependentUpon>

@@ -7,7 +7,7 @@
     <span class="lbtitle">Từ ngày</span>
     <inthudo:DatePicker runat="server" ID="ctrlDatePickerFrom" Format="dd/MM/yyyy" />
     <span class="lbtitle">Đến ngày</span><inthudo:DatePicker runat="server" ID="ctrlDatePickerTo" Format="dd/MM/yyyy" />
-    <inthudo:CustomerSelect runat="server" ID="ctrlCustomerSelect" />
+    <inthudo:CustomerSelect runat="server" ID="ctrlCustomerSelect" CustomerTypeCode="KH" />
     <span class="lbtitle">Sản phẩm</span><asp:DropDownList runat="server" ID="ddlProducts"></asp:DropDownList>
     <br />
     <span class="lbtitle">Trạng thái</span><asp:DropDownList runat="server" ID="ddlDesignRequestStatus">

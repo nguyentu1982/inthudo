@@ -9,7 +9,7 @@ namespace InthudoService
 {
     public interface ICustomerService
     {
-        List<CustomerBO> GetCustomers(string customerName, string telephone, string email, string companyName);
+        List<CustomerBO> GetCustomers(string customerName, string telephone, string email, string companyName, int customerTypeId);
 
         CustomerBO GetCustomerById(int custId);
 

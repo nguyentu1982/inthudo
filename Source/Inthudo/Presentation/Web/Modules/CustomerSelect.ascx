@@ -5,13 +5,15 @@
 <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
     
     <ContentTemplate>
-        <span class="lbtitle">MS Khách hàng:</span> <asp:TextBox ID="txtCustomerCode" runat="server" OnTextChanged="txtCustomerCode_TextChanged" AutoPostBack="true" ></asp:TextBox>
-        <input type="button" id="btFindCustomer" value="Tìm">
+        <span class="lbtitle">
+            <asp:Label ID="lbCustomerIdHeader" runat="server" Text=""></asp:Label></span> <asp:TextBox ID="txtCustomerCode" runat="server" OnTextChanged="txtCustomerCode_TextChanged" AutoPostBack="true" ></asp:TextBox>
+        <span runat="server" id="panelFind"></span>
+        
         <div runat="server" id="panelCustomerInfo">
-            <asp:Label runat="server" ID="lbCustomerInfo" Text="CustomerInfo"/>
+            <asp:Label runat="server" ID="lbCustomerInfo" Text=""/>
         </div>
         
-        <div id="panelCustomerSearch" style="display:none;border:1px solid #0094ff;padding:10px;">
+        <div id="panelCustomerSearch" style="display:none;border:1px solid #0094ff;padding:10px;" runat="server">
             
             <inthudo:CustomerSearch runat="server" ID="ctrlCustomerSearch" />
         </div>

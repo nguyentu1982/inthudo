@@ -44,5 +44,6 @@ namespace DataObjects.EntityFramework
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<UserOrganizationMappping> UserOrganizationMapppings { get; set; }
         public DbSet<LibCustomerType> LibCustomerTypes { get; set; }
+        public DbSet<LibPrintingType> LibPrintingTypes { get; set; }
     }
 }

@@ -150,9 +150,9 @@ namespace InthudoService
         }
 
 
-        public List<MemberBO> GetBusinessMen(int organizationId)
+        public List<MemberBO> GetBusinessMen(List<int> orgsId)
         {
-            return memberDao.GetBusinessMen(organizationId);
+            return memberDao.GetBusinessMen(orgsId);
         }
     }
 }

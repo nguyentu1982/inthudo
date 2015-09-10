@@ -31,8 +31,9 @@ namespace Web.Modules
                 ShipMethodId = 0,
                 DepositMethodId = 0,
                 OrderDetailStatus = 0,
-                OrderStatus = 0,            
-                DesignerManId = 0
+                OrderStatus = new List<OrderStatusEnum>(),            
+                DesignerManId = 0,
+                PrintingTypeIds = new List<int>()
             };
             List<OrderBO> orders = this.OrderService.GetOrders(searchObj);
             MemberBO mem = this.MemberService.GetMember(this.MemberId);
@@ -103,9 +104,9 @@ namespace Web.Modules
             decimal orderDetailOverdue = 0;
             foreach (OrderBO o in overdueOrders)
             {
-                foreach (OrderDetailBO od in o.OrderItems)
+                foreach (OrderItemlBO od in o.OrderItems)
                 {
-                    if (od.OrderDetailStatus == OrderDetailStatusEnum.Overdue)
+                    if (od.OrderItemStatus == OrderItemStatusEnum.Overdue)
                     {
                         orderDetailOverdue+= od.Quantity*od.Price;
                     }

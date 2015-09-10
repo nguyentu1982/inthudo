@@ -18,7 +18,7 @@
         <span class="lbtitle">Tên công ty:</span><asp:TextBox ID="txtCompanyName" runat="server"></asp:TextBox>
         <br />
         <asp:Button ID="btFind" runat="server" Text="Tìm" OnClick="btFind_Click" />
-        <input type="button" value="Thêm khách hàng mới" onclick="OpenWindow('CustomerAdd.aspx')" runat="server" id="btAddNew" />
+        <input type="button" value="Thêm khách hàng mới" onclick="OpenWindow('CustomerAdd.aspx')" runat="server" id="btAddNew"/>
         <br />
         <asp:GridView ID="grvCustomers" runat="server" AutoGenerateColumns="False" OnRowCommand="grvCustomers_RowCommand" OnRowDataBound="grvCustomers_RowDataBound">
            
